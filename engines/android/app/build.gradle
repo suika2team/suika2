@@ -1,0 +1,26 @@
+apply plugin: 'com.android.application'
+
+android {
+    namespace 'org.opennovel.engineandroid'
+    compileSdk 35
+    ndkVersion "27.0.12077973"
+    defaultConfig {
+        applicationId "org.opennovel.engineandroid"
+        minSdkVersion 21
+        versionCode 1
+        versionName "1.0.0"
+    }
+    externalNativeBuild {
+        cmake {
+            path "CMakeLists.txt"
+        }
+    }
+    lint {
+        abortOnError false
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'androidx.appcompat:appcompat:1.6.1'
+}

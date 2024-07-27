@@ -1,0 +1,30 @@
+# これは最初に読み込まれるストーリーファイルです。
+
+@bg white.png
+
+:TOP
+@menu title.txt
+
+:LOAD
+@menu load.txt
+@goto TOP
+
+:CONFIG
+@menu config.txt
+@goto TOP
+
+:START
+
+@bg coast.png 0.5
+
+@ch center 001-fun.png 0.5
+
+キャラ「セリフのテストです」
+
+@ch center 001-angry.png 0.5
+
+キャラ「セリフのテストです」
+
+@ch center 001-sad.png 0.5
+
+キャラ「セリフのテストです」

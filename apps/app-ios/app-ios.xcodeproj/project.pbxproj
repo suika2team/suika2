@@ -1,0 +1,734 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		2602543F2C368FC0009C6C88 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2602543E2C368FC0009C6C88 /* ContentView.swift */; };
+		260254412C368FC1009C6C88 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 260254402C368FC1009C6C88 /* Assets.xcassets */; };
+		260254452C368FC1009C6C88 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 260254442C368FC1009C6C88 /* Preview Assets.xcassets */; };
+		260254A42C36906B009C6C88 /* cmd_return.c in Sources */ = {isa = PBXBuildFile; fileRef = 2602544D2C369066009C6C88 /* cmd_return.c */; };
+		260254A52C36906B009C6C88 /* cmd_gui.c in Sources */ = {isa = PBXBuildFile; fileRef = 2602544E2C369066009C6C88 /* cmd_gui.c */; };
+		260254A62C36906B009C6C88 /* cmd_setconfig.c in Sources */ = {isa = PBXBuildFile; fileRef = 260254502C369066009C6C88 /* cmd_setconfig.c */; };
+		260254A72C36906B009C6C88 /* cmd_ch.c in Sources */ = {isa = PBXBuildFile; fileRef = 260254512C369066009C6C88 /* cmd_ch.c */; };
+		260254A82C36906B009C6C88 /* scbuf.c in Sources */ = {isa = PBXBuildFile; fileRef = 260254522C369066009C6C88 /* scbuf.c */; };
+		260254A92C36906B009C6C88 /* cmd_chapter.c in Sources */ = {isa = PBXBuildFile; fileRef = 260254532C369066009C6C88 /* cmd_chapter.c */; };
+		260254AA2C36906B009C6C88 /* cmd_wait.c in Sources */ = {isa = PBXBuildFile; fileRef = 260254552C369066009C6C88 /* cmd_wait.c */; };
+		260254AB2C36906B009C6C88 /* cmd_setsave.c in Sources */ = {isa = PBXBuildFile; fileRef = 260254562C369066009C6C88 /* cmd_setsave.c */; };
+		260254AC2C36906B009C6C88 /* cmd_set.c in Sources */ = {isa = PBXBuildFile; fileRef = 260254572C369066009C6C88 /* cmd_set.c */; };
+		260254AD2C36906B009C6C88 /* mixer.c in Sources */ = {isa = PBXBuildFile; fileRef = 260254582C369066009C6C88 /* mixer.c */; };
+		260254AE2C36906B009C6C88 /* cmd_video.c in Sources */ = {isa = PBXBuildFile; fileRef = 260254592C369066009C6C88 /* cmd_video.c */; };
+		260254AF2C36906B009C6C88 /* wms_lexer.yy.c in Sources */ = {isa = PBXBuildFile; fileRef = 2602545B2C369067009C6C88 /* wms_lexer.yy.c */; };
+		260254B02C36906B009C6C88 /* event.c in Sources */ = {isa = PBXBuildFile; fileRef = 2602545C2C369067009C6C88 /* event.c */; };
+		260254B12C36906B009C6C88 /* cmd_anime.c in Sources */ = {isa = PBXBuildFile; fileRef = 2602545D2C369067009C6C88 /* cmd_anime.c */; };
+		260254B22C36906B009C6C88 /* uimsg.c in Sources */ = {isa = PBXBuildFile; fileRef = 260254622C369067009C6C88 /* uimsg.c */; };
+		260254B32C36906B009C6C88 /* cmd_gosub.c in Sources */ = {isa = PBXBuildFile; fileRef = 260254632C369067009C6C88 /* cmd_gosub.c */; };
+		260254B42C36906B009C6C88 /* readwebp.c in Sources */ = {isa = PBXBuildFile; fileRef = 260254642C369067009C6C88 /* readwebp.c */; };
+		260254B52C36906B009C6C88 /* cmd_layer.c in Sources */ = {isa = PBXBuildFile; fileRef = 260254652C369067009C6C88 /* cmd_layer.c */; };
+		260254B62C36906B009C6C88 /* cmd_if.c in Sources */ = {isa = PBXBuildFile; fileRef = 260254662C369067009C6C88 /* cmd_if.c */; };
+		260254B72C36906B009C6C88 /* cmd_vol.c in Sources */ = {isa = PBXBuildFile; fileRef = 2602546A2C369067009C6C88 /* cmd_vol.c */; };
+		260254B82C36906B009C6C88 /* halwrap.c in Sources */ = {isa = PBXBuildFile; fileRef = 2602546C2C369067009C6C88 /* halwrap.c */; };
+		260254B92C36906B009C6C88 /* seen.c in Sources */ = {isa = PBXBuildFile; fileRef = 2602546D2C369067009C6C88 /* seen.c */; };
+		260254BA2C36906B009C6C88 /* cmd_chs.c in Sources */ = {isa = PBXBuildFile; fileRef = 2602546E2C369067009C6C88 /* cmd_chs.c */; };
+		260254BB2C36906B009C6C88 /* cmd_click.c in Sources */ = {isa = PBXBuildFile; fileRef = 2602546F2C369067009C6C88 /* cmd_click.c */; };
+		260254BC2C36906B009C6C88 /* vars.c in Sources */ = {isa = PBXBuildFile; fileRef = 260254732C369067009C6C88 /* vars.c */; };
+		260254BD2C36906B009C6C88 /* gui.c in Sources */ = {isa = PBXBuildFile; fileRef = 260254742C36906A009C6C88 /* gui.c */; };
+		260254BE2C36906B009C6C88 /* cmd_se.c in Sources */ = {isa = PBXBuildFile; fileRef = 260254752C36906A009C6C88 /* cmd_se.c */; };
+		260254BF2C36906B009C6C88 /* conf.c in Sources */ = {isa = PBXBuildFile; fileRef = 260254762C36906A009C6C88 /* conf.c */; };
+		260254C02C36906B009C6C88 /* cmd_shake.c in Sources */ = {isa = PBXBuildFile; fileRef = 260254772C36906A009C6C88 /* cmd_shake.c */; };
+		260254C12C36906B009C6C88 /* cmd_skip.c in Sources */ = {isa = PBXBuildFile; fileRef = 260254782C36906A009C6C88 /* cmd_skip.c */; };
+		260254C22C36906B009C6C88 /* history.c in Sources */ = {isa = PBXBuildFile; fileRef = 260254792C36906A009C6C88 /* history.c */; };
+		260254C32C36906B009C6C88 /* package.c in Sources */ = {isa = PBXBuildFile; fileRef = 2602547A2C36906A009C6C88 /* package.c */; };
+		260254C42C36906B009C6C88 /* readpng.c in Sources */ = {isa = PBXBuildFile; fileRef = 2602547B2C36906A009C6C88 /* readpng.c */; };
+		260254C52C36906B009C6C88 /* cmd_goto.c in Sources */ = {isa = PBXBuildFile; fileRef = 2602547D2C36906A009C6C88 /* cmd_goto.c */; };
+		260254C62C36906B009C6C88 /* glyph.c in Sources */ = {isa = PBXBuildFile; fileRef = 2602547E2C36906A009C6C88 /* glyph.c */; };
+		260254C72C36906B009C6C88 /* log.c in Sources */ = {isa = PBXBuildFile; fileRef = 260254802C36906A009C6C88 /* log.c */; };
+		260254C82C36906B009C6C88 /* wms_core.c in Sources */ = {isa = PBXBuildFile; fileRef = 260254842C36906A009C6C88 /* wms_core.c */; };
+		260254C92C36906B009C6C88 /* cmd_load.c in Sources */ = {isa = PBXBuildFile; fileRef = 260254852C36906A009C6C88 /* cmd_load.c */; };
+		260254CA2C36906B009C6C88 /* image.c in Sources */ = {isa = PBXBuildFile; fileRef = 260254862C36906A009C6C88 /* image.c */; };
+		260254CB2C36906B009C6C88 /* save.c in Sources */ = {isa = PBXBuildFile; fileRef = 260254872C36906A009C6C88 /* save.c */; };
+		260254CC2C36906B009C6C88 /* ciel.c in Sources */ = {isa = PBXBuildFile; fileRef = 260254892C36906A009C6C88 /* ciel.c */; };
+		260254CD2C36906B009C6C88 /* readimage.c in Sources */ = {isa = PBXBuildFile; fileRef = 2602548B2C36906A009C6C88 /* readimage.c */; };
+		260254CE2C36906B009C6C88 /* cmd_wms.c in Sources */ = {isa = PBXBuildFile; fileRef = 2602548D2C36906A009C6C88 /* cmd_wms.c */; };
+		260254CF2C36906B009C6C88 /* file.c in Sources */ = {isa = PBXBuildFile; fileRef = 2602548E2C36906A009C6C88 /* file.c */; };
+		260254D02C36906B009C6C88 /* readjpeg.c in Sources */ = {isa = PBXBuildFile; fileRef = 260254912C36906A009C6C88 /* readjpeg.c */; };
+		260254D12C36906B009C6C88 /* wms_parser.tab.c in Sources */ = {isa = PBXBuildFile; fileRef = 260254922C36906B009C6C88 /* wms_parser.tab.c */; };
+		260254D22C36906B009C6C88 /* cmd_bgm.c in Sources */ = {isa = PBXBuildFile; fileRef = 260254932C36906B009C6C88 /* cmd_bgm.c */; };
+		260254D32C36906B009C6C88 /* cmd_cha.c in Sources */ = {isa = PBXBuildFile; fileRef = 260254942C36906B009C6C88 /* cmd_cha.c */; };
+		260254D42C36906B009C6C88 /* cmd_pencil.c in Sources */ = {isa = PBXBuildFile; fileRef = 260254982C36906B009C6C88 /* cmd_pencil.c */; };
+		260254D52C36906B009C6C88 /* wms_impl.c in Sources */ = {isa = PBXBuildFile; fileRef = 260254992C36906B009C6C88 /* wms_impl.c */; };
+		260254D62C36906B009C6C88 /* cmd_switch.c in Sources */ = {isa = PBXBuildFile; fileRef = 2602549A2C36906B009C6C88 /* cmd_switch.c */; };
+		260254D72C36906B009C6C88 /* cmd_bg.c in Sources */ = {isa = PBXBuildFile; fileRef = 2602549B2C36906B009C6C88 /* cmd_bg.c */; };
+		260254D82C36906B009C6C88 /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = 2602549C2C36906B009C6C88 /* main.c */; };
+		260254D92C36906B009C6C88 /* cmd_message.c in Sources */ = {isa = PBXBuildFile; fileRef = 2602549E2C36906B009C6C88 /* cmd_message.c */; };
+		260254DA2C36906B009C6C88 /* wave.c in Sources */ = {isa = PBXBuildFile; fileRef = 2602549F2C36906B009C6C88 /* wave.c */; };
+		260254DB2C36906B009C6C88 /* script.c in Sources */ = {isa = PBXBuildFile; fileRef = 260254A12C36906B009C6C88 /* script.c */; };
+		260254DC2C36906B009C6C88 /* anime.c in Sources */ = {isa = PBXBuildFile; fileRef = 260254A22C36906B009C6C88 /* anime.c */; };
+		260254DD2C36906B009C6C88 /* stage.c in Sources */ = {isa = PBXBuildFile; fileRef = 260254A32C36906B009C6C88 /* stage.c */; };
+		260254E12C3693AB009C6C88 /* aunit.c in Sources */ = {isa = PBXBuildFile; fileRef = 260254DF2C3693AB009C6C88 /* aunit.c */; };
+		26607E292C39020A00488C40 /* GameShaders.metal in Sources */ = {isa = PBXBuildFile; fileRef = 26607E262C39020A00488C40 /* GameShaders.metal */; };
+		26607E342C3BAB2C00488C40 /* Renderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26607E332C3BAB2C00488C40 /* Renderer.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		260254392C368FC0009C6C88 /* app-ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "app-ios.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		2602543E2C368FC0009C6C88 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		260254402C368FC1009C6C88 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		260254422C368FC1009C6C88 /* app_ios.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = app_ios.entitlements; sourceTree = "<group>"; };
+		260254442C368FC1009C6C88 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		2602544C2C369066009C6C88 /* app-ios-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "app-ios-Bridging-Header.h"; sourceTree = "<group>"; };
+		2602544D2C369066009C6C88 /* cmd_return.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = cmd_return.c; path = ../../src/cmd_return.c; sourceTree = "<group>"; };
+		2602544E2C369066009C6C88 /* cmd_gui.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = cmd_gui.c; path = ../../src/cmd_gui.c; sourceTree = "<group>"; };
+		2602544F2C369066009C6C88 /* opennovel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = opennovel.h; path = ../../src/opennovel.h; sourceTree = "<group>"; };
+		260254502C369066009C6C88 /* cmd_setconfig.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = cmd_setconfig.c; path = ../../src/cmd_setconfig.c; sourceTree = "<group>"; };
+		260254512C369066009C6C88 /* cmd_ch.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = cmd_ch.c; path = ../../src/cmd_ch.c; sourceTree = "<group>"; };
+		260254522C369066009C6C88 /* scbuf.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = scbuf.c; path = ../../src/scbuf.c; sourceTree = "<group>"; };
+		260254532C369066009C6C88 /* cmd_chapter.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = cmd_chapter.c; path = ../../src/cmd_chapter.c; sourceTree = "<group>"; };
+		260254542C369066009C6C88 /* mixer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = mixer.h; path = ../../src/mixer.h; sourceTree = "<group>"; };
+		260254552C369066009C6C88 /* cmd_wait.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = cmd_wait.c; path = ../../src/cmd_wait.c; sourceTree = "<group>"; };
+		260254562C369066009C6C88 /* cmd_setsave.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = cmd_setsave.c; path = ../../src/cmd_setsave.c; sourceTree = "<group>"; };
+		260254572C369066009C6C88 /* cmd_set.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = cmd_set.c; path = ../../src/cmd_set.c; sourceTree = "<group>"; };
+		260254582C369066009C6C88 /* mixer.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = mixer.c; path = ../../src/mixer.c; sourceTree = "<group>"; };
+		260254592C369066009C6C88 /* cmd_video.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = cmd_video.c; path = ../../src/cmd_video.c; sourceTree = "<group>"; };
+		2602545A2C369066009C6C88 /* package.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = package.h; path = ../../src/package.h; sourceTree = "<group>"; };
+		2602545B2C369067009C6C88 /* wms_lexer.yy.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = wms_lexer.yy.c; path = ../../src/wms_lexer.yy.c; sourceTree = "<group>"; };
+		2602545C2C369067009C6C88 /* event.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = event.c; path = ../../src/event.c; sourceTree = "<group>"; };
+		2602545D2C369067009C6C88 /* cmd_anime.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = cmd_anime.c; path = ../../src/cmd_anime.c; sourceTree = "<group>"; };
+		2602545E2C369067009C6C88 /* main.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = main.h; path = ../../src/main.h; sourceTree = "<group>"; };
+		2602545F2C369067009C6C88 /* image.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = image.h; path = ../../src/image.h; sourceTree = "<group>"; };
+		260254602C369067009C6C88 /* hal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = hal.h; path = ../../src/hal.h; sourceTree = "<group>"; };
+		260254612C369067009C6C88 /* seen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = seen.h; path = ../../src/seen.h; sourceTree = "<group>"; };
+		260254622C369067009C6C88 /* uimsg.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = uimsg.c; path = ../../src/uimsg.c; sourceTree = "<group>"; };
+		260254632C369067009C6C88 /* cmd_gosub.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = cmd_gosub.c; path = ../../src/cmd_gosub.c; sourceTree = "<group>"; };
+		260254642C369067009C6C88 /* readwebp.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = readwebp.c; path = ../../src/readwebp.c; sourceTree = "<group>"; };
+		260254652C369067009C6C88 /* cmd_layer.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = cmd_layer.c; path = ../../src/cmd_layer.c; sourceTree = "<group>"; };
+		260254662C369067009C6C88 /* cmd_if.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = cmd_if.c; path = ../../src/cmd_if.c; sourceTree = "<group>"; };
+		260254672C369067009C6C88 /* types.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = types.h; path = ../../src/types.h; sourceTree = "<group>"; };
+		260254682C369067009C6C88 /* glyph.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = glyph.h; path = ../../src/glyph.h; sourceTree = "<group>"; };
+		260254692C369067009C6C88 /* ciel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ciel.h; path = ../../src/ciel.h; sourceTree = "<group>"; };
+		2602546A2C369067009C6C88 /* cmd_vol.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = cmd_vol.c; path = ../../src/cmd_vol.c; sourceTree = "<group>"; };
+		2602546B2C369067009C6C88 /* script.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = script.h; path = ../../src/script.h; sourceTree = "<group>"; };
+		2602546C2C369067009C6C88 /* halwrap.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = halwrap.c; path = ../../src/halwrap.c; sourceTree = "<group>"; };
+		2602546D2C369067009C6C88 /* seen.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = seen.c; path = ../../src/seen.c; sourceTree = "<group>"; };
+		2602546E2C369067009C6C88 /* cmd_chs.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = cmd_chs.c; path = ../../src/cmd_chs.c; sourceTree = "<group>"; };
+		2602546F2C369067009C6C88 /* cmd_click.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = cmd_click.c; path = ../../src/cmd_click.c; sourceTree = "<group>"; };
+		260254702C369067009C6C88 /* save.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = save.h; path = ../../src/save.h; sourceTree = "<group>"; };
+		260254712C369067009C6C88 /* pro.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = pro.h; path = ../../src/pro.h; sourceTree = "<group>"; };
+		260254722C369067009C6C88 /* wms_core.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = wms_core.h; path = ../../src/wms_core.h; sourceTree = "<group>"; };
+		260254732C369067009C6C88 /* vars.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = vars.c; path = ../../src/vars.c; sourceTree = "<group>"; };
+		260254742C36906A009C6C88 /* gui.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = gui.c; path = ../../src/gui.c; sourceTree = "<group>"; };
+		260254752C36906A009C6C88 /* cmd_se.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = cmd_se.c; path = ../../src/cmd_se.c; sourceTree = "<group>"; };
+		260254762C36906A009C6C88 /* conf.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = conf.c; path = ../../src/conf.c; sourceTree = "<group>"; };
+		260254772C36906A009C6C88 /* cmd_shake.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = cmd_shake.c; path = ../../src/cmd_shake.c; sourceTree = "<group>"; };
+		260254782C36906A009C6C88 /* cmd_skip.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = cmd_skip.c; path = ../../src/cmd_skip.c; sourceTree = "<group>"; };
+		260254792C36906A009C6C88 /* history.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = history.c; path = ../../src/history.c; sourceTree = "<group>"; };
+		2602547A2C36906A009C6C88 /* package.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = package.c; path = ../../src/package.c; sourceTree = "<group>"; };
+		2602547B2C36906A009C6C88 /* readpng.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = readpng.c; path = ../../src/readpng.c; sourceTree = "<group>"; };
+		2602547C2C36906A009C6C88 /* event.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = event.h; path = ../../src/event.h; sourceTree = "<group>"; };
+		2602547D2C36906A009C6C88 /* cmd_goto.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = cmd_goto.c; path = ../../src/cmd_goto.c; sourceTree = "<group>"; };
+		2602547E2C36906A009C6C88 /* glyph.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = glyph.c; path = ../../src/glyph.c; sourceTree = "<group>"; };
+		2602547F2C36906A009C6C88 /* key.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = key.h; path = ../../src/key.h; sourceTree = "<group>"; };
+		260254802C36906A009C6C88 /* log.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = log.c; path = ../../src/log.c; sourceTree = "<group>"; };
+		260254812C36906A009C6C88 /* stage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = stage.h; path = ../../src/stage.h; sourceTree = "<group>"; };
+		260254822C36906A009C6C88 /* wms.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = wms.h; path = ../../src/wms.h; sourceTree = "<group>"; };
+		260254832C36906A009C6C88 /* gui.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = gui.h; path = ../../src/gui.h; sourceTree = "<group>"; };
+		260254842C36906A009C6C88 /* wms_core.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = wms_core.c; path = ../../src/wms_core.c; sourceTree = "<group>"; };
+		260254852C36906A009C6C88 /* cmd_load.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = cmd_load.c; path = ../../src/cmd_load.c; sourceTree = "<group>"; };
+		260254862C36906A009C6C88 /* image.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = image.c; path = ../../src/image.c; sourceTree = "<group>"; };
+		260254872C36906A009C6C88 /* save.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = save.c; path = ../../src/save.c; sourceTree = "<group>"; };
+		260254882C36906A009C6C88 /* wms_parser.tab.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = wms_parser.tab.h; path = ../../src/wms_parser.tab.h; sourceTree = "<group>"; };
+		260254892C36906A009C6C88 /* ciel.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = ciel.c; path = ../../src/ciel.c; sourceTree = "<group>"; };
+		2602548A2C36906A009C6C88 /* log.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = log.h; path = ../../src/log.h; sourceTree = "<group>"; };
+		2602548B2C36906A009C6C88 /* readimage.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = readimage.c; path = ../../src/readimage.c; sourceTree = "<group>"; };
+		2602548C2C36906A009C6C88 /* wave.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = wave.h; path = ../../src/wave.h; sourceTree = "<group>"; };
+		2602548D2C36906A009C6C88 /* cmd_wms.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = cmd_wms.c; path = ../../src/cmd_wms.c; sourceTree = "<group>"; };
+		2602548E2C36906A009C6C88 /* file.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = file.c; path = ../../src/file.c; sourceTree = "<group>"; };
+		2602548F2C36906A009C6C88 /* conf.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = conf.h; path = ../../src/conf.h; sourceTree = "<group>"; };
+		260254902C36906A009C6C88 /* anime.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = anime.h; path = ../../src/anime.h; sourceTree = "<group>"; };
+		260254912C36906A009C6C88 /* readjpeg.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = readjpeg.c; path = ../../src/readjpeg.c; sourceTree = "<group>"; };
+		260254922C36906B009C6C88 /* wms_parser.tab.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = wms_parser.tab.c; path = ../../src/wms_parser.tab.c; sourceTree = "<group>"; };
+		260254932C36906B009C6C88 /* cmd_bgm.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = cmd_bgm.c; path = ../../src/cmd_bgm.c; sourceTree = "<group>"; };
+		260254942C36906B009C6C88 /* cmd_cha.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = cmd_cha.c; path = ../../src/cmd_cha.c; sourceTree = "<group>"; };
+		260254952C36906B009C6C88 /* uimsg.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = uimsg.h; path = ../../src/uimsg.h; sourceTree = "<group>"; };
+		260254962C36906B009C6C88 /* scbuf.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = scbuf.h; path = ../../src/scbuf.h; sourceTree = "<group>"; };
+		260254972C36906B009C6C88 /* file.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = file.h; path = ../../src/file.h; sourceTree = "<group>"; };
+		260254982C36906B009C6C88 /* cmd_pencil.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = cmd_pencil.c; path = ../../src/cmd_pencil.c; sourceTree = "<group>"; };
+		260254992C36906B009C6C88 /* wms_impl.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = wms_impl.c; path = ../../src/wms_impl.c; sourceTree = "<group>"; };
+		2602549A2C36906B009C6C88 /* cmd_switch.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = cmd_switch.c; path = ../../src/cmd_switch.c; sourceTree = "<group>"; };
+		2602549B2C36906B009C6C88 /* cmd_bg.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = cmd_bg.c; path = ../../src/cmd_bg.c; sourceTree = "<group>"; };
+		2602549C2C36906B009C6C88 /* main.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = main.c; path = ../../src/main.c; sourceTree = "<group>"; };
+		2602549D2C36906B009C6C88 /* vars.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = vars.h; path = ../../src/vars.h; sourceTree = "<group>"; };
+		2602549E2C36906B009C6C88 /* cmd_message.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = cmd_message.c; path = ../../src/cmd_message.c; sourceTree = "<group>"; };
+		2602549F2C36906B009C6C88 /* wave.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = wave.c; path = ../../src/wave.c; sourceTree = "<group>"; };
+		260254A02C36906B009C6C88 /* history.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = history.h; path = ../../src/history.h; sourceTree = "<group>"; };
+		260254A12C36906B009C6C88 /* script.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = script.c; path = ../../src/script.c; sourceTree = "<group>"; };
+		260254A22C36906B009C6C88 /* anime.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = anime.c; path = ../../src/anime.c; sourceTree = "<group>"; };
+		260254A32C36906B009C6C88 /* stage.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = stage.c; path = ../../src/stage.c; sourceTree = "<group>"; };
+		260254DF2C3693AB009C6C88 /* aunit.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = aunit.c; path = ../../src/apple/aunit.c; sourceTree = "<group>"; };
+		260254E02C3693AB009C6C88 /* aunit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = aunit.h; path = ../../src/apple/aunit.h; sourceTree = "<group>"; };
+		26607E262C39020A00488C40 /* GameShaders.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; name = GameShaders.metal; path = ../../../src/apple/GameShaders.metal; sourceTree = "<group>"; };
+		26607E272C39020A00488C40 /* GameShaderTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GameShaderTypes.h; path = ../../../src/apple/GameShaderTypes.h; sourceTree = "<group>"; };
+		26607E332C3BAB2C00488C40 /* Renderer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Renderer.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		260254362C368FC0009C6C88 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		260254302C368FC0009C6C88 = {
+			isa = PBXGroup;
+			children = (
+				2602543B2C368FC0009C6C88 /* app-ios */,
+				2602544B2C369006009C6C88 /* engine */,
+				2602543A2C368FC0009C6C88 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		2602543A2C368FC0009C6C88 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				260254392C368FC0009C6C88 /* app-ios.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		2602543B2C368FC0009C6C88 /* app-ios */ = {
+			isa = PBXGroup;
+			children = (
+				2602543E2C368FC0009C6C88 /* ContentView.swift */,
+				26607E332C3BAB2C00488C40 /* Renderer.swift */,
+				26607E262C39020A00488C40 /* GameShaders.metal */,
+				26607E272C39020A00488C40 /* GameShaderTypes.h */,
+				260254402C368FC1009C6C88 /* Assets.xcassets */,
+				260254422C368FC1009C6C88 /* app_ios.entitlements */,
+				260254432C368FC1009C6C88 /* Preview Content */,
+			);
+			path = "app-ios";
+			sourceTree = "<group>";
+		};
+		260254432C368FC1009C6C88 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				260254442C368FC1009C6C88 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		2602544B2C369006009C6C88 /* engine */ = {
+			isa = PBXGroup;
+			children = (
+				260254DF2C3693AB009C6C88 /* aunit.c */,
+				260254E02C3693AB009C6C88 /* aunit.h */,
+				260254A22C36906B009C6C88 /* anime.c */,
+				260254902C36906A009C6C88 /* anime.h */,
+				260254892C36906A009C6C88 /* ciel.c */,
+				260254692C369067009C6C88 /* ciel.h */,
+				2602545D2C369067009C6C88 /* cmd_anime.c */,
+				2602549B2C36906B009C6C88 /* cmd_bg.c */,
+				260254932C36906B009C6C88 /* cmd_bgm.c */,
+				260254512C369066009C6C88 /* cmd_ch.c */,
+				260254942C36906B009C6C88 /* cmd_cha.c */,
+				260254532C369066009C6C88 /* cmd_chapter.c */,
+				2602546E2C369067009C6C88 /* cmd_chs.c */,
+				2602546F2C369067009C6C88 /* cmd_click.c */,
+				260254632C369067009C6C88 /* cmd_gosub.c */,
+				2602547D2C36906A009C6C88 /* cmd_goto.c */,
+				2602544E2C369066009C6C88 /* cmd_gui.c */,
+				260254662C369067009C6C88 /* cmd_if.c */,
+				260254652C369067009C6C88 /* cmd_layer.c */,
+				260254852C36906A009C6C88 /* cmd_load.c */,
+				2602549E2C36906B009C6C88 /* cmd_message.c */,
+				260254982C36906B009C6C88 /* cmd_pencil.c */,
+				2602544D2C369066009C6C88 /* cmd_return.c */,
+				260254752C36906A009C6C88 /* cmd_se.c */,
+				260254572C369066009C6C88 /* cmd_set.c */,
+				260254502C369066009C6C88 /* cmd_setconfig.c */,
+				260254562C369066009C6C88 /* cmd_setsave.c */,
+				260254772C36906A009C6C88 /* cmd_shake.c */,
+				260254782C36906A009C6C88 /* cmd_skip.c */,
+				2602549A2C36906B009C6C88 /* cmd_switch.c */,
+				260254592C369066009C6C88 /* cmd_video.c */,
+				2602546A2C369067009C6C88 /* cmd_vol.c */,
+				260254552C369066009C6C88 /* cmd_wait.c */,
+				2602548D2C36906A009C6C88 /* cmd_wms.c */,
+				260254762C36906A009C6C88 /* conf.c */,
+				2602548F2C36906A009C6C88 /* conf.h */,
+				2602545C2C369067009C6C88 /* event.c */,
+				2602547C2C36906A009C6C88 /* event.h */,
+				2602548E2C36906A009C6C88 /* file.c */,
+				260254972C36906B009C6C88 /* file.h */,
+				2602547E2C36906A009C6C88 /* glyph.c */,
+				260254682C369067009C6C88 /* glyph.h */,
+				260254742C36906A009C6C88 /* gui.c */,
+				260254832C36906A009C6C88 /* gui.h */,
+				260254602C369067009C6C88 /* hal.h */,
+				2602546C2C369067009C6C88 /* halwrap.c */,
+				260254792C36906A009C6C88 /* history.c */,
+				260254A02C36906B009C6C88 /* history.h */,
+				260254862C36906A009C6C88 /* image.c */,
+				2602545F2C369067009C6C88 /* image.h */,
+				2602547F2C36906A009C6C88 /* key.h */,
+				260254802C36906A009C6C88 /* log.c */,
+				2602548A2C36906A009C6C88 /* log.h */,
+				2602549C2C36906B009C6C88 /* main.c */,
+				2602545E2C369067009C6C88 /* main.h */,
+				260254582C369066009C6C88 /* mixer.c */,
+				260254542C369066009C6C88 /* mixer.h */,
+				2602544F2C369066009C6C88 /* opennovel.h */,
+				2602547A2C36906A009C6C88 /* package.c */,
+				2602545A2C369066009C6C88 /* package.h */,
+				260254712C369067009C6C88 /* pro.h */,
+				2602548B2C36906A009C6C88 /* readimage.c */,
+				260254912C36906A009C6C88 /* readjpeg.c */,
+				2602547B2C36906A009C6C88 /* readpng.c */,
+				260254642C369067009C6C88 /* readwebp.c */,
+				260254872C36906A009C6C88 /* save.c */,
+				260254702C369067009C6C88 /* save.h */,
+				260254522C369066009C6C88 /* scbuf.c */,
+				260254962C36906B009C6C88 /* scbuf.h */,
+				260254A12C36906B009C6C88 /* script.c */,
+				2602546B2C369067009C6C88 /* script.h */,
+				2602546D2C369067009C6C88 /* seen.c */,
+				260254612C369067009C6C88 /* seen.h */,
+				260254A32C36906B009C6C88 /* stage.c */,
+				260254812C36906A009C6C88 /* stage.h */,
+				260254672C369067009C6C88 /* types.h */,
+				260254622C369067009C6C88 /* uimsg.c */,
+				260254952C36906B009C6C88 /* uimsg.h */,
+				260254732C369067009C6C88 /* vars.c */,
+				2602549D2C36906B009C6C88 /* vars.h */,
+				2602549F2C36906B009C6C88 /* wave.c */,
+				2602548C2C36906A009C6C88 /* wave.h */,
+				260254842C36906A009C6C88 /* wms_core.c */,
+				260254722C369067009C6C88 /* wms_core.h */,
+				260254992C36906B009C6C88 /* wms_impl.c */,
+				2602545B2C369067009C6C88 /* wms_lexer.yy.c */,
+				260254922C36906B009C6C88 /* wms_parser.tab.c */,
+				260254882C36906A009C6C88 /* wms_parser.tab.h */,
+				260254822C36906A009C6C88 /* wms.h */,
+				2602544C2C369066009C6C88 /* app-ios-Bridging-Header.h */,
+			);
+			name = engine;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		260254382C368FC0009C6C88 /* app-ios */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 260254482C368FC1009C6C88 /* Build configuration list for PBXNativeTarget "app-ios" */;
+			buildPhases = (
+				260254352C368FC0009C6C88 /* Sources */,
+				260254362C368FC0009C6C88 /* Frameworks */,
+				260254372C368FC0009C6C88 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "app-ios";
+			productName = "app-ios";
+			productReference = 260254392C368FC0009C6C88 /* app-ios.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		260254312C368FC0009C6C88 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1540;
+				LastUpgradeCheck = 1540;
+				TargetAttributes = {
+					260254382C368FC0009C6C88 = {
+						CreatedOnToolsVersion = 15.4;
+						LastSwiftMigration = 1540;
+					};
+				};
+			};
+			buildConfigurationList = 260254342C368FC0009C6C88 /* Build configuration list for PBXProject "app-ios" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 260254302C368FC0009C6C88;
+			productRefGroup = 2602543A2C368FC0009C6C88 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				260254382C368FC0009C6C88 /* app-ios */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		260254372C368FC0009C6C88 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				260254452C368FC1009C6C88 /* Preview Assets.xcassets in Resources */,
+				260254412C368FC1009C6C88 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		260254352C368FC0009C6C88 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				260254CB2C36906B009C6C88 /* save.c in Sources */,
+				260254C32C36906B009C6C88 /* package.c in Sources */,
+				260254A92C36906B009C6C88 /* cmd_chapter.c in Sources */,
+				260254D72C36906B009C6C88 /* cmd_bg.c in Sources */,
+				260254B22C36906B009C6C88 /* uimsg.c in Sources */,
+				260254B82C36906B009C6C88 /* halwrap.c in Sources */,
+				260254B72C36906B009C6C88 /* cmd_vol.c in Sources */,
+				260254BA2C36906B009C6C88 /* cmd_chs.c in Sources */,
+				26607E292C39020A00488C40 /* GameShaders.metal in Sources */,
+				260254C72C36906B009C6C88 /* log.c in Sources */,
+				260254C62C36906B009C6C88 /* glyph.c in Sources */,
+				260254D12C36906B009C6C88 /* wms_parser.tab.c in Sources */,
+				26607E342C3BAB2C00488C40 /* Renderer.swift in Sources */,
+				260254CE2C36906B009C6C88 /* cmd_wms.c in Sources */,
+				260254DD2C36906B009C6C88 /* stage.c in Sources */,
+				260254C12C36906B009C6C88 /* cmd_skip.c in Sources */,
+				260254C52C36906B009C6C88 /* cmd_goto.c in Sources */,
+				260254D92C36906B009C6C88 /* cmd_message.c in Sources */,
+				260254D32C36906B009C6C88 /* cmd_cha.c in Sources */,
+				260254B62C36906B009C6C88 /* cmd_if.c in Sources */,
+				2602543F2C368FC0009C6C88 /* ContentView.swift in Sources */,
+				260254D02C36906B009C6C88 /* readjpeg.c in Sources */,
+				260254BB2C36906B009C6C88 /* cmd_click.c in Sources */,
+				260254C42C36906B009C6C88 /* readpng.c in Sources */,
+				260254C82C36906B009C6C88 /* wms_core.c in Sources */,
+				260254C22C36906B009C6C88 /* history.c in Sources */,
+				260254BE2C36906B009C6C88 /* cmd_se.c in Sources */,
+				260254AA2C36906B009C6C88 /* cmd_wait.c in Sources */,
+				260254AE2C36906B009C6C88 /* cmd_video.c in Sources */,
+				260254AF2C36906B009C6C88 /* wms_lexer.yy.c in Sources */,
+				260254DB2C36906B009C6C88 /* script.c in Sources */,
+				260254BC2C36906B009C6C88 /* vars.c in Sources */,
+				260254B32C36906B009C6C88 /* cmd_gosub.c in Sources */,
+				260254BF2C36906B009C6C88 /* conf.c in Sources */,
+				260254D82C36906B009C6C88 /* main.c in Sources */,
+				260254C02C36906B009C6C88 /* cmd_shake.c in Sources */,
+				260254DC2C36906B009C6C88 /* anime.c in Sources */,
+				260254E12C3693AB009C6C88 /* aunit.c in Sources */,
+				260254B52C36906B009C6C88 /* cmd_layer.c in Sources */,
+				260254D52C36906B009C6C88 /* wms_impl.c in Sources */,
+				260254CD2C36906B009C6C88 /* readimage.c in Sources */,
+				260254CF2C36906B009C6C88 /* file.c in Sources */,
+				260254A82C36906B009C6C88 /* scbuf.c in Sources */,
+				260254A52C36906B009C6C88 /* cmd_gui.c in Sources */,
+				260254AB2C36906B009C6C88 /* cmd_setsave.c in Sources */,
+				260254B42C36906B009C6C88 /* readwebp.c in Sources */,
+				260254CC2C36906B009C6C88 /* ciel.c in Sources */,
+				260254B12C36906B009C6C88 /* cmd_anime.c in Sources */,
+				260254B02C36906B009C6C88 /* event.c in Sources */,
+				260254D42C36906B009C6C88 /* cmd_pencil.c in Sources */,
+				260254D62C36906B009C6C88 /* cmd_switch.c in Sources */,
+				260254CA2C36906B009C6C88 /* image.c in Sources */,
+				260254B92C36906B009C6C88 /* seen.c in Sources */,
+				260254AC2C36906B009C6C88 /* cmd_set.c in Sources */,
+				260254DA2C36906B009C6C88 /* wave.c in Sources */,
+				260254A72C36906B009C6C88 /* cmd_ch.c in Sources */,
+				260254AD2C36906B009C6C88 /* mixer.c in Sources */,
+				260254A62C36906B009C6C88 /* cmd_setconfig.c in Sources */,
+				260254D22C36906B009C6C88 /* cmd_bgm.c in Sources */,
+				260254A42C36906B009C6C88 /* cmd_return.c in Sources */,
+				260254C92C36906B009C6C88 /* cmd_load.c in Sources */,
+				260254BD2C36906B009C6C88 /* gui.c in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		260254462C368FC1009C6C88 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		260254472C368FC1009C6C88 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SWIFT_COMPILATION_MODE = wholemodule;
+			};
+			name = Release;
+		};
+		260254492C368FC1009C6C88 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = "app-ios/app_ios.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"app-ios/Preview Content\"";
+				DEVELOPMENT_TEAM = DT727R68TR;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = OpenNovel;
+				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
+				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
+				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
+				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphonesimulator*]" = YES;
+				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphoneos*]" = YES;
+				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphonesimulator*]" = YES;
+				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphoneos*]" = UIStatusBarStyleDefault;
+				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
+				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 14.5;
+				MARKETING_VERSION = 1.0;
+				MTL_COMPILER_FLAGS = "-fcikernel";
+				OTHER_CFLAGS = (
+					"-DUSE_SWIFT",
+					"-DUSE_DLL",
+					"-DNO_CDECL",
+					"-I./libroot/include",
+					"-I./libroot/include/freetype2",
+				);
+				OTHER_LDFLAGS = (
+					"-L./libroot/lib",
+					"-lpng",
+					"-ljpeg",
+					"-lwebp",
+					"-lfreetype",
+					"-lz",
+					"-lbz2",
+					"-lbrotlidec",
+					"-lbrotlicommon",
+					"-lvorbis",
+					"-logg",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "org.opennovel.app-ios";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "app-ios-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		2602544A2C368FC1009C6C88 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = "app-ios/app_ios.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"app-ios/Preview Content\"";
+				DEVELOPMENT_TEAM = DT727R68TR;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = OpenNovel;
+				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
+				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
+				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
+				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphonesimulator*]" = YES;
+				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphoneos*]" = YES;
+				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphonesimulator*]" = YES;
+				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphoneos*]" = UIStatusBarStyleDefault;
+				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
+				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 14.5;
+				MARKETING_VERSION = 1.0;
+				MTL_COMPILER_FLAGS = "-fcikernel";
+				OTHER_CFLAGS = (
+					"-DUSE_SWIFT",
+					"-DUSE_DLL",
+					"-DNO_CDECL",
+					"-I./libroot/include",
+					"-I./libroot/include/freetype2",
+				);
+				OTHER_LDFLAGS = (
+					"-L./libroot/lib",
+					"-lpng",
+					"-ljpeg",
+					"-lwebp",
+					"-lfreetype",
+					"-lz",
+					"-lbz2",
+					"-lbrotlidec",
+					"-lbrotlicommon",
+					"-lvorbis",
+					"-logg",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "org.opennovel.app-ios";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "app-ios-Bridging-Header.h";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		260254342C368FC0009C6C88 /* Build configuration list for PBXProject "app-ios" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				260254462C368FC1009C6C88 /* Debug */,
+				260254472C368FC1009C6C88 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		260254482C368FC1009C6C88 /* Build configuration list for PBXNativeTarget "app-ios" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				260254492C368FC1009C6C88 /* Debug */,
+				2602544A2C368FC1009C6C88 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 260254312C368FC0009C6C88 /* Project object */;
+}
