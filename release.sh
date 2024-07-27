@@ -110,4 +110,8 @@ echo "Making a ZIP..."
 7z a -tzip -mm=LZMA -mx9 -aoa "$TARGET.zip" "$TARGET"
 rm -rf "$TARGET"
 
+# Make a release on GitHub.
+echo "Making a release on GitHub..."
+yes "" | gh release create "$VERSION" --title "$VERSION" --notes "$NOTE" "$TARGET.zip"
+
 echo "Done."
