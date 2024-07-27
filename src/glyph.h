@@ -20,10 +20,10 @@
 #define CHAR_YENSIGN		(0x00a5)
 
 /* フォントタイプ */
-#define FONT_GLOBAL		(0)
-#define FONT_MAIN		(1)
-#define FONT_ALT1		(2)
-#define FONT_ALT2		(3)
+#define FONT_SELECT1		(0)
+#define FONT_SELECT2		(1)
+#define FONT_SELECT3		(2)
+#define FONT_SELECT4		(3)
 #define FONT_COUNT		(4)
 
 /* フォントレンダラの初期化処理を行う */

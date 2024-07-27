@@ -111,10 +111,10 @@ bool init_glyph(void)
 	}
 
 	/* コンフィグを読み込む */
-	fname[FONT_GLOBAL] = conf_font_ttf[0];
-	fname[FONT_MAIN] = conf_font_ttf[1];
-	fname[FONT_ALT1] = conf_font_ttf[2];
-	fname[FONT_ALT2] = conf_font_ttf[3];
+	fname[FONT_SELECT1] = conf_font_ttf[0];
+	fname[FONT_SELECT2] = conf_font_ttf[1];
+	fname[FONT_SELECT3] = conf_font_ttf[2];
+	fname[FONT_SELECT4] = conf_font_ttf[3];
 
 	/* フォントを読み込む */
 	for (i = 0; i < FONT_COUNT; i++) {
@@ -196,29 +196,29 @@ bool update_global_font(void)
 	assert(conf_font_ttf[0] != NULL);
 
 	/* Return if before init. */
-	if (face[FONT_GLOBAL] == NULL)
+	if (face[FONT_SELECT1] == NULL)
 		return true;
 
 	/* Cleanup the current global font. */
-	assert(face[FONT_GLOBAL] != NULL);
-	FT_Done_Face(face[FONT_GLOBAL]);
-	face[FONT_GLOBAL] = NULL;
-	assert(font_file_content[FONT_GLOBAL] != NULL);
-	free(font_file_content[FONT_GLOBAL]);
-	font_file_content[FONT_GLOBAL] = NULL;
+	assert(face[FONT_SELECT1] != NULL);
+	FT_Done_Face(face[FONT_SELECT1]);
+	face[FONT_SELECT1] = NULL;
+	assert(font_file_content[FONT_SELECT1] != NULL);
+	free(font_file_content[FONT_SELECT1]);
+	font_file_content[FONT_SELECT1] = NULL;
 
 	/* フォントファイルの内容を読み込む */
 	if (!read_font_file_content(conf_font_ttf[0],
-				    &font_file_content[FONT_GLOBAL],
-				    &font_file_size[FONT_GLOBAL]))
+				    &font_file_content[FONT_SELECT1],
+				    &font_file_size[FONT_SELECT1]))
 		return false;
 
 	/* フォントファイルを読み込む */
 	err = FT_New_Memory_Face(library,
-				 font_file_content[FONT_GLOBAL],
-				 font_file_size[FONT_GLOBAL],
+				 font_file_content[FONT_SELECT1],
+				 font_file_size[FONT_SELECT1],
 				 0,
-				 &face[FONT_GLOBAL]);
+				 &face[FONT_SELECT1]);
 	if (err != 0) {
 		log_font_file_error(conf_font_ttf[0]);
 		return false;
@@ -739,31 +739,33 @@ static bool apply_font_size(int font_type, int size)
 /* フォントを選択する */
 static int translate_font_type(int font_type)
 {
-	assert(font_type == FONT_GLOBAL || font_type == FONT_MAIN ||
-	       font_type == FONT_ALT1 || font_type == FONT_ALT2);
+	assert(font_type == FONT_SELECT1 ||
+	       font_type == FONT_SELECT2 ||
+	       font_type == FONT_SELECT3 ||
+	       font_type == FONT_SELECT4);
 
-	if (font_type == FONT_GLOBAL)
-		return FONT_GLOBAL;
-	if (font_type == FONT_MAIN) {
+	if (font_type == FONT_SELECT1)
+		return FONT_SELECT1;
+	if (font_type == FONT_SELECT2) {
 		if (conf_font_ttf[1] == NULL)
-			return FONT_GLOBAL;
+			return FONT_SELECT1;
 		else
-			return FONT_MAIN;
+			return FONT_SELECT2;
 	}
-	if (font_type == FONT_ALT1) {
+	if (font_type == FONT_SELECT3) {
 		if (conf_font_ttf[2] == NULL)
-			return FONT_GLOBAL;
+			return FONT_SELECT1;
 		else
-			return FONT_ALT1;
+			return FONT_SELECT3;
 	}
-	if (font_type == FONT_ALT2) {
+	if (font_type == FONT_SELECT4) {
 		if (conf_font_ttf[3] == NULL)
-			return FONT_GLOBAL;
+			return FONT_SELECT1;
 		else
-			return FONT_ALT2;
+			return FONT_SELECT4;
 	}
 	assert(0);
-	return FONT_GLOBAL;
+	return FONT_SELECT1;
 }
 
 /*
@@ -1847,17 +1849,17 @@ static bool process_escape_sequence_font(struct draw_msg_context *context)
 		/* フォントタイプを読む */
 		font_type = *(p + 3);
 		switch (font_type) {
-		case 'g':
-			context->font = FONT_GLOBAL;
+		case '1':
+			context->font = FONT_SELECT1;
 			break;
-		case 'm':
-			context->font = translate_font_type(FONT_MAIN);
+		case '2':
+			context->font = translate_font_type(FONT_SELECT2);
 			break;
-		case 'a':
-			context->font = translate_font_type(FONT_ALT1);
+		case '3':
+			context->font = translate_font_type(FONT_SELECT3);
 			break;
-		case 'b':
-			context->font = translate_font_type(FONT_ALT2);
+		case '4':
+			context->font = translate_font_type(FONT_SELECT4);
 			break;
 		default:
 			break;
