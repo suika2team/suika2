@@ -5,6 +5,7 @@
 # For cross compilation
 CC = i686-w64-mingw32-gcc
 CXX = i686-w64-mingw32-g++
+AR = i686-w64-mingw32-ar
 WINDRES = i686-w64-mingw32-windres
 
 #
@@ -188,7 +189,7 @@ game.exe: libroot $(OBJS) $(HDRS_MAIN) $(HDRS)
 	$(CC) -s -o game.exe $(OBJS) $(LDFLAGS)
 
 libroot:
-	@../../external/build-libs.sh "" i686-w64-mingw32-gcc "" i686-w64-mingw32-ar
+	@../../external/build-libs.sh "" $(CC) "" $(AR)
 
 #
 # Phony

@@ -261,9 +261,6 @@ bool is_sound_finished(int n)
 /* Initialize a device for a stream. */
 static bool init_pcm(int n)
 {
-#if !defined(__ANDROID__)
-	/* Normal GNU/Linux */
-
 	/* Open a device. */
 	int ret;
 	ret = snd_pcm_open(&pcm[n], "default", SND_PCM_STREAM_PLAYBACK, 0);
@@ -313,25 +310,7 @@ static bool init_pcm(int n)
 		log_api_error("snd_pcm_hw_params");
 		return false;
 	}
-#else
-	/* tinyalsa */
 
-	/* Describe the format (44.1kHz, stereo, 16-bit signed little endian) */
-	struct pcm_config config;
-	memset(&config, 0, sizeof(config));
-	config.channels = 2;
-	config.rate = 44100;
-	config.period_size = BUF_FRAMES;
-	config.period_count = PERIODS;
-	config.format = PCM_FORMAT_S16_LE;
-
-	/* Open a PCM device. */
-	pcm[n] = pcm_open(0, 0, PCM_OUT, &config);
-	if (pcm[n] == NULL) {
-		log_api_error("pcm_open_by_name");
-		return false;
-	}
-#endif
 	return true;
 }
 

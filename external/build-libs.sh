@@ -143,7 +143,8 @@ $CC -I. -I./src -fPIC $CFLAGS -std=c89 -Wno-deprecated-non-prototype -c crc32.c
 $CC -I. -I./src -fPIC $CFLAGS -std=c89 -Wno-deprecated-non-prototype -c inflate.c -Wno-undefined-internal
 $CC -I. -I./src -fPIC $CFLAGS -std=c89 -Wno-deprecated-non-prototype -c deflate.c
 $CC -I. -I./src -fPIC $CFLAGS -std=c89 -Wno-deprecated-non-prototype -c inftrees.c
-$AR rcs $PREFIX/lib/libz.a adler32.o infback.o trees.o compress.o inffast.o uncompr.o crc32.o inflate.o deflate.o inftrees.o
+$CC -I. -I./src -fPIC $CFLAGS -std=c89 -Wno-deprecated-non-prototype -c zutil.c
+$AR rcs $PREFIX/lib/libz.a adler32.o infback.o trees.o compress.o inffast.o uncompr.o crc32.o inflate.o deflate.o inftrees.o zutil.c
 cp zlib.h zconf.h $PREFIX/include/
 cd ..
 

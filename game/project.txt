@@ -575,7 +575,7 @@ sysbtn.hide=no
 #  - no:  表示しない
 #  - yes: 表示する
 #
-sysbtn.transition=no
+sysbtn.transition=yes
 
 ########################################################################
 

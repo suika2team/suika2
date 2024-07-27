@@ -107,16 +107,17 @@ libopennovel-win64.dll: $(SRCS_UNITY)
 		-I./libroot-win64/libroot/include/png \
 		-I./libroot-win64/libroot/include/freetype2 \
 		$(SRCS_UNITY) \
-		./libroot-win64/lib/libfreetype.a \
-		./libroot-win64/lib/libwebp.a \
-		./libroot-win64/lib/libpng.a \
-		./libroot-win64/lib/libjpeg.a \
-		./libroot-win64/lib/libbrotlidec.a \
-		./libroot-win64/lib/libbrotlicommon.a \
-		./libroot-win64/lib/libvorbis.a \
-		./libroot-win64/lib/libogg.a \
-		./libroot-win64/lib/libbz2.a \
-		./libroot-win64/lib/libz.a
+		-L./libroot-win64/lib \
+		-lfreetype \
+		-lwebp \
+		-lpng \
+		-ljpeg \
+		-lbrotlidec \
+		-lbrotlicommon \
+		-lvorbis \
+		-logg \
+		-lbz2 \
+		-lz
 
 #
 # macOS DLL for Test Run

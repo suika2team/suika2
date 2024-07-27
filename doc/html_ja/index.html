@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ja-JP">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>OpenNovel マニュアル</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<h1>OpenNovel マニュアル</h1>
+<p>
+	<code>OpenNovel</code> はビジュアルノベルを制作するためのツールです。
+</p>
+
+<h2>使い方</h2>
+<ul>
+	<li><code>game-win.exe</code> を <code>sample</code> の中にコピーします</li>
+	<li><code>sample</code> の中で <code>game-win.exe</code> を起動します</li>
+</ul>
+
+<h2>主要ドキュメント</h2>
+<ul>
+	<li><a href="html/intro.html">入門編はこちらです</a></li>
+	<li><a href="html/reference.html">命令仕様はこちらです</a></li>
+	<li><a href="html/faq.html">よくある質問はこちらです</a></li>
+</ul>
+
+<h2>Android 版の作り方</h2>
+<ul>
+	<li><code>export-kit/android/app/src/main/assets</code> の中にゲームの内容をコピーします</li>
+	<li>Android Studioで開きます</li>
+	<li>APKファイルをGoogleドライブで共有すれば配布できます</li>
+</ul>
+
+<h2>iOS 版の作り方</h2>
+<ul>
+	<li>Apple Developer Programへの加入(1万3千円/年)しておきます</li>
+	<li>XcodeでApple IDを使ってログインしておきます</li>
+	<li><code>pack-win.exe</code> で <code>package.pak</code> を作成します</li>
+	<li><code>export-kit/ios/Resources</code> の中に <code>package.pak</code> をコピーします</li>
+	<li><code>export-kit/ios/Resources/mov</code> の中に MP4 ファイルをコピーします (なければスキップ)</li>
+	<li>Xcodeで開きます</li>
+	<li>IPAファイルをAirDropでiPhoneに送ればインストールできます</li>
+</ul>
+
+<h2>Unity 版の作り方</h2>
+<ul>
+	<li><code>export-kit/unity/Assets/StreamingResource</code> の中にゲームの内容をコピーします</li>
+	<li>ゲーム機のSDKで make コマンドを実行します</li>
+	<li>ゲーム機用の Unity で開きます</li>
+</ul>
+
+<h2>ライセンス</h2>
+<ul>
+	<li>MITライセンスです</li>
+	<li>完全に無償であり、ソースコードの再利用は自由です</li>
+	<li>完全に無保証であり、使用したことによるどんな結果も関知しません</li>
+</ul>	
+
+</body>
+</html>
