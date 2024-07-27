@@ -1,11 +1,17 @@
 <html><head></head><body>
 
 <!-- BEGIN-LATEST -->
+<li>OpenNovel 0.0.2 2024/07/27
+  <ul>
+    <li>Fixed the escape sequence for font selection</li>
+  </ul>
+</li>
+<!-- END-LATEST -->
+
 <li>OpenNovel 0.0.1 2024/07/25
   <ul>
     <li>This project was forked from the Polaris Engine Project v2.0.5</li>
   </ul>
 </li>
-<!-- END-LATEST -->
 
 </ul></body></html>
