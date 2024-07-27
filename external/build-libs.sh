@@ -246,7 +246,7 @@ sed -e 's/@INCLUDE_INTTYPES_H@/1/g' \
     -e 's/@USIZE16@/uint16_t/g' \
     -e 's/@SIZE32@/int32_t/g' \
     -e 's/@USIZE32@/uint32_t/g' \
-    -e 's/@SIZE64@/uint64_t/g' \
+    -e 's/@SIZE64@/int64_t/g' \
     < include/ogg/config_types.h.in \
     > include/ogg/config_types.h
 $CC -I./include -fPIC $CFLAGS -c src/bitwise.c
@@ -454,5 +454,5 @@ cp include/ft2build.h $PREFIX/include/
 cd ..
 
 cd ..
-rm -rf tmp
+#rm -rf tmp
 echo 'Finished.'

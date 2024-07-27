@@ -1,5 +1,4 @@
 src:
-	@echo 'Making a source code tree for the export feature.'
 	@rm -rf app/build app/.cxx app/src/main/cpp app/src/main/java app/src/main/assets android-src
 	@mkdir -p android-src
 	@mkdir -p android-src/app/src/main/cpp

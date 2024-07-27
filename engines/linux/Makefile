@@ -96,7 +96,8 @@ SRCS_KHRONOS = \
 
 CPPFLAGS = \
 	-I./libroot/include \
-	-I./libroot/include/freetype2  \
+	-I/usr/include/freetype2 \
+	-I/usr/include/png \
 	-I/usr/local/include \
 	-I/usr/pkg/include \
 	-I/usr/X11R7/include
@@ -122,16 +123,17 @@ CFLAGS = \
 #
 
 LDFLAGS = \
-	libroot/lib/libpng.a \
-	libroot/lib/libjpeg.a \
-	libroot/lib/libwebp.a \
-	libroot/lib/libfreetype.a \
-	libroot/lib/libvorbis.a \
-	libroot/lib/libogg.a \
-	libroot/lib/libbrotlicommon.a \
-	libroot/lib/libbrotlidec.a \
-	libroot/lib/libbz2.a \
-	libroot/lib/libz.a \
+	-lpng \
+	-ljpeg \
+	-lwebp \
+	-lfreetype \
+	-lvorbisfile \
+	-lvorbis \
+	-logg \
+	-lbrotlicommon \
+	-lbrotlidec \
+	-lbz2 \
+	-lz \
 	-lasound \
 	-lX11 \
 	-lXpm \
@@ -164,18 +166,15 @@ OBJS = \
 
 all: game-linux
 
-game-linux: libroot $(OBJS) $(HDRS)
+game-linux: $(OBJS) $(HDRS)
 	$(CC) -o game-linux $(OBJS) $(LDFLAGS) `pkg-config --libs gstreamer-1.0 gstreamer-video-1.0`
-
-libroot:
-	@../../external/build-libs.sh "" gcc "-Dmktemp=mkdtemp" ar
 
 #
 # Phony
 #
 
 setup:
-	sudo apt-get install build-essential libasound2-dev libx11-dev libgstreamer1.0-dev libgstreamer-plugins-base1.0-dev libxpm-dev mesa-common-dev
+	sudo apt-get install build-essential libasound2-dev libx11-dev libxpm-dev mesa-common-dev libfreetype-dev libpng-dev libjpeg-dev libwebp-dev libvorbis-dev libogg-dev libbrotli-dev libbz2-dev libz-dev libgstreamer1.0-dev libgstreamer-plugins-base1.0-dev
 
 clean:
 	@rm -rf *~ *.o game-linux log.txt sav tmp libroot

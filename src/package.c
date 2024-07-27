@@ -585,11 +585,10 @@ const char *conv_utf16_to_utf8(const wchar_t *utf16_message)
 #endif /* _WIN32 */
 
 /* Stub for platform.c */
-bool log_error(const char *s, ...) { UNUSED_PARAMETER(s); }
-bool log_warn(const char *s, ...) { UNUSED_PARAMETER(s); }
-bool log_info(const char *s, ...) { UNUSED_PARAMETER(s); }
+bool log_error(const char *s, ...) { UNUSED_PARAMETER(s); return true; }
+bool log_warn(const char *s, ...) { UNUSED_PARAMETER(s); return true; }
+bool log_info(const char *s, ...) { UNUSED_PARAMETER(s); return true; }
 void log_dir_many_files(void) { log_error("Too many files.\n"); }
-const char *conv_utf8_to_native(const char *utf8_message) { return utf8_message; }
 const char *get_system_locale(void) { return "other"; }
 char *make_valid_path(const char *dir, const char *fname) { return strdup(""); }
 
