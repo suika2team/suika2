@@ -1,98 +1,6 @@
-SRCS = \
-	../../src/opennovel.h \
-	../../src/anime.h \
-	../../src/conf.h \
-	../../src/event.h \
-	../../src/file.h \
-	../../src/glyph.h \
-	../../src/gui.h \
-	../../src/history.h \
-	../../src/image.h \
-	../../src/log.h \
-	../../src/main.h \
-	../../src/mixer.h \
-	../../src/motion.h \
-	../../src/save.h \
-	../../src/script.h \
-	../../src/seen.h \
-	../../src/stage.h \
-	../../src/vars.h \
-	../../src/wave.h \
-	../../src/wms.h \
-	\
-	../../src/anime.c \
-	../../src/conf.c \
-	../../src/ciel.c \
-	../../src/event.c \
-	../../src/file.c \
-	../../src/glyph.c \
-	../../src/gui.c \
-	../../src/history.c \
-	../../src/image.c \
-	../../src/log.c \
-	../../src/main.c \
-	../../src/mixer.c \
-	../../src/readimage.c \
-	../../src/readpng.c \
-	../../src/readjpeg.c \
-	../../src/readwebp.c \
-	../../src/save.c \
-	../../src/script.c \
-	../../src/seen.c \
-	../../src/stage.c \
-	../../src/vars.c \
-	../../src/wave.c \
-	../../src/wms_core.c \
-	../../src/wms_lexer.yy.c \
-	../../src/wms_parser.tab.c \
-	../../src/wms_impl.c \
-	../../src/cmd_anime.c \
-	../../src/cmd_bg.c \
-	../../src/cmd_ch.c \
-	../../src/cmd_chapter.c \
-	../../src/cmd_chch.c \
-	../../src/cmd_choose.c \
-	../../src/cmd_click.c \
-	../../src/cmd_config.c \
-	../../src/cmd_gosub.c \
-	../../src/cmd_goto.c \
-	../../src/cmd_if.c \
-	../../src/cmd_layer.c \
-	../../src/cmd_menu.c \
-	../../src/cmd_message.c \
-	../../src/cmd_move.c \
-	../../src/cmd_music.c \
-	../../src/cmd_plugin.c \
-	../../src/cmd_return.c \
-	../../src/cmd_set.c \
-	../../src/cmd_shake.c \
-	../../src/cmd_skip.c \
-	../../src/cmd_sound.c \
-	../../src/cmd_story.c \
-	../../src/cmd_text.c \
-	../../src/cmd_time.c \
-	../../src/cmd_video.c \
-	../../src/cmd_volume.c \
-	\
-	engine-macos/main.m \
-	engine-macos/AppDelegate.h \
-	engine-macos/AppDelegate.m \
-	engine-macos/ViewController.h \
-	engine-macos/ViewController.m \
-	engine-macos/GameView.h \
-	engine-macos/GameView.m \
-	\
-	../../src/apple/aunit.h \
-	../../src/apple/aunit.c \
-	../../src/apple/GameRenderer.h \
-	../../src/apple/GameShaderTypes.h \
-	../../src/apple/GameViewControllerProtocol.h \
-	../../src/apple/GameRenderer.m \
-	../../src/apple/GameShaders.metal
-
 all: src game.dmg
 
-game.dmg: libroot $(SRCS)
+game.dmg: libroot
 	@echo "Building Game.app"
 	@rm -rf build
 	@echo 'archiving...'
@@ -222,6 +130,7 @@ src: libroot
 	@cp ../../src/cmd_volume.c macos-src/engine-macos/
 	@cp ../../src/cmd_plugin.c macos-src/engine-macos/
 	@mkdir macos-src/Resources/
+	@mkdir macos-src/Resources/video
 	@cp -Ra libroot macos-src/
 
 libroot:

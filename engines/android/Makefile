@@ -60,6 +60,7 @@ src: libopennovel-aarch64.so libopennovel-armv7a.so libopennovel-x86_64.so libop
 	@rm -rf app/build app/.cxx app/src/main/cpp app/src/main/java app/src/main/assets android-src
 	@mkdir -p android-src
 	@mkdir -p android-src/app/src/main/cpp
+	@mkdir -p android-src/app/src/main/assets
 	@
 	@cp -R app android-src/
 	@cp -R gradle.properties android-src/
@@ -68,9 +69,6 @@ src: libopennovel-aarch64.so libopennovel-armv7a.so libopennovel-x86_64.so libop
 	@cp -R settings.gradle android-src/
 	@cp -R gradlew.bat android-src/
 	@cp -R gradle android-src/
-	@
-	@cp build.sh android-src/
-	@cp build.bat android-src/
 	@
 	@mkdir -p android-src/app/src/main/java/org/opennovel/engineandroid
 	@cp ../../src/google/MainActivity.java android-src/app/src/main/java/org/opennovel/engineandroid/

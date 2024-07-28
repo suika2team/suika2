@@ -471,12 +471,9 @@ bool make_sav_dir(void)
 char *make_valid_path(const char *dir, const char *fname)
 {
     @autoreleasepool {
-        // package.pakの場合
+        // package.pakの場合、バンドル内を優先する
         if (dir == NULL && fname != NULL && strcmp(fname, PACKAGE_FILE) == 0) {
-            // バンドルのパスを取得する
             NSString *bundlePath = [[NSBundle mainBundle] bundlePath];
-            
-            // バンドル内にpackage.pakがあれば優先する
             NSString *filePath = [NSString stringWithFormat:@"%@/Contents/Resources/package.pak", bundlePath];
             if ([[NSFileManager defaultManager] fileExistsAtPath:filePath]) {
                 // data01.arcのサイズを取得する
@@ -496,17 +493,21 @@ char *make_valid_path(const char *dir, const char *fname)
                     return ret;
                 }
             }
-            
-            // バンドル外のpackage.pakとする
-            NSString *basePath = [bundlePath stringByDeletingLastPathComponent];
-            filePath = [NSString stringWithFormat:@"%@/%s", basePath, fname];
-            const char *cstr = [filePath UTF8String];
-            char *ret = strdup(cstr);
-            if (ret == NULL) {
-                log_memory();
-                return NULL;
+        }
+
+        // mp4の場合、バンドル内を優先する
+        if (dir != NULL && strcmp(dir, MOV_DIR) == 0 && fname != NULL) {
+            NSString *bundlePath = [[NSBundle mainBundle] bundlePath];
+            NSString *filePath = [NSString stringWithFormat:@"%@/Contents/Resources/%s/%s", bundlePath, MOV_DIR, fname];
+            if ([[NSFileManager defaultManager] fileExistsAtPath:filePath]) {
+                const char *cstr = [filePath UTF8String];
+                char *ret = strdup(cstr);
+                if (ret == NULL) {
+                    log_memory();
+                    return NULL;
+                }
+                return ret;
             }
-            return ret;
         }
 
         // リリースモードで、セーブファイルの場合
