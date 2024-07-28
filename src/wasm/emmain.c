@@ -71,8 +71,8 @@ int main(void)
 
 	/* IDBFSのセーブデータをマウントする */
 	EM_ASM_({
-		FS.mkdir("opennovel-sav");
-		FS.mount(IDBFS, {}, "opennovel-sav");
+		FS.mkdir("opennovel");
+		FS.mount(IDBFS, {}, "opennovel");
 		FS.syncfs(true, function (err) { Module.ccall('main_continue', 'v'); });
 	});
 

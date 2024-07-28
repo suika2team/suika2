@@ -88,6 +88,7 @@ bool create_package(const char *base_dir)
 			return false;
 		}
 	}
+	snprintf(entry[file_count++].name, FILE_NAME_SIZE, "project.txt");
 
 	/* Get all file sizes and decide all offsets in archive. */
 	if (!get_file_sizes(base_dir))

@@ -1,13 +1,20 @@
-<html><head></head><body>
+<html><head></head><body><ul>
 
 <!-- BEGIN-LATEST -->
+<li>OpenNovel 0.0.5 2024/07/28
+  <ul>
+    <li>Fixed the packager</li>
+    <li>Fixed the Wasm version</li>
+    <li>Added the FreeBSD version</li>
+  </ul>
+</li>
+<!-- END-LATEST -->
+
 <li>OpenNovel 0.0.4 2024/07/27
   <ul>
     <li>Organized the build script using Docker</li>
   </ul>
 </li>
-<!-- END-LATEST -->
-
 <li>OpenNovel 0.0.3 2024/07/27
   <ul>
     <li>Added Linux binaries</li>

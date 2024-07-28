@@ -314,14 +314,20 @@ struct rfile *open_rfile(
 	}
 
 	/* Search a file entry on the package. */
-	snprintf(entry_name, FILE_NAME_SIZE, "%s/%s", dir, file);
+	if (dir != NULL)
+		snprintf(entry_name, FILE_NAME_SIZE, "%s/%s", dir, file);
+	else
+		snprintf(entry_name, FILE_NAME_SIZE, "%s", file);
 	for (i = 0; i < entry_count; i++) {
 		if (strcasecmp(entry[i].name, entry_name) == 0)
 			break;
 	}
 	if (i == entry_count) {
 		/* Not found. */
-		log_dir_file_open(dir, file);
+		if (dir == NULL)
+			log_file_open(file);
+		else
+			log_dir_file_open(dir, file);
 		free(rf);
 		return NULL;
 	}
