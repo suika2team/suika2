@@ -1,13 +1,18 @@
 <html><head></head><body><ul><!-- -*- mode: html-mode; -*-
 
 <!-- BEGIN-LATEST -->
+<li>OpenNovel 0.0.10 2024/07/28
+  <ul>
+    <li>Changed some images</li>
+  </ul>
+</li>
+<!-- END-LATEST -->
+
 <li>OpenNovel 0.0.9 2024/07/28
   <ul>
     <li>Changed to normal ZIP rather than LZMA</li>
   </ul>
 </li>
-<!-- END-LATEST -->
-
 <li>OpenNovel 0.0.8 2024/07/28
   <ul>
     <li>100x faster build of the Android version due to a removal of NDK dependency</li>
