@@ -225,7 +225,24 @@ src: libroot
 	@cp -Ra libroot macos-src/
 
 libroot:
-	@MACOSX_DEPLOYMENT_TARGET=10.13 ../../external/build-libs.sh "" clang "-Dmktemp=mkdtemp" ar
+	@echo 'Building arm64 libraries..'
+	@MACOSX_DEPLOYMENT_TARGET=10.13 ../../external/build-libs.sh "arm64" clang "-arch arm64 -Dmktemp=mkdtemp" ar
+	@echo 'Building x86_64 libraries..'
+	@MACOSX_DEPLOYMENT_TARGET=10.13 ../../external/build-libs.sh "x86_64" clang "-arch x86_64 -Dmktemp=mkdtemp" ar
+	@mkdir -p libroot/include libroot/lib
+	@cp -Ra libroot-arm64/include/* libroot/include/
+	@lipo -create libroot-arm64/lib/libpng.a libroot-x86_64/lib/libpng.a -output libroot/lib/libpng.a
+	@lipo -create libroot-arm64/lib/libjpeg.a libroot-x86_64/lib/libjpeg.a -output libroot/lib/libjpeg.a
+	@lipo -create libroot-arm64/lib/libwebp.a libroot-x86_64/lib/libwebp.a -output libroot/lib/libwebp.a
+	@lipo -create libroot-arm64/lib/libvorbis.a libroot-x86_64/lib/libvorbis.a -output libroot/lib/libvorbis.a
+	@lipo -create libroot-arm64/lib/libogg.a libroot-x86_64/lib/libogg.a -output libroot/lib/libogg.a
+	@lipo -create libroot-arm64/lib/libfreetype.a libroot-x86_64/lib/libfreetype.a -output libroot/lib/libfreetype.a
+	@lipo -create libroot-arm64/lib/libbrotlicommon.a libroot-x86_64/lib/libbrotlicommon.a -output libroot/lib/libbrotlicommon.a
+	@lipo -create libroot-arm64/lib/libbrotlidec.a libroot-x86_64/lib/libbrotlidec.a -output libroot/lib/libbrotlidec.a
+	@lipo -create libroot-arm64/lib/libbz2.a libroot-x86_64/lib/libbz2.a -output libroot/lib/libbz2.a
+	@lipo -create libroot-arm64/lib/libz.a libroot-x86_64/lib/libz.a -output libroot/lib/libz.a
+	@rm -rf libroot-arm64 libroot-x86_64
 
 clean:
-	@rm -rf build libroot macos-src
+	@rm -rf build libroot* macos-src game.dmg
+

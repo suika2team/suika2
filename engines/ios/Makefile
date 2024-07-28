@@ -192,10 +192,28 @@ src: libroot-device libroot-sim
 	@mkdir ios-src/Resources/mov
 
 libroot-device:
+	@echo 'Building arm64 device libraries..'
 	@IPHONEOS_DEPLOYMENT_TARGET=12.0 ../../external/build-libs.sh device clang "-O2 -arch arm64 -isysroot `xcrun -sdk iphoneos --show-sdk-path` -fembed-bitcode -mios-version-min=8.0" ar
 
 libroot-sim:
-	@IPHONEOS_DEPLOYMENT_TARGET=12.0 ../../external/build-libs.sh sim clang "-O2 -arch arm64 -isysroot `xcrun -sdk iphonesimulator --show-sdk-path`" ar
+	@echo 'Building arm64 simulator libraries..'
+	@IPHONEOS_DEPLOYMENT_TARGET=12.0 ../../external/build-libs.sh sim-arm64 clang "-O2 -arch arm64 -isysroot `xcrun -sdk iphonesimulator --show-sdk-path`" ar
+	@echo 'Building x86_64 simulator libraries..'
+	@IPHONEOS_DEPLOYMENT_TARGET=12.0 ../../external/build-libs.sh sim-x86_64 clang "-O2 -arch x86_64 -isysroot `xcrun -sdk iphonesimulator --show-sdk-path`" ar
+	@echo 'Merging into Universal Binary...'
+	@mkdir -p libroot-sim/include libroot-sim/lib
+	@cp -Ra libroot-sim-arm64/include/* libroot-sim/include/
+	@lipo -create libroot-sim-arm64/lib/libpng.a libroot-sim-x86_64/lib/libpng.a -output libroot-sim/lib/libpng.a
+	@lipo -create libroot-sim-arm64/lib/libjpeg.a libroot-sim-x86_64/lib/libjpeg.a -output libroot-sim/lib/libjpeg.a
+	@lipo -create libroot-sim-arm64/lib/libwebp.a libroot-sim-x86_64/lib/libwebp.a -output libroot-sim/lib/libwebp.a
+	@lipo -create libroot-sim-arm64/lib/libvorbis.a libroot-sim-x86_64/lib/libvorbis.a -output libroot-sim/lib/libvorbis.a
+	@lipo -create libroot-sim-arm64/lib/libogg.a libroot-sim-x86_64/lib/libogg.a -output libroot-sim/lib/libogg.a
+	@lipo -create libroot-sim-arm64/lib/libfreetype.a libroot-sim-x86_64/lib/libfreetype.a -output libroot-sim/lib/libfreetype.a
+	@lipo -create libroot-sim-arm64/lib/libbrotlicommon.a libroot-sim-x86_64/lib/libbrotlicommon.a -output libroot-sim/lib/libbrotlicommon.a
+	@lipo -create libroot-sim-arm64/lib/libbrotlidec.a libroot-sim-x86_64/lib/libbrotlidec.a -output libroot-sim/lib/libbrotlidec.a
+	@lipo -create libroot-sim-arm64/lib/libbz2.a libroot-sim-x86_64/lib/libbz2.a -output libroot-sim/lib/libbz2.a
+	@lipo -create libroot-sim-arm64/lib/libz.a libroot-sim-x86_64/lib/libz.a -output libroot-sim/lib/libz.a
+	@rm -rf libroot-sim-arm64 libroot-sim-x86_64
 
 clean:
 	@rm -rf libroot-* ios-src

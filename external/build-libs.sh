@@ -144,7 +144,7 @@ $CC -I. -I./src -fPIC $CFLAGS -std=c89 -Wno-deprecated-non-prototype -c inflate.
 $CC -I. -I./src -fPIC $CFLAGS -std=c89 -Wno-deprecated-non-prototype -c deflate.c
 $CC -I. -I./src -fPIC $CFLAGS -std=c89 -Wno-deprecated-non-prototype -c inftrees.c
 $CC -I. -I./src -fPIC $CFLAGS -std=c89 -Wno-deprecated-non-prototype -c zutil.c
-$AR rcs $PREFIX/lib/libz.a adler32.o infback.o trees.o compress.o inffast.o uncompr.o crc32.o inflate.o deflate.o inftrees.o zutil.c
+$AR rcs $PREFIX/lib/libz.a adler32.o infback.o trees.o compress.o inffast.o uncompr.o crc32.o inflate.o deflate.o inftrees.o zutil.o
 cp zlib.h zconf.h $PREFIX/include/
 cd ..
 
@@ -454,5 +454,5 @@ cp include/ft2build.h $PREFIX/include/
 cd ..
 
 cd ..
-#rm -rf tmp
+rm -rf tmp
 echo 'Finished.'

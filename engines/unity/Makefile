@@ -64,7 +64,7 @@ OBJS = $(SRCS_UNITY:../../src/%.c=%.o)
 #
 # Make a source tree
 #
-all:
+all: libopennovel-win64.dll libopennovel-macos.dylib
 	@rm -rf unity-src
 	@mkdir unity-src
 	@mkdir unity-src/Assets
@@ -78,11 +78,11 @@ all:
 	@cp -v Assets/Resources/DimShader.shader unity-src/Assets/Resources/
 	@cp -v Assets/Resources/RuleShader.shader unity-src/Assets/Resources/
 	@cp -v Assets/Resources/MeltShader.shader unity-src/Assets/Resources/
-	@#cp libopennovel-win64.dll unity-src/Assets/libopennovel.dll
-	@#cp libopennovel-macos.dylib unity-src/Assets/libopennovel.dylib
+	@cp libopennovel-win64.dll unity-src/Assets/libopennovel.dll
+	@cp libopennovel-macos.dylib unity-src/Assets/libopennovel.dylib
 	@cp README.md unity-src/
 	@mkdir unity-src/dll-src
-	@cp build-libs.sh unity-src/dll-src/
+	@cp ../../external/build-libs.sh unity-src/dll-src/
 	@cp console.mk unity-src/Makefile
 	@cp $(SRCS_UNITY) unity-src/dll-src/
 	@cp ps45.mk unity-src/dll-src/
@@ -122,36 +122,65 @@ libopennovel-win64.dll: $(SRCS_UNITY)
 #
 # macOS DLL for Test Run
 #
-libopennovel-macos.dylib: ../macos/libroot $(SRCS_UNITY)
-	../../external/build-libs.sh "macos" clang "-arch arm64 -arch x86_64 -Dmktemp=mkdtemp" ar
-	/usr/bin/clang \
+libopennovel-macos.dylib: $(SRCS_UNITY)
+	@echo 'Building arm64 binaries...'
+	@../../external/build-libs.sh "macos-arm64" clang "-arch arm64 -Dmktemp=mkdtemp" ar
+	@/usr/bin/clang \
 		-O2 \
 		-arch arm64 \
+		-dynamiclib \
+		-undefined dynamic_lookup \
+		-fPIC \
+		-o libopennovel-macos-arm64.dylib \
+		-DUSE_UNITY \
+		-DUSE_CSHARP \
+		-DUSE_DLL \
+		-I./libroot-macos-arm64/include \
+		-I./libroot-macos-arm64/include/freetype2 \
+		$(SRCS_UNITY) \
+		./libroot-macos-arm64/lib/libfreetype.a \
+		./libroot-macos-arm64/lib/libwebp.a \
+		./libroot-macos-arm64/lib/libpng.a \
+		./libroot-macos-arm64/lib/libjpeg.a \
+		./libroot-macos-arm64/lib/libbrotlidec.a \
+		./libroot-macos-arm64/lib/libbrotlicommon.a \
+		./libroot-macos-arm64/lib/libvorbis.a \
+		./libroot-macos-arm64/lib/libogg.a \
+		./libroot-macos-arm64/lib/libbz2.a \
+		./libroot-macos-arm64/lib/libz.a
+	@rm -rf libopennovel-macos-arm64.dylib.dSYM
+	@echo 'Building arm64 binaries...'
+	@../../external/build-libs.sh "macos-x86_64" clang "-arch x86_64 -Dmktemp=mkdtemp" ar
+	@/usr/bin/clang \
+		-O2 \
 		-arch x86_64 \
 		-dynamiclib \
 		-undefined dynamic_lookup \
 		-fPIC \
-		-o libopennovel-macos.dylib \
+		-o libopennovel-macos-x86_64.dylib \
 		-DUSE_UNITY \
 		-DUSE_CSHARP \
 		-DUSE_DLL \
-		-I../macos/libroot/include \
-		-I../macos/libroot/include/freetype2 \
+		-I./libroot-macos-x86_64/include \
+		-I./libroot-macos-x86_64/include/freetype2 \
 		$(SRCS_UNITY) \
-		../macos/libroot/lib/libfreetype.a \
-		../macos/libroot/lib/libwebp.a \
-		../macos/libroot/lib/libpng.a \
-		../macos/libroot/lib/libjpeg.a \
-		../macos/libroot/lib/libbrotlidec.a \
-		../macos/libroot/lib/libbrotlicommon.a \
-		../macos/libroot/lib/libvorbis.a \
-		../macos/libroot/lib/libogg.a \
-		../macos/libroot/lib/libbz2.a \
-		../macos/libroot/lib/libz.a
-	rm -rf libopennovel-macos.dylib.dSYM
+		./libroot-macos-x86_64/lib/libfreetype.a \
+		./libroot-macos-x86_64/lib/libwebp.a \
+		./libroot-macos-x86_64/lib/libpng.a \
+		./libroot-macos-x86_64/lib/libjpeg.a \
+		./libroot-macos-x86_64/lib/libbrotlidec.a \
+		./libroot-macos-x86_64/lib/libbrotlicommon.a \
+		./libroot-macos-x86_64/lib/libvorbis.a \
+		./libroot-macos-x86_64/lib/libogg.a \
+		./libroot-macos-x86_64/lib/libbz2.a \
+		./libroot-macos-x86_64/lib/libz.a
+	@rm -rf libopennovel-macos-x86_64.dylib.dSYM
+	@echo 'Merging into Universal Binary...'
+	@lipo -create libopennovel-macos-arm64.dylib libopennovel-macos-x86_64.dylib -output libopennovel-macos.dylib
+	@rm -rf libopennovel-macos-arm64.dylib libopennovel-macos-x86_64.dylib
 
 #
 # Cleanup
 #
 clean:
-	@rm -rf unity-src libopennovel-win64.dll libopennovel-macos.dylib libroot* tmp
+	@rm -rf unity-src libopennovel-win64.dll libopennovel-macos*.dylib libroot* tmp
