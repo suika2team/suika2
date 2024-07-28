@@ -96,11 +96,9 @@ SRCS_KHRONOS = \
 
 CPPFLAGS = \
 	-I./libroot/include \
-	-I/usr/include/freetype2 \
-	-I/usr/include/png \
 	-I/usr/local/include \
-	-I/usr/pkg/include \
-	-I/usr/X11R7/include
+	-I/usr/local/include/freetype2 \
+	-I/usr/local/include/gstreamer-1.0
 
 #
 # CFLAGS
@@ -155,7 +153,7 @@ OBJS = \
 	$(CC) -c $(CPPFLAGS) $(CFLAGS) $<
 
 %.o: ../../src/linux/%.c
-	$(CC) -c $(CPPFLAGS) $(CFLAGS) `pkg-config --cflags gstreamer-1.0 gstreamer-video-1.0` $<
+	$(CC) -c $(CPPFLAGS) $(CFLAGS)
 
 %.o: ../../src/%.c
 	$(CC) -c $(CPPFLAGS) $(CFLAGS) $<
@@ -164,17 +162,17 @@ OBJS = \
 # Target
 #
 
-all: game-linux
+all: game-freebsd
 
-game-linux: $(OBJS) $(HDRS)
-	$(CC) -o game-linux $(OBJS) $(LDFLAGS) `pkg-config --libs gstreamer-1.0 gstreamer-video-1.0`
+game-freebsd: $(OBJS) $(HDRS)
+	$(CC) -o game-freebsd $(OBJS) $(LDFLAGS)
 
 #
 # Phony
 #
 
 setup:
-	sudo apt-get install build-essential libasound2-dev libx11-dev libxpm-dev mesa-common-dev libfreetype-dev libpng-dev libjpeg-dev libwebp-dev libvorbis-dev libogg-dev libbrotli-dev libbz2-dev libz-dev libgstreamer1.0-dev libgstreamer-plugins-base1.0-dev
+	sudo pkg install git gmake libX11 mesa-devel alsa-lib alsa-plugins gstreamer1 gstreamer1-plugins
 
 clean:
-	@rm -rf *~ *.o game-linux errors.txt save tmp libroot
+	@rm -rf *~ *.o game-freebsd errors.txt save tmp libroot

@@ -43,6 +43,8 @@
 #define OPENNOVEL_TARGET_UNITY
 #elif defined(__linux)
 #define OPENNOVEL_TARGET_POSIX
+#elif defined(__FreeBSD__)
+#define OPENNOVEL_TARGET_POSIX
 #else
 #error "No target detected."
 #endif
