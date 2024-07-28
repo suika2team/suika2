@@ -99,7 +99,7 @@ CPPFLAGS = \
 	-I/usr/local/include \
 	-I/usr/local/include/freetype2 \
 	-I/usr/local/include/gstreamer-1.0 \
-	-I/usr/local/include/glib-1.0 \
+	-I/usr/local/include/glib-2.0 \
 	-I/usr/local/lib/glib-2.0/include
 #
 # CFLAGS
