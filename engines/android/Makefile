@@ -1,4 +1,62 @@
-src:
+SRCS = \
+	../../src/anime.c \
+	../../src/conf.c \
+	../../src/ciel.c \
+	../../src/event.c \
+	../../src/glyph.c \
+	../../src/gui.c \
+	../../src/history.c \
+	../../src/image.c \
+	../../src/log.c \
+	../../src/main.c \
+	../../src/mixer.c \
+	../../src/readimage.c \
+	../../src/readpng.c \
+	../../src/readjpeg.c \
+	../../src/readwebp.c \
+	../../src/save.c \
+	../../src/script.c \
+	../../src/seen.c \
+	../../src/stage.c \
+	../../src/vars.c \
+	../../src/wave.c \
+	../../src/wms_core.c \
+	../../src/wms_lexer.yy.c \
+	../../src/wms_parser.tab.c \
+	../../src/wms_impl.c \
+	../../src/cmd_anime.c \
+	../../src/cmd_bg.c \
+	../../src/cmd_ch.c \
+	../../src/cmd_chapter.c \
+	../../src/cmd_chch.c \
+	../../src/cmd_choose.c \
+	../../src/cmd_click.c \
+	../../src/cmd_config.c \
+	../../src/cmd_gosub.c \
+	../../src/cmd_goto.c \
+	../../src/cmd_if.c \
+	../../src/cmd_layer.c \
+	../../src/cmd_menu.c \
+	../../src/cmd_message.c \
+	../../src/cmd_move.c \
+	../../src/cmd_music.c \
+	../../src/cmd_plugin.c \
+	../../src/cmd_return.c \
+	../../src/cmd_set.c \
+	../../src/cmd_shake.c \
+	../../src/cmd_skip.c \
+	../../src/cmd_sound.c \
+	../../src/cmd_story.c \
+	../../src/cmd_text.c \
+	../../src/cmd_time.c \
+	../../src/cmd_video.c \
+	../../src/cmd_volume.c \
+	../../src/khronos/glrender.c \
+	../../src/khronos/slsound.c \
+	../../src/google/ndkmain.c \
+	../../src/google/ndkfile.c
+
+src: libopennovel-aarch64.so libopennovel-armv7a.so libopennovel-x86_64.so libopennovel-i686.so
 	@rm -rf app/build app/.cxx app/src/main/cpp app/src/main/java app/src/main/assets android-src
 	@mkdir -p android-src
 	@mkdir -p android-src/app/src/main/cpp
@@ -11,128 +69,157 @@ src:
 	@cp -R gradlew.bat android-src/
 	@cp -R gradle android-src/
 	@
+	@cp build.sh android-src/
+	@cp build.bat android-src/
+	@
 	@mkdir -p android-src/app/src/main/java/org/opennovel/engineandroid
 	@cp ../../src/google/MainActivity.java android-src/app/src/main/java/org/opennovel/engineandroid/
 	@
-	@cp ../../src/google/ndkmain.h android-src/app/src/main/cpp/
-	@cp ../../src/google/ndkmain.c android-src/app/src/main/cpp/
-	@cp ../../src/google/ndkfile.c android-src/app/src/main/cpp/
-	@cp ../../src/khronos/glrender.h android-src/app/src/main/cpp/
-	@cp ../../src/khronos/glrender.c android-src/app/src/main/cpp/
-	@cp ../../src/khronos/slsound.h android-src/app/src/main/cpp/
-	@cp ../../src/khronos/slsound.c android-src/app/src/main/cpp/
-	@cp ../../src/opennovel.h android-src/app/src/main/cpp/
-	@cp ../../src/anime.h android-src/app/src/main/cpp/
-	@cp ../../src/anime.c android-src/app/src/main/cpp/
-	@cp ../../src/conf.h android-src/app/src/main/cpp/
-	@cp ../../src/conf.c android-src/app/src/main/cpp/
-	@cp ../../src/ciel.h android-src/app/src/main/cpp/
-	@cp ../../src/ciel.c android-src/app/src/main/cpp/
-	@cp ../../src/event.h android-src/app/src/main/cpp/
-	@cp ../../src/event.c android-src/app/src/main/cpp/
-	@cp ../../src/file.h android-src/app/src/main/cpp/
-	@cp ../../src/glyph.h android-src/app/src/main/cpp/
-	@cp ../../src/glyph.c android-src/app/src/main/cpp/
-	@cp ../../src/gui.h android-src/app/src/main/cpp/
-	@cp ../../src/gui.c android-src/app/src/main/cpp/
-	@cp ../../src/hal.h android-src/app/src/main/cpp/
-	@cp ../../src/history.h android-src/app/src/main/cpp/
-	@cp ../../src/history.c android-src/app/src/main/cpp/
-	@cp ../../src/image.h android-src/app/src/main/cpp/
-	@cp ../../src/image.c android-src/app/src/main/cpp/
-	@cp ../../src/log.h android-src/app/src/main/cpp/
-	@cp ../../src/log.c android-src/app/src/main/cpp/
-	@cp ../../src/main.h android-src/app/src/main/cpp/
-	@cp ../../src/main.c android-src/app/src/main/cpp/
-	@cp ../../src/mixer.h android-src/app/src/main/cpp/
-	@cp ../../src/mixer.c android-src/app/src/main/cpp/
-	@cp ../../src/motion.h android-src/app/src/main/cpp/
-	@cp ../../src/readimage.c android-src/app/src/main/cpp/
-	@cp ../../src/readpng.c android-src/app/src/main/cpp/
-	@cp ../../src/readjpeg.c android-src/app/src/main/cpp/
-	@cp ../../src/readwebp.c android-src/app/src/main/cpp/
-	@cp ../../src/save.h android-src/app/src/main/cpp/
-	@cp ../../src/save.c android-src/app/src/main/cpp/
-	@cp ../../src/script.h android-src/app/src/main/cpp/
-	@cp ../../src/script.c android-src/app/src/main/cpp/
-	@cp ../../src/seen.h android-src/app/src/main/cpp/
-	@cp ../../src/seen.c android-src/app/src/main/cpp/
-	@cp ../../src/stage.h android-src/app/src/main/cpp/
-	@cp ../../src/stage.c android-src/app/src/main/cpp/
-	@cp ../../src/types.h android-src/app/src/main/cpp/
-	@cp ../../src/vars.h android-src/app/src/main/cpp/
-	@cp ../../src/vars.c android-src/app/src/main/cpp/
-	@cp ../../src/wave.h android-src/app/src/main/cpp/
-	@cp ../../src/wave.c android-src/app/src/main/cpp/
-	@cp ../../src/wms.h android-src/app/src/main/cpp/
-	@cp ../../src/wms_core.h android-src/app/src/main/cpp/
-	@cp ../../src/wms_core.c android-src/app/src/main/cpp/
-	@cp ../../src/wms_impl.c android-src/app/src/main/cpp/
-	@cp ../../src/wms_lexer.yy.c android-src/app/src/main/cpp/
-	@cp ../../src/wms_parser.tab.h android-src/app/src/main/cpp/
-	@cp ../../src/wms_parser.tab.c android-src/app/src/main/cpp/
-	@cp ../../src/cmd_anime.c android-src/app/src/main/cpp/
-	@cp ../../src/cmd_bg.c android-src/app/src/main/cpp/
-	@cp ../../src/cmd_chapter.c android-src/app/src/main/cpp/
-	@cp ../../src/cmd_ch.c android-src/app/src/main/cpp/
-	@cp ../../src/cmd_chch.c android-src/app/src/main/cpp/
-	@cp ../../src/cmd_click.c android-src/app/src/main/cpp/
-	@cp ../../src/cmd_choose.c android-src/app/src/main/cpp/
-	@cp ../../src/cmd_config.c android-src/app/src/main/cpp/
-	@cp ../../src/cmd_gosub.c android-src/app/src/main/cpp/
-	@cp ../../src/cmd_goto.c android-src/app/src/main/cpp/
-	@cp ../../src/cmd_if.c android-src/app/src/main/cpp/
-	@cp ../../src/cmd_layer.c android-src/app/src/main/cpp/
-	@cp ../../src/cmd_menu.c android-src/app/src/main/cpp/
-	@cp ../../src/cmd_message.c android-src/app/src/main/cpp/
-	@cp ../../src/cmd_move.c android-src/app/src/main/cpp/
-	@cp ../../src/cmd_music.c android-src/app/src/main/cpp/
-	@cp ../../src/cmd_plugin.c android-src/app/src/main/cpp/
-	@cp ../../src/cmd_return.c android-src/app/src/main/cpp/
-	@cp ../../src/cmd_set.c android-src/app/src/main/cpp/
-	@cp ../../src/cmd_shake.c android-src/app/src/main/cpp/
-	@cp ../../src/cmd_skip.c android-src/app/src/main/cpp/
-	@cp ../../src/cmd_sound.c android-src/app/src/main/cpp/
-	@cp ../../src/cmd_story.c android-src/app/src/main/cpp/
-	@cp ../../src/cmd_text.c android-src/app/src/main/cpp/
-	@cp ../../src/cmd_time.c android-src/app/src/main/cpp/
-	@cp ../../src/cmd_video.c android-src/app/src/main/cpp/
-	@cp ../../src/cmd_volume.c android-src/app/src/main/cpp/
-	@
-	@mkdir -p android-src/app/src/main/cpp/libpng
-	@tar xzf ../../external/libpng-1.6.43.tar.gz -C android-src/app/src/main/cpp/libpng --strip-components 1
-	@cp android-src/app/src/main/cpp/libpng/scripts/pnglibconf.h.prebuilt android-src/app/src/main/cpp/libpng/pnglibconf.h
-	@
-	@mkdir -p android-src/app/src/main/cpp/jpeg
-	@tar xzf ../../external/jpegsrc.v9e.tar.gz -C android-src/app/src/main/cpp/jpeg --strip-components 1
-	@cp cmake/jpeg.txt android-src/app/src/main/cpp/jpeg/CMakeLists.txt
-	@cp android-src/app/src/main/cpp/jpeg/jconfig.txt android-src/app/src/main/cpp/jpeg/jconfig.h
-	@
-	@mkdir -p android-src/app/src/main/cpp/bzip2
-	@tar xzf ../../external/bzip2-1.0.6.tar.gz -C android-src/app/src/main/cpp/bzip2 --strip-components 1
-	@cp cmake/bzip2.txt android-src/app/src/main/cpp/bzip2/CMakeLists.txt
-	@
-	@mkdir -p android-src/app/src/main/cpp/libwebp
-	@tar xzf ../../external/libwebp-1.3.2.tar.gz -C android-src/app/src/main/cpp/libwebp --strip-components 1
-	@
-	@mkdir -p android-src/app/src/main/cpp/freetype
-	@tar xzf ../../external/freetype-2.13.2.tar.gz -C android-src/app/src/main/cpp/freetype --strip-components 1
-	@
-	@mkdir -p android-src/app/src/main/cpp/brotli
-	@tar xzf ../../external/brotli-1.1.0.tar.gz -C android-src/app/src/main/cpp/brotli --strip-components 1
-	@
-	@mkdir -p android-src/app/src/main/cpp/libogg
-	@tar xzf ../../external/libogg-1.3.3.tar.gz -C android-src/app/src/main/cpp/libogg --strip-components 1
-	@cp cmake/libogg.txt android-src/app/src/main/cpp/libogg/CMakeLists.txt
-	@sed -e 's/@INCLUDE_INTTYPES_H@/1/g' -e 's/@INCLUDE_STDINT_H@/1/g' -e 's/@INCLUDE_SYS_TYPES_H@/1/g' -e 's/@SIZE16@/int16_t/g' -e 's/@USIZE16@/uint16_t/g' -e 's/@SIZE32@/int32_t/g' -e 's/@USIZE32@/uint32_t/g' -e 's/@SIZE64@/int64_t/g' -e 's/@USIZE64@/uint64_t/g' < android-src/app/src/main/cpp/libogg/include/ogg/config_types.h.in > android-src/app/src/main/cpp/libogg/include/ogg/config_types.h
-	@rm -rf android-src/app/src/main/cpp/libogg/macosx
-	@
-	@mkdir -p android-src/app/src/main/cpp/libvorbis
-	@tar xzf ../../external/libvorbis-1.3.6.tar.gz -C android-src/app/src/main/cpp/libvorbis --strip-components 1
-	@cp cmake/libvorbis.txt android-src/app/src/main/cpp/libvorbis/CMakeLists.txt
-	@rm -rf android-src/app/src/main/cpp/libvorbis/macosx
-	@
-	@mkdir -p android-src/app/src/main/assets
+	@mkdir -p android-src/app/src/main/jniLibs/arm64-v8a
+	@cp libopennovel-aarch64.so android-src/app/src/main/jniLibs/arm64-v8a/libopennovel.so
+	@mkdir -p android-src/app/src/main/jniLibs/armeabi-v7a
+	@cp libopennovel-armv7a.so android-src/app/src/main/jniLibs/armeabi-v7a/libopennovel.so
+	@mkdir -p android-src/app/src/main/jniLibs/x86_64
+	@cp libopennovel-armv7a.so android-src/app/src/main/jniLibs/x86_64/libopennovel.so
+	@mkdir -p android-src/app/src/main/jniLibs/x86
+	@cp libopennovel-armv7a.so android-src/app/src/main/jniLibs/x86/libopennovel.so
+
+libopennovel-aarch64.so: ndk
+	@echo 'Building aarch64 library...'
+	@../../external/build-libs.sh aarch64 `pwd`/ndk/bin/clang-18 "--target=aarch64-linux-android21 -O2" `pwd`/ndk/bin/llvm-ar
+	@`pwd`/ndk/bin/clang-18 \
+		--target=aarch64-linux-android21 \
+		-O2 \
+		-shared \
+		-fPIC \
+		-o libopennovel-aarch64.so \
+		-DUSE_DLL \
+		-I../../src \
+		-I../../src/khronos \
+		-I./libroot-aarch64/include \
+		-I./libroot-aarch64/include/png \
+		-I./libroot-aarch64/include/freetype2 \
+		$(SRCS) \
+		-lm \
+		-lGLESv3 \
+		-lOpenSLES \
+		-llog \
+		-L./libroot-aarch64/lib \
+		-lfreetype \
+		-lwebp \
+		-lpng \
+		-ljpeg \
+		-lbrotlidec \
+		-lbrotlicommon \
+		-lvorbis \
+		-logg \
+		-lbz2 \
+		-lz
+
+libopennovel-armv7a.so: ndk
+	@echo 'Building armv7a library...'
+	@../../external/build-libs.sh armv7a `pwd`/ndk/bin/clang-18 "--target=armv7a-linux-androideabi21 -O2" `pwd`/ndk/bin/llvm-ar
+	@`pwd`/ndk/bin/clang-18 \
+		--target=armv7a-linux-android21 \
+		-O2 \
+		-shared \
+		-fPIC \
+		-o libopennovel-armv7a.so \
+		-DUSE_DLL \
+		-I../../src \
+		-I../../src/khronos \
+		-I./libroot-armv7a/include \
+		-I./libroot-armv7a/include/png \
+		-I./libroot-armv7a/include/freetype2 \
+		$(SRCS) \
+		-lm \
+		-lGLESv3 \
+		-lOpenSLES \
+		-llog \
+		-L./libroot-armv7a/lib \
+		-lfreetype \
+		-lwebp \
+		-lpng \
+		-ljpeg \
+		-lbrotlidec \
+		-lbrotlicommon \
+		-lvorbis \
+		-logg \
+		-lbz2 \
+		-lz
+
+libopennovel-x86_64.so: ndk
+	@echo 'Building x86_64 library...'
+	@../../external/build-libs.sh x86_64 `pwd`/ndk/bin/clang-18 "--target=x86_64-linux-android21 -O2" `pwd`/ndk/bin/llvm-ar
+	@`pwd`/ndk/bin/clang-18 \
+		--target=x86_64-linux-android21 \
+		-O2 \
+		-shared \
+		-fPIC \
+		-o libopennovel-x86_64.so \
+		-DUSE_DLL \
+		-I../../src \
+		-I../../src/khronos \
+		-I./libroot-x86_64/include \
+		-I./libroot-x86_64/include/png \
+		-I./libroot-x86_64/include/freetype2 \
+		$(SRCS) \
+		-lm \
+		-lGLESv3 \
+		-lOpenSLES \
+		-llog \
+		-L./libroot-x86_64/lib \
+		-lfreetype \
+		-lwebp \
+		-lpng \
+		-ljpeg \
+		-lbrotlidec \
+		-lbrotlicommon \
+		-lvorbis \
+		-logg \
+		-lbz2 \
+		-lz
+
+libopennovel-i686.so: ndk
+	@echo 'Building i686 library...'
+	@../../external/build-libs.sh i686 `pwd`/ndk/bin/clang-18 "--target=i686-linux-android21 -O2" `pwd`/ndk/bin/llvm-ar
+	@`pwd`/ndk/bin/clang-18 \
+		--target=i686-linux-android21 \
+		-O2 \
+		-shared \
+		-fPIC \
+		-o libopennovel-i686.so \
+		-DUSE_DLL \
+		-I../../src \
+		-I../../src/khronos \
+		-I./libroot-i686/include \
+		-I./libroot-i686/include/png \
+		-I./libroot-i686/include/freetype2 \
+		$(SRCS) \
+		-lm \
+		-lGLESv3 \
+		-lOpenSLES \
+		-llog \
+		-L./libroot-i686/lib \
+		-lfreetype \
+		-lwebp \
+		-lpng \
+		-ljpeg \
+		-lbrotlidec \
+		-lbrotlicommon \
+		-lvorbis \
+		-logg \
+		-lbz2 \
+		-lz
+
+ndk:
+	@curl -O https://dl.google.com/android/repository/android-ndk-r27-darwin.dmg
+	@7z x android-ndk-r27-darwin.dmg
+	@mv 'Android NDK r27/AndroidNDK12077973.app/Contents/NDK/toolchains/llvm/prebuilt/darwin-x86_64' ndk
+	@chmod -R +x ./ndk/bin/*
+	@rm ndk/bin/ld.lld
+	@ln -s lld ndk/bin/ld.lld
+	@rm -rf 'Android NDK r27'
 
 clean:
-	@rm -rf android-src
+	@rm -rf android-src android-ndk-r27-darwin.dmg ndk libroot-* libopennovel-*.so

@@ -104,8 +104,8 @@ libopennovel-win64.dll: $(SRCS_UNITY)
 		-DUSE_CSHARP \
 		-DUSE_DLL \
 		-I./libroot-win64/include \
-		-I./libroot-win64/libroot/include/png \
-		-I./libroot-win64/libroot/include/freetype2 \
+		-I./libroot-win64/include/png \
+		-I./libroot-win64/include/freetype2 \
 		$(SRCS_UNITY) \
 		-L./libroot-win64/lib \
 		-lfreetype \

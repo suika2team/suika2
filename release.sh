@@ -83,6 +83,57 @@ echo 'Ok.'
 echo ''
 
 #
+# Wasm Build
+#
+
+echo "Copying the Wasm source..."
+cd engines/wasm
+make
+cp -R html "$TARGET/export-kit/"
+cd ../../
+
+#
+# Unity Build 
+#
+echo "Copying the Unity source..."
+cd engines/unity
+make
+cp -R unity-src "$TARGET/export-kit/"
+cd ../../
+
+#
+# iOS Build (Source)
+#
+
+echo 'Building the iOS source...'
+cd engines/ios
+rm -rf ios-src libroot-*
+make
+cp -R ios-src "$TARGET/export-kit/"
+cd ../../
+
+#
+# Android Build (Source)
+#
+
+echo 'Building the Android source...'
+cd engines/android
+rm -rf libroot-* libopennovel-* android-src
+make
+cp -R android-src "$TARGET/export-kit/"
+cd ../../
+
+#
+# macOS Build (Source)
+#
+
+echo "Building the macOS source..."
+cd engines/macos
+make src
+cp -R macos-src "$TARGET/export-kit/"
+cd ../../
+
+#
 # Documents
 #
 
@@ -97,40 +148,6 @@ cp -R doc "$TARGET/manual"
 # Copy the sample.
 echo "Copying the sample..."
 cp -R game "$TARGET/sample"
-
-#
-# Export Templates
-#
-
-echo "Copying the iOS source..."
-cd engines/ios
-make
-cp -R ios-src "$TARGET/export-kit/"
-cd ../../
-
-echo "Copying the Android source..."
-cd engines/android
-make
-cp -R android-src "$TARGET/export-kit/"
-cd ../../
-
-echo "Copying the macOS source..."
-cd engines/macos
-make src
-cp -R macos-src "$TARGET/export-kit/"
-cd ../../
-
-echo "Copying the Wasm source..."
-cd engines/wasm
-make
-cp -R html "$TARGET/export-kit/"
-cd ../../
-
-echo "Copying the Unity source..."
-cd engines/unity
-make
-cp -R unity-src "$TARGET/export-kit/"
-cd ../../
 
 #
 # ZIP

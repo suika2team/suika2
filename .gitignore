@@ -3,13 +3,14 @@
 *.o
 *.aps
 *.exe
+*.zip
 *.dmg
 *.dylib
 libroot*
 *.meta
 tmp
-log.txt
-sav
+errors.txt
+save
 xcuserdata
 
 apps/app-ios/pro-ios.xcodeproj/project.xcworkspace
@@ -32,6 +33,8 @@ engines/android/.idea
 engines/android/app/.cxx
 engines/android/app/src/main/assets
 engines/android/app/src/main/cpp
+engines/android/libopennovel-*.so
+engines/android/ndk
 engines/android/android-src
 
 engines/wasm/html
@@ -40,3 +43,5 @@ engines/wasm/libwebp-1.3.2
 engines/linux/game-linux
 
 engines/unity/unity-src
+engines/unity/libopennovel-win64.dll
+engines/unity/libopennovel-macos.dylib
