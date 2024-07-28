@@ -1,7 +1,7 @@
 %{
 /*
  * OpenNovel
- * Copyright (c) 2001-2024, Keiichi Tabata. All rights reserved.
+ * Copyright (C) 2024, The Authors. All rights reserved.
  */
 
 #include "wms_parser.tab.h"

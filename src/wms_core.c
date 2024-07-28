@@ -1,6 +1,8 @@
+/* -*- coding: utf-8; tab-width: 8; indent-tabs-mode: t; -*- */
+
 /*
  * OpenNovel
- * Copyright (c) 2024, The Authors. All rights reserved.
+ * Copyright (C) 2024, The Authors. All rights reserved.
  */
 
 #include "opennovel.h"

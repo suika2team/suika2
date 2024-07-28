@@ -1,7 +1,7 @@
 %{
 /*
  * OpenNovel
- * Copyright (c) 2024, The Authors. All rights reserved.
+ * Copyright (C) 2024, The Authors. All rights reserved.
  */
 #include <stdio.h>
 #include "wms_core.h"
