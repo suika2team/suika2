@@ -153,7 +153,7 @@ OBJS = \
 	$(CC) -c $(CPPFLAGS) $(CFLAGS) $<
 
 %.o: ../../src/linux/%.c
-	$(CC) -c $(CPPFLAGS) $(CFLAGS)
+	$(CC) -c $(CPPFLAGS) $(CFLAGS) $<
 
 %.o: ../../src/%.c
 	$(CC) -c $(CPPFLAGS) $(CFLAGS) $<
