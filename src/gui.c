@@ -2837,7 +2837,7 @@ static int get_frame_chars(int index)
 {
 	float lap;
 	int char_count;
-	float MESSAGE_SPEED = 40.0f;
+	float MESSAGE_SPEED = 80.0f;
 
 	/* テキストスピードが最大のときはノーウェイトで全部描画する */
 	if (get_text_speed() == 1.0f) {

@@ -15,16 +15,9 @@
 
 :START
 
-@bg coast.png 0.5
+@bg sakura.png 0.5
+@ch center chara001.png 0.5
 
-@ch center 001-fun.png 0.5
-
-キャラ「セリフのテストです」
-
-@ch center 001-angry.png 0.5
-
-キャラ「セリフのテストです」
-
-@ch center 001-sad.png 0.5
-
-キャラ「セリフのテストです」
+キャラ「セリフのテストです１」
+キャラ「セリフのテストです２」
+キャラ「セリフのテストです３」

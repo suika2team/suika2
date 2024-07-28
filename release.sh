@@ -31,10 +31,11 @@ mkdir "$TARGET"
 mkdir "$TARGET/export-kit"
 
 #
-# Windows Build
+# Windows Build (Binary)
 #
 
-echo 'Building the Windows engine...'
+echo 'Building the Windows binaries...'
+
 cd engines/windows
 make
 cp game.exe "$TARGET/game-win.exe"
@@ -42,7 +43,6 @@ cd ../..
 echo 'Ok.'
 echo ''
 
-echo 'Building the Windows packager...'
 cd apps/pack
 make pack.exe
 cp pack.exe "$TARGET/pack-win.exe"
@@ -51,16 +51,16 @@ echo 'Ok.'
 echo ''
 
 #
-# Mac Build
+# Mac Build (Binary)
 #
 
-echo "Building the macOS source..."
+echo "Building the macOS binaries..."
+
 cd engines/macos
 make game.dmg
 cp game.dmg "$TARGET/game-mac.dmg"
 cd ../../
 
-echo 'Building the macOS packager...'
 cd apps/pack
 rm pack
 make pack
@@ -70,10 +70,11 @@ echo 'Ok.'
 echo ''
 
 #
-# Linux Build
+# Linux Build (Binary)
 #
 
-echo 'Building the Linux engine...'
+echo 'Building the Linux binaries...'
+
 docker build -t ubuntu engines/linux
 docker run -it -v `pwd`:/workspace ubuntu /bin/sh -c "cd /workspace/engines/linux && make clean && make"
 docker run -it -v `pwd`:/workspace ubuntu /bin/sh -c "cd /workspace/apps/pack && rm -f pack && make pack"
@@ -83,22 +84,14 @@ echo 'Ok.'
 echo ''
 
 #
-# Wasm Build
+# Wasm Build (Binary)
 #
 
-echo "Copying the Wasm source..."
+echo "Building the Wasm binaries..."
+
 cd engines/wasm
 make
 cp -R html "$TARGET/export-kit/"
-cd ../../
-
-#
-# Unity Build 
-#
-echo "Copying the Unity source..."
-cd engines/unity
-make
-cp -R unity-src "$TARGET/export-kit/"
 cd ../../
 
 #
@@ -106,6 +99,7 @@ cd ../../
 #
 
 echo 'Building the iOS source...'
+
 cd engines/ios
 rm -rf ios-src libroot-*
 make
@@ -117,6 +111,7 @@ cd ../../
 #
 
 echo 'Building the Android source...'
+
 cd engines/android
 rm -rf libroot-* libopennovel-* android-src
 make
@@ -128,9 +123,21 @@ cd ../../
 #
 
 echo "Building the macOS source..."
+
 cd engines/macos
 make src
 cp -R macos-src "$TARGET/export-kit/"
+cd ../../
+
+#
+# Unity Build (Source)
+#
+
+echo "Building the Unity source..."
+
+cd engines/unity
+make
+cp -R unity-src "$TARGET/export-kit/"
 cd ../../
 
 #
@@ -138,6 +145,7 @@ cd ../../
 #
 
 echo "Copying the documents..."
+
 find . -name .DS_Store | xargs rm
 cp -R doc "$TARGET/manual"
 
@@ -145,8 +153,8 @@ cp -R doc "$TARGET/manual"
 # Sample
 #
 
-# Copy the sample.
 echo "Copying the sample..."
+
 cp -R game "$TARGET/sample"
 
 #
@@ -154,6 +162,7 @@ cp -R game "$TARGET/sample"
 #
 
 echo "Making a ZIP..."
+
 7z a -tzip -mx9 -aoa "$TARGET.zip" "$TARGET"
 rm -rf "$TARGET"
 
@@ -162,6 +171,7 @@ rm -rf "$TARGET"
 #
 
 echo "Making a release on GitHub..."
+
 yes "" | gh release create "$VERSION" --title "$VERSION" --notes "$NOTE" "$TARGET.zip"
 
 echo "Done."

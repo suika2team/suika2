@@ -17,7 +17,7 @@
 #include "opennovel.h"
 
 /* Message speed (x letters/second) */
-#define MESSAGE_SPEED	(40.0f)
+#define MESSAGE_SPEED	(80.0f)
 
 /*
  * オートモードでボイスありのときの待ち時間
