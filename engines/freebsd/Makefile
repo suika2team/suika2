@@ -180,7 +180,7 @@ game-freebsd: $(OBJS) $(HDRS)
 #
 
 setup:
-	sudo pkg install git gmake libX11 libXpm mesa-devel alsa-lib alsa-plugins webp freetype2 brotli gstreamer1 gstreamer1-plugins
+	sudo pkg install git gmake libX11 libXpm mesa-devel alsa-lib alsa-plugins webp libvorbis libogg freetype2 brotli gstreamer1 gstreamer1-plugins
 
 clean:
 	@rm -rf *~ *.o game-freebsd errors.txt save tmp libroot
