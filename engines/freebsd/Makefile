@@ -98,8 +98,9 @@ CPPFLAGS = \
 	-I./libroot/include \
 	-I/usr/local/include \
 	-I/usr/local/include/freetype2 \
-	-I/usr/local/include/gstreamer-1.0
-
+	-I/usr/local/include/gstreamer-1.0 \
+	-I/usr/local/include/glib-1.0 \
+	-I/usr/local/lib/glib-2.0/include
 #
 # CFLAGS
 #
@@ -121,6 +122,9 @@ CFLAGS = \
 #
 
 LDFLAGS = \
+	-lpthread \
+	-lm \
+	-L/usr/local/lib \
 	-lpng \
 	-ljpeg \
 	-lwebp \
@@ -132,13 +136,17 @@ LDFLAGS = \
 	-lbrotlidec \
 	-lbz2 \
 	-lz \
-	-lasound \
 	-lX11 \
 	-lXpm \
 	-lGL \
 	-lGLX \
-	-lpthread \
-	-lm
+	-lasound \
+	-L/usr/local/lib/gstreamer-1.0 \
+	-lgstvideo-1.0 \
+	-lgstbase-1.0 \
+	-lgstreamer-1.0 \
+	-lgobject-2.0 \
+	-lglib-2.0
 
 #
 # .c.o compilation rules
