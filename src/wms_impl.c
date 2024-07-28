@@ -25,78 +25,76 @@ static int saved_layer_alpha[LAYER_EFFECT4 + 1];
  * FFI function declaration
  */
 
-static bool s2_get_variable(struct wms_runtime *rt);
-static bool s2_set_variable(struct wms_runtime *rt);
-static bool s2_get_name_variable(struct wms_runtime *rt);
-static bool s2_get_year(struct wms_runtime *rt);
-static bool s2_get_month(struct wms_runtime *rt);
-static bool s2_get_day(struct wms_runtime *rt);
-static bool s2_get_hour(struct wms_runtime *rt);
-static bool s2_get_minute(struct wms_runtime *rt);
-static bool s2_get_second(struct wms_runtime *rt);
-static bool s2_get_wday(struct wms_runtime *rt);
-static bool s2_set_name_variable(struct wms_runtime *rt);
-static bool s2_random(struct wms_runtime *rt);
-static bool s2_round(struct wms_runtime *rt);
-static bool s2_ceil(struct wms_runtime *rt);
-static bool s2_floor(struct wms_runtime *rt);
-static bool s2_set_config(struct wms_runtime *rt);
-static bool s2_reflect_msgbox_and_namebox_config(struct wms_runtime *rt);
-static bool s2_reflect_font_config(struct wms_runtime *rt);
-static bool s2_clear_history(struct wms_runtime *rt);
-static bool s2_clear_msgbox(struct wms_runtime *rt);
-static bool s2_clear_namebox(struct wms_runtime *rt);
-static bool s2_hide_msgbox(struct wms_runtime *rt);
-static bool s2_hide_namebox(struct wms_runtime *rt);
-static bool s2_save_global(struct wms_runtime *rt);
-bool s2_push_stage(struct wms_runtime *rt);
-bool s2_pop_stage(struct wms_runtime *rt);
-static bool s2_remove_local_save(struct wms_runtime *rt);
-static bool s2_remove_global_save(struct wms_runtime *rt);
-static bool s2_reset_local_variables(struct wms_runtime *rt);
-static bool s2_reset_global_variables(struct wms_runtime *rt);
-static bool s2_quick_save_extra(struct wms_runtime *rt);
-static bool s2_quick_load_extra(struct wms_runtime *rt);
-static bool s2_play_midi(struct wms_runtime *rt);
+static bool onvl_get_variable(struct wms_runtime *rt);
+static bool onvl_set_variable(struct wms_runtime *rt);
+static bool onvl_get_name_variable(struct wms_runtime *rt);
+static bool onvl_get_year(struct wms_runtime *rt);
+static bool onvl_get_month(struct wms_runtime *rt);
+static bool onvl_get_day(struct wms_runtime *rt);
+static bool onvl_get_hour(struct wms_runtime *rt);
+static bool onvl_get_minute(struct wms_runtime *rt);
+static bool onvl_get_second(struct wms_runtime *rt);
+static bool onvl_get_wday(struct wms_runtime *rt);
+static bool onvl_set_name_variable(struct wms_runtime *rt);
+static bool onvl_random(struct wms_runtime *rt);
+static bool onvl_round(struct wms_runtime *rt);
+static bool onvl_ceil(struct wms_runtime *rt);
+static bool onvl_floor(struct wms_runtime *rt);
+static bool onvl_set_config(struct wms_runtime *rt);
+static bool onvl_reflect_msgbox_and_namebox_config(struct wms_runtime *rt);
+static bool onvl_reflect_font_config(struct wms_runtime *rt);
+static bool onvl_clear_history(struct wms_runtime *rt);
+static bool onvl_clear_msgbox(struct wms_runtime *rt);
+static bool onvl_clear_namebox(struct wms_runtime *rt);
+static bool onvl_hide_msgbox(struct wms_runtime *rt);
+static bool onvl_hide_namebox(struct wms_runtime *rt);
+static bool onvl_save_global(struct wms_runtime *rt);
+bool onvl_push_stage(struct wms_runtime *rt);
+bool onvl_pop_stage(struct wms_runtime *rt);
+static bool onvl_remove_local_save(struct wms_runtime *rt);
+static bool onvl_remove_global_save(struct wms_runtime *rt);
+static bool onvl_reset_local_variables(struct wms_runtime *rt);
+static bool onvl_reset_global_variables(struct wms_runtime *rt);
+static bool onvl_quick_save_extra(struct wms_runtime *rt);
+static bool onvl_quick_load_extra(struct wms_runtime *rt);
 
 /*
  * FFI function table 
  */
 
 struct wms_ffi_func_tbl ffi_func_tbl[] = {
-	{s2_get_variable, "s2_get_variable", {"index", NULL}},
-	{s2_set_variable, "s2_set_variable", {"index", "value", NULL}},
-	{s2_get_name_variable, "s2_get_name_variable", {"index", NULL}},
-	{s2_get_year, "s2_get_year", {NULL}},
-	{s2_get_month, "s2_get_month", {NULL}},
-	{s2_get_day, "s2_get_day", {NULL}},
-	{s2_get_hour, "s2_get_hour", {NULL}},
-	{s2_get_minute, "s2_get_minute", {NULL}},
-	{s2_get_second, "s2_get_second", {NULL}},
-	{s2_get_wday, "s2_get_wday",{NULL}},
-	{s2_set_name_variable, "s2_set_name_variable", {"index", "value", NULL}},
-	{s2_random, "s2_random", {NULL}},
-	{s2_round,"s2_round", {"value",NULL}},
-	{s2_ceil,"s2_ceil", {"value",NULL}},
-	{s2_floor,"s2_floor", {"value",NULL}},
-	{s2_set_config, "s2_set_config", {"key", "value", NULL}},
-	{s2_reflect_msgbox_and_namebox_config, "s2_reflect_msgbox_and_namebox_config", {NULL}},
-	{s2_reflect_font_config, "s2_reflect_font_config", {NULL}},
-	{s2_clear_history, "s2_clear_history", {NULL}},
-	{s2_clear_msgbox, "s2_clear_msgbox", {NULL}},
-	{s2_clear_namebox, "s2_clear_namebox", {NULL}},
-	{s2_hide_msgbox, "s2_hide_msgbox", {NULL}},
-	{s2_hide_namebox, "s2_hide_namebox", {NULL}},
-	{s2_save_global, "s2_save_global", {NULL}},
-	{s2_push_stage, "s2_push_stage", {NULL}},
-	{s2_pop_stage, "s2_pop_stage", {NULL}},
-	{s2_remove_local_save, "s2_remove_local_save", {"index", NULL}},
-	{s2_remove_global_save, "s2_remove_global_save", {NULL}},
-	{s2_reset_local_variables, "s2_reset_local_variables", {NULL}},
-	{s2_reset_global_variables, "s2_reset_global_variables", {NULL}},
-	{s2_quick_save_extra, "s2_quick_save_extra", {NULL}},
-	{s2_quick_load_extra, "s2_quick_load_extra", {NULL}},
-	{s2_play_midi, "s2_play_midi", {"file"}},
+	{onvl_get_variable, "onvl_get_variable", {"index", NULL}},
+	{onvl_set_variable, "onvl_set_variable", {"index", "value", NULL}},
+	{onvl_get_name_variable, "onvl_get_name_variable", {"index", NULL}},
+	{onvl_get_year, "onvl_get_year", {NULL}},
+	{onvl_get_month, "onvl_get_month", {NULL}},
+	{onvl_get_day, "onvl_get_day", {NULL}},
+	{onvl_get_hour, "onvl_get_hour", {NULL}},
+	{onvl_get_minute, "onvl_get_minute", {NULL}},
+	{onvl_get_second, "onvl_get_second", {NULL}},
+	{onvl_get_wday, "onvl_get_wday",{NULL}},
+	{onvl_set_name_variable, "onvl_set_name_variable", {"index", "value", NULL}},
+	{onvl_random, "onvl_random", {NULL}},
+	{onvl_round,"onvl_round", {"value",NULL}},
+	{onvl_ceil,"onvl_ceil", {"value",NULL}},
+	{onvl_floor,"onvl_floor", {"value",NULL}},
+	{onvl_set_config, "onvl_set_config", {"key", "value", NULL}},
+	{onvl_reflect_msgbox_and_namebox_config, "onvl_reflect_msgbox_and_namebox_config", {NULL}},
+	{onvl_reflect_font_config, "onvl_reflect_font_config", {NULL}},
+	{onvl_clear_history, "onvl_clear_history", {NULL}},
+	{onvl_clear_msgbox, "onvl_clear_msgbox", {NULL}},
+	{onvl_clear_namebox, "onvl_clear_namebox", {NULL}},
+	{onvl_hide_msgbox, "onvl_hide_msgbox", {NULL}},
+	{onvl_hide_namebox, "onvl_hide_namebox", {NULL}},
+	{onvl_save_global, "onvl_save_global", {NULL}},
+	{onvl_push_stage, "onvl_push_stage", {NULL}},
+	{onvl_pop_stage, "onvl_pop_stage", {NULL}},
+	{onvl_remove_local_save, "onvl_remove_local_save", {"index", NULL}},
+	{onvl_remove_global_save, "onvl_remove_global_save", {NULL}},
+	{onvl_reset_local_variables, "onvl_reset_local_variables", {NULL}},
+	{onvl_reset_global_variables, "onvl_reset_global_variables", {NULL}},
+	{onvl_quick_save_extra, "onvl_quick_save_extra", {NULL}},
+	{onvl_quick_load_extra, "onvl_quick_load_extra", {NULL}},
 };
 
 #define FFI_FUNC_TBL_SIZE (sizeof(ffi_func_tbl) / sizeof(ffi_func_tbl[0]))
@@ -112,7 +110,7 @@ struct wms_ffi_func_tbl ffi_func_tbl[] = {
  */
 
 /* Get the value of the specified variable. */
-static bool s2_get_variable(struct wms_runtime *rt)
+static bool onvl_get_variable(struct wms_runtime *rt)
 {
 	struct wms_value *index;
 	int index_i;
@@ -139,7 +137,7 @@ static bool s2_get_variable(struct wms_runtime *rt)
 }
 
 /* Set the value of the specified variable. */
-static bool s2_set_variable(struct wms_runtime *rt)
+static bool onvl_set_variable(struct wms_runtime *rt)
 {
 	struct wms_value *index, *value;
 	int index_i, value_i;
@@ -165,7 +163,7 @@ static bool s2_set_variable(struct wms_runtime *rt)
 }
 
 /* Get the value of the specified name variable. */
-static bool s2_get_name_variable(struct wms_runtime *rt)
+static bool onvl_get_name_variable(struct wms_runtime *rt)
 {
 	struct wms_value *index;
 	const char *value;
@@ -192,7 +190,7 @@ static bool s2_get_name_variable(struct wms_runtime *rt)
 }
 
 /* Set the value of the specified name variable. */
-static bool s2_set_name_variable(struct wms_runtime *rt)
+static bool onvl_set_name_variable(struct wms_runtime *rt)
 {
 	struct wms_value *index, *value;
 	const char *value_s;
@@ -219,7 +217,7 @@ static bool s2_set_name_variable(struct wms_runtime *rt)
 	return true;
 }
 
-static bool s2_get_year(struct wms_runtime *rt)
+static bool onvl_get_year(struct wms_runtime *rt)
 {
 	int now_year;
 	time_t now_unixtime;
@@ -241,7 +239,7 @@ static bool s2_get_year(struct wms_runtime *rt)
 }
 
 /* Returns now month*/
-static bool s2_get_month(struct wms_runtime *rt)
+static bool onvl_get_month(struct wms_runtime *rt)
 {
 	int now_month;
 	time_t now_unixtime;
@@ -263,7 +261,7 @@ static bool s2_get_month(struct wms_runtime *rt)
 }
 
 /* Returns now day*/
-static bool s2_get_day(struct wms_runtime *rt)
+static bool onvl_get_day(struct wms_runtime *rt)
 {
 	int now_day;
 	time_t now_unixtime;
@@ -285,7 +283,7 @@ static bool s2_get_day(struct wms_runtime *rt)
 }
 
 /* Returns now hour*/
-static bool s2_get_hour(struct wms_runtime *rt)
+static bool onvl_get_hour(struct wms_runtime *rt)
 {
 	int now_hour;
 	time_t now_unixtime;
@@ -307,7 +305,7 @@ static bool s2_get_hour(struct wms_runtime *rt)
 }
 
 /* Returns now minute*/
-static bool s2_get_minute(struct wms_runtime *rt)
+static bool onvl_get_minute(struct wms_runtime *rt)
 {
 	int now_minute;
 	time_t now_unixtime;
@@ -329,7 +327,7 @@ static bool s2_get_minute(struct wms_runtime *rt)
 }
 
 /* Returns now second*/
-static bool s2_get_second(struct wms_runtime *rt)
+static bool onvl_get_second(struct wms_runtime *rt)
 {
 	int now_second;
 	time_t now_unixtime;
@@ -351,7 +349,7 @@ static bool s2_get_second(struct wms_runtime *rt)
 }
 
 /* Returns day of week (Sunday=0) */
-static bool s2_get_wday(struct wms_runtime *rt)
+static bool onvl_get_wday(struct wms_runtime *rt)
 {
 	int now_wday;
 	time_t now_unixtime;
@@ -373,7 +371,7 @@ static bool s2_get_wday(struct wms_runtime *rt)
 }
 
 /* Returns a random number that ranges from 0 to 99999. */
-static bool s2_random(struct wms_runtime *rt)
+static bool onvl_random(struct wms_runtime *rt)
 {
 	int rand_value;
 
@@ -389,7 +387,7 @@ static bool s2_random(struct wms_runtime *rt)
 }
 
 /* Returns a rounded value. */
-static bool s2_round(struct wms_runtime *rt)
+static bool onvl_round(struct wms_runtime *rt)
 {
 	struct wms_value *value;
 	double value_i;
@@ -415,7 +413,7 @@ static bool s2_round(struct wms_runtime *rt)
 }
 
 /* Returns a value rounded up. */
-static bool s2_ceil(struct wms_runtime *rt)
+static bool onvl_ceil(struct wms_runtime *rt)
 {
 	struct wms_value *value;
 	double value_i;
@@ -441,7 +439,7 @@ static bool s2_ceil(struct wms_runtime *rt)
 }
 
 /* Returns a value rounded down. */
-static bool s2_floor(struct wms_runtime *rt)
+static bool onvl_floor(struct wms_runtime *rt)
 {
 	struct wms_value *value;
 	double value_i;
@@ -467,7 +465,7 @@ static bool s2_floor(struct wms_runtime *rt)
 }
 
 /* Set the value of the config. */
-static bool s2_set_config(struct wms_runtime *rt)
+static bool onvl_set_config(struct wms_runtime *rt)
 {
 	struct wms_value *key, *value;
 	const char *key_s, *value_s;
@@ -494,7 +492,7 @@ static bool s2_set_config(struct wms_runtime *rt)
 }
 
 /* Reflect the changed configs for the message box and the name box. */
-static bool s2_reflect_msgbox_and_namebox_config(struct wms_runtime *rt)
+static bool onvl_reflect_msgbox_and_namebox_config(struct wms_runtime *rt)
 {
 	UNUSED_PARAMETER(rt);
 
@@ -505,7 +503,7 @@ static bool s2_reflect_msgbox_and_namebox_config(struct wms_runtime *rt)
 }
 
 /* Reflect the changed font configs. */
-static bool s2_reflect_font_config(struct wms_runtime *rt)
+static bool onvl_reflect_font_config(struct wms_runtime *rt)
 {
 	UNUSED_PARAMETER(rt);
 
@@ -518,7 +516,7 @@ static bool s2_reflect_font_config(struct wms_runtime *rt)
 }
 
 /* Clear the message history. */
-static bool s2_clear_history(struct wms_runtime *rt)
+static bool onvl_clear_history(struct wms_runtime *rt)
 {
 	UNUSED_PARAMETER(rt);
 
@@ -529,7 +527,7 @@ static bool s2_clear_history(struct wms_runtime *rt)
 }
 
 /* Clear the message box. */
-static bool s2_clear_msgbox(struct wms_runtime *rt)
+static bool onvl_clear_msgbox(struct wms_runtime *rt)
 {
 	UNUSED_PARAMETER(rt);
 
@@ -540,7 +538,7 @@ static bool s2_clear_msgbox(struct wms_runtime *rt)
 }
 
 /* Clear the name box. */
-static bool s2_clear_namebox(struct wms_runtime *rt)
+static bool onvl_clear_namebox(struct wms_runtime *rt)
 {
 	UNUSED_PARAMETER(rt);
 
@@ -551,7 +549,7 @@ static bool s2_clear_namebox(struct wms_runtime *rt)
 }
 
 /* Hide the message box. */
-static bool s2_hide_msgbox(struct wms_runtime *rt)
+static bool onvl_hide_msgbox(struct wms_runtime *rt)
 {
 	UNUSED_PARAMETER(rt);
 
@@ -562,7 +560,7 @@ static bool s2_hide_msgbox(struct wms_runtime *rt)
 }
 
 /* Hide the name box. */
-static bool s2_hide_namebox(struct wms_runtime *rt)
+static bool onvl_hide_namebox(struct wms_runtime *rt)
 {
 	UNUSED_PARAMETER(rt);
 
@@ -573,7 +571,7 @@ static bool s2_hide_namebox(struct wms_runtime *rt)
 }
 
 /* Save the global data. */
-static bool s2_save_global(struct wms_runtime *rt)
+static bool onvl_save_global(struct wms_runtime *rt)
 {
 	UNUSED_PARAMETER(rt);
 
@@ -583,7 +581,7 @@ static bool s2_save_global(struct wms_runtime *rt)
 }
 
 /* Push the stage. */
-bool s2_push_stage(struct wms_runtime *rt)
+bool onvl_push_stage(struct wms_runtime *rt)
 {
 	const char *s;
 	int i;
@@ -630,7 +628,7 @@ bool s2_push_stage(struct wms_runtime *rt)
 }
 
 /* Pop the stage. */
-bool s2_pop_stage(struct wms_runtime *rt)
+bool onvl_pop_stage(struct wms_runtime *rt)
 {
 	struct image *img;
 	int i;
@@ -731,7 +729,7 @@ bool s2_pop_stage(struct wms_runtime *rt)
 }
 
 /* Removes all local save data. */
-static bool s2_remove_local_save(struct wms_runtime *rt)
+static bool onvl_remove_local_save(struct wms_runtime *rt)
 {
 	struct wms_value *index;
 	int index_i;
@@ -753,7 +751,7 @@ static bool s2_remove_local_save(struct wms_runtime *rt)
 }
 
 /* Removes a global save data. */
-static bool s2_remove_global_save(struct wms_runtime *rt)
+static bool onvl_remove_global_save(struct wms_runtime *rt)
 {
 	UNUSED_PARAMETER(rt);
 
@@ -762,7 +760,7 @@ static bool s2_remove_global_save(struct wms_runtime *rt)
 	return true;
 }
 
-static bool s2_reset_local_variables(struct wms_runtime *rt)
+static bool onvl_reset_local_variables(struct wms_runtime *rt)
 {
 	int i;
 
@@ -774,7 +772,7 @@ static bool s2_reset_local_variables(struct wms_runtime *rt)
 	return true;
 }
 
-static bool s2_reset_global_variables(struct wms_runtime *rt)
+static bool onvl_reset_global_variables(struct wms_runtime *rt)
 {
 	int i;
 
@@ -786,7 +784,7 @@ static bool s2_reset_global_variables(struct wms_runtime *rt)
 	return true;
 }
 
-static bool s2_quick_save_extra(struct wms_runtime *rt)
+static bool onvl_quick_save_extra(struct wms_runtime *rt)
 {
 	UNUSED_PARAMETER(rt);
 
@@ -795,7 +793,7 @@ static bool s2_quick_save_extra(struct wms_runtime *rt)
 	return true;
 }
 
-static bool s2_quick_load_extra(struct wms_runtime *rt)
+static bool onvl_quick_load_extra(struct wms_runtime *rt)
 {
 	UNUSED_PARAMETER(rt);
 
@@ -804,34 +802,11 @@ static bool s2_quick_load_extra(struct wms_runtime *rt)
 	return true;
 }
 
-static bool s2_play_midi(struct wms_runtime *rt)
-{
-	struct wms_value *file_name;
-	const char *file_name_s;
-
-	assert(rt != NULL);
-
-	/* Get the argument pointer. */
-	if (!wms_get_var_value(rt, "file", &file_name))
-		return false;
-
-	/* Get the argument value. */
-	if (!wms_get_str_value(rt, file_name, &file_name_s))
-		return false;
-
-#if defined(OPENNOVEL_TARGET_WIN32) && defined(USE_EDITOR)
-	bool play_midi(const char *dir, const char *fname);
-	play_midi("bgm", file_name_s);
-#endif
-
-	return true;
-}
-
 /*
  * FFI function registration
  */
 
-bool register_s2_functions(struct wms_runtime *rt)
+bool register_onvl_functions(struct wms_runtime *rt)
 {
 	if (!wms_register_ffi_func_tbl(rt, ffi_func_tbl, FFI_FUNC_TBL_SIZE)) {
 		log_wms_runtime_error("", 0, wms_get_runtime_error_message(rt));

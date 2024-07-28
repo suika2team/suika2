@@ -15,7 +15,8 @@ static bool init(void);
 static bool run(void);
 static bool cleanup(void);
 
-bool register_s2_functions(struct wms_runtime *rt);
+/* wms_impl.c */
+bool register_onvl_functions(struct wms_runtime *rt);
 
 /*
  * pluginコマンド
@@ -78,7 +79,7 @@ static bool init(void)
 	}
 
 	/* ランタイムにFFI関数を登録する */
-	if (!register_s2_functions(rt))
+	if (!register_onvl_functions(rt))
 		return false;
 
 	return true;
