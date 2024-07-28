@@ -17,10 +17,8 @@ call commandlinetools-win-11076708_latest\cmdline-tools\bin\sdkmanager --install
 set ANDROID_SDK_ROOT=%CURRENT_DIR%commandlinetools-win-11076708_latest\cmdline-tools\latest
 set ANDROID_HOME=%CURRENT_DIR%commandlinetools-win-11076708_latest\cmdline-tools\latest
 call commandlinetools-win-11076708_latest\cmdline-tools\bin\sdkmanager --licenses --sdk_root=%ANDROID_SDK_ROOT%
-call commandlinetools-win-11076708_latest\cmdline-tools\bin\sdkmanager "platforms;android-34"  --sdk_root=%ANDROID_SDK_ROOT%
-call commandlinetools-win-11076708_latest\cmdline-tools\bin\sdkmanager "ndk;25.2.9519653" --sdk_root=%ANDROID_SDK_ROOT%
+call commandlinetools-win-11076708_latest\cmdline-tools\bin\sdkmanager "platforms;android-35"  --sdk_root=%ANDROID_SDK_ROOT%
 echo "sdk.dir=%ANDROID_SDK_ROOT%" > local.properties
-echo "ndk.dir=%ANDROID_SDK_ROOT%\ndk\25.2.9519653" >> local.properties
 
 echo Building app...
 call gradlew.bat --no-daemon --stacktrace build

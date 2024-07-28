@@ -1,14 +1,19 @@
 <html><head></head><body><ul><!-- -*- mode: html-mode; -*-
 
 <!-- BEGIN-LATEST -->
+<li>OpenNovel 0.0.8 2024/07/28
+  <ul>
+    <li>100x faster build of the Android version due to a removal of NDK dependency</li>
+  </ul>
+</li>
+<!-- END-LATEST -->
+
 <li>OpenNovel 0.0.7 2024/07/28
   <ul>
     <li>Fixed generation of Universal Binary on macOS and iOS</li>
     <li>Added Windows and Mac DLLs to the Unity template</li>
   </ul>
 </li>
-<!-- END-LATEST -->
-
 <li>OpenNovel 0.0.6 2024/07/28
   <ul>
     <li>Removed a garbage file</li>

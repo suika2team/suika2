@@ -25,10 +25,8 @@ yes | ./cmdline-tools/bin/sdkmanager --install "cmdline-tools;latest" --sdk_root
 export ANDROID_SDK_ROOT=$CUR_DIR/cmdline-tools/latest
 export ANDROID_HOME=$CUR_DIR/cmdline-tools/latest
 yes | ./cmdline-tools/bin/sdkmanager --install --licenses --sdk_root=$ANDROID_SDK_ROOT
-yes | ./cmdline-tools/bin/sdkmanager "platforms;android-34" --sdk_root=$ANDROID_SDK_ROOT
-yes | ./cmdline-tools/bin/sdkmanager "ndk;25.2.9519653" --sdk_root=$ANDROID_SDK_ROOT
+yes | ./cmdline-tools/bin/sdkmanager "platforms;android-35" --sdk_root=$ANDROID_SDK_ROOT
 echo "sdk.dir=$ANDROID_SDK_ROOT" > local.properties
-echo "ndk.dir=$ANDROID_SDK_ROOT/ndk/25.2.9519653" >> local.properties
 
 echo "Building app..."
 sh ./gradlew --no-daemon --stacktrace build
