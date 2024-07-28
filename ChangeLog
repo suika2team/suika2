@@ -1,6 +1,13 @@
 <html><head></head><body><ul>
 
 <!-- BEGIN-LATEST -->
+<li>OpenNovel 0.0.6 2024/07/28
+  <ul>
+    <li>Removed a garbage file</li>
+  </ul>
+</li>
+<!-- END-LATEST -->
+
 <li>OpenNovel 0.0.5 2024/07/28
   <ul>
     <li>Fixed the packager</li>
@@ -8,8 +15,6 @@
     <li>Added the FreeBSD version</li>
   </ul>
 </li>
-<!-- END-LATEST -->
-
 <li>OpenNovel 0.0.4 2024/07/27
   <ul>
     <li>Organized the build script using Docker</li>
