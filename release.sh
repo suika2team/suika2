@@ -154,7 +154,7 @@ cp -R game "$TARGET/sample"
 #
 
 echo "Making a ZIP..."
-7z a -tzip -mm=LZMA -mx9 -aoa "$TARGET.zip" "$TARGET"
+7z a -tzip -mx9 -aoa "$TARGET.zip" "$TARGET"
 rm -rf "$TARGET"
 
 #
