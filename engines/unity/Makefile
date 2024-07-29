@@ -5,7 +5,8 @@ SRCS = $(SRCS_MAIN_MINUS_FILE) $(SRCS_CSHARP)
 #
 # Make a source tree
 #
-all: libopennovel.dll libopennovel.dylib libopennovel.nso
+all: libopennovel.dll libopennovel.dylib libopennovel.so libopennovel.nso
+	@echo 'Making Unity source tree...'
 	@rm -rf unity-src
 	@mkdir unity-src
 	@mkdir unity-src/Assets
@@ -24,11 +25,14 @@ all: libopennovel.dll libopennovel.dylib libopennovel.nso
 	@cp libopennovel.so unity-src/Assets/libopennovel.so
 	@cp libopennovel.nso unity-src/Assets/libopennovel.nso
 	@cp README.md unity-src/
+	@echo 'Done making Unity source tree...'
+	@echo ''
 
 #
 # Windows / Xbox Series X|S x86_64 DLL
 #
 libopennovel.dll: $(SRCS)
+	@echo 'Building Unity Win64 DLL...'
 	@../../external/build-libs.sh "win64" x86_64-w64-mingw32-gcc "" x86_64-w64-mingw32-ar
 	@x86_64-w64-mingw32-gcc \
 		-shared \
@@ -54,14 +58,16 @@ libopennovel.dll: $(SRCS)
 		-lbz2 \
 		-lz
 	@rm -rf libroot-win64
+	@echo 'Done building libopennovel.dll for Win64.'
+	@echo ''
 
 #
 # macOS Universal Binary DLL
 #
 libopennovel.dylib: $(SRCS)
-	@echo 'Building macOS DLL...'
+	@echo 'Building Unity macOS DLL...'
 	@
-	@echo 'Building for arm64...'
+	@echo '1. Building for arm64...'
 	@../../external/build-libs.sh "macos-arm64" clang "-arch arm64" ar
 	@/usr/bin/clang \
 		-O2 \
@@ -88,7 +94,7 @@ libopennovel.dylib: $(SRCS)
 		./libroot-macos-arm64/lib/libz.a
 	@rm -rf libopennovel-macos-arm64.dylib.dSYM
 	@
-	@echo 'Building for x86_64...'
+	@echo '2. Building for x86_64...'
 	@../../external/build-libs.sh "macos-x86_64" clang "-arch x86_64" ar
 	@/usr/bin/clang \
 		-O2 \
@@ -114,16 +120,20 @@ libopennovel.dylib: $(SRCS)
 		./libroot-macos-x86_64/lib/libbz2.a \
 		./libroot-macos-x86_64/lib/libz.a
 	@rm -rf libopennovel-macos-x86_64.dylib.dSYM
+	@
 	@echo 'Merging into a Universal Binary...'
 	@lipo -create libopennovel-macos-arm64.dylib libopennovel-macos-x86_64.dylib -output libopennovel.dylib
 	@rm -rf libopennovel-macos-arm64.dylib libopennovel-macos-x86_64.dylib libroot-macos-arm64 libroot-macos-x86_64
+	@
+	@echo 'Done building macOS DLL.'
+	@echo ''
 
 #
 # Linux x86_64 DLL
 #  - Please recompile on the Orbis SDK to use with PlayStation 4/5
 #
 libopennovel.so: $(SRCS)
-	@echo 'Building Linux DLL...'
+	@echo 'Building Unity Linux DLL...'
 	@../../external/build-libs.sh linux clang "" llvm-ar
 	@clang \
 		-shared \
@@ -150,12 +160,14 @@ libopennovel.so: $(SRCS)
 		-lbz2 \
 		-lz
 	@rm -rf libroot-linux
+	@echo 'Done building Linux DLL...'
+	@echo ''
 
 #
 # Switch DLL
 #
 libopennovel.nso: $(SRCS)
-	@echo 'Building Switch DLL...'
+	@echo 'Building Unity Switch DLL...'
 	@../../external/build-libs.sh switch /opt/devkitpro/devkitA64/bin/aarch64-none-elf-gcc "" /opt/devkitpro/devkitA64/bin/aarch64-none-elf-ar
 	@/opt/devkitpro/devkitA64/bin/aarch64-none-elf-gcc \
 		-shared \
@@ -182,6 +194,8 @@ libopennovel.nso: $(SRCS)
 		-lbz2 \
 		-lz
 	@rm -rf libroot-switch
+	@echo 'Done building Unity Switch DLL.'
+	@echo ''
 
 #
 # Cleanup

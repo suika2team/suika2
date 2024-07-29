@@ -1,5 +1,5 @@
 CPPFLAGS=-DUSE_EDITOR -DUSE_STANDALONE_PACK -I../../src
-CFLAGS=-O2
+CFLAGS=-O2 -Wno-format-truncation
 LDFLAGS=
 
 SRC=../../src/package.c ../../src/log.c

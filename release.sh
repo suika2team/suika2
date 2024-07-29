@@ -29,32 +29,32 @@ TARGET="`pwd`/opennovel-$VERSION"
 rm -rf "$TARGET" "$TARGET.zip"
 mkdir "$TARGET"
 mkdir "$TARGET/export-kit"
+echo ''
 
 #
 # Windows Build (Binary)
 #
 
-echo 'Building the Windows binaries...'
+echo 'Building Windows binaries...'
 
 cd engines/windows
 make
 cp game.exe "$TARGET/game-win.exe"
 cd ../..
-echo 'Ok.'
-echo ''
 
 cd apps/pack
 make pack.exe
 cp pack.exe "$TARGET/pack-win.exe"
 cd ../..
-echo 'Ok.'
+
+echo 'Done building Windows binaries.'
 echo ''
 
 #
 # Mac Build (Binary)
 #
 
-echo "Building the macOS binaries..."
+echo "Building macOS binaries..."
 
 cd engines/macos
 make game.dmg
@@ -69,6 +69,9 @@ cd ../..
 echo 'Ok.'
 echo ''
 
+echo 'Done building macOS binaries.'
+echo ''
+
 #
 # Linux Build (Binary)
 #
@@ -80,7 +83,8 @@ docker run -it -v `pwd`:/workspace ubuntu-build /bin/sh -c "cd /workspace/engine
 docker run -it -v `pwd`:/workspace ubuntu-build /bin/sh -c "cd /workspace/apps/pack && rm -f pack && make pack"
 cp engines/linux/game-linux "$TARGET/game-linux"
 cp apps/pack/pack "$TARGET/pack-linux"
-echo 'Ok.'
+
+echo 'Done building Linux binaries.'
 echo ''
 
 #
@@ -94,11 +98,14 @@ make
 cp -R html "$TARGET/export-kit/"
 cd ../../
 
+echo 'Done building Wasm binaries.'
+echo ''
+
 #
 # iOS Build (Source)
 #
 
-echo 'Building the iOS source...'
+echo 'Building iOS source tree...'
 
 cd engines/ios
 rm -rf ios-src libroot-*
@@ -106,11 +113,14 @@ make
 cp -R ios-src "$TARGET/export-kit/"
 cd ../../
 
+echo 'Done building iOS source tree.'
+echo ''
+
 #
 # Android Build (Source)
 #
 
-echo 'Building the Android source...'
+echo 'Building Android source tree...'
 
 cd engines/android
 rm -rf libroot-* libopennovel-* android-src
@@ -118,22 +128,28 @@ make
 cp -R android-src "$TARGET/export-kit/"
 cd ../../
 
+echo 'Done building Android source tree.'
+echo ''
+
 #
 # macOS Build (Source)
 #
 
-echo "Building the macOS source..."
+echo "Building macOS source tree...\n"
 
 cd engines/macos
 make src
 cp -R macos-src "$TARGET/export-kit/"
 cd ../../
 
+echo 'Done building macOS source tree.'
+echo ''
+
 #
 # Unity Build (Source)
 #
 
-echo "Building the Unity source..."
+echo "Building Unity source tree...\n"
 
 cd engines/unity
 
@@ -145,31 +161,34 @@ make all
 cp -R unity-src "$TARGET/export-kit/"
 cd ../../
 
+echo 'Done building Unity source tree.'
+echo ''
+
 #
-# Documents
+# Documents and Sample
 #
 
-echo "Copying the documents..."
+echo "Copying documents and sample..."
 
 find . -name .DS_Store | xargs rm
+
 cp -R doc "$TARGET/manual"
-
-#
-# Sample
-#
-
-echo "Copying the sample..."
-
 cp -R game "$TARGET/sample"
+
+echo 'Done copying documents and sample.'
+echo ''
 
 #
 # ZIP
 #
 
-echo "Making a ZIP..."
+echo "Compressing..."
 
 7z a -tzip -mx9 -aoa "$TARGET.zip" "$TARGET"
 rm -rf "$TARGET"
+
+echo 'Done compressing.'
+echo ''
 
 #
 # GitHub Release
