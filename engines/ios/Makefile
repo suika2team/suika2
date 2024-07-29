@@ -110,14 +110,16 @@ src: libroot-device libroot-sim $(SRCS_MAIN) $(SRCS_APPLE) $(SRCS_PROJECT)
 	@mkdir ios-src/Resources/mov
 
 libroot-device:
-	@echo 'Building arm64 device libraries..'
-	@IPHONEOS_DEPLOYMENT_TARGET=12.0 ../../external/build-libs.sh device clang "-O2 -arch arm64 -isysroot `xcrun -sdk iphoneos --show-sdk-path` -fembed-bitcode -mios-version-min=8.0" ar
+	@echo 'Building arm64 device libraries...'
+	@IPHONEOS_DEPLOYMENT_TARGET=12.0 ../../external/build-libs.sh device clang "-O2 -arch arm64 -isysroot `xcrun -sdk iphoneos --show-sdk-path` -fembed-bitcode -mios-version-min=12.0" ar
 
 libroot-sim:
-	@echo 'Building arm64 simulator libraries..'
+	@echo 'Building arm64 simulator libraries...'
 	@IPHONEOS_DEPLOYMENT_TARGET=12.0 ../../external/build-libs.sh sim-arm64 clang "-O2 -arch arm64 -isysroot `xcrun -sdk iphonesimulator --show-sdk-path`" ar
-	@echo 'Building x86_64 simulator libraries..'
+	@
+	@echo 'Building x86_64 simulator libraries...'
 	@IPHONEOS_DEPLOYMENT_TARGET=12.0 ../../external/build-libs.sh sim-x86_64 clang "-O2 -arch x86_64 -isysroot `xcrun -sdk iphonesimulator --show-sdk-path`" ar
+	@
 	@echo 'Merging into Universal Binary...'
 	@mkdir -p libroot-sim/include libroot-sim/lib
 	@cp -Ra libroot-sim-arm64/include/* libroot-sim/include/

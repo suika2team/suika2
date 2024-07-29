@@ -3,13 +3,12 @@ How to make
 
 ## Build
 ```
-pkg install gmake
-gmake setup
-gmake
+make setup
+make
 ```
 
 ## Run
 ```
-cd game
+cd ../../game
 ../engines/freebsd/game-freebsd
 ```

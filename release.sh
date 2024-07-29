@@ -178,5 +178,6 @@ rm -rf "$TARGET"
 echo "Making a release on GitHub..."
 
 yes "" | gh release create "$VERSION" --title "$VERSION" --notes "$NOTE" "$TARGET.zip"
+rm "$TARGET.zip"
 
 echo "Done."

@@ -1,6 +1,5 @@
 CC=cc
 AR=ar
-STRIP=strip
 
 #
 # Source
@@ -80,11 +79,11 @@ game-freebsd: $(SRCS) libroot
 		-o game-freebsd \
 		$(CPPFLAGS) \
 		$(CFLAGS) \
-		`pkg-config --cflags gstreamer-1.0 gstreamer-video-1.0` \
 		$(SRCS) \
-		 $(LDFLAGS) \
-		`pkg-config --libs gstreamer-1.0 gstreamer-video-1.0`
-	$(STRIP) game-freebsd
+		$(LDFLAGS) \
+
+libroot:
+	../../external/build-libs.sh "" $(CC) "" $(AR)
 
 setup:
 	sudo pkg install git libX11 libXpm mesa-devel alsa-lib alsa-plugins webp libvorbis libogg freetype2 brotli gstreamer1 gstreamer1-plugins

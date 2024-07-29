@@ -1,65 +1,6 @@
-#
-# Makefile for the Unity export template
-#  - Note that the author does not have any copy of commercial SDKs
-#  - This Makefile was written with his imagination
-#
+include ../common.mk
 
-SRCS_UNITY = \
-	../../src/halwrap.c \
-	../../src/anime.c \
-	../../src/conf.c \
-	../../src/ciel.c \
-	../../src/event.c \
-	../../src/glyph.c \
-	../../src/gui.c \
-	../../src/history.c \
-	../../src/image.c \
-	../../src/log.c \
-	../../src/main.c \
-	../../src/mixer.c \
-	../../src/readimage.c \
-	../../src/readpng.c \
-	../../src/readjpeg.c \
-	../../src/readwebp.c \
-	../../src/save.c \
-	../../src/script.c \
-	../../src/seen.c \
-	../../src/stage.c \
-	../../src/vars.c \
-	../../src/wave.c \
-	../../src/wms_core.c \
-	../../src/wms_lexer.yy.c \
-	../../src/wms_parser.tab.c \
-	../../src/wms_impl.c \
-	../../src/cmd_anime.c \
-	../../src/cmd_bg.c \
-	../../src/cmd_ch.c \
-	../../src/cmd_chapter.c \
-	../../src/cmd_chch.c \
-	../../src/cmd_choose.c \
-	../../src/cmd_click.c \
-	../../src/cmd_config.c \
-	../../src/cmd_gosub.c \
-	../../src/cmd_goto.c \
-	../../src/cmd_if.c \
-	../../src/cmd_layer.c \
-	../../src/cmd_menu.c \
-	../../src/cmd_message.c \
-	../../src/cmd_move.c \
-	../../src/cmd_music.c \
-	../../src/cmd_plugin.c \
-	../../src/cmd_return.c \
-	../../src/cmd_set.c \
-	../../src/cmd_shake.c \
-	../../src/cmd_skip.c \
-	../../src/cmd_sound.c \
-	../../src/cmd_story.c \
-	../../src/cmd_text.c \
-	../../src/cmd_time.c \
-	../../src/cmd_video.c \
-	../../src/cmd_volume.c
-
-OBJS = $(SRCS_UNITY:../../src/%.c=%.o)
+SRCS = $(SRCS_MAIN_MINUS_FILE) $(SRCS_CSHARP)
 
 #
 # Make a source tree
@@ -87,7 +28,7 @@ all: libopennovel.dll libopennovel.dylib libopennovel.nso
 #
 # Windows / Xbox Series X|S x86_64 DLL
 #
-libopennovel.dll: $(SRCS_UNITY)
+libopennovel.dll: $(SRCS)
 	@../../external/build-libs.sh "win64" x86_64-w64-mingw32-gcc "" x86_64-w64-mingw32-ar
 	@x86_64-w64-mingw32-gcc \
 		-shared \
@@ -117,10 +58,11 @@ libopennovel.dll: $(SRCS_UNITY)
 #
 # macOS Universal Binary DLL
 #
-libopennovel.dylib: $(SRCS_UNITY)
+libopennovel.dylib: $(SRCS)
 	@echo 'Building macOS DLL...'
+	@
 	@echo 'Building for arm64...'
-	@../../external/build-libs.sh "macos-arm64" clang "-arch arm64 -Dmktemp=mkdtemp" ar
+	@../../external/build-libs.sh "macos-arm64" clang "-arch arm64" ar
 	@/usr/bin/clang \
 		-O2 \
 		-arch arm64 \
@@ -145,8 +87,9 @@ libopennovel.dylib: $(SRCS_UNITY)
 		./libroot-macos-arm64/lib/libbz2.a \
 		./libroot-macos-arm64/lib/libz.a
 	@rm -rf libopennovel-macos-arm64.dylib.dSYM
+	@
 	@echo 'Building for x86_64...'
-	@../../external/build-libs.sh "macos-x86_64" clang "-arch x86_64 -Dmktemp=mkdtemp" ar
+	@../../external/build-libs.sh "macos-x86_64" clang "-arch x86_64" ar
 	@/usr/bin/clang \
 		-O2 \
 		-arch x86_64 \
@@ -179,9 +122,9 @@ libopennovel.dylib: $(SRCS_UNITY)
 # Linux x86_64 DLL
 #  - Please recompile on the Orbis SDK to use with PlayStation 4/5
 #
-libopennovel.so: $(SRCS_UNITY)
+libopennovel.so: $(SRCS)
 	@echo 'Building Linux DLL...'
-	@../../external/build-libs.sh linux clang "-Dmktemp=mkdtemp" llvm-ar
+	@../../external/build-libs.sh linux clang "" llvm-ar
 	@clang \
 		-shared \
 		-fPIC \
@@ -211,7 +154,7 @@ libopennovel.so: $(SRCS_UNITY)
 #
 # Switch DLL
 #
-libopennovel.nso: $(SRCS_UNITY)
+libopennovel.nso: $(SRCS)
 	@echo 'Building Switch DLL...'
 	@../../external/build-libs.sh switch /opt/devkitpro/devkitA64/bin/aarch64-none-elf-gcc "" /opt/devkitpro/devkitA64/bin/aarch64-none-elf-ar
 	@/opt/devkitpro/devkitA64/bin/aarch64-none-elf-gcc \

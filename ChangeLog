@@ -1,13 +1,19 @@
 <html><head></head><body><ul><!-- -*- mode: html-mode; -*-
 
 <!-- BEGIN-LATEST -->
+<li>OpenNovel 0.0.14 2024/07/30
+  <ul>
+    <li>Fixed FreeBSD sound</li>
+    <li>Faster library build</li>
+  </ul>
+</li>
+<!-- END-LATEST -->
+
 <li>OpenNovel 0.0.13 2024/07/29
   <ul>
     <li>Fixed a bug where pressing the Space key doesn't take effect properly</li>
   </ul>
 </li>
-<!-- END-LATEST -->
-
 <li>OpenNovel 0.0.12 2024/07/29
   <ul>
     <li>Removed the library sources for Unity and changed to use prebuild DLLs</li>

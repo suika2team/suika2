@@ -1,7 +1,7 @@
-SRCS = \
+SRCS_MAIN_MINUS_FILE = \
 	../../src/anime.c \
-	../../src/conf.c \
 	../../src/ciel.c \
+	../../src/conf.c \
 	../../src/event.c \
 	../../src/glyph.c \
 	../../src/gui.c \
@@ -11,8 +11,8 @@ SRCS = \
 	../../src/main.c \
 	../../src/mixer.c \
 	../../src/readimage.c \
-	../../src/readpng.c \
 	../../src/readjpeg.c \
+	../../src/readpng.c \
 	../../src/readwebp.c \
 	../../src/save.c \
 	../../src/script.c \
@@ -21,9 +21,9 @@ SRCS = \
 	../../src/vars.c \
 	../../src/wave.c \
 	../../src/wms_core.c \
+	../../src/wms_impl.c \
 	../../src/wms_lexer.yy.c \
 	../../src/wms_parser.tab.c \
-	../../src/wms_impl.c \
 	../../src/cmd_anime.c \
 	../../src/cmd_bg.c \
 	../../src/cmd_ch.c \
@@ -50,11 +50,9 @@ SRCS = \
 	../../src/cmd_text.c \
 	../../src/cmd_time.c \
 	../../src/cmd_video.c \
-	../../src/cmd_volume.c \
-	../../src/khronos/glrender.c \
-	../../src/khronos/slsound.c \
-	../../src/google/ndkmain.c \
-	../../src/google/ndkfile.c
+	../../src/cmd_volume.c
+
+SRCS = $(SRCS_MAIN_MINUS_FILE) $(SRCS_ANDROID) $(SRCS_OPENGL) $(SRCS_OPENSL)
 
 src: libopennovel-aarch64.so libopennovel-armv7a.so libopennovel-x86_64.so libopennovel-i686.so
 	@rm -rf app/build app/.cxx app/src/main/cpp app/src/main/java app/src/main/assets android-src

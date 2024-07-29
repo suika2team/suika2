@@ -77,7 +77,7 @@ game-linux: $(SRCS) libroot
 	$(STRIP) game-linux
 
 libroot:
-	../../external/build-libs.sh "" $(CC) "-Dmktemp=mkdtemp" $(AR)
+	../../external/build-libs.sh "" $(CC) "" $(AR)
 
 setup:
 	sudo apt-get install build-essential libasound2-dev libx11-dev libxpm-dev mesa-common-dev libfreetype-dev libpng-dev libjpeg-dev libwebp-dev libvorbis-dev libogg-dev libbrotli-dev libbz2-dev libz-dev libgstreamer1.0-dev libgstreamer-plugins-base1.0-dev

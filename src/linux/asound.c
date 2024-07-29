@@ -56,17 +56,11 @@ static pthread_t thread[MIXER_STREAMS];
 /* Mutex Objects (mutually exclude between the main thread and a sound thread) */
 static pthread_mutex_t mutex[MIXER_STREAMS];
 
-/* Conditional Variables (for requests from the main thread to a sound thread) */
-static pthread_cond_t req[MIXER_STREAMS];
-
-/* Conditional Variables (for renponses from a sound thread to the main thread */
-static pthread_cond_t ack[MIXER_STREAMS];
+/* Exit Requst */
+static bool exit_req;
 
 /* Buffers */
 SIMD_ALIGNED_MEMBER(static uint32_t period_buf[MIXER_STREAMS][PERIOD_FRAMES + PERIOD_FRAMES_PAD]);
-
-/* Flags of Quit Requests */
-static bool quit[MIXER_STREAMS];
 
 /* Volume Values */
 static float volume[MIXER_STREAMS];
@@ -89,11 +83,12 @@ bool init_asound(void)
 {
 	int n, ret;
 
+	exit_req = false;
+
 	for (n = 0; n < MIXER_STREAMS; n++) {
 		/* Initialize per stream data. */
 		pcm[n] = NULL;
 		wave[n] = NULL;
-		quit[n] = false;
 		volume[n] = 1.0f;
 		finish[n] = false;
 
@@ -104,23 +99,12 @@ bool init_asound(void)
 		/* Create a mutex object. */
 		pthread_mutex_init(&mutex[n], NULL);
 
-		/* Create conditional variables. */
-		pthread_cond_init(&req[n], NULL);
-		pthread_cond_init(&ack[n], NULL);
-
-		pthread_mutex_lock(&mutex[n]);
-		{
-			/* Start a sound thread. */
-			ret = pthread_create(&thread[n], NULL, sound_thread, (void *)(intptr_t)n);
-			if (ret != 0) {
-				pthread_mutex_unlock(&mutex[n]);
-				return false;
-			}
-
-			/* Receive a response that indicates the sound thread is in a wait. */
-			pthread_cond_wait(&ack[n], &mutex[n]);
+		/* Start a sound thread. */
+		ret = pthread_create(&thread[n], NULL, sound_thread, (void *)(intptr_t)n);
+		if (ret != 0) {
+			pthread_mutex_unlock(&mutex[n]);
+			return false;
 		}
-		pthread_mutex_unlock(&mutex[n]);
 	}
 
 	return true;
@@ -134,19 +118,13 @@ void cleanup_asound(void)
 	void *p1;
 	int n;
 
+	exit_req = true;
+
 	for (n = 0; n < MIXER_STREAMS; n++) {
 		if (pcm[n] == NULL)
 			continue;
 
 		stop_sound(n);
-
-		pthread_mutex_lock(&mutex[n]);
-		{
-			/* Send a quit signal to a sound thread. */
-			quit[n] = true;
-			pthread_cond_signal(&req[n]);
-		}
-		pthread_mutex_unlock(&mutex[n]);
 
 		/* Wait for an exit of the sound thread. */
 		pthread_join(thread[n], &p1);
@@ -154,9 +132,6 @@ void cleanup_asound(void)
 		/* Close a device. */
 		if (pcm[n] != NULL)
 			snd_pcm_close(pcm[n]);
-
-		/* Destroy a conditional variable. */
-		pthread_cond_destroy(&req[n]);
 
 		/* Destroy a mutex. */
 		pthread_mutex_destroy(&mutex[n]);
@@ -178,21 +153,19 @@ bool play_sound(int n, struct wave *w)
 	if (pcm[n] == NULL)
 		return true;
 
-	/* Stop an in-flight playback. */
-	stop_sound(n);
-
 	pthread_mutex_lock(&mutex[n]);
 	{
+		/* Drop the current buffer. */
+		snd_pcm_drop(pcm[n]);
+
 		/* Set a PCM stream. */
 		wave[n] = w;
 
 		/* Reset a finish flag. */
 		finish[n] = false;
-
-		/* Send a signal of a playback start. */
-		pthread_cond_signal(&req[n]);
 	}
 	pthread_mutex_unlock(&mutex[n]);
+
 	return true;
 }
 
@@ -215,12 +188,10 @@ bool stop_sound(int n)
 
 			/* Stop an in-flight buffer. */
 			snd_pcm_drop(pcm[n]);
-
-			/* Receive a signal that indicates a sound thread is in a wait. */
-			pthread_cond_wait(&ack[n], &mutex[n]);
 		}
 	}
 	pthread_mutex_unlock(&mutex[n]);
+
 	return true;
 }
 
@@ -323,21 +294,7 @@ static void *sound_thread(void *p)
 {
 	int n = (int)(intptr_t)p;
 
-	while (1) {
-		pthread_mutex_lock(&mutex[n]);
-		{
-			/* Send a signal that indicates the sound thread is in a wait. */
-			pthread_cond_signal(&ack[n]);
-
-			/* Wait for a signal. (start or exit) */
-			pthread_cond_wait(&req[n], &mutex[n]);
-			if (quit[n]) {
-				pthread_mutex_unlock(&mutex[n]);
-				break;
-			}
-		}
-		pthread_mutex_unlock(&mutex[n]);
-
+	while (!exit_req) {
 		/* Run a playback loop. */
 		while (playback_period(n)) {
 #if defined(__linux__)

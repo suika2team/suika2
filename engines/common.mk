@@ -1,9 +1,8 @@
-SRCS_MAIN = \
+SRCS_MAIN_MINUS_FILE = \
 	../../src/anime.c \
 	../../src/ciel.c \
 	../../src/conf.c \
 	../../src/event.c \
-	../../src/file.c \
 	../../src/glyph.c \
 	../../src/gui.c \
 	../../src/history.c \
@@ -53,16 +52,23 @@ SRCS_MAIN = \
 	../../src/cmd_video.c \
 	../../src/cmd_volume.c
 
+SRCS_MAIN = \
+	$(SRCS_MAIN_MINUS_FILE) \
+	../../src/file.c
+
 SRC_APPLE = \
 	../../src/apple/GameRenderer.m \
 	../../src/apple/GameShaders.metal \
 	../../src/apple/aunit.c
 
-SRCS_OPENGL = \
-	../../src/khronos/glrender.c
+SRCS_WIN_C = \
+	../../src/microsoft/winmain.c \
+	../../src/microsoft/dsound.c
 
-SRCS_OPENSL = \
-	../../src/khronos/slsound.c
+SRCS_WIN_CC = \
+	../../src/microsoft/dx9render.cc \
+	../../src/microsoft/dsvideo.cc \
+	../../src/microsoft/tts_sapi.cc
 
 SRCS_LINUX = \
 	../../src/linux/asound.c \
@@ -71,11 +77,20 @@ SRCS_LINUX = \
 
 SRCS_ANDROID = \
 	../../src/google/ndkmain.c \
-	../../src/google/ndkfile.c \
-	../../src/google/ndkpro.c
+	../../src/google/ndkfile.c
+
+SRCS_OPENGL = \
+	../../src/khronos/glrender.c
+
+SRCS_OPENSL = \
+	../../src/khronos/slsound.c
 
 SRCS_SWIFT = \
 	../../src/halwrap.c \
 
 SRCS_CSHARP = \
 	../../src/halwrap.c \
+
+SRCS_WASM = \
+	../../src/wasm/emmain.c \
+	../../src/wasm/alsound.c
