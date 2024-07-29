@@ -75,9 +75,9 @@ echo ''
 
 echo 'Building the Linux binaries...'
 
-docker build -t ubuntu engines/linux
-docker run -it -v `pwd`:/workspace ubuntu /bin/sh -c "cd /workspace/engines/linux && make clean && make"
-docker run -it -v `pwd`:/workspace ubuntu /bin/sh -c "cd /workspace/apps/pack && rm -f pack && make pack"
+docker build -t ubuntu-build engines/linux
+docker run -it -v `pwd`:/workspace ubuntu-build /bin/sh -c "cd /workspace/engines/linux && make clean && make"
+docker run -it -v `pwd`:/workspace ubuntu-build /bin/sh -c "cd /workspace/apps/pack && rm -f pack && make pack"
 cp engines/linux/game-linux "$TARGET/game-linux"
 cp apps/pack/pack "$TARGET/pack-linux"
 echo 'Ok.'
@@ -136,7 +136,12 @@ cd ../../
 echo "Building the Unity source..."
 
 cd engines/unity
-make
+
+docker pull yesimnathan/switchdev
+docker run -it -v `pwd`/../..:/workspace yesimnathan/switchdev /bin/bash -c "cd /workspace/engines/unity && make libopennovel.nso"
+
+make all
+
 cp -R unity-src "$TARGET/export-kit/"
 cd ../../
 

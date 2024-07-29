@@ -43,5 +43,7 @@ engines/wasm/libwebp-1.3.2
 engines/linux/game-linux
 
 engines/unity/unity-src
-engines/unity/libopennovel-win64.dll
-engines/unity/libopennovel-macos.dylib
+engines/unity/libopennovel.dll
+engines/unity/libopennovel.dylib
+engines/unity/libopennovel.so
+engines/unity/libopennovel.nso

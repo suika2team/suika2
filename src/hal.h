@@ -437,7 +437,13 @@ extern void (*wrap_on_update_variable)(void);
  * Foreign Language Support for C#
  */
 #if defined(USE_CSHARP)
+
 #define UNSAFEPTR(t)  intptr_t	/* For C# */
+
+#ifdef NO_CDECL
+#define __cdecl
+#endif
+
 void init_hal_func_table(
 	void __cdecl (*p_log_info)(UNSAFEPTR(const char *) s),
 	void __cdecl (*p_log_warn)(UNSAFEPTR(const char *) s),
@@ -477,6 +483,11 @@ void init_hal_func_table(
 	void __cdecl (*p_write_save_file)(int b),
 	void __cdecl (*p_close_save_file)(void)
 );
+
+#ifdef NO_CDECL
+#undef __cdecl
+#endif
+
 #endif /* deinfed(USE_CSHARP) */
 
 #endif /* OPENNOVEL_HAL_H */

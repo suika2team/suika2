@@ -15,7 +15,7 @@
  * Function Pointers
  */
 
-#ifdef USE_CSHARP
+#if defined(USE_CSHARP) && !defined(NO_CDECL)
 #define CDECL __cdecl
 #else
 #define CDECL

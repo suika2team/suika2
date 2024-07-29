@@ -5,13 +5,13 @@ help:
 	@echo '  make switch ... make a DLL for Switch'
 
 ps45:
-	rm -f Assets/*.so Assets/*.dll Assets/*.nso
+	rm -f Assets/*.so
 	cd dll-src && make -f ps45.mk && cd ..
 
 xbox
-	rm -f Assets/*.so Assets/*.dll Assets/*.nso
+	rm -f Assets/*.dll
 	cd dll-src && make -f xbox.mk && cd ..
 
 switch:
-	rm -f Assets/*.so Assets/*.dll Assets/*.nso
-	cd dll-src && make -f switch.mk && cd ..
+	rm -f Assets/*.nso
+	../../external/build-libs.sh switch /opt/devkitpro/devkitA64/bin/aarch64-none-elf-gcc \"\" /opt/devkitpro/devkitA64/bin/aarch64-none-elf-ar"
