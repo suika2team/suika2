@@ -438,7 +438,7 @@ $CC -DFT2_BUILD_LIBRARY -I./include -I$PREFIX/include -fPIC $CFLAGS -c src/gzip/
 $CC -DFT2_BUILD_LIBRARY -I./include -I$PREFIX/include -fPIC $CFLAGS -c src/gzip/crc32.c
 $CC -DFT2_BUILD_LIBRARY -I./include -I$PREFIX/include -fPIC $CFLAGS -c src/gzip/ftgzip.c
 $CC -DFT2_BUILD_LIBRARY -I./include -I$PREFIX/include -fPIC $CFLAGS -c src/gzip/inffast.c
-$CC -DFT2_BUILD_LIBRARY -I./include -I$PREFIX/include -fPIC $CFLAGS -c src/gzip/inflate.c -Wno-implicit-function-declaration -Wno-undefined-internal -Dft_memcpy=memcpy
+$CC -DFT2_BUILD_LIBRARY -I./include -I$PREFIX/include -fPIC $CFLAGS -c src/gzip/inflate.c -w -Dft_memcpy=memcpy
 $CC -DFT2_BUILD_LIBRARY -I./include -I$PREFIX/include -fPIC $CFLAGS -c src/gzip/inftrees.c
 $CC -DFT2_BUILD_LIBRARY -I./include -I$PREFIX/include -fPIC $CFLAGS -c src/gzip/zutil.c
 $CC -DFT2_BUILD_LIBRARY -I./include -I$PREFIX/include -fPIC $CFLAGS -c src/lzw/ftlzw.c

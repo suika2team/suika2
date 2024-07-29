@@ -8,6 +8,8 @@
 #ifndef OPENNOVEL_ASOUND_H
 #define OPENNOVEL_ASOUND_H
 
+#include "../types.h"
+
 /* Initialize ALSA. */
 bool init_asound(void);
 

@@ -1,67 +1,81 @@
-SRC_MAIN = \
-	../../src/opennovel.h \
-	../../src/anime.h \
+SRCS_MAIN = \
 	../../src/anime.c \
-	../../src/conf.h \
+	../../src/ciel.c \
 	../../src/conf.c \
-	../../src/event.h \
 	../../src/event.c \
-	../../src/file.h \
 	../../src/file.c \
-	../../src/glyph.h \
 	../../src/glyph.c \
-	../../src/gui.h \
 	../../src/gui.c \
-	../../src/history.h \
 	../../src/history.c \
-	../../src/image.h \
 	../../src/image.c \
-	../../src/log.h \
 	../../src/log.c \
-	../../src/main.h \
 	../../src/main.c \
-	../../src/mixer.h \
 	../../src/mixer.c \
-	../../src/save.h \
+	../../src/readimage.c \
+	../../src/readjpeg.c \
+	../../src/readpng.c \
+	../../src/readwebp.c \
 	../../src/save.c \
-	../../src/script.h \
 	../../src/script.c \
-	../../src/seen.h \
 	../../src/seen.c \
-	../../src/stage.h \
 	../../src/stage.c \
-	../../src/vars.h \
 	../../src/vars.c \
-	../../src/wave.h \
 	../../src/wave.c \
-	../../src/wms.h \
-	../../src/wms.h
+	../../src/wms_core.c \
+	../../src/wms_impl.c \
+	../../src/wms_lexer.yy.c \
+	../../src/wms_parser.tab.c \
+	../../src/cmd_anime.c \
+	../../src/cmd_bg.c \
+	../../src/cmd_ch.c \
+	../../src/cmd_chapter.c \
+	../../src/cmd_chch.c \
+	../../src/cmd_choose.c \
+	../../src/cmd_click.c \
+	../../src/cmd_config.c \
+	../../src/cmd_gosub.c \
+	../../src/cmd_goto.c \
+	../../src/cmd_if.c \
+	../../src/cmd_layer.c \
+	../../src/cmd_menu.c \
+	../../src/cmd_message.c \
+	../../src/cmd_move.c \
+	../../src/cmd_music.c \
+	../../src/cmd_plugin.c \
+	../../src/cmd_return.c \
+	../../src/cmd_set.c \
+	../../src/cmd_shake.c \
+	../../src/cmd_skip.c \
+	../../src/cmd_sound.c \
+	../../src/cmd_story.c \
+	../../src/cmd_text.c \
+	../../src/cmd_time.c \
+	../../src/cmd_video.c \
+	../../src/cmd_volume.c
 
 SRC_APPLE = \
-	../../src/apple/GameRenderer.h \
 	../../src/apple/GameRenderer.m \
-	../../src/apple/GameShaderTypes.h \
 	../../src/apple/GameShaders.metal \
-	../../src/apple/GameViewControllerProtocol.h \
-	../../src/apple/aunit.h \
 	../../src/apple/aunit.c
 
-SRCS_KHRONOS = \
-	../../src/khronos/glhelper.h \
-	../../src/khronos/glrender.h \
-	../../src/khronos/glrender.c \
-	../../src/khronos/slsound.h \
+SRCS_OPENGL = \
+	../../src/khronos/glrender.c
+
+SRCS_OPENSL = \
 	../../src/khronos/slsound.c
 
 SRCS_LINUX = \
 	../../src/linux/asound.c \
-	../../src/linux/asound.h \
-	../../src/linux/gstplay.h \
 	../../src/linux/gstplay.c \
 	../../src/linux/x11main.c
 
-SRCS_GOOGLE = \
-	../../src/google/ndkmain.h \
+SRCS_ANDROID = \
 	../../src/google/ndkmain.c \
 	../../src/google/ndkfile.c \
 	../../src/google/ndkpro.c
+
+SRCS_SWIFT = \
+	../../src/halwrap.c \
+
+SRCS_CSHARP = \
+	../../src/halwrap.c \

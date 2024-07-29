@@ -1,5 +1,4 @@
 all:
-	brew install mingw-w64 emscripten
 	@echo 'Preparing iOS engine...' && cd engines/ios && make && cd ../..
 	@echo 'Building macOS engine...' && cd engines/macos && make && cd ../..
 	@echo 'Preparing Android engine...' && cd engines/android && make && cd ../..
