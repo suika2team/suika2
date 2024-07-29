@@ -134,8 +134,8 @@ libopennovel.dylib: $(SRCS)
 #
 libopennovel.so: $(SRCS)
 	@echo 'Building Unity Linux DLL...'
-	@../../external/build-libs.sh linux clang "" llvm-ar
-	@clang \
+	@../../external/build-libs.sh linux gcc "" ar
+	@gcc \
 		-shared \
 		-fPIC \
 		-o libopennovel.so \
