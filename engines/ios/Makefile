@@ -1,4 +1,4 @@
-include common.mk
+include ../common.mk
 
 SRCS_PROJECT = \
 	engine-ios/AppDelegate.h \
