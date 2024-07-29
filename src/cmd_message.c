@@ -1452,6 +1452,7 @@ static void action_toggle_hide(void)
 {
 	if (!is_hidden) {
 		/* メッセージボックスを非表示にする */
+		is_hidden = true;
 		if (get_command_type() == COMMAND_SERIF)
 			show_namebox(false);
 		show_msgbox(false);

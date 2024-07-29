@@ -15,7 +15,6 @@ HDRS = \
 	../../src/log.h \
 	../../src/main.h \
 	../../src/mixer.h \
-	../../src/motion.h \
 	../../src/save.h \
 	../../src/script.h \
 	../../src/seen.h \

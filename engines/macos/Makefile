@@ -1,6 +1,17 @@
-all: src game.dmg
+include ../common.mk
 
-game.dmg: libroot
+SRCS_PROJECT = \
+	engine-macos/AppDelegate.h \
+	engine-macos/AppDelegate.m \
+	engine-macos/ViewController.h \
+	engine-macos/ViewController.m \
+	engine-macos/GameView.h \
+	engine-macos/GameView.m \
+	engine-macos/main.m
+
+all: game.dmg src
+
+game.dmg: libroot $(SRCS_MAIN) $(SRCS_APPLE) $(SRCS_PROJECT)
 	@echo "Building Game.app"
 	@rm -rf build
 	@echo 'archiving...'
@@ -36,7 +47,7 @@ game.dmg: libroot
 	@codesign --sign 'Developer ID Application' game.dmg
 	@rm -rf tmp
 
-src: libroot
+src: libroot $(SRCS_MAIN) $(SRCS_APPLE) $(SRCS_PROJECT)
 	@rm -rf macos-src
 	@mkdir macos-src
 	@cp -R engine-macos engine-macos.xcodeproj macos-src/
@@ -136,8 +147,11 @@ src: libroot
 libroot:
 	@echo 'Building arm64 libraries..'
 	@MACOSX_DEPLOYMENT_TARGET=10.13 ../../external/build-libs.sh "arm64" clang "-arch arm64 -Dmktemp=mkdtemp" ar
+	@
 	@echo 'Building x86_64 libraries..'
 	@MACOSX_DEPLOYMENT_TARGET=10.13 ../../external/build-libs.sh "x86_64" clang "-arch x86_64 -Dmktemp=mkdtemp" ar
+	@
+	@echo 'Merging into Univeral Binary libraries...'
 	@mkdir -p libroot/include libroot/lib
 	@cp -Ra libroot-arm64/include/* libroot/include/
 	@lipo -create libroot-arm64/lib/libpng.a libroot-x86_64/lib/libpng.a -output libroot/lib/libpng.a
@@ -154,4 +168,3 @@ libroot:
 
 clean:
 	@rm -rf build libroot* macos-src game.dmg
-
