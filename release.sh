@@ -20,15 +20,12 @@ echo ''
 echo 'Press enter to continue.'
 read str
 
-echo ''
-echo "Making opennovel-$VERSION.zip ..."
-echo ''
-
 echo 'Making a target directory...'
-TARGET="`pwd`/opennovel-$VERSION"
-rm -rf "$TARGET" "$TARGET.zip"
+TARGET="`pwd`/opennovel"
+rm -rf "$TARGET" "$TARGET-$VERSION.zip"
 mkdir "$TARGET"
 mkdir "$TARGET/export-kit"
+echo '...Done making a target directory.'
 echo ''
 
 #
@@ -198,7 +195,7 @@ echo ''
 
 echo 'Compressing...'
 
-7z a -tzip -mx9 -aoa "$TARGET.zip" "$TARGET"
+7z a -tzip -mx9 -aoa "$TARGET-$VERSION.zip" "$TARGET"
 rm -rf "$TARGET"
 
 echo '...Done compressing.'
@@ -210,8 +207,8 @@ echo ''
 
 echo 'Making a release on GitHub...'
 
-yes '' | gh release create "$VERSION" --title "$VERSION" --notes "$NOTE" "$TARGET.zip"
-rm "$TARGET.zip"
+yes '' | gh release create "$VERSION" --title "$VERSION" --notes "$NOTE" "$TARGET-$VERSION.zip"
+rm "$TARGET-$VERSION.zip"
 
 echo '...Done.'
 echo ''
