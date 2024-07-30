@@ -83,8 +83,7 @@ bool create_package(const char *base_dir)
 	/* Get list of files. */
 	for (i = 0; i < DIR_COUNT; i++) {
 		if (!get_file_names(base_dir, dir_names[i])) {
-			if (strcmp(dir_names[i], "anime") == 0)
-				continue;
+			printf("Failed to open folder %s.", dir_names[i]);
 			return false;
 		}
 	}
@@ -355,9 +354,10 @@ static bool get_file_sizes(const char *base_dir)
 			return false;
 		}
 		slash = strchr(path, '/');
-		if (slash == NULL)
-			return false;
-		*slash = '\\';
+		while (slash != NULL) {
+			*slash = '\\';
+			slash = strchr(slash + 1, '/');
+		}
 		fp = fopen(path, "rb");
 		free(path);
 #else
@@ -548,6 +548,11 @@ int main(int argc, char *argv[])
 	}
 
 	printf("Suceeded.\n");
+
+#ifdef _WIN32
+	getchar();
+#endif
+
 	return 0;
 }
 
