@@ -1,13 +1,18 @@
 <html><head></head><body><ul><!-- -*- mode: html-mode; -*-
 
 <!-- BEGIN-LATEST -->
+<li>OpenNovel 0.0.17 2024/07/30
+  <ul>
+    <li>Removed garbages</li>
+  </ul>
+</li>
+<!-- END-LATEST -->
+
 <li>OpenNovel 0.0.16 2024/07/30
   <ul>
     <li>Fixed a bug of pack.exe</li>
   </ul>
 </li>
-<!-- END-LATEST -->
-
 <li>OpenNovel 0.0.15 2024/07/30
   <ul>
     <li>Smaller and faster binaries</li>
