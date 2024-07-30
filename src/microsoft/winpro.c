@@ -115,9 +115,9 @@
 #define VAR_TEXTBOX_MAX		(11000 * (1 + 5 + 1 + 11 + 2))
 
 /* Window class names */
-static const wchar_t wszWindowClassMainWindow[] = L"XEngineMainWindow";
-static const wchar_t wszWindowClassRenderingPanel[] = L"XEngineRenderingPanel";
-static const wchar_t wszWindowClassEditorPanel[] = L"XEngineEditorPanel";
+static const wchar_t wszWindowClassMainWindow[] = L"OpenNovelMainWindow";
+static const wchar_t wszWindowClassRenderingPanel[] = L"OpenNovelRenderingPanel";
+static const wchar_t wszWindowClassEditorPanel[] = L"OpenNovelEditorPanel";
 
 /*
  * Variables

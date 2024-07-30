@@ -45,6 +45,16 @@ make pack.exe
 cp pack.exe "$TARGET/pack-win.exe"
 cd ../..
 
+cd apps/exporter
+make exporter.exe
+cp exporter.exe "$TARGET/export-kit/exporter.exe"
+cd ../..
+
+cd apps/web-test
+make web-test.exe
+cp web-test.exe "$TARGET/export-kit/web-test.exe"
+cd ../..
+
 echo '...Done building Windows binaries.'
 echo ''
 
@@ -96,7 +106,7 @@ echo 'Building the Wasm binaries...'
 
 cd engines/wasm
 make
-cp -R html "$TARGET/export-kit/"
+cp -R html "$TARGET/export-kit/wasm-src"
 cd ../../
 
 echo '...Done building Wasm binaries.'
@@ -173,22 +183,6 @@ cp -R unity-src "$TARGET/export-kit/"
 cd ../../
 
 echo '...Done building Unity source tree.'
-echo ''
-
-#
-# Exporter
-#
-
-echo 'Building exporter...'
-
-cd apps/exporter
-$TARGET/pack-mac
-mv package.pak $TARGET/export-kit/
-cd ../..
-
-cp $TARGET/game-win.exe $TARGET/export-kit/exporter.exe
-
-echo '...Done building exporter.'
 echo ''
 
 #

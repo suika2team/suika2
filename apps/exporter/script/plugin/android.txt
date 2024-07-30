@@ -1,3 +1,0 @@
-func main() {
-    onvl_export_android();
-}

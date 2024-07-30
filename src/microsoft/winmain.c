@@ -64,7 +64,7 @@
 #define CONV_MESSAGE_SIZE	(65536)
 
 /* ウィンドウクラス名 */
-static const wchar_t wszWindowClassMain[] = L"XEngineMain";
+static const wchar_t wszWindowClassMain[] = L"OpenNovelMain";
 
 /* i18n messages. */
 enum {

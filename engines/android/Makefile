@@ -16,6 +16,8 @@ src: libopennovel-aarch64.so libopennovel-armv7a.so libopennovel-x86_64.so libop
 	@cp -R gradlew.bat android-src/
 	@cp -R gradle android-src/
 	@
+	@cp -R build.bat android-src/
+	@
 	@mkdir -p android-src/app/src/main/java/org/opennovel/engineandroid
 	@cp ../../src/google/MainActivity.java android-src/app/src/main/java/org/opennovel/engineandroid/
 	@
