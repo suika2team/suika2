@@ -146,10 +146,10 @@ src: libroot $(SRCS_MAIN) $(SRCS_APPLE) $(SRCS_PROJECT)
 
 libroot:
 	@echo 'Building arm64 libraries..'
-	@MACOSX_DEPLOYMENT_TARGET=10.13 ../../external/build-libs.sh "arm64" clang "-arch arm64" ar
+	@MACOSX_DEPLOYMENT_TARGET=10.13 ../../external/build-libs.sh "arm64" clang "-O2 -g0 -arch arm64" ar
 	@
 	@echo 'Building x86_64 libraries..'
-	@MACOSX_DEPLOYMENT_TARGET=10.13 ../../external/build-libs.sh "x86_64" clang "-arch x86_64" ar
+	@MACOSX_DEPLOYMENT_TARGET=10.13 ../../external/build-libs.sh "x86_64" clang "-O2 -g0 -arch x86_64" ar
 	@
 	@echo 'Merging into Univeral Binary libraries...'
 	@mkdir -p libroot/include libroot/lib

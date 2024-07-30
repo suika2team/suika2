@@ -1,56 +1,4 @@
-SRCS_MAIN_MINUS_FILE = \
-	../../src/anime.c \
-	../../src/ciel.c \
-	../../src/conf.c \
-	../../src/event.c \
-	../../src/glyph.c \
-	../../src/gui.c \
-	../../src/history.c \
-	../../src/image.c \
-	../../src/log.c \
-	../../src/main.c \
-	../../src/mixer.c \
-	../../src/readimage.c \
-	../../src/readjpeg.c \
-	../../src/readpng.c \
-	../../src/readwebp.c \
-	../../src/save.c \
-	../../src/script.c \
-	../../src/seen.c \
-	../../src/stage.c \
-	../../src/vars.c \
-	../../src/wave.c \
-	../../src/wms_core.c \
-	../../src/wms_impl.c \
-	../../src/wms_lexer.yy.c \
-	../../src/wms_parser.tab.c \
-	../../src/cmd_anime.c \
-	../../src/cmd_bg.c \
-	../../src/cmd_ch.c \
-	../../src/cmd_chapter.c \
-	../../src/cmd_chch.c \
-	../../src/cmd_choose.c \
-	../../src/cmd_click.c \
-	../../src/cmd_config.c \
-	../../src/cmd_gosub.c \
-	../../src/cmd_goto.c \
-	../../src/cmd_if.c \
-	../../src/cmd_layer.c \
-	../../src/cmd_menu.c \
-	../../src/cmd_message.c \
-	../../src/cmd_move.c \
-	../../src/cmd_music.c \
-	../../src/cmd_plugin.c \
-	../../src/cmd_return.c \
-	../../src/cmd_set.c \
-	../../src/cmd_shake.c \
-	../../src/cmd_skip.c \
-	../../src/cmd_sound.c \
-	../../src/cmd_story.c \
-	../../src/cmd_text.c \
-	../../src/cmd_time.c \
-	../../src/cmd_video.c \
-	../../src/cmd_volume.c
+include ../common.mk
 
 SRCS = $(SRCS_MAIN_MINUS_FILE) $(SRCS_ANDROID) $(SRCS_OPENGL) $(SRCS_OPENSL)
 
@@ -82,7 +30,7 @@ src: libopennovel-aarch64.so libopennovel-armv7a.so libopennovel-x86_64.so libop
 
 libopennovel-aarch64.so: ndk
 	@echo 'Building aarch64 library...'
-	@../../external/build-libs.sh aarch64 `pwd`/ndk/bin/clang-18 "--target=aarch64-linux-android21 -O2" `pwd`/ndk/bin/llvm-ar
+	@../../external/build-libs.sh aarch64 `pwd`/ndk/bin/clang-18 "--target=aarch64-linux-android21 -O2 -g0 -fPIC" `pwd`/ndk/bin/llvm-ar
 	@`pwd`/ndk/bin/clang-18 \
 		--target=aarch64-linux-android21 \
 		-O2 \
@@ -114,7 +62,7 @@ libopennovel-aarch64.so: ndk
 
 libopennovel-armv7a.so: ndk
 	@echo 'Building armv7a library...'
-	@../../external/build-libs.sh armv7a `pwd`/ndk/bin/clang-18 "--target=armv7a-linux-androideabi21 -O2" `pwd`/ndk/bin/llvm-ar
+	@../../external/build-libs.sh armv7a `pwd`/ndk/bin/clang-18 "--target=armv7a-linux-androideabi21 -O2 -g0 -fPIC" `pwd`/ndk/bin/llvm-ar
 	@`pwd`/ndk/bin/clang-18 \
 		--target=armv7a-linux-android21 \
 		-O2 \
@@ -146,7 +94,7 @@ libopennovel-armv7a.so: ndk
 
 libopennovel-x86_64.so: ndk
 	@echo 'Building x86_64 library...'
-	@../../external/build-libs.sh x86_64 `pwd`/ndk/bin/clang-18 "--target=x86_64-linux-android21 -O2" `pwd`/ndk/bin/llvm-ar
+	@../../external/build-libs.sh x86_64 `pwd`/ndk/bin/clang-18 "--target=x86_64-linux-android21 -O2 -g0 -fPIC" `pwd`/ndk/bin/llvm-ar
 	@`pwd`/ndk/bin/clang-18 \
 		--target=x86_64-linux-android21 \
 		-O2 \
@@ -178,7 +126,7 @@ libopennovel-x86_64.so: ndk
 
 libopennovel-i686.so: ndk
 	@echo 'Building i686 library...'
-	@../../external/build-libs.sh i686 `pwd`/ndk/bin/clang-18 "--target=i686-linux-android21 -O2" `pwd`/ndk/bin/llvm-ar
+	@../../external/build-libs.sh i686 `pwd`/ndk/bin/clang-18 "--target=i686-linux-android21 -O2 -g0 -fPIC" `pwd`/ndk/bin/llvm-ar
 	@`pwd`/ndk/bin/clang-18 \
 		--target=i686-linux-android21 \
 		-O2 \

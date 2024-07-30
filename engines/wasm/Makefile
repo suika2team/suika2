@@ -9,7 +9,7 @@ html: $(SRCS)
 	@rm -f html/index.*
 	@mkdir -p html
 	@emcc \
-		-O3 \
+		-O2 \
 		-o html/index.html \
 		-I./libwebp-1.3.2 \
 		-I./libwebp-1.3.2/src \

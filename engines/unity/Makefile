@@ -33,7 +33,7 @@ all: libopennovel.dll libopennovel.dylib libopennovel.so libopennovel.nso
 #
 libopennovel.dll: $(SRCS)
 	@echo 'Building Unity Win64 DLL...'
-	@../../external/build-libs.sh "win64" x86_64-w64-mingw32-gcc "" x86_64-w64-mingw32-ar
+	@../../external/build-libs.sh "win64" x86_64-w64-mingw32-gcc "-O2 -g0 -fPIC" x86_64-w64-mingw32-ar
 	@x86_64-w64-mingw32-gcc \
 		-shared \
 		-fPIC \
@@ -68,7 +68,7 @@ libopennovel.dylib: $(SRCS)
 	@echo 'Building Unity macOS DLL...'
 	@
 	@echo '1. Building for arm64...'
-	@../../external/build-libs.sh "macos-arm64" clang "-arch arm64" ar
+	@../../external/build-libs.sh "macos-arm64" clang "-O2 -g0 -arch arm64 -fPIC" ar
 	@/usr/bin/clang \
 		-O2 \
 		-arch arm64 \
@@ -95,7 +95,7 @@ libopennovel.dylib: $(SRCS)
 	@rm -rf libopennovel-macos-arm64.dylib.dSYM
 	@
 	@echo '2. Building for x86_64...'
-	@../../external/build-libs.sh "macos-x86_64" clang "-arch x86_64" ar
+	@../../external/build-libs.sh "macos-x86_64" clang "-O2 -g0 -arch x86_64 -fPIC" ar
 	@/usr/bin/clang \
 		-O2 \
 		-arch x86_64 \
@@ -134,7 +134,7 @@ libopennovel.dylib: $(SRCS)
 #
 libopennovel.so: $(SRCS)
 	@echo 'Building Unity Linux DLL...'
-	@../../external/build-libs.sh linux gcc "" ar
+	@../../external/build-libs.sh linux gcc "-O2 -g0 -fPIC" ar
 	@gcc \
 		-shared \
 		-fPIC \
@@ -168,7 +168,7 @@ libopennovel.so: $(SRCS)
 #
 libopennovel.nso: $(SRCS)
 	@echo 'Building Unity Switch DLL...'
-	@../../external/build-libs.sh switch /opt/devkitpro/devkitA64/bin/aarch64-none-elf-gcc "" /opt/devkitpro/devkitA64/bin/aarch64-none-elf-ar
+	@../../external/build-libs.sh switch /opt/devkitpro/devkitA64/bin/aarch64-none-elf-gcc "-O2 -g0 -fPIC" /opt/devkitpro/devkitA64/bin/aarch64-none-elf-ar
 	@/opt/devkitpro/devkitA64/bin/aarch64-none-elf-gcc \
 		-shared \
 		-fPIC \

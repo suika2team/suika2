@@ -1,25 +1,25 @@
 CC = i686-w64-mingw32-gcc
 CXX = i686-w64-mingw32-g++
 AR = i686-w64-mingw32-ar
+STRIP = i686-w64-mingw32-strip
 WINDRES = i686-w64-mingw32-windres
-
-#
-# CPPFLAGS
-#
 
 CPPFLAGS = \
 	-I./ \
 	-I./libroot/include \
 	-I./libroot/include/freetype2
 
-#
-# CFLAGS
-#
-
 CFLAGS = \
-	-O2 \
+	-O3 \
+	-g0 \
+	-s \
+	-fno-exceptions \
+	-fno-stack-protector \
+	-fomit-frame-pointer \
 	-municode \
+	-msse3 \
 	-ffast-math \
+	-ftree-vectorize \
 	-finput-charset=utf-8 \
 	-fexec-charset=utf-8 \
 	-Wall \
@@ -28,13 +28,12 @@ CFLAGS = \
 	-Wundef \
 	-Wconversion
 
-#
-# LDFLAGS
-#
+CXXFLAGS = \
+	-fno-rtti
 
 LDFLAGS = \
+	-Wl,--gc-sections \
 	-mwindows \
-	-municode \
 	-lgdi32 \
 	-lole32 \
 	-ldsound \
@@ -42,7 +41,6 @@ LDFLAGS = \
 	-ld3d9 \
 	-lstrmiids \
 	-lsapi \
-	-limagehlp \
 	./libroot/lib/libpng.a \
 	./libroot/lib/libjpeg.a \
 	./libroot/lib/libwebp.a \
@@ -91,10 +89,11 @@ OBJS = \
 all: game.exe
 
 game.exe: libroot $(OBJS) $(HDRS_MAIN) $(HDRS)
-	@$(CC) -s -o game.exe $(OBJS) $(LDFLAGS)
+	@$(CC) -o game.exe $(OBJS) $(CFLAGS) $(LDFLAGS)
+	@$(STRIP) --strip-all game.exe
 
 libroot:
-	@../../external/build-libs.sh "" $(CC) "" $(AR)
+	@../../external/build-libs.sh "" $(CC) "-O3 -g0 -s -fno-stack-protector -fomit-frame-pointer -msse3 -ffast-math -ftree-vectorize -ffunction-sections -fdata-sections" $(AR)
 
 #
 # Phony

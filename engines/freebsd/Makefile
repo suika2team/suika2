@@ -27,6 +27,7 @@ CPPFLAGS = \
 
 CFLAGS = \
 	-O2 \
+	-g0 \
 	-ffast-math \
 	-ftree-vectorize \
 	-std=gnu11 \
@@ -83,7 +84,7 @@ game-freebsd: $(SRCS) libroot
 		$(LDFLAGS) \
 
 libroot:
-	../../external/build-libs.sh "" $(CC) "" $(AR)
+	../../external/build-libs.sh "" $(CC) "-O2 -g0" $(AR)
 
 setup:
 	sudo pkg install git libX11 libXpm mesa-devel alsa-lib alsa-plugins webp libvorbis libogg freetype2 brotli gstreamer1 gstreamer1-plugins
