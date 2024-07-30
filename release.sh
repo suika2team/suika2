@@ -182,8 +182,8 @@ echo ''
 echo 'Building exporter...'
 
 cd apps/exporter
-../../$TARGET/pack-mac
-mv package.pak ../../$TARGET/export-kit/
+$TARGET/pack-mac
+mv package.pak $TARGET/export-kit/
 cd ../..
 
 cp $TARGET/game-win.exe $TARGET/export-kit/exporter.exe
