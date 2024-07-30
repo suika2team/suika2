@@ -10,7 +10,7 @@
 
 #include <time.h>
 
-#if defined(OPENNOVEL_TARGET_WIN32)
+#if defined(OPENNOVEL_TARGET_WIN32) && !defined(USE_UNITY)
 #include <windows.h>
 #include <shlobj.h>
 #include "package.h"
@@ -62,7 +62,7 @@ static bool onvl_remove_global_save(struct wms_runtime *rt);
 static bool onvl_reset_local_variables(struct wms_runtime *rt);
 static bool onvl_reset_global_variables(struct wms_runtime *rt);
 
-#if defined(OPENNOVEL_TARGET_WIN32)
+#if defined(OPENNOVEL_TARGET_WIN32) && !defined(USE_UNITY)
 static bool onvl_export_ios(struct wms_runtime *rt);
 static bool onvl_export_android(struct wms_runtime *rt);
 static bool onvl_export_unity(struct wms_runtime *rt);
@@ -103,7 +103,7 @@ struct wms_ffi_func_tbl ffi_func_tbl[] = {
 	{onvl_remove_global_save, "onvl_remove_global_save", {NULL}},
 	{onvl_reset_local_variables, "onvl_reset_local_variables", {NULL}},
 	{onvl_reset_global_variables, "onvl_reset_global_variables", {NULL}},
-#if defined(OPENNOVEL_TARGET_WIN32)
+#if defined(OPENNOVEL_TARGET_WIN32) && !defined(USE_UNITY)
 	{onvl_export_ios, "onvl_export_ios", {NULL}},
 	{onvl_export_android, "onvl_export_android", {NULL}},
 	{onvl_export_unity, "onvl_export_unity", {NULL}},
@@ -799,7 +799,7 @@ static bool onvl_reset_global_variables(struct wms_runtime *rt)
 	return true;
 }
 
-#if defined(OPENNOVEL_TARGET_WIN32)
+#if defined(OPENNOVEL_TARGET_WIN32) && !defined(USE_UNITY)
 
 const char *conv_utf16_to_utf8(const wchar_t *s);
 static BOOL SelectGameDirectory(wchar_t *szDir);

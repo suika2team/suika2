@@ -34,7 +34,7 @@ src:
 libopennovel.dll: $(SRCS)
 	@echo 'Building Unity Win64 DLL...'
 	@../../external/build-libs.sh "win64" x86_64-w64-mingw32-gcc "-O2 -g0 -fPIC" x86_64-w64-mingw32-ar
-	@x86_64-w64-mingw32-gcc \
+	x86_64-w64-mingw32-gcc \
 		-shared \
 		-fPIC \
 		-o libopennovel.dll \
@@ -45,7 +45,7 @@ libopennovel.dll: $(SRCS)
 		-I./libroot-win64/include \
 		-I./libroot-win64/include/png \
 		-I./libroot-win64/include/freetype2 \
-		$(SRCS_UNITY) \
+		$(SRCS) \
 		-L./libroot-win64/lib \
 		-lfreetype \
 		-lwebp \
@@ -81,7 +81,7 @@ libopennovel.dylib: $(SRCS)
 		-DUSE_DLL \
 		-I./libroot-macos-arm64/include \
 		-I./libroot-macos-arm64/include/freetype2 \
-		$(SRCS_UNITY) \
+		$(SRCS) \
 		./libroot-macos-arm64/lib/libfreetype.a \
 		./libroot-macos-arm64/lib/libwebp.a \
 		./libroot-macos-arm64/lib/libpng.a \
@@ -108,7 +108,7 @@ libopennovel.dylib: $(SRCS)
 		-DUSE_DLL \
 		-I./libroot-macos-x86_64/include \
 		-I./libroot-macos-x86_64/include/freetype2 \
-		$(SRCS_UNITY) \
+		$(SRCS) \
 		./libroot-macos-x86_64/lib/libfreetype.a \
 		./libroot-macos-x86_64/lib/libwebp.a \
 		./libroot-macos-x86_64/lib/libpng.a \
@@ -147,7 +147,7 @@ libopennovel.so: $(SRCS)
 		-I./libroot-linux/include \
 		-I./libroot-linux/include/png \
 		-I./libroot-linux/include/freetype2 \
-		$(SRCS_UNITY) \
+		$(SRCS) \
 		-L./libroot-linux/lib \
 		-lfreetype \
 		-lwebp \
@@ -181,7 +181,7 @@ libopennovel.nso: $(SRCS)
 		-I./libroot-switch/include \
 		-I./libroot-switch/include/png \
 		-I./libroot-switch/include/freetype2 \
-		$(SRCS_UNITY) \
+		$(SRCS) \
 		-L./libroot-switch/lib \
 		-lfreetype \
 		-lwebp \
