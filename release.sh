@@ -11,7 +11,7 @@ VERSION=`grep -a1 '<!-- BEGIN-LATEST -->' ChangeLog | tail -n1`
 VERSION=`echo $VERSION | cut -d ' ' -f 2`
 NOTE=`cat ChangeLog | awk '/BEGIN-LATEST/,/END-LATEST/' | tail -n +2 | ghead -n -1`
 
-echo 'Going to release the version $VERSION of the OpenNovel project.'
+echo "Going to release the version $VERSION of the OpenNovel project."
 echo ''
 echo '[Note]'
 echo "$NOTE"
