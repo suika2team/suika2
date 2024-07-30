@@ -1519,6 +1519,7 @@ static bool frame_sysbtn(void)
 		return false;
 
 	/* システムメニューに入る */
+	play_se(conf_sysbtn_se);
 
 	/* システムメニューを表示する */
 	need_sysmenu_mode = true;

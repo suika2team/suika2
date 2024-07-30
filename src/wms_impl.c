@@ -10,6 +10,12 @@
 
 #include <time.h>
 
+#if defined(OPENNOVEL_TARGET_WIN32)
+#include <windows.h>
+#include <shlobj.h>
+#include "package.h"
+#endif
+
 /*
  * Stage save area
  *  - FIXME: memory leaks when the app successfully exits.
@@ -55,11 +61,15 @@ static bool onvl_remove_local_save(struct wms_runtime *rt);
 static bool onvl_remove_global_save(struct wms_runtime *rt);
 static bool onvl_reset_local_variables(struct wms_runtime *rt);
 static bool onvl_reset_global_variables(struct wms_runtime *rt);
-static bool onvl_quick_save_extra(struct wms_runtime *rt);
-static bool onvl_quick_load_extra(struct wms_runtime *rt);
+
+#if defined(OPENNOVEL_TARGET_WIN32)
+static bool onvl_export_ios(struct wms_runtime *rt);
+static bool onvl_export_android(struct wms_runtime *rt);
+static bool onvl_export_unity(struct wms_runtime *rt);
+#endif
 
 /*
- * FFI function table 
+ * FFI function table
  */
 
 struct wms_ffi_func_tbl ffi_func_tbl[] = {
@@ -93,8 +103,11 @@ struct wms_ffi_func_tbl ffi_func_tbl[] = {
 	{onvl_remove_global_save, "onvl_remove_global_save", {NULL}},
 	{onvl_reset_local_variables, "onvl_reset_local_variables", {NULL}},
 	{onvl_reset_global_variables, "onvl_reset_global_variables", {NULL}},
-	{onvl_quick_save_extra, "onvl_quick_save_extra", {NULL}},
-	{onvl_quick_load_extra, "onvl_quick_load_extra", {NULL}},
+#if defined(OPENNOVEL_TARGET_WIN32)
+	{onvl_export_ios, "onvl_export_ios", {NULL}},
+	{onvl_export_android, "onvl_export_android", {NULL}},
+	{onvl_export_unity, "onvl_export_unity", {NULL}},
+#endif
 };
 
 #define FFI_FUNC_TBL_SIZE (sizeof(ffi_func_tbl) / sizeof(ffi_func_tbl[0]))
@@ -760,6 +773,7 @@ static bool onvl_remove_global_save(struct wms_runtime *rt)
 	return true;
 }
 
+/* Resets the local variables to zero. */
 static bool onvl_reset_local_variables(struct wms_runtime *rt)
 {
 	int i;
@@ -772,6 +786,7 @@ static bool onvl_reset_local_variables(struct wms_runtime *rt)
 	return true;
 }
 
+/* Resets the global variables to zero. */
 static bool onvl_reset_global_variables(struct wms_runtime *rt)
 {
 	int i;
@@ -784,23 +799,325 @@ static bool onvl_reset_global_variables(struct wms_runtime *rt)
 	return true;
 }
 
-static bool onvl_quick_save_extra(struct wms_runtime *rt)
+#if defined(OPENNOVEL_TARGET_WIN32)
+
+const char *conv_utf16_to_utf8(const wchar_t *s);
+static BOOL SelectGameDirectory(wchar_t *szDir);
+static VOID RecreateDirectory(const wchar_t *path);
+static BOOL CopyLibraryFiles(const wchar_t *szSrcDir, const wchar_t *szDestDir);
+static BOOL CopyGameFiles(const wchar_t *szSrcDir, const wchar_t *szDestDir);
+static BOOL CopyMovFiles(const wchar_t *szSrcDir, const wchar_t *szDestDir);
+static BOOL MovePackageFile(const wchar_t *szPkgFile, wchar_t *szDestDir);
+
+/* Export for iOS. */
+static bool onvl_export_ios(struct wms_runtime *rt)
 {
+	wchar_t szPwd[PATH_MAX];
+	wchar_t szGame[PATH_MAX];
+	wchar_t szExport[PATH_MAX];
+	wchar_t szPackageSrc[PATH_MAX];
+	wchar_t szPackageDst[PATH_MAX];
+	wchar_t szVideoSrc[PATH_MAX];
+	wchar_t szVideoDst[PATH_MAX];
+
 	UNUSED_PARAMETER(rt);
 
-	quick_save(true);
+	if (!SelectGameDirectory(szGame))
+		return true;
+
+	wcscpy(szExport, szGame);
+	wcscat(szExport, L"\\");
+	wcscat(szExport, L"export-ios");
+	RecreateDirectory(szExport);
+
+	GetCurrentDirectory(PATH_MAX, szPwd);
+	SetCurrentDirectory(szGame);
+
+	if (!create_package(".")) {
+		SetCurrentDirectory(szPwd);
+		log_error("Failed to make a package.");
+		return true;
+	}
+
+	SetCurrentDirectory(szPwd);
+
+	wcscpy(szPackageSrc, szGame);
+	wcscat(szPackageSrc, L"\\");
+	wcscat(szPackageSrc, L"package.pak");
+
+	wcscpy(szPackageDst, szExport);
+	wcscat(szPackageDst, L"\\");
+	wcscat(szPackageDst, L"Resources");
+
+	CopyLibraryFiles(L"ios-src", szExport);
+	MovePackageFile(szPackageSrc, szPackageDst);
+
+	wcscpy(szVideoSrc, szGame);
+	wcscat(szVideoSrc, L"\\");
+	wcscat(szVideoSrc, L"video");
+
+	wcscpy(szVideoDst, szExport);
+	wcscat(szVideoDst, L"\\");
+	wcscat(szVideoDst, L"Resources\\mov");
+
+	CopyMovFiles(szVideoSrc, szVideoDst);
+
+	ShellExecuteW(NULL, L"explore", szExport, NULL, NULL, SW_SHOW);
 
 	return true;
 }
 
-static bool onvl_quick_load_extra(struct wms_runtime *rt)
+static bool onvl_export_android(struct wms_runtime *rt)
 {
+	wchar_t szPwd[PATH_MAX];
+	wchar_t szGame[PATH_MAX];
+	wchar_t szExport[PATH_MAX];
+	wchar_t szAssets[PATH_MAX];
+
 	UNUSED_PARAMETER(rt);
 
-	quick_load(true);
+	if (!SelectGameDirectory(szGame))
+		return true;
+
+	wcscpy(szExport, szGame);
+	wcscat(szExport, L"\\");
+	wcscat(szExport, L"export-android");
+	RecreateDirectory(szExport);
+
+	CopyLibraryFiles(L"android-src", szExport);
+
+	GetCurrentDirectory(PATH_MAX, szPwd);
+	SetCurrentDirectory(szGame);
+
+	wcscpy(szAssets, szExport);
+	wcscat(szAssets, L"\\app\\src\\main\\assets");
+	CopyGameFiles(L"image", szAssets);
+	CopyGameFiles(L"sound", szAssets);
+	CopyGameFiles(L"story", szAssets);
+	CopyGameFiles(L"script", szAssets);
+	CopyGameFiles(L"font", szAssets);
+	CopyGameFiles(L"video", szAssets);
+	CopyGameFiles(L"project.txt", szAssets);
+
+	SetCurrentDirectory(szPwd);
+
+	ShellExecuteW(NULL, L"explore", szExport, NULL, NULL, SW_SHOW);
 
 	return true;
 }
+
+static bool onvl_export_unity(struct wms_runtime *rt)
+{
+	wchar_t szPwd[PATH_MAX];
+	wchar_t szGame[PATH_MAX];
+	wchar_t szExport[PATH_MAX];
+	wchar_t szAssets[PATH_MAX];
+
+	UNUSED_PARAMETER(rt);
+
+	if (!SelectGameDirectory(szGame))
+		return true;
+
+	wcscpy(szExport, szGame);
+	wcscat(szExport, L"\\");
+	wcscat(szExport, L"export-unity");
+	RecreateDirectory(szExport);
+
+	wcscpy(szAssets, szExport);
+	wcscat(szAssets, L"\\Assets\\StreamingAssets");
+
+	CopyLibraryFiles(L"unity-src", szExport);
+
+	GetCurrentDirectory(PATH_MAX, szPwd);
+	SetCurrentDirectory(szGame);
+
+	CopyGameFiles(L"image", szAssets);
+	CopyGameFiles(L"sound", szAssets);
+	CopyGameFiles(L"story", szAssets);
+	CopyGameFiles(L"script", szAssets);
+	CopyGameFiles(L"font", szAssets);
+	CopyGameFiles(L"video", szAssets);
+	CopyGameFiles(L"project.txt", szAssets);
+
+	SetCurrentDirectory(szPwd);
+
+	ShellExecuteW(NULL, L"explore", szExport, NULL, NULL, SW_SHOW);
+
+	return true;
+}
+
+static BOOL SelectGameDirectory(wchar_t *szDir)
+{
+	BROWSEINFO bInfo;
+	LPITEMIDLIST lpItem;
+
+	bInfo.hwndOwner = NULL;
+	bInfo.pidlRoot = NULL;
+	bInfo.pszDisplayName = szDir;
+	bInfo.lpszTitle = L"Select a folder";
+	bInfo.ulFlags = 0 ;
+	bInfo.lpfn = NULL;
+	bInfo.lParam = 0;
+	bInfo.iImage = -1;
+
+	lpItem = SHBrowseForFolder(&bInfo);
+	if (lpItem != NULL)
+	{
+		SHGetPathFromIDList(lpItem, szDir);
+		return TRUE;
+	}
+
+	return FALSE;
+}
+	
+/* フォルダを再作成する */
+static VOID RecreateDirectory(const wchar_t *path)
+{
+	wchar_t newpath[MAX_PATH];
+	SHFILEOPSTRUCT fos;
+
+	/* 二重のNUL終端を行う */
+	wcscpy(newpath, path);
+	newpath[wcslen(path) + 1] = L'\0';
+
+	/* コピーする */
+	ZeroMemory(&fos, sizeof(SHFILEOPSTRUCT));
+	fos.wFunc = FO_DELETE;
+	fos.pFrom = newpath;
+	fos.fFlags = FOF_NOCONFIRMATION | FOF_NOERRORUI | FOF_SILENT;
+	SHFileOperationW(&fos);
+}
+
+/* ライブラリファイルをコピーする (インストール先 to エクスポート先) */
+static BOOL CopyLibraryFiles(const wchar_t *lpszSrcDir, const wchar_t *lpszDestDir)
+{
+	wchar_t from[MAX_PATH];
+	wchar_t to[MAX_PATH];
+	SHFILEOPSTRUCTW fos;
+	wchar_t *pSep;
+	int ret;
+
+	/* コピー元を求める */
+	GetModuleFileName(NULL, from, MAX_PATH);
+	pSep = wcsrchr(from, L'\\');
+	if (pSep != NULL)
+		*(pSep + 1) = L'\0';
+	wcscat(from, lpszSrcDir);
+	from[wcslen(from) + 1] = L'\0';	/* 二重のNUL終端を行う */
+
+	/* コピー先を求める */
+	wcscpy(to, lpszDestDir);
+	to[wcslen(lpszDestDir) + 1] = L'\0';	/* 二重のNUL終端を行う */
+
+	/* コピーする */
+	ZeroMemory(&fos, sizeof(SHFILEOPSTRUCT));
+	fos.wFunc = FO_COPY;
+	fos.pFrom = from;
+	fos.pTo = to;
+	fos.fFlags = FOF_NOCONFIRMATION | FOF_NOCONFIRMMKDIR;
+	ret = SHFileOperationW(&fos);
+	if (ret != 0)
+	{
+		log_error("Failed to copy a template folder.");
+		return FALSE;
+	}
+
+	return TRUE;
+}
+
+/* ゲームファイルをコピーする (ゲーム内 to エクスポート先) */
+static BOOL __attribute__((unused)) CopyGameFiles(const wchar_t *lpszSrcDir, const wchar_t *lpszDestDir)
+{
+	wchar_t from[MAX_PATH];
+	wchar_t to[MAX_PATH];
+	SHFILEOPSTRUCTW fos;
+	int ret;
+
+	/* 二重のNUL終端を行う */
+	wcscpy(from, lpszSrcDir);
+	from[wcslen(lpszSrcDir) + 1] = L'\0';
+	wcscpy(to, lpszDestDir);
+	to[wcslen(lpszDestDir) + 1] = L'\0';
+
+	/* コピーする */
+	ZeroMemory(&fos, sizeof(SHFILEOPSTRUCT));
+	fos.wFunc = FO_COPY;
+	fos.pFrom = from;
+	fos.pTo = to;
+	fos.fFlags = FOF_NOCONFIRMATION | FOF_NOCONFIRMMKDIR;
+	ret = SHFileOperationW(&fos);
+	if (ret != 0)
+	{
+		log_error("%s: error code = %d", conv_utf16_to_utf8(lpszSrcDir), ret);
+		return FALSE;
+	}
+
+	return TRUE;
+}
+
+/* movをコピーする */
+static BOOL CopyMovFiles(const wchar_t *lpszSrcDir, const wchar_t *lpszDestDir)
+{
+	wchar_t from[MAX_PATH];
+	wchar_t to[MAX_PATH];
+	SHFILEOPSTRUCTW fos;
+	int ret;
+
+	/* 二重のNUL終端を行う */
+	wcscpy(from, lpszSrcDir);
+	from[wcslen(lpszSrcDir) + 1] = L'\0';
+	wcscpy(to, lpszDestDir);
+	to[wcslen(lpszDestDir) + 1] = L'\0';
+
+	/* コピーする */
+	ZeroMemory(&fos, sizeof(SHFILEOPSTRUCT));
+	fos.wFunc = FO_COPY;
+	fos.pFrom = from;
+	fos.pTo = to;
+	fos.fFlags = FOF_NOCONFIRMATION | FOF_NOCONFIRMMKDIR | FOF_NOERRORUI |
+		FOF_SILENT;
+	ret = SHFileOperationW(&fos);
+	if (ret != 0)
+	{
+		log_error("Failed to copy video files.");
+		return FALSE;
+	}
+
+	return TRUE;
+}
+
+/* パッケージファイルを移動する */
+static BOOL MovePackageFile(const wchar_t *lpszPkgFile, wchar_t *lpszDestDir)
+{
+	wchar_t from[MAX_PATH];
+	wchar_t to[MAX_PATH];
+	SHFILEOPSTRUCTW fos;
+	int ret;
+
+	/* 二重のNUL終端を行う */
+	wcscpy(from, lpszPkgFile);
+	from[wcslen(lpszPkgFile) + 1] = L'\0';
+	wcscpy(to, lpszDestDir);
+	to[wcslen(lpszDestDir) + 1] = L'\0';
+
+	/* 移動する */
+	ZeroMemory(&fos, sizeof(SHFILEOPSTRUCT));
+	fos.hwnd = NULL;
+	fos.wFunc = FO_MOVE;
+	fos.pFrom = from;
+	fos.pTo = to;
+	fos.fFlags = FOF_NOCONFIRMATION;
+	ret = SHFileOperationW(&fos);
+	if (ret != 0)
+	{
+		log_error("Failed to move a package file.");
+		return FALSE;
+	}
+
+	return TRUE;
+}
+
+#endif
 
 /*
  * FFI function registration

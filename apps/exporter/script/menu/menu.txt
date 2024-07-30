@@ -36,6 +36,9 @@ SAVE {
     width: 80;
     height: 80;
 
+    # ポイントされたときの効果音
+    pointse: button.ogg;
+
     # クリックされたときの効果音
     clickse: click.ogg;
 }
@@ -54,6 +57,9 @@ LOAD {
     width: 80;
     height: 80;
 
+    # ポイントされたときの効果音
+    pointse: button.ogg;
+
     # クリックされたときの効果音
     clickse: click.ogg;
 }
@@ -69,6 +75,9 @@ AUTO {
     width: 80;
     height: 80;
 
+    # ポイントされたときの効果音
+    pointse: button.ogg;
+
     # クリックされたときの効果音
     clickse: click.ogg;
 }
@@ -83,6 +92,9 @@ SKIP {
     y: 0;
     width: 80;
     height: 80;
+
+    # ポイントされたときの効果音
+    pointse: button.ogg;
 
     # クリックされたときの効果音
     clickse: click.ogg;
@@ -102,6 +114,9 @@ HISTORY {
     width: 80;
     height: 80;
 
+    # ポイントされたときの効果音
+    pointse: button.ogg;
+
     # クリックされたときの効果音
     clickse: click.ogg;
 }
@@ -119,6 +134,9 @@ CONFIG {
     y: 0;
     width: 80;
     height: 80;
+
+    # ポイントされたときの効果音
+    pointse: button.ogg;
 
     # クリックされたときの効果音
     clickse: click.ogg;

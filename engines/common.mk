@@ -94,3 +94,6 @@ SRCS_CSHARP = \
 SRCS_WASM = \
 	../../src/wasm/emmain.c \
 	../../src/wasm/alsound.c
+
+SRCS_PACKAGE = \
+	../../src/package.c

@@ -66,6 +66,7 @@ SRCS_R = resource.rc
 
 OBJS = \
 	$(SRCS_MAIN:../../src/%.c=%.o) \
+	$(SRCS_PACKAGE:../../src/%.c=%.o) \
 	$(SRCS_WIN_C:../../src/microsoft/%.c=%.o) \
 	$(SRCS_WIN_CC:../../src/microsoft/%.cc=%.o) \
 	$(SRCS_R:%.rc=%.o)

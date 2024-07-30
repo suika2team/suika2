@@ -1,0 +1,27 @@
+# エクスポートプログラムです。
+
+@bg sakura.png 0.5
+
+@ch left chara001.png 0.5
+
+このプログラムは各プラットフォーム用のゲーム書き出しを行います。
+
+@choose IOS "iOS用の書き出し" ANDROID "Android用の書き出し" UNITY "Unity用の書き出し"
+
+:IOS
+入力するゲームフォルダを選択してください。
+@plugin ios.txt
+@goto FINISH
+
+:ANDROID
+入力するゲームフォルダを選択してください。
+@plugin android.txt
+@goto FINISH
+
+:UNITY
+入力するゲームフォルダを選択してください。
+@plugin unity.txt
+@goto FINISH
+
+:FINISH
+書き出しを終了します。

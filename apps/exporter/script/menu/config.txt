@@ -1,0 +1,161 @@
+#
+# コンフィグ画面
+#
+
+# このファイルの基本設定
+global {
+    # 下記の画像を使用する
+    base:   system/config/base.png;
+    idle:   system/config/idle.png;
+    hover:  system/config/hover.png;
+    active: system/config/active.png;
+
+    # 何もないところをクリックされたらキャンセルする
+    clickcancel: yes;
+
+    # 右クリックによるキャンセル時のSE
+    cancelse: click.ogg;
+
+    # フェードイン時間(秒)
+    fadein: 0.5;
+
+    # フェードアウト時間(秒)
+    fadeout: 0.5;
+}
+
+# BGMのボリュームスライダー
+MASTER {
+    # 種類:BGMボリューム
+    type: mastervol;
+
+    # 座標とサイズ
+    x: 258;
+    y: 182;
+    width: 344;
+    height: 50;
+
+    # ポイントされたときの効果音
+    pointse: button.ogg;
+}
+
+# BGMのボリュームスライダー
+BGM {
+    # 種類:BGMボリューム
+    type: bgmvol;
+
+    # 座標とサイズ
+    x: 258;
+    y: 262;
+    width: 344;
+    height: 50;
+
+    # ポイントされたときの効果音
+    pointse: button.ogg;
+}
+
+# SEのボリュームスライダー
+SE {
+    # 種類:SEボリューム
+    type: sevol;
+
+    # スライダーが変更されたときに再生するSEファイル
+    file: click.ogg;
+
+    # 座標とサイズ
+    x: 258;
+    y: 342;
+    width: 344;
+    height: 50;
+
+    # ポイントされたときの効果音
+    pointse: button.ogg;
+}
+
+# ボイスのボリュームスライダー
+VOICE {
+    # Voice volume type
+    type: voicevol;
+
+    # スライダーが変更されたときに再生するCVファイル
+    file: button.ogg;
+
+    # 座標とサイズ
+    x: 258;
+    y: 422;
+    width: 344;
+    height: 50;
+
+    # ポイントされたときの効果音
+    pointse: button.ogg;
+}
+
+# テキストスピードスライダー
+TEXTSPEED {
+    # 種類:テキストスピード
+    type: textspeed;
+
+    # 座標とサイズ
+    x: 818;
+    y: 324;
+    width: 344;
+    height: 50;
+
+    # ポイントされたときの効果音
+    pointse: button.ogg;
+}
+
+# オートモードスピードスライダー
+AUTOSPEED {
+    # 種類:オートモードスピード
+    type: autospeed;
+
+    # 座標とサイズ
+    x: 818;
+    y: 404;
+    width: 344;
+    height: 50;
+
+    # ポイントされたときの効果音
+    pointse: button.ogg;
+}
+
+# テキストスピードのプレビュー
+PREVIEW {
+    # 種類:プレビュー
+    type: preview;
+
+    # 表示するメッセージ
+    msg: "これはメッセージのプレビューです。スピードはよろしいですか？";
+
+    # 表示するメッセージ(英語の場合)
+    msg-en: "This is a message preview. Is the speed okay?";
+
+    # 背景色
+    clear-r: 255;
+    clear-g: 255;
+    clear-b: 255;
+
+    # 座標とサイズ
+    x: 340;
+    y: 524;
+    width: 600;
+    height: 120;
+}
+
+# すべて既定値に戻すボタン(RESET)
+DEFAULT {
+    # 種類:既定値
+    type: default;
+
+    # 座標とサイズ
+    x: 570;
+    y: 30;
+    width: 210;
+    height: 70;
+
+    # ポイントされたときの効果音
+    pointse: button.ogg;
+
+    # クリックされたときの効果音
+    clickse: click.ogg;
+}
