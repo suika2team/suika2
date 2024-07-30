@@ -11,11 +11,11 @@ VERSION=`grep -a1 '<!-- BEGIN-LATEST -->' ChangeLog | tail -n1`
 VERSION=`echo $VERSION | cut -d ' ' -f 2`
 NOTE=`cat ChangeLog | awk '/BEGIN-LATEST/,/END-LATEST/' | tail -n +2 | ghead -n -1`
 
-echo "Going to release the version $VERSION of the OpenNovel project."
-echo ""
-echo "[Note]"
+echo 'Going to release the version $VERSION of the OpenNovel project.'
+echo ''
+echo '[Note]'
 echo "$NOTE"
-echo ""
+echo ''
 
 echo 'Press enter to continue.'
 read str
@@ -38,7 +38,8 @@ echo ''
 echo 'Building Windows binaries...'
 
 cd engines/windows
-make
+make libroot
+make -j$(nproc) game.exe
 cp game.exe "$TARGET/game-win.exe"
 cd ../..
 
@@ -47,16 +48,17 @@ make pack.exe
 cp pack.exe "$TARGET/pack-win.exe"
 cd ../..
 
-echo 'Done building Windows binaries.'
+echo '...Done building Windows binaries.'
 echo ''
 
 #
 # Mac Build (Binary)
 #
 
-echo "Building macOS binaries..."
+echo 'Building macOS binaries...'
 
 cd engines/macos
+make libroot
 make game.dmg
 cp game.dmg "$TARGET/game-mac.dmg"
 cd ../../
@@ -69,7 +71,7 @@ cd ../..
 echo 'Ok.'
 echo ''
 
-echo 'Done building macOS binaries.'
+echo '...Done building macOS binaries.'
 echo ''
 
 #
@@ -79,26 +81,28 @@ echo ''
 echo 'Building the Linux binaries...'
 
 docker build -t ubuntu-build engines/linux
-docker run -it -v `pwd`:/workspace ubuntu-build /bin/sh -c "cd /workspace/engines/linux && make clean && make"
-docker run -it -v `pwd`:/workspace ubuntu-build /bin/sh -c "cd /workspace/apps/pack && rm -f pack && make pack"
+
+docker run -it -v `pwd`:/workspace ubuntu-build /bin/sh -c 'cd /workspace/engines/linux && make clean && make libroot && make -j$(nproc)'
 cp engines/linux/game-linux "$TARGET/game-linux"
+
+docker run -it -v `pwd`:/workspace ubuntu-build /bin/sh -c 'cd /workspace/apps/pack && rm -f pack && make pack'
 cp apps/pack/pack "$TARGET/pack-linux"
 
-echo 'Done building Linux binaries.'
+echo '...Done building Linux binaries.'
 echo ''
 
 #
 # Wasm Build (Binary)
 #
 
-echo "Building the Wasm binaries..."
+echo 'Building the Wasm binaries...'
 
 cd engines/wasm
 make
 cp -R html "$TARGET/export-kit/"
 cd ../../
 
-echo 'Done building Wasm binaries.'
+echo '...Done building Wasm binaries.'
 echo ''
 
 #
@@ -108,12 +112,11 @@ echo ''
 echo 'Building iOS source tree...'
 
 cd engines/ios
-rm -rf ios-src libroot-*
 make
 cp -R ios-src "$TARGET/export-kit/"
 cd ../../
 
-echo 'Done building iOS source tree.'
+echo '...Done building iOS source tree.'
 echo ''
 
 #
@@ -123,80 +126,82 @@ echo ''
 echo 'Building Android source tree...'
 
 cd engines/android
-rm -rf libroot-* libopennovel-* android-src
 make
 cp -R android-src "$TARGET/export-kit/"
 cd ../../
 
-echo 'Done building Android source tree.'
+echo '...Done building Android source tree.'
 echo ''
 
 #
 # macOS Build (Source)
 #
 
-echo "Building macOS source tree...\n"
+echo 'Building macOS source tree...'
 
 cd engines/macos
+make libroot
 make src
 cp -R macos-src "$TARGET/export-kit/"
 cd ../../
 
-echo 'Done building macOS source tree.'
+echo '...Done building macOS source tree.'
 echo ''
 
 #
 # Unity Build (Source)
 #
 
-echo "Building Unity source tree...\n"
+echo 'Building Unity source tree...'
 
 cd engines/unity
 
 docker pull yesimnathan/switchdev
 docker run -it -v `pwd`/../..:/workspace yesimnathan/switchdev /bin/bash -c "cd /workspace/engines/unity && make libopennovel.nso"
 
-make all
+make -j$(nproc) all
 
 cp -R unity-src "$TARGET/export-kit/"
 cd ../../
 
-echo 'Done building Unity source tree.'
+echo '...Done building Unity source tree.'
 echo ''
 
 #
 # Documents and Sample
 #
 
-echo "Copying documents and sample..."
+echo 'Copying documents and sample...'
 
 find . -name .DS_Store | xargs rm
 
 cp -R doc "$TARGET/manual"
 cp -R game "$TARGET/sample"
 
-echo 'Done copying documents and sample.'
+echo '...Done copying documents and sample.'
 echo ''
 
 #
 # ZIP
 #
 
-echo "Compressing..."
+echo 'Compressing...'
 
 7z a -tzip -mx9 -aoa "$TARGET.zip" "$TARGET"
 rm -rf "$TARGET"
 
-echo 'Done compressing.'
+echo '...Done compressing.'
 echo ''
 
 #
 # GitHub Release
 #
 
-echo "Making a release on GitHub..."
+echo 'Making a release on GitHub...'
 
-yes "" | gh release create "$VERSION" --title "$VERSION" --notes "$NOTE" "$TARGET.zip"
+yes '' | gh release create "$VERSION" --title "$VERSION" --notes "$NOTE" "$TARGET.zip"
 rm "$TARGET.zip"
 
-echo "Done."
+echo '...Done.'
+echo ''
+echo 'Release completed!'

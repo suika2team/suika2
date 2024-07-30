@@ -1,0 +1,197 @@
+all: alpha_dec.o buffer_dec.o frame_dec.o idec_dec.o io_dec.o quant_dec.o tree_dec.o vp8_dec.o vp8l_dec.o webp_dec.o anim_decode.o demux.o alpha_processing.o cost.o cost_mips32.o cpu.o dec.o dec_clip_tables.o enc.o filters.o lossless.o lossless_enc.o rescaler.o ssim.o upsampling.o yuv.o alpha_enc.o analysis_enc.o backward_references_cost_enc.o backward_references_enc.o config_enc.o cost_enc.o filter_enc.o frame_enc.o histogram_enc.o iterator_enc.o near_lossless_enc.o picture_csp_enc.o picture_enc.o picture_psnr_enc.o picture_rescale_enc.o picture_tools_enc.o predictor_enc.o quant_enc.o syntax_enc.o token_enc.o tree_enc.o vp8l_enc.o webp_enc.o anim_encode.o muxedit.o muxinternal.o muxread.o bit_reader_utils.o bit_writer_utils.o color_cache_utils.o filters_utils.o huffman_encode_utils.o huffman_utils.o quant_levels_dec_utils.o quant_levels_utils.o random_utils.o rescaler_utils.o thread_utils.o utils.o
+	$(AR) rcs $(PREFIX)/lib/libwebp.a *.o
+
+alpha_dec.o: src/dec/alpha_dec.c
+	$(CC) -I. -I./src -fPIC $(CFLAGS) -c $<
+
+buffer_dec.o: src/dec/buffer_dec.c
+	$(CC) -I. -I./src -fPIC $(CFLAGS) -c $<
+
+frame_dec.o: src/dec/frame_dec.c
+	$(CC) -I. -I./src -fPIC $(CFLAGS) -c $<
+
+idec_dec.o: src/dec/idec_dec.c
+	$(CC) -I. -I./src -fPIC $(CFLAGS) -c $<
+
+io_dec.o: src/dec/io_dec.c
+	$(CC) -I. -I./src -fPIC $(CFLAGS) -c $<
+
+quant_dec.o: src/dec/quant_dec.c
+	$(CC) -I. -I./src -fPIC $(CFLAGS) -c $<
+
+tree_dec.o: src/dec/tree_dec.c
+	$(CC) -I. -I./src -fPIC $(CFLAGS) -c $<
+
+vp8_dec.o: src/dec/vp8_dec.c
+	$(CC) -I. -I./src -fPIC $(CFLAGS) -c $<
+
+vp8l_dec.o: src/dec/vp8l_dec.c
+	$(CC) -I. -I./src -fPIC $(CFLAGS) -c $<
+
+webp_dec.o: src/dec/webp_dec.c
+	$(CC) -I. -I./src -fPIC $(CFLAGS) -c $<
+
+anim_decode.o: src/demux/anim_decode.c
+	$(CC) -I. -I./src -fPIC $(CFLAGS) -c $<
+
+demux.o: src/demux/demux.c
+	$(CC) -I. -I./src -fPIC $(CFLAGS) -c $<
+
+alpha_processing.o: src/dsp/alpha_processing.c
+	$(CC) -I. -I./src -fPIC $(CFLAGS) -c $<
+
+cost.o: src/dsp/cost.c
+	$(CC) -I. -I./src -fPIC $(CFLAGS) -c $<
+
+cost_mips32.o: src/dsp/cost_mips32.c
+	$(CC) -I. -I./src -fPIC $(CFLAGS) -c $<
+
+cpu.o: src/dsp/cpu.c
+	$(CC) -I. -I./src -fPIC $(CFLAGS) -c $<
+
+dec.o: src/dsp/dec.c
+	$(CC) -I. -I./src -fPIC $(CFLAGS) -c $<
+
+dec_clip_tables.o: src/dsp/dec_clip_tables.c
+	$(CC) -I. -I./src -fPIC $(CFLAGS) -c $<
+
+enc.o: src/dsp/enc.c
+	$(CC) -I. -I./src -fPIC $(CFLAGS) -c $<
+
+filters.o: src/dsp/filters.c
+	$(CC) -I. -I./src -fPIC $(CFLAGS) -c $<
+
+lossless.o: src/dsp/lossless.c
+	$(CC) -I. -I./src -fPIC $(CFLAGS) -c $<
+
+lossless_enc.o: src/dsp/lossless_enc.c
+	$(CC) -I. -I./src -fPIC $(CFLAGS) -c $<
+
+rescaler.o: src/dsp/rescaler.c
+	$(CC) -I. -I./src -fPIC $(CFLAGS) -c $<
+
+ssim.o: src/dsp/ssim.c
+	$(CC) -I. -I./src -fPIC $(CFLAGS) -c $<
+
+upsampling.o: src/dsp/upsampling.c
+	$(CC) -I. -I./src -fPIC $(CFLAGS) -c $<
+
+yuv.o: src/dsp/yuv.c
+	$(CC) -I. -I./src -fPIC $(CFLAGS) -c $<
+
+alpha_enc.o: src/enc/alpha_enc.c
+	$(CC) -I. -I./src -fPIC $(CFLAGS) -c $<
+
+analysis_enc.o: src/enc/analysis_enc.c
+	$(CC) -I. -I./src -fPIC $(CFLAGS) -c $<
+
+backward_references_cost_enc.o: src/enc/backward_references_cost_enc.c
+	$(CC) -I. -I./src -fPIC $(CFLAGS) -c $<
+
+backward_references_enc.o: src/enc/backward_references_enc.c
+	$(CC) -I. -I./src -fPIC $(CFLAGS) -c $<
+
+config_enc.o: src/enc/config_enc.c
+	$(CC) -I. -I./src -fPIC $(CFLAGS) -c $<
+
+cost_enc.o: src/enc/cost_enc.c
+	$(CC) -I. -I./src -fPIC $(CFLAGS) -c $<
+
+filter_enc.o: src/enc/filter_enc.c
+	$(CC) -I. -I./src -fPIC $(CFLAGS) -c $<
+
+frame_enc.o: src/enc/frame_enc.c
+	$(CC) -I. -I./src -fPIC $(CFLAGS) -c $<
+
+histogram_enc.o: src/enc/histogram_enc.c
+	$(CC) -I. -I./src -fPIC $(CFLAGS) -c $<
+
+iterator_enc.o: src/enc/iterator_enc.c
+	$(CC) -I. -I./src -fPIC $(CFLAGS) -c $<
+
+near_lossless_enc.o: src/enc/near_lossless_enc.c
+	$(CC) -I. -I./src -fPIC $(CFLAGS) -c $<
+
+picture_csp_enc.o: src/enc/picture_csp_enc.c
+	$(CC) -I. -I./src -fPIC $(CFLAGS) -c $<
+
+picture_enc.o: src/enc/picture_enc.c
+	$(CC) -I. -I./src -fPIC $(CFLAGS) -c $<
+
+picture_psnr_enc.o: src/enc/picture_psnr_enc.c
+	$(CC) -I. -I./src -fPIC $(CFLAGS) -c $<
+
+picture_rescale_enc.o: src/enc/picture_rescale_enc.c
+	$(CC) -I. -I./src -fPIC $(CFLAGS) -c $<
+
+picture_tools_enc.o: src/enc/picture_tools_enc.c
+	$(CC) -I. -I./src -fPIC $(CFLAGS) -c $<
+
+predictor_enc.o: src/enc/predictor_enc.c
+	$(CC) -I. -I./src -fPIC $(CFLAGS) -c $<
+
+quant_enc.o: src/enc/quant_enc.c
+	$(CC) -I. -I./src -fPIC $(CFLAGS) -c $<
+
+syntax_enc.o: src/enc/syntax_enc.c
+	$(CC) -I. -I./src -fPIC $(CFLAGS) -c $<
+
+token_enc.o: src/enc/token_enc.c
+	$(CC) -I. -I./src -fPIC $(CFLAGS) -c $<
+
+tree_enc.o: src/enc/tree_enc.c
+	$(CC) -I. -I./src -fPIC $(CFLAGS) -c $<
+
+vp8l_enc.o: src/enc/vp8l_enc.c
+	$(CC) -I. -I./src -fPIC $(CFLAGS) -c $<
+
+webp_enc.o: src/enc/webp_enc.c
+	$(CC) -I. -I./src -fPIC $(CFLAGS) -c $<
+
+anim_encode.o: src/mux/anim_encode.c
+	$(CC) -I. -I./src -fPIC $(CFLAGS) -c $<
+
+muxedit.o: src/mux/muxedit.c
+	$(CC) -I. -I./src -fPIC $(CFLAGS) -c $<
+
+muxinternal.o: src/mux/muxinternal.c
+	$(CC) -I. -I./src -fPIC $(CFLAGS) -c $<
+
+muxread.o: src/mux/muxread.c
+	$(CC) -I. -I./src -fPIC $(CFLAGS) -c $<
+
+bit_reader_utils.o: src/utils/bit_reader_utils.c
+	$(CC) -I. -I./src -fPIC $(CFLAGS) -c $<
+
+bit_writer_utils.o: src/utils/bit_writer_utils.c
+	$(CC) -I. -I./src -fPIC $(CFLAGS) -c $<
+
+color_cache_utils.o: src/utils/color_cache_utils.c
+	$(CC) -I. -I./src -fPIC $(CFLAGS) -c $<
+
+filters_utils.o: src/utils/filters_utils.c
+	$(CC) -I. -I./src -fPIC $(CFLAGS) -c $<
+
+huffman_encode_utils.o: src/utils/huffman_encode_utils.c
+	$(CC) -I. -I./src -fPIC $(CFLAGS) -c $<
+
+huffman_utils.o: src/utils/huffman_utils.c
+	$(CC) -I. -I./src -fPIC $(CFLAGS) -c $<
+
+quant_levels_dec_utils.o: src/utils/quant_levels_dec_utils.c
+	$(CC) -I. -I./src -fPIC $(CFLAGS) -c $<
+
+quant_levels_utils.o: src/utils/quant_levels_utils.c
+	$(CC) -I. -I./src -fPIC $(CFLAGS) -c $<
+
+random_utils.o: src/utils/random_utils.c
+	$(CC) -I. -I./src -fPIC $(CFLAGS) -c $<
+
+rescaler_utils.o: src/utils/rescaler_utils.c
+	$(CC) -I. -I./src -fPIC $(CFLAGS) -c $<
+
+thread_utils.o: src/utils/thread_utils.c
+	$(CC) -I. -I./src -fPIC $(CFLAGS) -c $<
+
+utils.o: src/utils/utils.c
+	$(CC) -I. -I./src -fPIC $(CFLAGS) -c $<
