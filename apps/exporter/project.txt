@@ -923,11 +923,11 @@ kirakira.frame=0.333
 # - スクリプトで使う時は\e{絵文字名}と書く
 #
 
-emoticon.name1=heart
-emoticon.image1=emoji/heart.png
+#emoticon.name1=heart
+#emoticon.image1=emoji/heart.png
 
-emoticon.name2=sweat
-emoticon.image2=emoji/sweat.png
+#emoticon.name2=sweat
+#emoticon.image2=emoji/sweat.png
 
 ########################################################################
 

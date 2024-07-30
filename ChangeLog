@@ -1,13 +1,18 @@
 <html><head></head><body><ul><!-- -*- mode: html-mode; -*-
 
 <!-- BEGIN-LATEST -->
+<li>OpenNovel 0.1.1 2024/07/31
+  <ul>
+    <li>Fixed Exporter</li>
+  </ul>
+</li>
+<!-- END-LATEST -->
+
 <li>OpenNovel 0.1.0 2024/07/31
   <ul>
     <li>Added Exporter for Windows</li>
   </ul>
 </li>
-<!-- END-LATEST -->
-
 <li>OpenNovel 0.0.18 2024/07/30
   <ul>
     <li>Fixed a bug of pack.exe</li>
