@@ -156,12 +156,21 @@ echo 'Building Unity source tree...'
 
 cd engines/unity
 
+# Unity Windows
+make -j$(nproc) libopennovel.dll
+
+# Unity macOS
+make -j$(nproc) libopennovel.dylib
+
+# Linux
+docker run -it -v `pwd`/../..:/workspace ubuntu-build /bin/sh -c 'cd /workspace/engines/unity && make libopennovel.so'
+
+# Switch
 docker pull yesimnathan/switchdev
 docker run -it -v `pwd`/../..:/workspace yesimnathan/switchdev /bin/bash -c "cd /workspace/engines/unity && make libopennovel.nso"
 
-docker run -it -v `pwd`:/workspace ubuntu-build /bin/sh -c 'cd /workspace/engines/unity && make libopennovel.so'
-
-make -j$(nproc) all
+# src
+make -j$(nproc) src
 
 cp -R unity-src "$TARGET/export-kit/"
 cd ../../
