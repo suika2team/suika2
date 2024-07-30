@@ -83,7 +83,7 @@ bool create_package(const char *base_dir)
 	/* Get list of files. */
 	for (i = 0; i < DIR_COUNT; i++) {
 		if (!get_file_names(base_dir, dir_names[i])) {
-			printf("Failed to open folder %s.", dir_names[i]);
+			printf("Failed to open folder %s.\n", dir_names[i]);
 			return false;
 		}
 	}
@@ -110,154 +110,86 @@ static bool get_file_names_recursive(const wchar_t *base_dir, const wchar_t *dir
 /* Get file list in directory (for Windows) */
 static bool get_file_names(const char *base_dir, const char *dir)
 {
-    wchar_t base_buf[PATH_SIZE];
-    wchar_t dir_buf[PATH_SIZE];
+	wchar_t base_buf[PATH_SIZE];
+	wchar_t dir_buf[PATH_SIZE];
 
-    wcsncpy(base_buf, conv_utf8_to_utf16(base_dir), PATH_SIZE - 1);
-    base_buf[PATH_SIZE - 1] = L'\0';
+	wcsncpy(base_buf, conv_utf8_to_utf16(base_dir), PATH_SIZE - 1);
+	base_buf[PATH_SIZE - 1] = L'\0';
 
-    wcsncpy(dir_buf, conv_utf8_to_utf16(dir), PATH_SIZE - 1);
-    dir_buf[PATH_SIZE - 1] = L'\0';
+	wcsncpy(dir_buf, conv_utf8_to_utf16(dir), PATH_SIZE - 1);
+	dir_buf[PATH_SIZE - 1] = L'\0';
 
-    return get_file_names_recursive(base_buf, dir_buf, 0);
+	return get_file_names_recursive(base_buf, dir_buf, 0);
 }
 
 static bool get_file_names_recursive(const wchar_t *base_dir, const wchar_t *dir, int depth)
 {
-    HANDLE hFind;
-    WIN32_FIND_DATAW wfd;
-    wchar_t curdir[PATH_SIZE];
-    wchar_t findpath[PATH_SIZE];
-    char u8dir[PATH_SIZE];
-    char *separator;
+	HANDLE hFind;
+	WIN32_FIND_DATAW wfd;
+	wchar_t curdir[PATH_SIZE];
+	wchar_t findpath[PATH_SIZE];
+	char u8dir[PATH_SIZE];
+	char *separator;
 
-    /* Make path. */
-    if (wcscmp(base_dir, L"") == 0) {
-        /* Make Utf-16 current directory path. */
-        _snwprintf(curdir, PATH_SIZE, L"%s", dir);
+	/* Make path. */
+	if (wcscmp(base_dir, L"") == 0) {
+		/* Make Utf-16 current directory path. */
+		_snwprintf(curdir, PATH_SIZE, L"%s", dir);
 
-        /* Make Utf-8 current directory path. */
-        snprintf(u8dir, PATH_SIZE, "%s", conv_utf16_to_utf8(dir));
-    } else {
-        /* Make Utf-16 current directory path. */
-        _snwprintf(curdir, PATH_SIZE, L"%s\\%s", base_dir, dir);
+		/* Make Utf-8 current directory path. */
+		snprintf(u8dir, PATH_SIZE, "%s", conv_utf16_to_utf8(dir));
+	} else {
+		/* Make Utf-16 current directory path. */
+		_snwprintf(curdir, PATH_SIZE, L"%s\\%s", base_dir, dir);
 
-        /* Make Utf-8 current directory path. */
-        snprintf(u8dir, PATH_SIZE, "%s\\", conv_utf16_to_utf8(base_dir));
-        strncat(u8dir, conv_utf16_to_utf8(dir), PATH_SIZE - 1);
-        u8dir[PATH_SIZE - 1] = '\0';
-    }
-    /* Replace '\\' with '/' in u8dir. */
-    while ((separator = strstr(u8dir, "\\")) != NULL)
-        *separator = '/';
+		/* Make Utf-8 current directory path. */
+		snprintf(u8dir, PATH_SIZE, "%s\\", conv_utf16_to_utf8(base_dir));
+		strncat(u8dir, conv_utf16_to_utf8(dir), PATH_SIZE - 1);
+		u8dir[PATH_SIZE - 1] = '\0';
+	}
+	/* Replace '\\' with '/' in u8dir. */
+	while ((separator = strstr(u8dir, "\\")) != NULL)
+		*separator = '/';
 
-    /* Get directory content. */
-    _snwprintf(findpath, PATH_SIZE, L"%s\\*.*", curdir);
+	/* Get directory content. */
+	_snwprintf(findpath, PATH_SIZE, L"%s\\*.*", curdir);
 	findpath[PATH_SIZE - 1] = L'\0';
-    hFind = FindFirstFileW(findpath, &wfd);
-    if(hFind == INVALID_HANDLE_VALUE)
-    {
-        log_dir_not_found(u8dir);
-        return false;
-    }
-    do
-    {
-        if(!(wfd.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY))
-        {
+	hFind = FindFirstFileW(findpath, &wfd);
+	if(hFind == INVALID_HANDLE_VALUE)
+	{
+		log_dir_not_found(u8dir);
+		return false;
+	}
+	do
+	{
+		if(!(wfd.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY))
+		{
 #if defined(__GNUC__) && !defined(__llvm__)
 #pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Wformat-truncation"
 #endif
-            snprintf(entry[file_count].name, FILE_NAME_SIZE, "%s/%s", u8dir,
-                 conv_utf16_to_utf8(wfd.cFileName));
+			snprintf(entry[file_count].name, FILE_NAME_SIZE, "%s/%s", u8dir, conv_utf16_to_utf8(wfd.cFileName));
+			printf("%s\n", entry[file_count].name);
 #if defined(__GNUC__) && !defined(__llvm__)
 #pragma GCC diagnostic pop
 #endif
-            file_count++;
-        }
-        else if((wfd.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY) &&
-            wfd.cFileName[0] != L'.')
-        {
-            get_file_names_recursive(curdir, wfd.cFileName, depth + 1);
-        }
-    } while(FindNextFileW(hFind, &wfd));
+			file_count++;
+		}
+		else if((wfd.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY) &&
+			wfd.cFileName[0] != L'.')
+		{
+			get_file_names_recursive(curdir, wfd.cFileName, depth + 1);
+		}
+	} while(FindNextFileW(hFind, &wfd));
 
-    FindClose(hFind);
-    return true;
-}
-
-#elif defined(OSX)
-/*
- * For macOS:
- */
-
-static bool get_file_names_recursive(const char *game_base, const char *base_dir, const char *dir, int depth);
-
-/* Get directory file list (for Mac and Linux) */
-static bool get_file_names(const char *base_dir, const char *dir)
-{
-    if (!get_file_names_recursive(base_dir, "", dir, 0))
-        return false;
-
-    return true;
-}
-
-static bool get_file_names_recursive(const char *game_base, const char *base_dir, const char *dir, int depth)
-{
-    char new_path[1024];
-    char query_path[1024];
-    struct dirent **names;
-    int i, count;
-    bool succeeded;
-
-    /* Make a path. */
-    if (strcmp(base_dir, "") == 0) {
-        snprintf(new_path, sizeof(new_path), "%s", dir);
-        snprintf(query_path, sizeof(query_path), "%s/%s", game_base, dir);
-    } else {
-        snprintf(new_path, sizeof(new_path), "%s/%s", base_dir, dir);
-        snprintf(query_path, sizeof(query_path), "%s/%s/%s", game_base, base_dir, dir);
-    }
-
-    /* Get directory content. */
-    count = scandir(query_path, &names, NULL, alphasort);
-    if (count < 0 && depth == 0) {
-        log_dir_not_found(dir);
-        return false;
-    }
-    succeeded = true;
-    for (i = 0; i < count; i++) {
-        if (names[i]->d_name[0] == '.') {
-            /* Ignore . and .. (also .*)*/
-            continue;
-        }
-        if (count >= FILE_ENTRY_SIZE) {
-            log_too_many_files();
-            succeeded = false;
-            break;
-        }
-        if (names[i]->d_type == DT_DIR) {
-            if (!get_file_names_recursive(game_base, new_path, names[i]->d_name, depth + 1)) {
-                succeeded = false;
-                break;
-            }
-        } else {
-            snprintf(entry[file_count].name, FILE_NAME_SIZE,
-                     "%s/%s", new_path, names[i]->d_name);
-            printf("%s\n", entry[file_count].name);
-            file_count++;
-        }
-    }
-    for (i = 0; i < count; i++)
-        free(names[i]);
-    free(names);
-    return succeeded;
+	FindClose(hFind);
+	return true;
 }
 
 #else
 
 /*
- * For Linux:
+ * For macOS and Linux:
  */
 
 static bool get_file_names_recursive(const char *base_dir, const char *dir, int depth);
@@ -265,69 +197,68 @@ static bool get_file_names_recursive(const char *base_dir, const char *dir, int 
 /* Get directory file list (for Mac and Linux) */
 static bool get_file_names(const char *base_dir, const char *dir)
 {
-    return get_file_names_recursive(base_dir, dir, 0);
+	return get_file_names_recursive(base_dir, dir, 0);
 }
 
 static bool get_file_names_recursive(const char *base_dir, const char *dir, int depth)
 {
-    char new_path[1024];
-    struct dirent **names;
-    int i, count;
-    bool succeeded;
+	char new_path[1024];
+	struct dirent **names;
+	int i, count;
+	bool succeeded;
 
-    /* Make a path. */
+	/* Make a path. */
 #if defined(__GNUC__) && !defined(__llvm__)
 #pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Wformat-truncation"
 #endif
-    if (strcmp(base_dir, "") == 0)
-        snprintf(new_path, sizeof(new_path), "%s", dir);
-    else
-        snprintf(new_path, sizeof(new_path), "%s/%s", base_dir, dir);
+	if (strcmp(base_dir, "") == 0)
+		snprintf(new_path, sizeof(new_path), "%s", dir);
+	else
+		snprintf(new_path, sizeof(new_path), "%s/%s", base_dir, dir);
 #if defined(__GNUC__) && !defined(__llvm__)
 #pragma GCC diagnostic pop
 #endif
 
-    /* Get directory content. */
-    count = scandir(new_path, &names, NULL, alphasort);
-    if (count < 0 && depth == 0) {
-        log_dir_not_found(dir);
-        return false;
-    }
-    succeeded = true;
-    for (i = 0; i < count; i++) {
-        if (names[i]->d_name[0] == '.') {
-            /* Ignore . and .. (also .*)*/
-            continue;
-        }
-        if (count >= FILE_ENTRY_SIZE) {
-            log_too_many_files();
-            succeeded = false;
-            break;
-        }
-        if (names[i]->d_type == DT_DIR) {
-            if (!get_file_names_recursive(new_path, names[i]->d_name, depth + 1)) {
-                succeeded = false;
-                break;
-            }
-        } else {
+	/* Get directory content. */
+	count = scandir(new_path, &names, NULL, alphasort);
+	if (count < 0 && depth == 0) {
+		log_dir_not_found(dir);
+		return false;
+	}
+	succeeded = true;
+	for (i = 0; i < count; i++) {
+		if (names[i]->d_name[0] == '.') {
+			/* Ignore . and .. (also .*)*/
+			continue;
+		}
+		if (count >= FILE_ENTRY_SIZE) {
+			log_too_many_files();
+			succeeded = false;
+			break;
+		}
+		if (names[i]->d_type == DT_DIR) {
+			if (!get_file_names_recursive(new_path, names[i]->d_name, depth + 1)) {
+				succeeded = false;
+				break;
+			}
+		} else {
 #if defined(__GNUC__) && !defined(__llvm__)
 #pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Wformat-truncation"
 #endif
-            snprintf(entry[file_count].name, FILE_NAME_SIZE,
-                     "%s/%s", new_path, names[i]->d_name);
+			snprintf(entry[file_count].name, FILE_NAME_SIZE, "%s/%s", new_path, names[i]->d_name);
 #if defined(__GNUC__) && !defined(__llvm__)
 #pragma GCC diagnostic pop
 #endif
-            printf("%s\n", entry[file_count].name);
-            file_count++;
-        }
-    }
-    for (i = 0; i < count; i++)
-        free(names[i]);
-    free(names);
-    return succeeded;
+			printf("%s\n", entry[file_count].name);
+			file_count++;
+		}
+	}
+	for (i = 0; i < count; i++)
+		free(names[i]);
+	free(names);
+	return succeeded;
 }
 #endif
 
@@ -467,9 +398,10 @@ static bool write_file_bodies(const char *base_dir, FILE *fp)
 			return false;
 		}
 		slash = strchr(path, '/');
-		if (slash == NULL)
-			return false;
-		*slash = '\\';
+		while (slash != NULL) {
+			*slash = '\\';
+			slash = strchr(slash + 1, '/');
+		}
 		fpin = fopen(path, "rb");
 		UNUSED_PARAMETER(base_dir);
 #else
