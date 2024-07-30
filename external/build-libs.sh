@@ -7,8 +7,6 @@ CC=$2
 CFLAGS=$3
 AR=$4
 
-echo "Building libroot with CC=$CC AR=$AR"
-
 if [ ! -z $MACHINE ]; then
     PREFIX=`pwd`/libroot-$MACHINE;
 else

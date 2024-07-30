@@ -159,6 +159,8 @@ cd engines/unity
 docker pull yesimnathan/switchdev
 docker run -it -v `pwd`/../..:/workspace yesimnathan/switchdev /bin/bash -c "cd /workspace/engines/unity && make libopennovel.nso"
 
+docker run -it -v `pwd`:/workspace ubuntu-build /bin/sh -c 'cd /workspace/engines/unity && make libopennovel.so'
+
 make -j$(nproc) all
 
 cp -R unity-src "$TARGET/export-kit/"
