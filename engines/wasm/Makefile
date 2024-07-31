@@ -1,6 +1,6 @@
 include ../common.mk
 
-SRCS = $(SRCS_MAIN) $(SRCS_WASM)
+SRCS = $(SRCS_MAIN) $(SRCS_WASM) $(SRCS_OPENGL)
 
 all: html
 
@@ -13,7 +13,7 @@ html: $(SRCS)
 		-o html/index.html \
 		-I./libwebp-1.3.2 \
 		-I./libwebp-1.3.2/src \
-		$(SRC) \
+		$(SRCS) \
 		libwebp-1.3.2/src/**/*.c \
 		-s USE_ZLIB=1 \
 		-s USE_LIBPNG=1 \

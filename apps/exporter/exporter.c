@@ -10,6 +10,7 @@
  */
 
 /* OpenNovel Base */
+#include "../../src/opennovel.h"
 #include "../../src/package.h"
 
 /* Windows */
@@ -125,7 +126,7 @@ static BOOL ExportForIOS(VOID)
 	GetCurrentDirectory(PATH_MAX, szPwd);
 	SetCurrentDirectory(szGame);
 
-	if (!create_package(".")) {
+	if (!create_package("")) {
 		SetCurrentDirectory(szPwd);
 		MessageBox(NULL, L"Failed to make package.", szTitle, MB_OK);
 		return FALSE;
@@ -268,7 +269,7 @@ static BOOL ExportForMacOS(VOID)
 	GetCurrentDirectory(PATH_MAX, szPwd);
 	SetCurrentDirectory(szGame);
 
-	if (!create_package(".")) {
+	if (!create_package("")) {
 		SetCurrentDirectory(szPwd);
 		MessageBox(NULL, L"Failed to make a package.", szTitle, MB_OK);
 		return FALSE;
@@ -376,7 +377,7 @@ static BOOL ExportForWeb(VOID)
 	GetCurrentDirectory(PATH_MAX, szPwd);
 	SetCurrentDirectory(szGame);
 
-	if (!create_package(".")) {
+	if (!create_package("")) {
 		SetCurrentDirectory(szPwd);
 		MessageBox(NULL, L"Failed to make a package.", szTitle, MB_OK);
 		return FALSE;

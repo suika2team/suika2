@@ -284,11 +284,8 @@ static bool get_file_sizes(const char *base_dir)
 			log_memory();
 			return false;
 		}
-		slash = strchr(path, '/');
-		while (slash != NULL) {
+		while ((slash = strchr(path, '/')) != NULL)
 			*slash = '\\';
-			slash = strchr(slash + 1, '/');
-		}
 		fp = fopen(path, "rb");
 		free(path);
 #else
@@ -397,11 +394,8 @@ static bool write_file_bodies(const char *base_dir, FILE *fp)
 			log_memory();
 			return false;
 		}
-		slash = strchr(path, '/');
-		while (slash != NULL) {
+		while ((slash = strchr(path, '/')) != NULL)
 			*slash = '\\';
-			slash = strchr(slash + 1, '/');
-		}
 		fpin = fopen(path, "rb");
 		UNUSED_PARAMETER(base_dir);
 #else
@@ -429,7 +423,7 @@ static bool write_file_bodies(const char *base_dir, FILE *fp)
 				}
 			}
 		} while (len == sizeof(buf));
-#ifdef _WIN32
+#ifdef OPENNOVEL_TARGET_WIN32
 		free(path);
 #endif
 		fclose(fpin);
@@ -481,14 +475,14 @@ int main(int argc, char *argv[])
 
 	printf("Suceeded.\n");
 
-#ifdef _WIN32
+#ifdef OPENNOVEL_TARGET_WIN32
 	getchar();
 #endif
 
 	return 0;
 }
 
-#ifdef _WIN32
+#ifdef OPENNOVEL_TARGET_WIN32
 
 #define CONV_MESSAGE_SIZE 65536
 
@@ -520,7 +514,7 @@ const char *conv_utf16_to_utf8(const wchar_t *utf16_message)
 	return szMessage;
 }
 
-#endif /* _WIN32 */
+#endif
 
 /* Stub for platform.c */
 bool log_error(const char *s, ...) { UNUSED_PARAMETER(s); return true; }

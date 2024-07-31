@@ -14,4 +14,4 @@ pack: $(SRC)
 	$(CC) -o pack $(CPPFLAGS) $(CFLAGS) $(LDFLAGS) $(SRC)
 
 pack.exe: $(SRC)
-	i686-w64-mingw32-gcc -o pack.exe -municode $(CPPFLAGS) $(CFLAGS) $(LDFLAGS) $(SRC)
+	i686-w64-mingw32-gcc -o pack.exe -municode $(CPPFLAGS) $(CFLAGS) $(SRC) $(LDFLAGS)
