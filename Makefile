@@ -26,6 +26,9 @@ engine-wasm:
 	@cd engine/wasm && make && cp -R html ../../game-wasm
 	@echo 'See game-wasm'
 
+release:
+	./release.sh
+
 clean:
 	@echo 'Cleaning Windows engine...' && cd engines/windows && make clean && cd ../..
 	@echo 'Cleaning macOS engine...' && cd engines/macos && make clean && cd ../..

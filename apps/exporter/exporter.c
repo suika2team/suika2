@@ -28,6 +28,7 @@ const wchar_t *conv_utf8_to_utf16(const char *utf8_message);
 const char *conv_utf16_to_utf8(const wchar_t *utf16_message);
 const char *conv_utf16_to_utf8(const wchar_t *s);
 
+static BOOL ExportForWindows(VOID);
 static BOOL ExportForIOS(VOID);
 static BOOL ExportForAndroid(VOID);
 static BOOL ExportForMacOS(VOID);
@@ -37,7 +38,7 @@ static BOOL SelectGameDirectory(wchar_t *szDir);
 static VOID RecreateDirectory(const wchar_t *path);
 static BOOL CopyLibraryFiles(const wchar_t *szSrcDir, const wchar_t *szDestDir);
 static BOOL CopyGameFiles(const wchar_t *szSrcDir, const wchar_t *szDestDir);
-static BOOL CopyVideoFiles(const wchar_t *szSrcDir, const wchar_t *szDestDir);
+static VOID CopyVideoFiles(const wchar_t *szSrc, const wchar_t *szDestDir);
 static BOOL MovePackageFile(const wchar_t *szPkgFile, wchar_t *szDestDir);
 
 int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpszCmd, int nCmdShow)
@@ -46,6 +47,17 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpszCmd
 	UNUSED_PARAMETER(hPrevInstance);
 	UNUSED_PARAMETER(lpszCmd);
 	UNUSED_PARAMETER(nCmdShow);
+
+	if (MessageBox(NULL,
+				   L"Do you want to export for Windows?\n"
+				   L"Windows向けに書き出しますか？",
+				   szTitle,
+				   MB_YESNO) == IDYES)
+	{
+		if (!ExportForWindows())
+			return 1;
+		return 0;
+	}
 
 	if (MessageBox(NULL,
 				   L"Do you want to export for iOS?\n"
@@ -104,6 +116,61 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpszCmd
 	return 0;
 }
 
+/* Windows用に書き出す */
+static BOOL ExportForWindows(VOID)
+{
+	wchar_t szPwd[PATH_MAX];
+	wchar_t szGame[PATH_MAX];
+	wchar_t szExport[PATH_MAX];
+	wchar_t szPackageSrc[PATH_MAX];
+	wchar_t szPackageDst[PATH_MAX];
+	wchar_t szVideoSrc[PATH_MAX];
+	wchar_t szVideoDst[PATH_MAX];
+
+	if (!SelectGameDirectory(szGame))
+		return FALSE;
+
+	wcscpy(szExport, szGame);
+	wcscat(szExport, L"\\");
+	wcscat(szExport, L"export-windows");
+	RecreateDirectory(szExport);
+
+	if (!CopyLibraryFiles(L"game.exe", szGame))
+		return FALSE;
+
+	GetCurrentDirectory(PATH_MAX, szPwd);
+	SetCurrentDirectory(szGame);
+
+	if (!create_package("")) {
+		SetCurrentDirectory(szPwd);
+		MessageBox(NULL, L"Failed to make package.", szTitle, MB_OK);
+		return FALSE;
+	}
+
+	SetCurrentDirectory(szPwd);
+
+	wcscpy(szPackageSrc, szGame);
+	wcscat(szPackageSrc, L"\\");
+	wcscat(szPackageSrc, L"package.pak");
+
+	if (!MovePackageFile(szPackageSrc, szExport))
+		return FALSE;
+
+	wcscpy(szVideoSrc, szGame);
+	wcscat(szVideoSrc, L"\\video\\*.wmv");
+
+	wcscpy(szVideoDst, szExport);
+	wcscat(szVideoDst, L"\\");
+	wcscat(szVideoDst, L"video");
+	RecreateDirectory(szVideoDst);
+
+	CopyVideoFiles(szVideoSrc, szVideoDst);
+
+	ShellExecuteW(NULL, L"explore", szExport, NULL, NULL, SW_SHOW);
+
+	return TRUE;
+}
+
 /* iOS用に書き出す */
 static BOOL ExportForIOS(VOID)
 {
@@ -142,7 +209,7 @@ static BOOL ExportForIOS(VOID)
 	wcscat(szPackageDst, L"\\");
 	wcscat(szPackageDst, L"Resources");
 
-	if (!CopyLibraryFiles(L"ios-src", szExport))
+	if (!CopyLibraryFiles(L"tools\\ios-src", szExport))
 		return FALSE;
 	if (!MovePackageFile(szPackageSrc, szPackageDst))
 		return FALSE;
@@ -155,8 +222,9 @@ static BOOL ExportForIOS(VOID)
 	wcscat(szVideoDst, L"\\");
 	wcscat(szVideoDst, L"Resources\\mov");
 
-	if (!CopyVideoFiles(szVideoSrc, szVideoDst))
-		return FALSE;
+	RecreateDirectory(szVideoDst);
+
+	CopyVideoFiles(szVideoSrc, szVideoDst);
 
 	ShellExecuteW(NULL, L"explore", szExport, NULL, NULL, SW_SHOW);
 
@@ -185,13 +253,14 @@ static BOOL ExportForAndroid(VOID)
 	wcscat(szExport, L"export-android");
 	RecreateDirectory(szExport);
 
-	CopyLibraryFiles(L"android-src", szExport);
+	CopyLibraryFiles(L"tools\\android-src", szExport);
 
 	GetCurrentDirectory(PATH_MAX, szPwd);
 	SetCurrentDirectory(szGame);
 
 	wcscpy(szAssets, szExport);
 	wcscat(szAssets, L"\\app\\src\\main\\assets");
+
 	CopyGameFiles(L"image", szAssets);
 	CopyGameFiles(L"sound", szAssets);
 	CopyGameFiles(L"story", szAssets);
@@ -201,8 +270,6 @@ static BOOL ExportForAndroid(VOID)
 	CopyGameFiles(L"project.txt", szAssets);
 
 	SetCurrentDirectory(szPwd);
-
-	ShellExecuteW(NULL, L"explore", szExport, NULL, NULL, SW_SHOW);
 
 	if (MessageBox(NULL,
 				   L"Do you want to build apk file automatically?\n"
@@ -243,6 +310,8 @@ static BOOL ExportForAndroid(VOID)
 				   szTitle,
 				   MB_OK);
 	}
+
+	ShellExecuteW(NULL, L"explore", szExport, NULL, NULL, SW_SHOW);
 
 	return TRUE;
 }
@@ -285,8 +354,9 @@ static BOOL ExportForMacOS(VOID)
 	wcscat(szPackageDst, L"\\");
 	wcscat(szPackageDst, L"Resources");
 
-	if (!CopyLibraryFiles(L"macos-src", szExport))
+	if (!CopyLibraryFiles(L"tools\\macos-src", szExport))
 		return FALSE;
+
 	if (!MovePackageFile(szPackageSrc, szPackageDst))
 		return FALSE;
 
@@ -298,8 +368,9 @@ static BOOL ExportForMacOS(VOID)
 	wcscat(szVideoDst, L"\\");
 	wcscat(szVideoDst, L"Resources\\video");
 
-	if (!CopyVideoFiles(szVideoSrc, szVideoDst))
-		return FALSE;
+	RecreateDirectory(szVideoDst);
+
+	CopyVideoFiles(szVideoSrc, szVideoDst);
 
 	ShellExecuteW(NULL, L"explore", szExport, NULL, NULL, SW_SHOW);
 
@@ -326,12 +397,13 @@ static BOOL ExportForUnity(VOID)
 	wcscpy(szExport, szGame);
 	wcscat(szExport, L"\\");
 	wcscat(szExport, L"export-unity");
+
 	RecreateDirectory(szExport);
 
 	wcscpy(szAssets, szExport);
 	wcscat(szAssets, L"\\Assets\\StreamingAssets");
 
-	CopyLibraryFiles(L"unity-src", szExport);
+	CopyLibraryFiles(L"tools\\unity-src", szExport);
 
 	GetCurrentDirectory(PATH_MAX, szPwd);
 	SetCurrentDirectory(szGame);
@@ -372,6 +444,7 @@ static BOOL ExportForWeb(VOID)
 	wcscpy(szExport, szGame);
 	wcscat(szExport, L"\\");
 	wcscat(szExport, L"export-web");
+
 	RecreateDirectory(szExport);
 
 	GetCurrentDirectory(PATH_MAX, szPwd);
@@ -389,7 +462,7 @@ static BOOL ExportForWeb(VOID)
 	wcscat(szPackageSrc, L"\\");
 	wcscat(szPackageSrc, L"package.pak");
 
-	if (!CopyLibraryFiles(L"wasm-src", szExport))
+	if (!CopyLibraryFiles(L"tools\\wasm-src", szExport))
 		return FALSE;
 	if (!MovePackageFile(szPackageSrc, szExport))
 		return FALSE;
@@ -397,10 +470,7 @@ static BOOL ExportForWeb(VOID)
 	wcscpy(szVideoSrc, szGame);
 	wcscat(szVideoSrc, L"\\video\\*.mp4");
 
-	if (!CopyVideoFiles(szVideoSrc, szExport))
-		return FALSE;
-
-	ShellExecuteW(NULL, L"explore", szExport, NULL, NULL, SW_SHOW);
+	CopyVideoFiles(szVideoSrc, szExport);
 
 	if (MessageBox(NULL,
 				   L"Do you want to run on a broser?\n"
@@ -417,7 +487,7 @@ static BOOL ExportForWeb(VOID)
 		pSep = wcsrchr(szExePath, L'\\');
 		if (pSep != NULL)
 			*(pSep + 1) = L'\0';
-		wcscat(szExePath, L"web-test.exe");
+		wcscat(szExePath, L"tools\\web-test.exe");
 
 		ZeroMemory(&si, sizeof(STARTUPINFOW));
 		si.cb = sizeof(STARTUPINFOW);
@@ -445,6 +515,8 @@ static BOOL ExportForWeb(VOID)
 				   MB_OK);
 	}
 
+	ShellExecuteW(NULL, L"explore", szExport, NULL, NULL, SW_SHOW);
+
 	return TRUE;
 }
 
@@ -457,7 +529,7 @@ static BOOL SelectGameDirectory(wchar_t *szDir)
 	bInfo.hwndOwner = NULL;
 	bInfo.pidlRoot = NULL;
 	bInfo.pszDisplayName = szDir;
-	bInfo.lpszTitle = L"Select a folder";
+	bInfo.lpszTitle = L"Select a game folder.\nゲームフォルダを選択してください。";
 	bInfo.ulFlags = 0 ;
 	bInfo.lpfn = NULL;
 	bInfo.lParam = 0;
@@ -559,16 +631,15 @@ static BOOL CopyGameFiles(const wchar_t *lpszSrcDir, const wchar_t *lpszDestDir)
 }
 
 /* 動画をコピーする */
-static BOOL CopyVideoFiles(const wchar_t *lpszSrcDir, const wchar_t *lpszDestDir)
+static VOID CopyVideoFiles(const wchar_t *lpszSrc, const wchar_t *lpszDestDir)
 {
 	wchar_t from[MAX_PATH];
 	wchar_t to[MAX_PATH];
 	SHFILEOPSTRUCTW fos;
-	int ret;
 
 	/* 二重のNUL終端を行う */
-	wcscpy(from, lpszSrcDir);
-	from[wcslen(lpszSrcDir) + 1] = L'\0';
+	wcscpy(from, lpszSrc);
+	from[wcslen(lpszSrc) + 1] = L'\0';
 	wcscpy(to, lpszDestDir);
 	to[wcslen(lpszDestDir) + 1] = L'\0';
 
@@ -579,14 +650,7 @@ static BOOL CopyVideoFiles(const wchar_t *lpszSrcDir, const wchar_t *lpszDestDir
 	fos.pTo = to;
 	fos.fFlags = FOF_NOCONFIRMATION | FOF_NOCONFIRMMKDIR | FOF_NOERRORUI |
 		FOF_SILENT;
-	ret = SHFileOperationW(&fos);
-	if (ret != 0)
-	{
-		MessageBox(NULL, L"Failed to copy video files.", szTitle, MB_OK);
-		return FALSE;
-	}
-
-	return TRUE;
+	SHFileOperationW(&fos);
 }
 
 /* パッケージファイルを移動する */
