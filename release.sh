@@ -28,7 +28,7 @@ read str
 echo 'Making a target directories...'
 
 TARGET_DIR="`pwd`/OpenNovel-$VERSION"
-TARGET_ZIP="`pwd`/OpenNovel.zip"
+TARGET_ZIP="`pwd`/OpenNovel-$VERSION.zip"
 rm -rf "$TARGET_DIR" "$TARGET_ZIP"
 mkdir "$TARGET_DIR"
 mkdir "$TARGET_DIR/tools"
