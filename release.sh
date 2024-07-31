@@ -225,8 +225,8 @@ echo ''
 
 echo 'Making a release on GitHub...'
 
-yes '' | gh release create "$VERSION" --title "$VERSION" --notes "$NOTE" "$TARGET.zip"
-rm "$TARGET.zip"
+yes '' | gh release create "$VERSION" --title "$VERSION" --notes "$NOTE" "$TARGET_ZIP"
+rm "$TARGET_ZIP"
 
 echo '...Done.'
 echo ''

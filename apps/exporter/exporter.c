@@ -122,6 +122,7 @@ static BOOL ExportForWindows(VOID)
 	wchar_t szPwd[PATH_MAX];
 	wchar_t szGame[PATH_MAX];
 	wchar_t szExport[PATH_MAX];
+	wchar_t szExe[PATH_MAX];
 	wchar_t szPackageSrc[PATH_MAX];
 	wchar_t szPackageDst[PATH_MAX];
 	wchar_t szVideoSrc[PATH_MAX];
@@ -133,9 +134,14 @@ static BOOL ExportForWindows(VOID)
 	wcscpy(szExport, szGame);
 	wcscat(szExport, L"\\");
 	wcscat(szExport, L"export-windows");
+
 	RecreateDirectory(szExport);
 
-	if (!CopyLibraryFiles(L"game.exe", szGame))
+	wcscpy(szExe, szExport);
+	wcscat(szExe, L"\\");
+	wcscat(szExe, L"game.exe");
+
+	if (!CopyLibraryFiles(L"game.exe", szExe))
 		return FALSE;
 
 	GetCurrentDirectory(PATH_MAX, szPwd);
@@ -153,7 +159,11 @@ static BOOL ExportForWindows(VOID)
 	wcscat(szPackageSrc, L"\\");
 	wcscat(szPackageSrc, L"package.pak");
 
-	if (!MovePackageFile(szPackageSrc, szExport))
+	wcscpy(szPackageDst, szExport);
+	wcscat(szPackageDst, L"\\");
+	wcscat(szPackageDst, L"package.pak");
+
+	if (!MovePackageFile(szPackageSrc, szPackageDst))
 		return FALSE;
 
 	wcscpy(szVideoSrc, szGame);
@@ -162,6 +172,7 @@ static BOOL ExportForWindows(VOID)
 	wcscpy(szVideoDst, szExport);
 	wcscat(szVideoDst, L"\\");
 	wcscat(szVideoDst, L"video");
+
 	RecreateDirectory(szVideoDst);
 
 	CopyVideoFiles(szVideoSrc, szVideoDst);
