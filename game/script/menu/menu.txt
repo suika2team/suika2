@@ -1,10 +1,11 @@
 #
-# タップメニューのメニュー定義
+# タップメニューのメニュースクリプト
 #
 
 # このファイルの基本設定
 global {
     # 下記の画像を使用する
+    base:   system/menu/large-idle.png;
     idle:   system/menu/large-idle.png;
     hover:  system/menu/large-hover.png;
     active: system/menu/large-hover.png;
@@ -31,10 +32,10 @@ SAVE {
     file: save.txt;
 
     # 座標とサイズ
-    x: 800;
-    y: 0;
-    width: 80;
-    height: 80;
+    x: 978;
+    y: 125;
+    width: 292;
+    height: 79;
 
     # クリックされたときの効果音
     clickse: click.ogg;
@@ -49,10 +50,10 @@ LOAD {
     file: load.txt;
 
     # 座標とサイズ
-    x: 880;
-    y: 0;
-    width: 80;
-    height: 80;
+    x: 978;
+    y: 233;
+    width: 292;
+    height: 79;
 
     # クリックされたときの効果音
     clickse: click.ogg;
@@ -64,10 +65,10 @@ AUTO {
     type: auto;
 
     # 座標とサイズ
-    x: 960;
-    y: 0;
-    width: 80;
-    height: 80;
+    x: 974;
+    y: 369;
+    width: 131;
+    height: 54;
 
     # クリックされたときの効果音
     clickse: click.ogg;
@@ -79,10 +80,10 @@ SKIP {
     type: skip;
 
     # 座標とサイズ
-    x: 1040;
-    y: 0;
-    width: 80;
-    height: 80;
+    x: 1114;
+    y: 370;
+    width: 159;
+    height: 52;
 
     # クリックされたときの効果音
     clickse: click.ogg;
@@ -97,10 +98,10 @@ HISTORY {
     file: history.txt;
 
     # 座標とサイズ
-    x: 1120;
-    y: 0;
-    width: 80;
-    height: 80;
+    x: 976;
+    y: 472;
+    width: 295;
+    height: 71;
 
     # クリックされたときの効果音
     clickse: click.ogg;
@@ -115,10 +116,10 @@ CONFIG {
     file: config.txt;
 
     # 座標とサイズ
-    x: 1200;
-    y: 0;
-    width: 80;
-    height: 80;
+    x: 975;
+    y: 588;
+    width: 293;
+    height: 77;
 
     # クリックされたときの効果音
     clickse: click.ogg;

@@ -115,9 +115,9 @@ msgbox.font.size=36
 #
 # フォントの色
 #
-msgbox.font.r=0
-msgbox.font.g=0
-msgbox.font.b=0
+msgbox.font.r=255
+msgbox.font.g=255
+msgbox.font.b=255
 
 #
 # フォントのふちどりの幅
@@ -252,9 +252,9 @@ namebox.font.size=36
 #
 # フォントの色
 #
-namebox.font.r=0
-namebox.font.g=0
-namebox.font.b=0
+namebox.font.r=255
+namebox.font.g=255
+namebox.font.b=255
 
 #
 # フォントのふちどりの幅
@@ -416,9 +416,9 @@ choose.font.size=36
 #
 # フォントの色
 #
-choose.font.r=0
-choose.font.g=0
-choose.font.b=0
+choose.font.r=255
+choose.font.g=255
+choose.font.b=255
 
 #
 # フォントのふちどりの幅
@@ -557,8 +557,8 @@ sysbtn.hover.image=system/menu/small-hover.png
 #
 # システムボタンの位置
 #
-sysbtn.x=1200
-sysbtn.y=0
+sysbtn.x=1183
+sysbtn.y=48
 
 # システムボタンが押されたときの効果音
 sysbtn.se=click.ogg
@@ -650,9 +650,9 @@ menu.save.font.size=36
 #
 # セーブ画面のフォントの色
 #
-menu.save.font.r=0
-menu.save.font.g=0
-menu.save.font.b=0
+menu.save.font.r=255
+menu.save.font.g=255
+menu.save.font.b=255
 
 #
 # セーブ画面のフォントのふちどりの幅
@@ -696,9 +696,9 @@ menu.history.font.size=36
 #
 # ヒストリ画面のフォントの色
 #
-menu.history.font.r=0
-menu.history.font.g=0
-menu.history.font.b=0
+menu.history.font.r=255
+menu.history.font.g=255
+menu.history.font.b=255
 
 #
 # ヒストリ画面のフォントのふちどりの幅

@@ -652,6 +652,16 @@ static void init_colors(void)
 					(uint32_t)conf_msgbox_font_outline_r,
 					(uint32_t)conf_msgbox_font_outline_g,
 					(uint32_t)conf_msgbox_font_outline_b);
+
+	name_color = make_pixel(0xff,
+				(uint32_t)conf_namebox_font_r,
+				(uint32_t)conf_namebox_font_g,
+				(uint32_t)conf_namebox_font_b);
+
+	name_outline_color = make_pixel(0xff,
+					(uint32_t)conf_namebox_font_outline_r,
+					(uint32_t)conf_namebox_font_outline_g,
+					(uint32_t)conf_namebox_font_outline_b);
 }
 
 /* 名前を取得する */

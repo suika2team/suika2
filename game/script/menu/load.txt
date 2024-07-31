@@ -1,6 +1,6 @@
-###
-### ロード画面のGUI定義
-###
+#
+# ロード画面のメニュースクリプト
+#
 
 # このファイルの基本設定
 global {
@@ -29,10 +29,10 @@ BACK {
     type: cancel;
 
     # 座標とサイズ
-    x: 1142;
-    y: 22;
-    width: 80;
-    height: 80;
+    x: 888;
+    y: 27;
+    width: 361;
+    height: 96;
 
     # ポイントされたときの効果音
     pointse: button.ogg;
@@ -50,24 +50,24 @@ SAVESLOT1 {
     index: 0;
 
     # 座標とサイズ
-    x: 167;
-    y: 153;
-    width: 950;
-    height: 162;
+    x: 32;
+    y: 136;
+    width: 1001;
+    height: 171;
 
     # 画像とテキストのマージン
-    margin: 20;
-
-    # 背景色(スロットが白や黒のときに目立たないようにする)
-    clear-r: 255;
-    clear-g: 255;
-    clear-b: 255;
+    margin: 28;
 
     # ポイントされたときの効果音
     pointse: button.ogg;
 
     # クリックされたときの効果音
     clickse: click.ogg;
+
+    # クリア用の色(背景色を設定しないと擬似的なフォントのふちどりが生じる)
+    clear-r: 255;
+    clear-g: 255;
+    clear-b: 255;
 }
 
 # セーブデータ2番目
@@ -79,24 +79,24 @@ SAVESLOT2 {
     index: 1;
 
     # 座標とサイズ
-    x: 167;
-    y: 318;
-    width: 950;
-    height: 162;
+    x: 32;
+    y: 324;
+    width: 1001;
+    height: 171;
 
     # 画像とテキストのマージン
-    margin: 20;
-
-    # 背景色(スロットが白や黒のときに目立たないようにする)
-    clear-r: 255;
-    clear-g: 255;
-    clear-b: 255;
+    margin: 28;
 
     # ポイントされたときの効果音
     pointse: button.ogg;
 
     # クリックされたときの効果音
     clickse: click.ogg;
+
+    # クリア用の色(背景色を設定しないと擬似的なフォントのふちどりが生じる)
+    clear-r: 255;
+    clear-g: 255;
+    clear-b: 255;
 }
 
 # セーブデータ3番目
@@ -108,24 +108,24 @@ SAVESLOT3 {
     index: 2;
 
     # 座標とサイズ
-    x: 167;
-    y: 483;
-    width: 950;
-    height: 162;
+    x: 32;
+    y: 510;
+    width: 1001;
+    height: 171;
 
     # 画像とテキストのマージン
-    margin: 20;
-
-    # 背景色(スロットが白や黒のときに目立たないようにする)
-    clear-r: 255;
-    clear-g: 255;
-    clear-b: 255;
+    margin: 28;
 
     # ポイントされたときの効果音
     pointse: button.ogg;
 
     # クリックされたときの効果音
     clickse: click.ogg;
+
+    # クリア用の色(背景色を設定しないと擬似的なフォントのふちどりが生じる)
+    clear-r: 255;
+    clear-g: 255;
+    clear-b: 255;
 }
 
 # セーブデータページ1のボタン
@@ -137,10 +137,10 @@ PAGE1 {
     index: 0;
 
     # 座標とサイズ
-    x: 862;
-    y: 58;
-    width: 80;
-    height: 80;
+    x: 1065;
+    y: 135;
+    width: 184;
+    height: 96;
 
     # ポイントされたときの効果音
     pointse: button.ogg;
@@ -158,10 +158,10 @@ PAGE2 {
     index: 1;
 
     # 座標とサイズ
-    x: 952;
-    y: 58;
-    width: 80;
-    height: 80;
+    x: 1065;
+    y: 247;
+    width: 184;
+    height: 96;
 
     # ポイントされたときの効果音
     pointse: button.ogg;
@@ -179,10 +179,10 @@ PAGE3 {
     index: 2;
 
     # 座標とサイズ
-    x: 1042;
-    y: 58;
-    width: 80;
-    height: 80;
+    x: 1065;
+    y: 359;
+    width: 184;
+    height: 96;
 
     # ポイントされたときの効果音
     pointse: button.ogg;
@@ -191,19 +191,62 @@ PAGE3 {
     clickse: click.ogg;
 }
 
+# セーブデータページ2のボタン
+PAGE4 {
+    # 種類:セーブデータページ
+    type: savepage;
+
+    # 4ページ目(index=3)
+    index: 3;
+
+    # 座標とサイズ
+    x: 1065;
+    y: 471;
+    width: 184;
+    height: 96;
+
+    # ポイントされたときの効果音
+    pointse: button.ogg;
+
+    # クリックされたときの効果音
+    clickse: click.ogg;
+}
+
+# セーブデータページ2のボタン
+PAGE5 {
+    # 種類:セーブデータページ
+    type: savepage;
+
+    # 5ページ目(index=4)
+    index: 4;
+
+    # 座標とサイズ
+    x: 1065;
+    y: 583;
+    width: 184;
+    height: 96;
+
+    # ポイントされたときの効果音
+    pointse: button.ogg;
+
+    # クリックされたときの効果音
+    clickse: click.ogg;
+}
+
+
 # タイトルへ戻るボタン
 TITLE {
     # 種類:タイトルへ戻る
     type: title;
 
     # 移動先のシナリオファイル
-    file: init.txt;
+    file: story.txt;
 
     # 座標とサイズ
-    x: 967;
-    y: 625;
-    width: 174;
-    height: 80;
+    x: 514;
+    y: 27;
+    width: 361;
+    height: 96;
 
     # ポイントされたときの効果音
     pointse: button.ogg;
