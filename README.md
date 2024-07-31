@@ -44,4 +44,4 @@ Throw away the old fashion engines!
 Currently we don't have a dedicated forum and please feel free to write to GitHub Issues.
 
 ## Contact
-Please contact us at `info@opennovel.org`.
+Please contact us at `info@opennovel.org` anytime.
