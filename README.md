@@ -37,7 +37,8 @@ Our core engine is written in ANSI C, making it **the most portable visual novel
 ## Ditch the Web for Apps
 Let me tell you the truth, the Web is a place for old people.
 You need to realize that quickly.
-If you notice, move onto Apps!
+If you notice, move onto Apps.
+Throw away Tyrano!
 
 ## Forum
 Currently we don't have a dedicated forum and please feel free to write to GitHub Issues.
