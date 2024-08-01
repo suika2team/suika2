@@ -79,7 +79,7 @@ cp game.dmg "$TARGET_DIR/tools/game-mac.dmg"
 cd ../../
 
 cd apps/pack
-rm pack
+rm -f pack
 make pack
 cp pack "$TARGET_DIR/tools/pack-mac"
 cd ../..
