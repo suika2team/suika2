@@ -220,7 +220,7 @@ namebox.image=system/message/namebox.png
 # 名前ボックスの位置
 #
 namebox.x=80
-namebox.y=460
+namebox.y=450
 
 #
 # 名前ボックスの文字の上端マージン(ピクセル)
