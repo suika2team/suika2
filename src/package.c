@@ -482,6 +482,10 @@ int main(int argc, char *argv[])
 	return 0;
 }
 
+#endif
+
+#if defined(USE_STANDALONE_PACK) || defined(USE_LIB_PACK)
+
 #ifdef OPENNOVEL_TARGET_WIN32
 
 #define CONV_MESSAGE_SIZE 65536

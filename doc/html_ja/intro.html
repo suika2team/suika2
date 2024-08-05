@@ -12,7 +12,7 @@
 
 <h2>OpenNovelの使い方</h2>
 <p>
-	このチュートリアルでは、Polaris Engineを使ってゲームを作成する方法を説明します。
+	このチュートリアルでは、OpenNovelを使ってゲームを作成する方法を説明します。
 </p>
 <p>
 	内容はとてもかんたんで、1時間もあれば取り組めます。
@@ -40,7 +40,7 @@
 			<li>title ... タイトル画面</li>
 		</ul>
 	</li>
-	<li>sound ... 画像
+	<li>sound ... サウンド
 		<ul>
 			<li>music ... BGM</li>
 			<li>effect ... 効果音</li>
@@ -75,7 +75,7 @@
 <p>
 	屋上の背景が表示されるはずです。
 	<code>@bg</code> というのが背景を表示する命令です。
-	<code>roof.png は <code>image/bg</code> フォルダの中のファイル名です。
+	<code>roof.png</code> は <code>image/bg</code> フォルダの中のファイル名です。
 	<code>1.0</code> は画面の表示が完了するまでの時間(秒)です。
 </p>
 
@@ -86,13 +86,13 @@
 </p>
 
 <pre><code>@bg roof.png 1.0
-@ch center 001-fun.png 1.0</code></pre>
+@ch center chara001.png 1.0</code></pre>
 
 <p>
 	屋上の背景が表示され、続いてキャラクタが表示され、クリックを行うと、終了するはずです。
 	<code>@ch</code> というのがキャラクタを表示するコマンドです。
 	<code>center</code> は表示位置(中央)です。
-	<code>f001-fun.png</code> は <code>image/ch</code> フォルダの中のファイル名です。
+	<code>chara001.png</code> は <code>image/ch</code> フォルダの中のファイル名です。
 	<code>1.0</code> はフェードインの時間(秒)です。
 </p>
 
@@ -103,10 +103,10 @@
 </p>
 
 <pre><code>@bg roof.png 1.0
-@ch center 001-fun.png 1.0
+@ch center chara001.png 1.0
 メッセージボックスにテキストを表示するのが"メッセージ"です。
-みどり「キャラクタの名前を付けたメッセージが"セリフ"です。」
-*みどり*011.ogg*セリフにはボイスをつけることができます。</code></pre>
+なまえ「キャラクタの名前を付けたメッセージが"セリフ"です。」
+*なまえ*001.ogg*セリフにはボイスをつけることができます。</code></pre>
 
 <p>
 	先ほどのキャラクタが表示されたあと、メッセージとセリフが表示されるはずです。
@@ -124,7 +124,7 @@
 
 <pre><code>@bgm 01.ogg
 @bg roof.png 1.0
-@ch center 001-fun.png 1.0</code></pre>
+@ch center chara001.png 1.0</code></pre>
 
 <p>
 	BGMが再生され、先ほどのキャラクタが表示されるはずです。
@@ -143,22 +143,22 @@
 </p>
 
 <pre><code>@bg roof.png 1.0
-@ch center 001-fun.png 1.0
+@ch center chara001.png 1.0
 さて、学校へ行くか。
-@choose label1 歩いて行こう label2 自転車で行こう
-:label1
+@choose WALK 歩いて行こう BIKE 自転車で行こう
+:WALK
 歩いて行くことにした。
 @goto end
-:label2
+:BIKE
 自転車で行くことにした。
 @goto end
 :end</code></pre>
 
 <p>
-	コピペしたら、ゲームを実行します。3つの選択肢が表示されるはずです。
-	@choose は選択肢命令を表し、 label1, label2 は選択肢が選ばれたときにジャンプする先のラベルです(後述)。
-	ラベルと選択肢がセットです。
-	<code>:label1</code> は、ジャンプ先として指定されるラベルです。
+	コピペしたら、ゲームを実行します。2つの選択肢が表示されるはずです。
+	<code>@choose</code> は選択肢命令を表し、<code>WALK</code>, <code>BIKE</code> は選択肢が選ばれたときにジャンプする先のラベルです(後述)。
+	ラベル名と選択肢のテキストが一組のセットです。
+	<code>:WALK</code> は、ジャンプ先として指定されるラベルです。
 	ラベルの行は、ゲームの見た目の上では何も実行されません。
 </p>
 
@@ -170,7 +170,7 @@
 </p>
 
 <pre><code>@bg roof.png 1.0
-@ch center 001-fun.png 1.0
+@ch center chara001.png 1.0
 さて、学校へ行くか。
 
 &lt;&lt;&lt;
@@ -192,7 +192,7 @@ case "自転車で行こう":
 </p>
 
 <pre><code>@bg roof.png 1.0
-@ch center 001-fun.png 1.0
+@ch center chara001.png 1.0
 
 さて、学校へ行くか。
 
@@ -297,7 +297,7 @@ if $1 == 0 {
 
 <p>story.txt:</p>
 <pre><code>@bg roof.png 1.0
-@ch center 001-fun.png 1.0
+@ch center chara001.png 1.0
 init.txtの中にいます。
 @story second.txt</code></pre>
 
@@ -311,11 +311,7 @@ init.txtの中にいます。
 
 <h2>素材ファイルをパッケージにまとめて見えなくする方法</h2>
 <p>
-	ゲームリリース時には、素材ファイルがそのまま見えないように、ファイル群を1つのパッケージにまとめます。
-	ゲームフォルダの中に <code>pack-win.exe</code> をコピーして実行します。
-	すると、<code>package.pak</code> ファイルが生成されます。
-	ゲームの実行には、<code>game.exe</code> と <code>package.pak</code> の2点があれば動作します。
-	動画を利用した場合は mov フォルダも必要になります。
+	<code>exporter.exe</code> を使ってください。
 </p>
 
 </body>
