@@ -226,14 +226,14 @@ echo ''
 echo 'Making a release on GitHub...'
 
 yes '' | gh release create "$VERSION" --title "$VERSION" --notes "$NOTE" "$TARGET_ZIP"
-rm "$TARGET_ZIP"
+rm -f "$TARGET_ZIP"
 
 #
 # Discord Announcement
 #
 
 echo 'Posting to the Discord server...'
-discord-post.sh "$NOTE"
+discord-release.sh "$NOTE"
 
 echo '...Done.'
 echo ''
