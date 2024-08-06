@@ -1,13 +1,19 @@
 <html><head></head><body><ul><!-- -*- mode: html-mode; -*-
 
 <!-- BEGIN-LATEST -->
+<li>OpenNovel 0.99.1 2024/08/06
+  <ul>
+    <li>Release Candidate of 1.0.0</li>
+    <li>Changed the design of the choose box</li>
+  </ul>
+</li>
+<!-- END-LATEST -->
+
 <li>OpenNovel 0.99.0 2024/08/06
   <ul>
     <li>Release Candidate of 1.0.0</li>
   </ul>
 </li>
-<!-- END-LATEST -->
-
 <li>OpenNovel 0.2.9 2024/08/06
   <ul>
     <li>Improvements on the sample game</li>

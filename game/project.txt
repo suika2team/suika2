@@ -189,7 +189,7 @@ msgbox.show.on.ch=yes
 #  - no:  表示しない
 #  - yes: 表示する
 #
-msgbox.show.on.bg=no
+msgbox.show.on.bg=yes
 
 #
 # 選択肢表示中にメッセージボックスを表示するか
@@ -416,9 +416,9 @@ choose.font.size=36
 #
 # フォントの色
 #
-choose.font.r=0
-choose.font.g=0
-choose.font.b=0
+choose.font.r=255
+choose.font.g=255
+choose.font.b=255
 
 #
 # フォントのふちどりの幅
