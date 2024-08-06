@@ -416,9 +416,9 @@ choose.font.size=36
 #
 # フォントの色
 #
-choose.font.r=255
-choose.font.g=255
-choose.font.b=255
+choose.font.r=0
+choose.font.g=0
+choose.font.b=0
 
 #
 # フォントのふちどりの幅
@@ -575,7 +575,7 @@ sysbtn.hide=no
 #  - no:  表示しない
 #  - yes: 表示する
 #
-sysbtn.transition=no
+sysbtn.transition=yes
 
 ########################################################################
 

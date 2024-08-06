@@ -1,13 +1,18 @@
 <html><head></head><body><ul><!-- -*- mode: html-mode; -*-
 
 <!-- BEGIN-LATEST -->
+<li>OpenNovel 0.2.9 2024/08/06
+  <ul>
+    <li>Improvements on the sample game</li>
+  </ul>
+</li>
+<!-- END-LATEST -->
+
 <li>OpenNovel 0.2.8 2024/08/05
   <ul>
     <li>Changed the design of the message and name boxes</li>
   </ul>
 </li>
-<!-- END-LATEST -->
-
 <li>OpenNovel 0.2.7 2024/08/05
   <ul>
     <li>English translation</li>
