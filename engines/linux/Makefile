@@ -1,4 +1,4 @@
-CC=clang
+CC=gcc
 AR=ar
 STRIP=strip
 
@@ -67,7 +67,7 @@ LDFLAGS = \
 all: game-linux
 
 game-linux: $(SRCS) libroot
-	$(CC) \
+	@$(CC) \
 		-o game-linux \
 		$(CPPFLAGS) \
 		$(CFLAGS) \
@@ -75,10 +75,10 @@ game-linux: $(SRCS) libroot
 		$(SRCS) \
 		 $(LDFLAGS) \
 		`pkg-config --libs gstreamer-1.0 gstreamer-video-1.0`
-	$(STRIP) game-linux
+	@$(STRIP) game-linux
 
 libroot:
-	../../external/build-libs.sh "" $(CC) "-O2 -g0" $(AR)
+	@../../external/build-libs.sh "" $(CC) "-O2 -g0" $(AR)
 
 setup:
 	sudo apt-get install build-essential libasound2-dev libx11-dev libxpm-dev mesa-common-dev libfreetype-dev libpng-dev libjpeg-dev libwebp-dev libvorbis-dev libogg-dev libbrotli-dev libbz2-dev libz-dev libgstreamer1.0-dev libgstreamer-plugins-base1.0-dev
