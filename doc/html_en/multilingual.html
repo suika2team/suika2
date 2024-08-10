@@ -3,96 +3,94 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width">
-  <title>OpenNovel マニュアル</title>
+  <title>OpenNovel</title>
   <link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
 
-<h1>多言語対応</h1>
+<h1>Multilingualization</h1>
 <p>
-	ストーリーファイル中では下記のように言語を書き分けることができます。
+	In a story file, you can write a message with a language specifier.
 </p>
 
 <pre><code>+en+This is an English message.
 +ja+日本語のメッセージです。</code></pre>
 
 <p>
-	セリフの場合は下記のように記述します。
+	Do the same thing for a line with a name.
 </p>
 
-<pre><code>+en+*Midori*This is an English message.
-+ja+*みどり*日本語のメッセージです。</code></pre>
+<pre><code>+en+*Hina*This is an English message.
++ja+*ひな*日本語のメッセージです。</code></pre>
 
 <p>
-	<code>+en+</code> の表記は、OSの動作言語が英語である場合だけ実行する、という意味です。
-	メッセージやコマンドの直前、行頭に書きます。
-	同様に、<code>+ja+</code>の表記は、OSの動作言語が日本語である場合だけ実行する、という意味です。
+	<code>+en+</code> means a message will be shown only if the system locale is English.
 </p>
 <p>
-	利用できる言語は、現時点でl下記の通りです。
+	Available languages are the following.
 </p>
 
 <table>
 	<thead>
 		<tr>
-			<th>言語指定</th>
-			<th>言語の内容</th>
+			<th>ID</th>
+			<th>Language</th>
 		</tr>
 	</thead>
 	<tbody>
 		<tr>
 			<td>ja</td>
-			<td>日本語</td>
+			<td>Japanese</td>
 		</tr>
 		<tr>
 			<td>en</td>
-			<td>英語</td>
+			<td>English</td>
 		</tr>
 		<tr>
 			<td>fr</td>
-			<td>フランス語</td>
+			<td>French</td>
 		</tr>
 		<tr>
 			<td>it</td>
-			<td>イタリア語</td>
+			<td>Italian</td>
 		</tr>
 		<tr>
 			<td>es</td>
-			<td>スペイン語</td>
+			<td>Spanish</td>
 		</tr>
 		<tr>
 			<td>de</td>
-			<td>ドイツ語</td>
+			<td>Deutsch</td>
 		</tr>
 		<tr>
 			<td>el</td>
-			<td>ギリシャ語</td>
+			<td>Greek</td>
 		</tr>
 		<tr>
 			<td>ru</td>
-			<td>ロシア語</td>
+			<td>Russian</td>
 		</tr>
 		<tr>
 			<td>zh</td>
-			<td>中国語(簡体字)</td>
+			<td>Chinese (Simplified)</td>
 		</tr>
 		<tr>
 			<td>tw</td>
-			<td>中国語(繁体字)</td>
+			<td>Chinese (Traditional)</td>
 		</tr>
 		<tr>
 			<td>other</td>
-			<td>その他</td>
+			<td>Other languages</td>
 		</tr>
 	</tbody>
 </table>
 
 <p>
-	最後に、もしもゲーム中で言語選択の画面を作成する場合は、ストーリーファイルの中で、
+	If you want to make a language choose inside a game, write:
 </p>
 <pre><code>@config locale.force en</code></pre>
 <p>
-	のように記述すれば、OSの言語設定とは関係なく強制的に言語が変更されます。
+	This will force-set the current language.
 </p>
 
 </body>

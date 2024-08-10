@@ -3,113 +3,106 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width">
-  <title>OpenNovel マニュアル</title>
+  <title>OpenNovel</title>
   <link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
 
-<h1>メニュー画面の作り方</h1>
+<h1>How to make a menu screen</h1>
 <p>
-	メニュー画面を作っていくための手順を載せています。
+	This page shows how to make a menu screen with OpenNovel.
 </p>
 
-<h2>まずはじめに</h2>
+<h2>Introduction</h2>
 <p>
-	テンプレートゲームの中身を見ていきましょう。
+	Let's dive into the sample game.
 </p>
 
-<h3>タイトル画面の呼び出し箇所</h3>
+<h3>Calling site of the title screen</h3>
 <p>
-	<code>story/story.txt</code> の中で、<code>@menu title.txt</code> と書いてある行を探してください。
-	これがメニュー画面の呼び出しです。
-	タイトル画面はメニュースクリプトを使って実現されています。
+	In the <code>story/story.txt</code> file, find a line that is described as <code>@menu title.txt</code>.
+	That is a menu calling site.
+	The title screen is realized by a menu script.
 </p>
 <p>
-	<code>title.txt</code> というのは、<code>script/menu</code> フォルダに入っている <code>title.txt</code> のことです。
+	<code>title.txt</code> means the <code>script/menu/title.txt</code> file.
 </p>
 
-<h3>title.txt の中身</h3>
+<h3>Contents of title.txt</h3>
 <p>
-	<code>script/menu/title.txt</code> など、メニュースクリプトを開いてみてください。
-	まず先頭に、
+	Open the <code>script/menu/title.txt</code> file.
+	At the top of the file, you will see:
 </p>
-<pre><code># このファイルの基本設定
+<pre><code># File Setting
 global {
-    # 下記の画像を使用する
+    # Use the following images.
     base:   title/idle.png;
     idle:   title/idle.png;
     hover:  title/hover.png;
     active: title/hover.png;
 
-    # フェードイン時間(秒)
+    # Fading-in time (second)
     fadein: 0.2;
 
-    # フェードアウト時間(秒)
+    # Fading-out time (second)
     fadeout: 0.2;
 }</code></pre>
-<p>
-	と書かれています。これの意味は下記のとおりです。
-</p>
 
 <table>
 	<thead>
 		<tr>
-			<th>指定名</th>
-			<th>意味</th>
+			<th>Specifier</th>
+			<th>Meaning</th>
 		</tr>
 	</thead>
 	<tbody>
 		<tr>
 			<td>base</td>
 			<td>
-				一番背景となるレイヤーの指定。
-				noneを指定するとゲームのステージ（背景、キャラ）が表示される。
-				画像を指定すると画像が表示される。
+				Back most layer.
+				If none is specified, stage layers (e.g. background and characters) will be shown.
+				If a file is specified, an image will be shown.
 			</td>
 		</tr>
 		<tr>
 			<td>idle</td>
 			<td>
-				何もしていない状態で表示する画像。cgフォルダの画像。
+				An image to show when a button is not pointed my a mouse.
 			</td>
 		</tr>
 		<tr>
 			<td>hover</td>
 			<td>
-				ボタンがマウスでポイントされた時に表示する画像。
-				cgフォルダの画像。
+				An image to show when a button is pointed by a mouse.
 			</td>
 		</tr>
 		<tr>
 			<td>active</td>
 			<td>
-				単純なタイトル画面では使いません。
-				適当にidleやhoverと同じ画像を使っておきます。
+				Not used in a simple title screen.
+				Specify the same file as idle or hover.
 			</td>
 		</tr>
 		<tr>
 			<td>fadein</td>
-			<td>フェードイン時間(秒)</td>
+			<td>Fading-in time (second)</td>
 		</tr>
 		<tr>
 			<td>fadeout</td>
-			<td>フェードアウト時間(秒)</td>
+			<td>Fading-out time (second)</td>
 		</tr>
 	</tbody>
 </table>
 
-<h3>ボタン画像の準備について</h3>
+<h3>About Images</h3>
 <ul>
-	<li>他のエンジンと違って、個々の小さなボタンの画像を使いません</li>
-	<li>代わりに、画面全体の中にボタンを配置した画像を利用します</li>
-	<li>このデータを作るには、画像編集ソフトやペイントソフトのレイヤー機能を使います</li>
+	<li>We use screen-sized images instead of per-button images.</li>
+	<li>To create those images, please use a painting software that has layer function.</li>
 </ul>
 
-<h3>menu.txt ファイルの構造</h3>
+<h3>Structure of title.txt</h3>
 <p>
-	<code>title.txt</code> ファイルの続きについて見ていきます。
-	大まかに見ると4つのボタンについて書かれています。
-	なんとなく眺めてみると、次の構造になっていることがわかります。
+	<code>title.txt</code> has 3 button blocks.
 </p>
 <pre><code>START {
     ...
@@ -127,104 +120,78 @@ QUIT {
     ...
 }</code></pre>
 
-<h3>START ボタンの中身</h3>
-<p>
-	ここで START ボタンの中をよく見ていきます。
-</p>
-<pre><code># STARTボタン
+<h3>Contents of START button</h3>
+<pre><code># START button
 START {
-    # 種類:ラベルへジャンプ
+    # Type: jump to a label
     type: goto;
 
-    # ジャンプ先のラベル
+    # Jump destination label
     label: START;
 
-    # 座標とサイズ
+    # Position and size
     x: 2;
     y: 495;
     width: 314;
     height: 192;
 
-    # ポイントされたときの効果音
+    # Sound effect when pointed 
     pointse: btn-change.ogg;
 
-    # クリックされたときの効果音
+    # Sound effect when clicked
     clickse: click.ogg;
 }</code></pre>
 
+<h3>type: goto;</h3>
 <p>
-	わかる部分、わからない部分があると思います。さらに詳しく見ていきましょう。
+	<code>type: goto;</code> means a goto jump will occur when the button is clicked.
+</p>
+<p>
+	<code>label: START;</code> means the jump destination is <code>:START</code>.
 </p>
 
-<h3>クリックされたらラベルへジャンプ</h3>
+<h3>Position and Size</h3>
 <p>
-	<code>type: goto;</code> というのは、このボタンが押されたときに、
-	「ストーリーファイルどこかのラベルにジャンプする」、
-	という意味です。
-	ラベルというのは、シナリオの中で、`:` から始まる行のことです。
-</p>
-<p>
-	<code>label: START;</code> というのは、このボタンが押されたときに、
-	「ストーリーファイルの <code>:START</code> という行にジャンプする」、
-	という意味です。
+	Please check the position and the size on <code>Photoshop</code>, <code>CLIP STUDIO PAINT</code>, or equivalent tools.
 </p>
 
-<h3>座標とサイズ</h3>
+<h2>Color Adjustments</h2>
 <p>
-	座標とサイズですが、これは <code>Photoshop</code> や <code>CLIP STUDIO PAINT</code> などのツールで、
-	ボタンの位置とサイズを確認して書いてください。
+	If a fringe is shown on a save/load/history slot, please add the following settings.
 </p>
-
-<h3>これでOK</h3>
-<p>
-	たったこれだけです。意外と難しくなかった、という感想を持たれたと思います。
-</p>
-
-<h2>ボタンを増やすには？</h2>
-<ul>
-	<li>START { ... } のブロックをコピーして、新しいブロックを作ってみましょう</li>
-	<li>コピー先の START の部分には自分で新しい名前を付けてください</li>
-	<li>アルファベットならなんでもいいです。(実を言うとSTARTが2つあってもそのまま動きます)</li>
-</ul>
-
-<h2>ヒストリーやセーブ画面での調整</h2>
-<p>
-	GUIのセーブ・ロード・ヒストリーのスロット内の文字に、灰色のふちどりが生じることがあります。
-	この場合、スロットに以下のような背景色を追加すると解決できます。
-</p>
-<pre><code># 背景色
+<pre><code># Clear color
 clear-r: 255;
 clear-g: 255;
 clear-b: 255;</code></pre>
 <p>
-	GUIファイル記載例
+	Sample:
 </p>
-<pre><code># セーブデータ1番目
+<pre><code># Save data slot #1
 SAVESLOT1 {
-   # 種類:セーブ
+   # Type: Save
    type: save;
 
-   # セーブデータ番号0
+   # Save data index 0
    index: 0;
 
-   # 背景色
+   # Clear color
    clear-r: 255;
    clear-g: 255;
    clear-b: 255;
 
-   # 座標とサイズ
+   # Position and size
    x: 167;
    y: 153;
    width: 950;
    height: 162;
 
-   # 画像とテキストのマージン
+   # Margin between image and text
    margin: 20;
 
-   # ポイントされたときの効果音
+   # Sound effect when pointed
    pointse: btn-change.ogg;
 
-   # クリックされたときの効果音
+   # Sound effect when clicked
    clickse: click.ogg;
 
 }</code></pre>

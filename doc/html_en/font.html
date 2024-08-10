@@ -3,61 +3,56 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width">
-  <title>OpenNovel マニュアル</title>
+  <title>OpenNovel</title>
   <link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
 <p>
-	conf/config.txt`でフォントを4つまで設定できます。
+	You can specify up to 4 fonts in the <code>project.txt</code> file.
 </p>
 <table>
 	<thead>
 		<tr>
-			<td>フォントの種類</td>
-			<td>説明</td>
+			<td>Font Type</td>
+			<td>Explanation</td>
 		</tr>
 	</thead>
 	<tbody>
 		<tr>
-			<td>フォント1</td>
-			<td>プレイヤーが設定画面で切り替えできるデフォルトのフォント</td>
+			<td>Font 1</td>
+			<td>Default font to be selected at the config screen.</td>
 		</tr>
 		<tr>
-			<td>フォント2</td>
-			<td>固定のフォント</td>
+			<td>Font 2</td>
+			<td>A fixed font.</td>
 		</tr>
 		<tr>
-			<td>フォント3</td>
-			<td>固定のフォント</td>
+			<td>Font 3</td>
+			<td>A fixed font.</td>
 		</tr>
 		<tr>
-			<td>フォント4</td>
-			<td>固定のフォント</td>
+			<td>Font 4</td>
+			<td>A fixed font.</td>
 		</tr>
 	</tbody>
 </table>
 
 <p>
-	フォント1はコンフィグ画面からプレイヤーが変更できます。
+	You can choose a font for the message box as the following.
 </p>
-<p>
-	ストーリー中では、下記のように変更できます。
-</p>
-<pre><code># フォント1を選択
+<pre><code># Choose Font 1
 @config msgbox.font 1</code></pre>
 <p>
-	また、メッセージの中で一時的に変更も可能です。
+	You can choose fonts inside messages temporalily.
 </p>
-<pre><code>	メッセージ中では、\f{1}でフォント1を選択できます。
-メッセージ中では、\f{2}でフォント2を選択できます。
-メッセージ中では、\f{3}でフォント3を選択できます。
-メッセージ中では、\f{4}でフォント4を選択できます。</code></pre>
+<pre><code>In a message, \f{1}you can choose Font 1 like this.
+In a message, \f{2}you can choose Font 1 like this.
+In a message, \f{3}you can choose Font 1 like this.
+In a message, \f{3}you can choose Font 1 like this.</code></pre>
 <p>
-	フォント1の選択はセーブデータに残るため、
-	フォント1のファイル名が変更になった場合には、
-	エラーが表示されます。
-
-	この場合、セーブデータを削除して再起動すれば解決します。
+	Because Font 1 will be saved to the save file,
+	an error will be shown after changes to font file name of Font 1 in the <code>project.txt</code> file.
+	In that case, please remove your save files.
 </p>
 
 </body>

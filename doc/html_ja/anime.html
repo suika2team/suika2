@@ -11,7 +11,7 @@
 <h1>アニメの基本</h1>
 
 <p>
-	<a href="referene.html#anime"><code>@anime</code></a> コマンドでアニメファイルを再生できます。
+	<a href="referene.html#anime"><code>@anime</code></a> コマンドでアニメスクリプトを再生できます。
 	アニメの内容は、ストーリーファイルではなく、別なテキストファイルに記述します。
 </p>
 <p>
@@ -43,8 +43,8 @@ text2
 text1 
 
 chf  (キャラ顔)
-name (名前ボックス、画像変更はアニメからはできない)
-msg  (メッセージボックス、画像変更はアニメからはできない)
+name (名前ボックス)
+msg  (メッセージボックス)
 
 effect4
 effect3
@@ -52,9 +52,9 @@ effect2
 effect1
  
 chc  (中央キャラ)
-chrc  (右中キャラ)
+chrc (右中キャラ)
 chr  (右キャラ)
-chlc  (左中キャラ)
+chlc (左中キャラ)
 chl  (左キャラ)
 chb  (背面キャラ)
 
@@ -64,7 +64,7 @@ effect6
 effect5
  
 bg2
-bg   (背景, 今のところアルファ値は255固定)</code></pre>
+bg   (背景)</code></pre>
 
 <p>
 	<code>effect1</code> から <code>effect4</code> は、雨のアニメーションや、色味を加えるのに使えます。
@@ -75,8 +75,6 @@ bg   (背景, 今のところアルファ値は255固定)</code></pre>
 <pre><code>test1 {
     layer: effect1;
  
-    clear: all;
-
     start: 0.0;
     end: 3.0;
 

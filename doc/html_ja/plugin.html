@@ -56,7 +56,7 @@ msgbox.font.b=255</code></pre>
 }</code></pre>
 
 <p>
-	そして、init.txt の中で次のように呼び出してみてください。
+	そして、<code>story.txt</code> の中で次のように呼び出してみてください。
 </p>
 
 <pre><code>今から文字の色が変わります。
@@ -77,7 +77,7 @@ msgbox.font.b=255</code></pre>
 <h3>プログラムは <code>main()</code> 関数から始まる</h3>
 <pre><code>func main() {
     // これはコメントです
-    print(<span class="hljs-string">"Hello, world!");
+    print("Hello, world!");
 }</code></pre>
 
 <h3>関数は他の関数を呼び出しできる</h3>
@@ -87,10 +87,11 @@ msgbox.font.b=255</code></pre>
 
 func foo(a, b, c) {
     return a + b + c;
-}
-</code></pre><h3 id="-">文字列変数による間接呼び出しが可能</h3>
+}</code></pre>
+
+<h3>文字列変数による間接呼び出しが可能</h3>
 <pre><code>func main() {
-    myfunc = <span class="hljs-string">"foo";
+    myfunc = "foo";
     myfunc(0, 1, 2);
 }
 
@@ -100,74 +101,100 @@ func foo(a, b, c) {
 
 func myfunc(a, b, c) {
     // この関数は呼び出されません。foo()が呼び出されます。
-}
-</code></pre><h3 id="-">型と変数</h3>
-<p>プログラムは整数、浮動小数点数、文字列、配列の変数と値を利用できます。</p>
+}</code></pre>
+
+<h3>型と変数</h3>
+<p>
+	プログラムは整数、浮動小数点数、文字列、配列の変数と値を利用できます。
+</p>
 <pre><code>func main() {
     // 整数
     a = 1;
     if(isint(a)) {
-        print(<span class="hljs-string">"a is int");
+        print("a is int");
     }
 
     // 浮動小数点数
     b = 1.0;
     if(isfloat(b)) {
-        print(<span class="hljs-string">"b is float");
+        print("b is float");
     }
 
     // 文字列
-    c = <span class="hljs-string">"string";
+    c = "string";
     if(isstr(c)) {
-        print(<span class="hljs-string">"c is string");
+        print("c is string");
     }
 
     // 配列 (整数インデックス)
     d[0] = 0;
     if(isarray(d)) {
-        print(<span class="hljs-string">"d is array");
+        print("d is array");
     }
 
     // 配列 (文字列インデックス)
-    e[<span class="hljs-string">"abc"] = 0;
+    e["abc"] = 0;
     if(isarray(e)) {
-        print(<span class="hljs-string">"e is array");
+        print("e is array");
     }
 
     // 配列の配列
-    f[<span class="hljs-string">"key"] = e;
-}
-</code></pre><h3 id="-">計算</h3>
-<p>整数と浮動小数点数は加算、減算、乗算、除算が可能です。</p>
-<p>整数は下記のようになります。</p>
+    f["key"] = e;
+}</code></pre>
+
+<h3>計算</h3>
+<p>
+	整数と浮動小数点数は加算、減算、乗算、除算が可能です。
+</p>
+<p>
+	整数は下記のようになります。
+</p>
 <pre><code>a = 1;
 b = 2;
 c = a + b;
 // a += b; の形式はサポートされていません。
-</code></pre><p>また、浮動小数点は下記のようになります。</p>
+</code></pre>
+
+<p>
+	また、浮動小数点は下記のようになります。
+</p>
 <pre><code>a = 1.0;
 b = 2.0;
 c = a + b;
 </code></pre><p>整数と浮動小数点数を組み合わせると、結果は浮動小数点数になります。</p>
 <pre><code>a = 1;
 b = 2.0;
-c = a + b; // cは浮動小数点数
-</code></pre><p>整数は除算の余り（剰余）を求めることができます。</p>
+c = a + b; // cは浮動小数点数</code></pre>
+
+<p>
+	整数は除算の余り（剰余）を求めることができます。
+</p>
 <pre><code>a = 3;
 b = a % 2; // 結果は3÷2の余りである1
-</code></pre><p>文字列は+で連結可能です。</p>
-<pre><code>a = <span class="hljs-string">"aaa";
-b = <span class="hljs-string">"bbb";
-c = a + b;
-</code></pre><p>文字列＋整数は文字列ですが、整数＋文字列は整数です。</p>
-<h3 id="-">ループ</h3>
-<p>指定した回数の繰り返し:</p>
+</code></pre>
+
+<p>
+	文字列は+で連結可能です。
+</p>
+<pre><code>a = "aaa";
+b = "bbb";
+c = a + b;</code></pre>
+
+<p>
+	文字列＋整数は文字列ですが、整数＋文字列は整数です。
+</p>
+
+<h3>回数ループ</h3>
+<p>
+	指定した回数の繰り返し:
+</p>
 <pre><code>func main() {
     for(i in 0..9) {
         print(i);
     }
-}
-</code></pre><h3 id="-">配列の値についての繰り返し:</h3>
+}</code></pre>
+
+<h3>配列の値についての繰り返し:</h3>
 <pre><code>func main() {
     a[0] = 0;
     a[1] = 1;
@@ -175,26 +202,30 @@ c = a + b;
     for(v in a) {
         print(v);
     }
-}
-</code></pre><h3 id="-">配列のキー/値ペアについての繰り返し:</h3>
+}</code></pre>
+
+<h3>配列のキー/値ペアについての繰り返し:</h3>
 <pre><code>func main() {
-    a[<span class="hljs-string">"key1"] = 0;
-    a[<span class="hljs-string">"key2"] = 1;
-    a[<span class="hljs-string">"key3"] = 2;
+    a["key1"] = 0;
+    a["key2"] = 1;
+    a["key3"] = 2;
 
     for(k, v in a) {
-        print(k + <span class="hljs-string">"=" + v);
+        print(k + "=" + v);
     }
-}
-</code></pre><h3 id="-while-">単純な while ループ:</h3>
+}</code></pre>
+
+<h3>単純な while ループ:</h3>
+
 <pre><code>func main() {
     a = 10;
     while (a &gt; 0) {
         print(a);
         a = a - 1;
     }
-}
-</code></pre><h3 id="break-continue-">break と continue:</h3>
+}</code></pre>
+
+<h3>break と continue:</h3>
 <pre><code>func main() {
     for(i in 0..9) {
         if(i == 2) {
@@ -204,94 +235,133 @@ c = a + b;
             break;
         }
     }
-}
-</code></pre><h3 id="-">分岐</h3>
-<p>プログラムは if - else if - else で分岐できます。</p>
+}</code></pre>
+
+<h3>分岐</h3>
+<p>
+	プログラムは if - else if - else で分岐できます。
+</p>
 <pre><code>func main() {
     a = foo();
     if(a &gt; 10) {
-        print(<span class="hljs-string">"a &gt; 10");
+        print("a &gt; 10");
     } else if(a &gt; 5) {
-        print(<span class="hljs-string">"a &gt; 5");
+        print("a &gt; 5");
     } else {
-        print(<span class="hljs-string">"else");
+        print("else");
     }
 }
 
 func foo() {
     return 6;
-}
-</code></pre><h3 id="-">配列</h3>
-<p>配列の要素はキー(インデックス)を持ち、キーには整数、浮動小数点数、文字列が使えます。
-１つの配列の中で、整数、浮動小数点数、文字列のキーを混在させられます。</p>
-<p>配列を作成するには、値を [key] の文法で代入します。</p>
+}</code></pre>
+
+<h3>配列</h3>
+
+<p>
+	配列の要素はキー(インデックス)を持ち、キーには整数、浮動小数点数、文字列が使えます。
+	１つの配列の中で、整数、浮動小数点数、文字列のキーを混在させられます。
+</p>
+
+<p>
+	配列を作成するには、値を [key] の文法で代入します。
+</p>
 <pre><code>func main() {
     a[0] = 0;
     print(a);
-}
-</code></pre><p>配列の要素を削除するには、remove() を使います。</p>
+}</code></pre>
+
+<p>
+	配列の要素を削除するには、remove() を使います。
+</p>
 <pre><code>func main() {
     a[0] = 0;
     remove(a, 0);
     print(a);
-}
-</code></pre><p>配列の要素数を取得するには、size() を使います。</p>
+}</code></pre>
+
+<p>
+	配列の要素数を取得するには、size() を使います。
+</p>
 <pre><code>func main() {
     a[0] = 0;
     print(size(a));
-}
-</code></pre><h3 id="-">型変換</h3>
-<p>整数から文字列:</p>
-<pre><code>s = <span class="hljs-string">"" + 123;
-</code></pre><p>浮動小数点数から文字列:</p>
-<pre><code>s = <span class="hljs-string">"" + 1.23;
-</code></pre><p>整数から浮動小数点数:</p>
-<pre><code>f = 0.0 + 123;
-</code></pre><p>文字列から整数:</p>
-<pre><code>i = 0 + <span class="hljs-string">"123";
-</code></pre><p>文字列から浮動小数点数:</p>
-<pre><code>f = 0.0 + <span class="hljs-string">"1.23";
-</code></pre><p>文法については以上です。</p>
-<h2 id="-">エンジンの呼び出し</h2>
-<p>エンジンの本体は、プラグインスクリプトからエンジンを操作するための関数を提供しています。これらの関数は名前に s2_ という接頭辞を持ちます。</p>
-<h3 id="-">フラグ用変数の値を取得する</h3>
-<p>s2_get_variable() はフラグ用変数のインデックスを受け取り、フラグ用変数の値を返します。</p>
-<pre><code>value = s2_get_variable(100);
-</code></pre><h3 id="-">フラグ用変数の値を設定する</h3>
-<p>s2_set_variable() はフラグ用変数のインデックスと値を受け取って、フラグ用変数の値を変更します。</p>
-<pre><code>s2_set_variable(100, 1);
-</code></pre><h3 id="-">ランダムな数(乱数)を取得する</h3>
-<p>s2_random() はランダムな整数を返します。戻り値の範囲は 0 から 9999 です。</p>
-<pre><code>value = s2_random();
-</code></pre><h3 id="-">コンフィグを書き換える</h3>
-<p>s2_set_config() はコンフィグ名の文字列と、コンフィグ値の文字列を受け取り、コンフィグを書き換えます。</p>
-<pre><code><span class="hljs-selector-tag">s2_set_config(<span class="hljs-string">"msgbox.x", <span class="hljs-string">"0");
-<span class="hljs-selector-tag">s2_set_config(<span class="hljs-string">"msgbox.speed", <span class="hljs-string">"20.0");
-</code></pre><p>かつてはs2<em>reflect</em>*_config()がありましたが、現在ではこれを呼び出さなくても即座に画像やフォントは自動で再読込されます。
-よってs2_reflect_font_config()は現在では、何もしない関数になっています。</p>
+}</code></pre>
+
+<h3>型変換</h3>
+<p>
+	整数から文字列:
+</p>
+<pre><code>s = "" + 123;</code></pre>
+
+<p>
+	浮動小数点数から文字列:
+</p>
+<pre><code>s = "" + 1.23;</code></pre>
+
+<p>
+	整数から浮動小数点数:
+</p>
+<pre><code>f = 0.0 + 123;</code></pre>
+
+<p>
+	文字列から整数:
+</p>
+<pre><code>i = 0 + "123";</code></pre>
+
+<p>
+	文字列から浮動小数点数:
+</p>
+<pre><code>f = 0.0 + "1.23";</code></pre>
+
+<p>
+	文法については以上です。
+</p>
+
+<h2>エンジンの呼び出し</h2>
+
+<p>
+	エンジンの本体は、プラグインスクリプトからエンジンを操作するための関数を提供しています。これらの関数は名前に onvl_ という接頭辞を持ちます。
+</p>
+
+<h3>フラグ用変数の値を取得する</h3>
+
+<p>
+	onvl_get_variable() はフラグ用変数のインデックスを受け取り、フラグ用変数の値を返します。
+</p>
+<pre><code>value = onvl_get_variable(100);</code></pre>
+
+<h3>フラグ用変数の値を設定する</h3>
+
+<p>
+	onvl_set_variable() はフラグ用変数のインデックスと値を受け取って、フラグ用変数の値を変更します。
+</p>
+<pre><code>onvl_set_variable(100, 1);</code></pre>
+
+<h3>ランダムな数(乱数)を取得する</h3>
+
+<p>
+	onvl_random() はランダムな整数を返します。戻り値の範囲は <code>0</code> から <code>9999</code> です。
+</p>
+<pre><code>value = onvl_random();</code></pre>
+
+<h3>コンフィグを書き換える</h3>
+
+<p>
+	onvl_set_config() はコンフィグ名の文字列と、コンフィグ値の文字列を受け取り、コンフィグを書き換えます。
+</p>
+<pre><code>onvl_set_config("msgbox.x", "0");
+onvl_set_config("msgbox.speed", "20.0");</code></pre>
+
 <hr>
-<h1 id="-">使用例</h1>
-<p>コピペで使える事例集です。</p>
-<h2 id="-">メッセージウインドウ、フォント、横書きなどの初期化をする</h2>
-<pre><code><span class="hljs-selector-tag">func <span class="hljs-selector-tag">main() {
-    <span class="hljs-selector-tag">s2_set_config(<span class="hljs-string">"msgbox.tategaki", <span class="hljs-string">"0");  #横書き
-    <span class="hljs-selector-tag">s2_set_config(<span class="hljs-string">"font.file", <span class="hljs-string">"VL-PGothic-Regular.ttf");  #フォント名指定
-    <span class="hljs-selector-tag">s2_set_config(<span class="hljs-string">"msgbox.bg.file", <span class="hljs-string">"msgbox-bg.png");
-    <span class="hljs-selector-tag">s2_set_config(<span class="hljs-string">"msgbox.fg.file", <span class="hljs-string">"msgbox-fg.png");
-    <span class="hljs-selector-tag">s2_set_config(<span class="hljs-string">"msgbox.x", <span class="hljs-string">"0");  #メッセ―ジボックスの<span class="hljs-selector-tag">x座標
-    <span class="hljs-selector-tag">s2_set_config(<span class="hljs-string">"msgbox.y", <span class="hljs-string">"457");  #メッセ―ジボックスの<span class="hljs-selector-tag">y座標
-    <span class="hljs-selector-tag">s2_set_config(<span class="hljs-string">"msgbox.margin.left", <span class="hljs-string">"80");  #メッセージボックスの左マージン
-    <span class="hljs-selector-tag">s2_set_config(<span class="hljs-string">"msgbox.margin.right", <span class="hljs-string">"80");  #メッセージボックスの右マージン
-    <span class="hljs-selector-tag">s2_set_config(<span class="hljs-string">"msgbox.margin.top", <span class="hljs-string">"59");  #メッセージボックスの上マージン
-    <span class="hljs-selector-tag">s2_set_config(<span class="hljs-string">"sysmenu.hidden", <span class="hljs-string">"0");  #システムメニューを隠さない
-    <span class="hljs-selector-tag">s2_set_config(<span class="hljs-string">"namebox.hidden", <span class="hljs-string">"0");  #名前ボックスは隠さない
-    <span class="hljs-selector-tag">s2_set_config(<span class="hljs-string">"click.move", <span class="hljs-string">"0");  #クリックカーソルは隠さない
-    <span class="hljs-selector-tag">s2_set_config(<span class="hljs-string">"click.x", <span class="hljs-string">"1170");  #クリックカーソルの<span class="hljs-selector-tag">x座標
-    <span class="hljs-selector-tag">s2_set_config(<span class="hljs-string">"click.y", <span class="hljs-string">"645");  #クリックカーソルの<span class="hljs-selector-tag">y座標
-    <span class="hljs-selector-tag">s2_reflect_msgbox_and_namebox_config();  #メッセージ＆名前ボックス設定変更
-    <span class="hljs-selector-tag">s2_reflect_font_config();  #フォント設定の変更
-}
-</code></pre><h2 id="-">変数を取得し、計算した後、ゲーム内変数に書き込む</h2>
+
+<h1>使用例</h1>
+
+<p>
+	コピペで使える事例集です。
+</p>
+
+<h2>変数を取得し、計算した後、ゲーム内変数に書き込む</h2>
 <pre><code>func main() {
     // 変数を取得する
     a = s2_get_variable(0);

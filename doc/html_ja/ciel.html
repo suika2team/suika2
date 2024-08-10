@@ -24,12 +24,12 @@
 @cl.file name=bg file=roof.png
 
 # ステージにキャラクタを入場させます。（@chと違って位置指定は存在せず、この時点では表示もされません。）
-@cl.enter name=midori
+@cl.enter name=hina
 
 # 入場済みのキャラクタに画像のロード、座標指定、アルファ値の指定を行います。
-@cl.file name=midori file=001-normal.png
-@cl.pos name=midori align=center x+=100
-@cl.alpha name=midori a=255
+@cl.file name=hina file=001-normal.png
+@cl.pos name=hina align=center x+=100
+@cl.alpha name=hina a=255
 
 # フェードの種類を指定します。
 @cl.effect effect=normal
@@ -71,7 +71,7 @@
 		</tr>
 		<tr>
 			<td>@cl.dim name=名前 dim=true</td>
-			<td>キャラを暗くかの手動設定を行う。dim=trueかdim=false</td>
+			<td>キャラを暗くするかの手動設定を行う。dim=trueかdim=false</td>
 		</tr>
 		<tr>
 			<td>@cl.time t=0.5</td>
@@ -98,12 +98,12 @@
 
 <h2>アニメの例</h2>
 <p>
-	キャラクタ <code>midori</code> を頷かせます。
+	キャラクタ <code>hina</code> を頷かせます。
 </p>
-<pre><code>@cl.move name=midori t=0.3 y-=100
-@cl.move name=midori t=0.3 y+=100
-@cl.move name=midori t=0.3 y-=100
-@cl.move name=midori t=0.3 y+=100
+<pre><code>@cl.move name=hina t=0.3 y-=100
+@cl.move name=hina t=0.3 y+=100
+@cl.move name=hina t=0.3 y-=100
+@cl.move name=hina t=0.3 y+=100
 @cl.run</code></pre>
 <p>
 	最後の <code>@cl.run</code> を <code>@cl.async</code> に置き換えると、アニメの完了を待つことなく、次のメッセージに進みます。
@@ -113,13 +113,13 @@
 <p>
 	<code>@gosub</code> やその省略形によるマクロとの組み合わせが想定されています。
 </p>
-<pre><code>&amp;midori happy</code></pre>
+<pre><code>&amp;hina happy</code></pre>
 <p>
 	呼び出し先のマクロは下記のように定義します。
 	引数は <code>&amp;1</code> のように番号で書くと展開されます。
 </p>
-<pre><code>:midori
-@cl.file name=midori file=001-&amp;1.png
+<pre><code>:hina
+@cl.file name=hina file=001-&amp;1.png
 @cl.run
 @return</code></pre>
 
