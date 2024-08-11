@@ -1,14 +1,20 @@
 <html><head></head><body><ul><!-- -*- mode: html-mode; -*-
 
 <!-- BEGIN-LATEST -->
+<li>OpenNovel 1.0.0 2024/08/11
+  <ul>
+    <li>Major release completed</li>
+    <li>We now entered to a maintainance phase</li>
+  </ul>
+</li>
+<!-- END-LATEST -->
+
 <li>OpenNovel 0.99.2 2024/08/11
   <ul>
     <li>Release Candidate of 1.0.0</li>
     <li>Improved English translation</li>
   </ul>
 </li>
-<!-- END-LATEST -->
-
 <li>OpenNovel 0.99.1 2024/08/06
   <ul>
     <li>Release Candidate of 1.0.0</li>
