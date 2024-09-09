@@ -282,8 +282,8 @@ char *make_valid_path(const char *dir, const char *fname)
 {
     @autoreleasepool {
         // セーブファイルの場合
-        if(dir != NULL && strcmp(dir, "save") == 0) {
-            NSString *path = [NSString stringWithFormat:@"%@/%@/%s/sav/%s",
+        if(dir != NULL && strcmp(dir, SAVE_DIR) == 0) {
+            NSString *path = [NSString stringWithFormat:@"%@/%@/%s/save/%s",
                               NSHomeDirectory(),
                               @"/Library/Application Support",
                               conf_game_title,
@@ -293,7 +293,7 @@ char *make_valid_path(const char *dir, const char *fname)
         }
 
         // package.pakの場合
-        if(dir == NULL && strcmp(fname, "package.pak") == 0) {
+        if(dir == NULL && strcmp(fname, PACKAGE_FILE) == 0) {
             // package.pakのパスを返す
             NSString *path = [[NSBundle mainBundle] pathForResource:@"package" ofType:@"pak"];
             const char *cstr = [path UTF8String];
