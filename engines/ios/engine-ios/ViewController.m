@@ -282,7 +282,7 @@ char *make_valid_path(const char *dir, const char *fname)
 {
     @autoreleasepool {
         // セーブファイルの場合
-        if(dir != NULL && strcmp(dir, "sav") == 0) {
+        if(dir != NULL && strcmp(dir, "save") == 0) {
             NSString *path = [NSString stringWithFormat:@"%@/%@/%s/sav/%s",
                               NSHomeDirectory(),
                               @"/Library/Application Support",
