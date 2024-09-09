@@ -26,9 +26,9 @@ src: libopennovel-aarch64.so libopennovel-armv7a.so libopennovel-x86_64.so libop
 	@mkdir -p android-src/app/src/main/jniLibs/armeabi-v7a
 	@cp libopennovel-armv7a.so android-src/app/src/main/jniLibs/armeabi-v7a/libopennovel.so
 	@mkdir -p android-src/app/src/main/jniLibs/x86_64
-	@cp libopennovel-armv7a.so android-src/app/src/main/jniLibs/x86_64/libopennovel.so
+	@cp libopennovel-x86_64.so android-src/app/src/main/jniLibs/x86_64/libopennovel.so
 	@mkdir -p android-src/app/src/main/jniLibs/x86
-	@cp libopennovel-armv7a.so android-src/app/src/main/jniLibs/x86/libopennovel.so
+	@cp libopennovel-i686.so android-src/app/src/main/jniLibs/x86/libopennovel.so
 
 libopennovel-aarch64.so: ndk
 	@echo 'Building aarch64 library...'
@@ -158,7 +158,7 @@ libopennovel-i686.so: ndk
 		-lbz2 \
 		-lz
 
-ndk:
+ndk-mac:
 	@curl -O https://dl.google.com/android/repository/android-ndk-r27-darwin.dmg
 	@7z x android-ndk-r27-darwin.dmg
 	@mv 'Android NDK r27/AndroidNDK12077973.app/Contents/NDK/toolchains/llvm/prebuilt/darwin-x86_64' ndk
@@ -167,5 +167,12 @@ ndk:
 	@ln -s lld ndk/bin/ld.lld
 	@rm -rf 'Android NDK r27'
 
+ndk-linux:
+	@curl -O https://dl.google.com/android/repository/android-ndk-r27-linux.zip
+	@unzip android-ndk-r27-linux.zip
+	@mv 'android-ndk-r27/toolchains/llvm/prebuilt/linux-x86_64' ndk
+	@chmod -R +x ./ndk/bin/*
+	@rm -rf 'android-ndk-r27'
+
 clean:
-	@rm -rf android-src android-ndk-r27-darwin.dmg ndk libroot-* libopennovel-*.so
+	@rm -rf android-src android-ndk-r27-darwin.dmg android-ndk-r27-linux.zip ndk libroot-* libopennovel-*.so
