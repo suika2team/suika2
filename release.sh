@@ -93,7 +93,7 @@ echo ''
 # Linux Build (Binary)
 #
 
-echo 'Building the Linux binaries...'
+echo 'Building Linux binaries...'
 
 docker build -t ubuntu-build engines/linux
 
@@ -110,7 +110,7 @@ echo ''
 # Wasm Build (Binary)
 #
 
-echo 'Building the Wasm binaries...'
+echo 'Building Wasm binaries...'
 
 cd engines/wasm
 make
@@ -177,15 +177,15 @@ make -j$(nproc) libopennovel.dll
 # Unity macOS
 make -j$(nproc) libopennovel.dylib
 
-# Linux
+# Unity Linux
 docker run -it -v `pwd`/../..:/workspace ubuntu-build /bin/sh -c 'cd /workspace/engines/unity && make libopennovel.so'
 
-# Switch
+# Unity Switch
 docker pull yesimnathan/switchdev
 docker run -it -v `pwd`/../..:/workspace yesimnathan/switchdev /bin/bash -c "cd /workspace/engines/unity && make libopennovel.nso"
 
 # src
-make -j$(nproc) src
+make src
 
 cp -R unity-src "$TARGET_DIR/tools/"
 cd ../../
