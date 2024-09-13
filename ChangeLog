@@ -4,6 +4,7 @@
 <li>OpenNovel 1.0.1 2024/09/13
   <ul>
     <li>Upgraded to support Android 14, dropped the support for Android 5/6/7/8</li>
+    <li>Fixed a bug where apps cannot run on Android simulators on Windows</li>
     <li>Fixed the iOS project file</li>
   </ul>
 </li>
