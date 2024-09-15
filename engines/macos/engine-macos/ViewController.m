@@ -20,6 +20,9 @@
 
 static ViewController *theViewController;
 static FILE *openLog(void);
+static void show_log(void);
+
+static NSString *logFilePath;
 
 @interface ViewController ()
 @end
@@ -678,14 +681,8 @@ bool log_info(const char *s, ...)
         fflush(fp);
     }
 
-    // Show an alert.
-    NSAlert *alert = [[NSAlert alloc] init];
-    [alert setMessageText:@"Info"];
-    NSString *text = [[NSString alloc] initWithUTF8String:buf];
-    if (![text canBeConvertedToEncoding:NSUTF8StringEncoding])
-        text = @"(invalid utf-8 string)";
-    [alert setInformativeText:text];
-    [alert runModal];
+    // Open the log when exit.
+    atexit(show_log);
 
     return true;
 }
@@ -710,14 +707,8 @@ bool log_warn(const char *s, ...)
         fflush(fp);
     }
 
-    // Show an alert.
-    NSAlert *alert = [[NSAlert alloc] init];
-    [alert setMessageText:@"Warn"];
-    NSString *text = [[NSString alloc] initWithUTF8String:buf];
-    if (![text canBeConvertedToEncoding:NSUTF8StringEncoding])
-        text = @"(invalid utf-8 string)";
-    [alert setInformativeText:text];
-    [alert runModal];
+    // Open the log when exit.
+    atexit(show_log);
 
     return true;
 }
@@ -742,14 +733,8 @@ bool log_error(const char *s, ...)
         fflush(fp);
     }
 
-    // Show an alert.
-    NSAlert *alert = [[NSAlert alloc] init];
-    [alert setMessageText:@"Error"];
-    NSString *text = [[NSString alloc] initWithUTF8String:buf];
-    if (![text canBeConvertedToEncoding:NSUTF8StringEncoding])
-        text = @"(invalid utf-8 string)";
-    [alert setInformativeText:text];
-    [alert runModal];
+    // Open the log when exit.
+    atexit(show_log);
 
     return true;
 }
@@ -776,12 +761,14 @@ static FILE *openLog(void)
                                                         error:NULL];
         path = [path stringByAppendingString:@"/"];
         path = [path stringByAppendingString:[[NSString alloc] initWithUTF8String:LOG_FILE]];
+        logFilePath = path;
         cpath = [path UTF8String];
         fp = fopen(cpath, "w");
         if (fp == NULL) {
             NSAlert *alert = [[NSAlert alloc] init];
             [alert setMessageText:@"Error"];
             [alert setInformativeText:@"Cannot open log file."];
+            [alert addButtonWithTitle:@"OK"];
             [alert runModal];
         }
         return fp;
@@ -790,15 +777,25 @@ static FILE *openLog(void)
     // Use the folder where .app bundle exists.
     NSString *bundlePath = [[NSBundle mainBundle] bundlePath];
     NSString *basePath = [bundlePath stringByDeletingLastPathComponent];
-    cpath = [[NSString stringWithFormat:@"%@/%s", basePath, LOG_FILE] UTF8String];
+    logFilePath = [NSString stringWithFormat:@"%@/%s", basePath, LOG_FILE];
+    cpath = [logFilePath UTF8String];
     fp = fopen(cpath, "w");
     if (fp == NULL) {
         NSAlert *alert = [[NSAlert alloc] init];
         [alert setMessageText:@"Error"];
         [alert setInformativeText:@"Cannot open log file."];
+        [alert addButtonWithTitle:@"OK"];
         [alert runModal];
     }
     return fp;
+}
+
+//
+// Show the log file.
+//
+static void show_log(void)
+{
+    [[NSWorkspace sharedWorkspace] openFile:logFilePath];
 }
 
 //

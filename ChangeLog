@@ -1,6 +1,14 @@
 <html><head></head><body><ul><!-- -*- mode: html-mode; -*-
 
 <!-- BEGIN-LATEST -->
+<li>OpenNovel 1.0.2 2024/09/16
+  <ul>
+    <li>Fixed a bug where the macOS app cannot run due to sign failure</li>
+    <li>Fixed a bug where the macOS app cannot show log</li>
+  </ul>
+</li>
+<!-- END-LATEST -->
+
 <li>OpenNovel 1.0.1 2024/09/13
   <ul>
     <li>Upgraded to support Android 14, dropped the support for Android 5/6/7/8</li>
@@ -8,8 +16,6 @@
     <li>Fixed the iOS project file</li>
   </ul>
 </li>
-<!-- END-LATEST -->
-
 <li>OpenNovel 1.0.0 2024/08/11
   <ul>
     <li>Major release completed</li>
