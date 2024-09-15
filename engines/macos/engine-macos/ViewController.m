@@ -26,9 +26,9 @@ static FILE *openLog(void);
 
 @implementation ViewController
 {
-    // The GameView for AppKit
+    // The GameView (a subclass of MTKView)
     GameView *_view;
-    
+
     // The GameRender (common for AppKit and UIKit)
     GameRenderer *_renderer;
     
@@ -37,24 +37,27 @@ static FILE *openLog(void);
     NSSize _screenSize;
     NSPoint _screenOffset;
     
-    // The view frame before entering a full screen mode.
+    // The view frame (saved before entering a full screen mode)
     NSRect _savedViewFrame;
     
-    // The temporary window frame size on resizing.
+    // The temporary window frame size (for resizing)
     NSSize _resizeFrame;
     
-    // The full screen status.
+    // The full screen status
     BOOL _isFullScreen;
     
-    // The control key status.
+    // The control key status
     BOOL _isControlPressed;
     
-    // The video player objects and status.
+    // The video player objects and status
     AVPlayer *_avPlayer;
     AVPlayerLayer *_avPlayerLayer;
     BOOL _isVideoPlaying;
 }
 
+//
+// Called when the view is loaded.
+//
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -91,12 +94,18 @@ static FILE *openLog(void);
                                     repeats:YES];
 }
 
+//
+// Called when the view is layouted.
+//
 - (void)viewDidLayout {
     [super viewDidLayout];
     
     self.view.window.delegate = self;
 }
 
+//
+// Called when the view appeared.
+//
 - (void)viewDidAppear {
     self.view.window.delegate = self;
     
@@ -122,19 +131,30 @@ static FILE *openLog(void);
     
     // Set the app name in the main menu.
     [self setAppName];
-    
+
+    // Recalculate the view size.
     [self updateViewport:_view.frame.size];
 }
 
+//
+// A helper to set the app name.
+//
 - (void)setAppName {
     NSMenu *menu = [[[NSApp mainMenu] itemAtIndex:0] submenu];
     [menu setTitle:[[NSString alloc] initWithUTF8String:conf_game_title]];
 }
 
+//
+// Called every frame.
+//
 - (void)timerFired:(NSTimer *)timer {
+    // 
     [_view setNeedsDisplay:TRUE];
 }
 
+//
+// Called when the window close button is pressed.
+//
 - (BOOL)windowShouldClose:(id)sender {
     @autoreleasepool {
         bool isEnglish = !compare_locale("ja");
@@ -151,6 +171,9 @@ static FILE *openLog(void);
     }
 }
 
+//
+// Called when the window is going to be closed.
+//
 - (void)windowWillClose:(NSNotification *)notification {
     // Save.
     save_global_data();
@@ -172,56 +195,80 @@ static FILE *openLog(void);
              atStart:YES];
 }
 
+//
+// Called when the Quit menu item is pressed.
+//
 - (IBAction)onQuit:(id)sender {
     if ([self windowShouldClose:sender])
         [NSApp stop:nil];
 }
 
-// フルスクリーンになる前に呼び出される
+//
+// Called before entering the full screen mode.
+//
 - (NSSize)window:(NSWindow *)window willUseFullScreenContentSize:(NSSize)proposedSize {
-    // 表示位置を更新する
+    // Calculate the viewport size.
     [self updateViewport:proposedSize];
     
-    // 動画プレーヤレイヤのサイズを更新する
+    // Set the frame of the video player.
     if (_avPlayerLayer != nil)
         [_avPlayerLayer setFrame:NSMakeRect(_screenOffset.x, _screenOffset.y, _screenSize.width, _screenSize.height)];
     
-    // スクリーンサイズを返す
+    // Returns the screen size.
     return proposedSize;
 }
 
-// フルスクリーンになるとき呼び出される
+//
+// Called when entering the full screen mode.
+//
 - (void)windowWillEnterFullScreen:(NSNotification *)notification {
+    // Set the flag.
     _isFullScreen = YES;
     
-    // ウィンドウサイズを保存する
+    // Save the window frame.
     _savedViewFrame = self.view.frame;
-    
+
+    // MAGIC: set the app name again to avoid the reset of the app name on the menu bar.
     [self setAppName];
 }
 
-// フルスクリーンから戻るときに呼び出される
+//
+// Called before returning to the windowed mode.
+//
 - (void)windowWillExitFullScreen:(NSNotification *)notification {
+    // Set the flag.
     _isFullScreen = NO;
     
-    // 動画プレーヤレイヤのサイズを元に戻す
+    // Reset the video player size.
     if(_avPlayerLayer != nil)
         [_avPlayerLayer setFrame:NSMakeRect(0, 0, _savedViewFrame.size.width, _savedViewFrame.size.height)];
     
+    // Recalculate the viewport size.
     [self updateViewport:_savedViewFrame.size];
 }
 
+//
+// Called when entered the full screen mode.
+//
 - (void)windowDidEnterFullScreen:(NSNotification *)notification {
     [self setAppName];
 }
 
+//
+// Called when returned to the windowed mode.
+//
 - (void)windowDidLeaveFullScreen:(NSNotification *)notification {
     [self setAppName];
 }
 
+//
+// Called when the window size is changing, including a window resize by mouse device.
+//
 - (NSSize)windowWillResize:(NSWindow *)sender toSize:(NSSize)frameSize {
+    // Get a new view rect from a window rect.
     NSRect contentRect = [self.view.window contentRectForFrameRect:NSMakeRect(0, 0, frameSize.width, frameSize.height)];
-    
+
+    // Calculate the content rect.
     float aspect = (float)conf_game_height / (float)conf_game_width;
     if (self.view.window.frame.size.width != frameSize.width)
         contentRect.size.height = contentRect.size.width * aspect;
@@ -236,11 +283,19 @@ static FILE *openLog(void);
     return windowRect.size;
 }
 
+//
+// Called after a window resize.
+//
 - (void)windowDidResize:(NSNotification *)notification {
+    // Recalculate the viewport size.
     [self updateViewport:_resizeFrame];
 }
 
+//
+// Calculate the viewport size.
+//
 - (void)updateViewport:(NSSize)newViewSize {
+    // For when the view is not initialized.
     if (newViewSize.width == 0 || newViewSize.height == 0) {
         _screenScale = 1.0f;
         _screenSize = NSMakeSize(conf_game_width, conf_game_height);
@@ -249,32 +304,35 @@ static FILE *openLog(void);
         return;
     }
     
-    // ゲーム画面のアスペクト比を求める
+    // Get the game aspect ratio.
     float aspect = (float)conf_game_height / (float)conf_game_width;
     
-    // 1. 横幅優先で高さを仮決めする
+    // 1. Calculate by width-first.
     _screenSize.width = newViewSize.width;
     _screenSize.height = _screenSize.width * aspect;
     _screenScale = (float)conf_game_width / _screenSize.width;
     
-    // 2. 高さが足りなければ、縦幅優先で横幅を決める
+    // 2. If the height is not enough, use height-first.
     if(_screenSize.height > newViewSize.height) {
         _screenSize.height = newViewSize.height;
         _screenSize.width = _screenSize.height / aspect;
         _screenScale = (float)conf_game_height / _screenSize.height;
     }
-    
-    // スケールファクタを乗算する
+
+    // Multiply the scaling factor.
     _screenSize.width *= _view.layer.contentsScale;
     _screenSize.height *= _view.layer.contentsScale;
     newViewSize.width *= _view.layer.contentsScale;
     newViewSize.height *= _view.layer.contentsScale;
-    
-    // マージンを計算する
+
+    // Calculate the offset.
     _screenOffset.x = (newViewSize.width - _screenSize.width) / 2.0f;
     _screenOffset.y = (newViewSize.height - _screenSize.height) / 2.0f;
 }
 
+//
+// Called when a mouse is moved.
+//
 - (void)mouseMoved:(NSEvent *)event {
     NSPoint point = [event locationInWindow];
     int x = (int)((point.x - self.screenOffset.x) * _screenScale);
@@ -282,6 +340,9 @@ static FILE *openLog(void);
     on_event_mouse_move(x, conf_game_height - y);
 }
 
+//
+// Called when a mouse is moved by a drag.
+//
 - (void)mouseDragged:(NSEvent *)event {
     NSPoint point = [event locationInWindow];
     int x = (int)((point.x - self.screenOffset.x) * _screenScale);
@@ -289,12 +350,14 @@ static FILE *openLog(void);
     on_event_mouse_move(x, conf_game_height - y);
 }
 
-// キーボード修飾変化イベント
+//
+// Called when a modifier key is pressed or released.
+//
 - (void)flagsChanged:(NSEvent *)theEvent {
-    // Controlキーの状態を取得する
+    // Get the Control key state.
     BOOL bit = ([theEvent modifierFlags] & NSEventModifierFlagControl) == NSEventModifierFlagControl;
     
-    // Controlキーの状態が変化した場合は通知する
+    // Notify when the Control key state is changed.
     if (!_isControlPressed && bit) {
         _isControlPressed = YES;
         on_event_key_press(KEY_CONTROL);
@@ -304,7 +367,9 @@ static FILE *openLog(void);
     }
 }
 
-// キー押下イベント
+//
+// Called when a keyboard is pressed.
+//
 - (void)keyDown:(NSEvent *)theEvent {
     if ([theEvent isARepeat])
         return;
@@ -314,14 +379,18 @@ static FILE *openLog(void);
         on_event_key_press(kc);
 }
 
-// キー解放イベント
+//
+// Called when a keyboard is released.
+//
 - (void)keyUp:(NSEvent *)theEvent {
     int kc = [self convertKeyCode:[theEvent keyCode]];
     if (kc != -1)
         on_event_key_release(kc);
 }
 
-// キーコードを変換する
+//
+// A helper to convert a keycode.
+//
 - (int)convertKeyCode:(int)keyCode {
     switch(keyCode) {
         case 49: return KEY_SPACE;
@@ -339,22 +408,37 @@ static FILE *openLog(void);
 // GameViewControllerProtocol
 //
 
+//
+// Set the window title.
+//
 - (void)setWindowTitle:(NSString *)name {
     [self.view.window setTitle:name];
 }
 
+//
+// Get the view scale.
+//
 - (float)screenScale {
     return _screenScale;
 }
 
+//
+// Get the screen offset.
+//
 - (NSPoint)screenOffset {
     return _screenOffset;
 }
 
+//
+// Get the screen size.
+//
 - (NSSize)screenSize {
     return _screenSize;
 }
 
+//
+// Convert a screen point to window point.
+//
 - (NSPoint)windowPointToScreenPoint:(NSPoint)windowPoint {
     float retinaScale = _view.layer.contentsScale;
     
@@ -364,10 +448,16 @@ static FILE *openLog(void);
     return NSMakePoint(x, conf_game_height - y);
 }
 
+//
+// Returns whether we are in the full screen mode or not.
+//
 - (BOOL)isFullScreen {
     return _isFullScreen;
 }
 
+//
+// Enter the full screen mode.
+//
 - (void)enterFullScreen {
     if (!_isFullScreen) {
         [self.view.window toggleFullScreen:self.view];
@@ -376,6 +466,9 @@ static FILE *openLog(void);
     }
 }
 
+//
+// Leave the full screen mode.
+//
 - (void)leaveFullScreen {
     if (_isFullScreen) {
         [self.view.window toggleFullScreen:self.view];
@@ -384,10 +477,16 @@ static FILE *openLog(void);
     }
 }
 
+//
+// Returns whether we are playing a video or not.
+//
 - (BOOL)isVideoPlaying {
     return _isVideoPlaying;
 }
 
+//
+// Play a video.
+//
 - (void)playVideoWithPath:(NSString *)path skippable:(BOOL)isSkippable {
     // プレーヤーを作成する
     NSURL *url = [NSURL URLWithString:[@"file://" stringByAppendingString:path]];
@@ -412,11 +511,17 @@ static FILE *openLog(void);
     _isVideoPlaying = YES;
 }
 
+//
+// Called when a video playback is finished.
+//
 - (void)onPlayEnd:(NSNotification *)notification {
     [_avPlayer replaceCurrentItemWithPlayerItem:nil];
     _isVideoPlaying = NO;
 }
 
+//
+// Stop a video playback.
+//
 - (void)stopVideo {
     if (_avPlayer != nil) {
         [_avPlayer replaceCurrentItemWithPlayerItem:nil];
@@ -433,13 +538,13 @@ static FILE *openLog(void);
 //
 
 //
-// セーブディレクトリを作成する
+// Make a save directory.
 //
 bool make_sav_dir(void)
 {
     @autoreleasepool {
         if (conf_release) {
-            // リリースモードの場合
+            // If we are in the release mode, use home folder.
             NSString *path = NSHomeDirectory();
             path = [path stringByAppendingString:@"/Library/Application Support/"];
             path = [path stringByAppendingString:[[NSString alloc] initWithUTF8String:conf_game_title]];
@@ -451,8 +556,8 @@ bool make_sav_dir(void)
                                                             error:NULL];
             return true;
         }
-        
-        // 通常モードの場合
+
+        // If we are in the normal mode, use the folder where the app exists.
         NSString *bundlePath = [[NSBundle mainBundle] bundlePath];
         NSString *basePath = [bundlePath stringByDeletingLastPathComponent];
         NSString *savePath = [NSString stringWithFormat:@"%@/%s", basePath, SAVE_DIR];
@@ -466,23 +571,23 @@ bool make_sav_dir(void)
 }
 
 //
-// データファイルのディレクトリ名とファイル名を指定して有効なパスを取得する
+// Get a real path for a file.
 //
 char *make_valid_path(const char *dir, const char *fname)
 {
     @autoreleasepool {
-        // package.pakの場合、バンドル内を優先する
+        // For package.pak, find the bundle first.
         if (dir == NULL && fname != NULL && strcmp(fname, PACKAGE_FILE) == 0) {
             NSString *bundlePath = [[NSBundle mainBundle] bundlePath];
             NSString *filePath = [NSString stringWithFormat:@"%@/Contents/Resources/package.pak", bundlePath];
             if ([[NSFileManager defaultManager] fileExistsAtPath:filePath]) {
-                // data01.arcのサイズを取得する
+                // Get the size of package.pak.
                 NSError *attributesError = nil;
                 NSDictionary *fileAttributes = [[NSFileManager defaultManager] attributesOfItemAtPath:filePath error:&attributesError];
                 NSNumber *fileSizeNumber = [fileAttributes objectForKey:NSFileSize];
                 long long fileSize = [fileSizeNumber longLongValue];
 
-                // package.pakがダミーファイルでないとき
+                // If package.pak is not a dummy file, use it.
                 if (fileSize > 100) {
                     const char *cstr = [filePath UTF8String];
                     char *ret = strdup(cstr);
@@ -495,7 +600,7 @@ char *make_valid_path(const char *dir, const char *fname)
             }
         }
 
-        // mp4の場合、バンドル内を優先する
+        // For an mp4 file, find the bundle first.
         if (dir != NULL && strcmp(dir, MOV_DIR) == 0 && fname != NULL) {
             NSString *bundlePath = [[NSBundle mainBundle] bundlePath];
             NSString *filePath = [NSString stringWithFormat:@"%@/Contents/Resources/%s/%s", bundlePath, MOV_DIR, fname];
@@ -510,9 +615,8 @@ char *make_valid_path(const char *dir, const char *fname)
             }
         }
 
-        // リリースモードで、セーブファイルの場合
+        // If we are in the release mode and are going to open a save file, use the home folder.
         if (conf_release && dir != NULL && strcmp(dir, SAVE_DIR) == 0) {
-            // リリースモードの場合
             assert(fname != NULL);
             NSString *path = NSHomeDirectory();
             path = [path stringByAppendingString:@"/Library/Application Support/"];
@@ -529,7 +633,7 @@ char *make_valid_path(const char *dir, const char *fname)
             return ret;
         }
 
-        // 一般のファイルの場合
+        // Other files.
         NSString *bundlePath = [[NSBundle mainBundle] bundlePath];
         NSString *basePath = [bundlePath stringByDeletingLastPathComponent];
         NSString *filePath;
@@ -555,7 +659,7 @@ char *make_valid_path(const char *dir, const char *fname)
 }
 
 //
-// INFOログを出力する
+// Show an INFO log.
 //
 bool log_info(const char *s, ...)
 {
@@ -566,7 +670,7 @@ bool log_info(const char *s, ...)
     vsnprintf(buf, sizeof(buf), s, ap);
     va_end(ap);
 
-    // ログファイルに出力する
+    // Write to the log file.
     FILE *fp = openLog();
     if (fp != NULL) {
         fprintf(stderr, "%s", buf);
@@ -574,7 +678,7 @@ bool log_info(const char *s, ...)
         fflush(fp);
     }
 
-    // アラートを表示する
+    // Show an alert.
     NSAlert *alert = [[NSAlert alloc] init];
     [alert setMessageText:@"Info"];
     NSString *text = [[NSString alloc] initWithUTF8String:buf];
@@ -587,7 +691,7 @@ bool log_info(const char *s, ...)
 }
 
 //
-// WARNログを出力する
+// Show a WARN log.
 //
 bool log_warn(const char *s, ...)
 {
@@ -598,7 +702,7 @@ bool log_warn(const char *s, ...)
     vsnprintf(buf, sizeof(buf), s, ap);
     va_end(ap);
 
-    // ログファイルに出力する
+    // Write to the log file.
     FILE *fp = openLog();
     if (fp != NULL) {
         fprintf(stderr, "%s", buf);
@@ -606,7 +710,7 @@ bool log_warn(const char *s, ...)
         fflush(fp);
     }
 
-    // アラートを表示する
+    // Show an alert.
     NSAlert *alert = [[NSAlert alloc] init];
     [alert setMessageText:@"Warn"];
     NSString *text = [[NSString alloc] initWithUTF8String:buf];
@@ -619,7 +723,7 @@ bool log_warn(const char *s, ...)
 }
 
 //
-// Errorログを出力する
+// Show an ERROR log.
 //
 bool log_error(const char *s, ...)
 {
@@ -630,7 +734,7 @@ bool log_error(const char *s, ...)
     vsnprintf(buf, sizeof(buf), s, ap);
     va_end(ap);
 
-    // ログファイルに出力する
+    // Write to the log file.
     FILE *fp = openLog();
     if (fp != NULL) {
         fprintf(stderr, "%s", buf);
@@ -638,7 +742,7 @@ bool log_error(const char *s, ...)
         fflush(fp);
     }
 
-    // アラートを表示する
+    // Show an alert.
     NSAlert *alert = [[NSAlert alloc] init];
     [alert setMessageText:@"Error"];
     NSString *text = [[NSString alloc] initWithUTF8String:buf];
@@ -650,19 +754,19 @@ bool log_error(const char *s, ...)
     return true;
 }
 
-// ログをオープンする
+// Open the log file.
 static FILE *openLog(void)
 {
     static FILE *fp = NULL;
     const char *cpath;
 
-    // すでにオープン済みの場合、成功とする
+    // If already opened.
     if (fp != NULL)
         return fp;
 
-    // リリースモードの場合
+    // If we are in the release mode.
     if (conf_release && conf_game_title != NULL) {
-        // "Aplication Support"の下にウィンドウタイトルのフォルダを作成して、その下にログファイルを作成する
+        // Use the "Aplication Support" folder.
         NSString *path = NSHomeDirectory();
         path = [path stringByAppendingString:@"/Library/Application Support/"];
         path = [path stringByAppendingString:[[NSString alloc] initWithUTF8String:conf_game_title]];
@@ -683,7 +787,7 @@ static FILE *openLog(void)
         return fp;
     }
 
-    // .appバンドルのあるディレクトリにログファイルを作成する
+    // Use the folder where .app bundle exists.
     NSString *bundlePath = [[NSBundle mainBundle] bundlePath];
     NSString *basePath = [bundlePath stringByDeletingLastPathComponent];
     cpath = [[NSString stringWithFormat:@"%@/%s", basePath, LOG_FILE] UTF8String];
@@ -697,6 +801,9 @@ static FILE *openLog(void)
     return fp;
 }
 
+//
+// Not used in the macOS app.
+//
 void set_continuous_swipe_enabled(bool is_enabled)
 {
     UNUSED_PARAMETER(is_enabled);

@@ -203,16 +203,18 @@ static void drawPrimitives3D(float x1, float y1, float x2, float y2, float x3, f
     for (int i = 0; i < theInitialUploadArrayCount; i++)
         if (theInitialUploadArray[i] != NULL)
             notify_image_update(theInitialUploadArray[i]);
+    theInitialUploadArrayCount = 0;
 
+    // Make a barrier.
     dispatch_semaphore_wait(in_flight_semaphore, DISPATCH_TIME_FOREVER);
     __block dispatch_semaphore_t block_sema = in_flight_semaphore;
     [theCommandBuffer addCompletedHandler:^(id<MTLCommandBuffer> buffer) {
-         dispatch_semaphore_signal(block_sema);
+        dispatch_semaphore_signal(block_sema);
     }];
 
     // Create an array for textures to be destroyed.
     thePurgeArrayCount = 0;
-    
+
     // Run a frame event and do rendering.
     if(!runFrame())
         exit(0);
@@ -228,11 +230,11 @@ static void drawPrimitives3D(float x1, float y1, float x2, float y2, float x3, f
     
     // Push the command buffer to the GPU.
     [theCommandBuffer commit];
-    
+
     // Synchronize.
     [theCommandBuffer waitUntilCompleted];
     
-    // Set destroyed textures purgeable.
+    // Set the destroyed textures purgeable.
     for (int i = 0; i < thePurgeArrayCount; i++) {
         if (thePurgeArray[i] == NULL)
             continue;
