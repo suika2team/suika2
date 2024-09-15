@@ -40,6 +40,9 @@ static BOOL isContinuousSwipeEnabled;
     BOOL _isVideoPlaying;
 }
 
+//
+// Called when the view is loaded.
+//
 - (void)viewDidLoad {
     [super viewDidLoad];
 
@@ -78,31 +81,35 @@ static BOOL isContinuousSwipeEnabled;
                                     repeats:YES];
 }
 
+//
+// Calculate the viewport size.
+//
 - (void)updateViewport:(CGSize)newViewSize {
+    // If called before the view initialization.
     if (newViewSize.width == 0 || newViewSize.height == 0)
         return;
 
-    // ゲーム画面のアスペクト比を求める
+    // Get the aspect ratio of the game.
     float aspect = (float)conf_game_height / (float)conf_game_width;
 
-    // 1. 横幅優先で高さを仮決めする
+    // 1. Use width-first.
     _screenSize.width = newViewSize.width;
     _screenSize.height = _screenSize.width * aspect;
     _screenScale = (float)conf_game_width / _screenSize.width;
     
-    // 2. 高さが足りなければ、縦幅優先で横幅を決める
+    // 2. If the height is not enough, use height-first.
     if(_screenSize.height > newViewSize.height) {
         _screenSize.height = newViewSize.height;
         _screenSize.width = _screenSize.height / aspect;
         _screenScale = (float)conf_game_height / _screenSize.height;
     }
     
-    // マウス座標用のマージンとスケールを計算する
+    // Calculate the scale factor and the margin for touch position.
     _view.left = (newViewSize.width - _screenSize.width) / 2.0f;
     _view.top = (newViewSize.height - _screenSize.height) / 2.0f;
     _view.scale = _screenScale;
 
-    // MTKView用にスケールファクタを乗算する
+    // Multiply the scale factor of MTKView.
     _screenScale *= _view.layer.contentsScale;
     _screenSize.width *= _view.layer.contentsScale;
     _screenSize.height *= _view.layer.contentsScale;
@@ -110,11 +117,17 @@ static BOOL isContinuousSwipeEnabled;
     _screenOffset.y = _view.top * _view.layer.contentsScale;
 }
 
+//
+// Called when the view appeared.
+//
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     [self updateViewport:_view.frame.size];
 }
 
+//
+// Called every frame.
+//
 - (void)timerFired:(NSTimer *)timer {
     [_view setNeedsDisplay];
 }
@@ -123,49 +136,70 @@ static BOOL isContinuousSwipeEnabled;
 // GameViewControllerProtocol
 //
 
+//
+// Get the screen scale.
+//
 - (float)screenScale {
     return _screenScale;
 }
 
+//
+// Get the screen offset.
+//
 - (CGPoint)screenOffset {
     return _screenOffset;
 }
 
+//
+// Get the screen size.
+//
 - (CGSize)screenSize {
     return _screenSize;
 }
 
+//
+// Check whether we are playing back a video.
+//
 - (BOOL)isVideoPlaying {
     return _isVideoPlaying;
 }
 
+//
+// Play a video.
+//
 - (void)playVideoWithPath:(NSString *)path skippable:(BOOL)isSkippable {
-    // プレーヤーを作成する
+    // Create a player.
     AVPlayerItem *playerItem = [[AVPlayerItem alloc] initWithURL:[NSURL fileURLWithPath:path]];
     _avPlayer = [[AVPlayer alloc] initWithPlayerItem:playerItem];
 
-    // プレーヤーのレイヤーを作成する
+    // Create a layer for the player.
     _avPlayerLayer = [AVPlayerLayer playerLayerWithPlayer:_avPlayer];
     [_avPlayerLayer setFrame:self.view.bounds];
     [self.view.layer addSublayer:_avPlayerLayer];
 
-    // 再生終了の通知を送るようにする
+    // Set the finish notification.
     [NSNotificationCenter.defaultCenter addObserver:self
                                            selector:@selector(onPlayEnd:)
                                                name:AVPlayerItemDidPlayToEndTimeNotification
                                              object:playerItem];
 
-    // 再生を開始する
+    // Start playing.
     [_avPlayer play];
 
     _isVideoPlaying = YES;
 }
 
+//
+// Called when a video playback is finished.
+//
 - (void)onPlayEnd:(NSNotification *)notification {
     [_avPlayer replaceCurrentItemWithPlayerItem:nil];
     _isVideoPlaying = NO;
 }
 
+//
+// Stop a video playback.
+//
 - (void)stopVideo {
     if (_avPlayer != nil) {
         [_avPlayer replaceCurrentItemWithPlayerItem:nil];
@@ -175,22 +209,37 @@ static BOOL isContinuousSwipeEnabled;
     }
 }
 
+//
+// Not used in the iOS app.
+//
 - (void)setWindowTitle:(NSString *)name {
 }
 
+//
+// Not used in the iOS app.
+//
 - (void)enterFullScreen {
 }
 
 
+//
+// Not used in the iOS app.
+//
 - (BOOL)isFullScreen { 
     return NO;
 }
 
 
+//
+// Not used in the iOS app.
+//
 - (void)leaveFullScreen { 
 }
 
 
+//
+// Not used in the iOS app.
+//
 - (CGPoint)windowPointToScreenPoint:(CGPoint)windowPoint { 
     return windowPoint;
 }
@@ -202,7 +251,7 @@ static BOOL isContinuousSwipeEnabled;
 //
 
 //
-// INFOログを出力する
+// Show an INFO log.
 //
 bool log_info(const char *s, ...)
 {
@@ -219,7 +268,7 @@ bool log_info(const char *s, ...)
 }
 
 //
-// WARNログを出力する
+// Show a WARN log.
 //
 bool log_warn(const char *s, ...)
 {
@@ -236,7 +285,7 @@ bool log_warn(const char *s, ...)
 }
 
 //
-// Errorログを出力する
+// Show an ERROR log.
 //
 bool log_error(const char *s, ...)
 {
@@ -253,7 +302,7 @@ bool log_error(const char *s, ...)
 }
 
 //
-// セーブディレクトリを作成する
+// Make a save directory.
 //
 bool make_sav_dir(void)
 {
@@ -276,13 +325,14 @@ bool make_sav_dir(void)
 }
 
 //
-// データファイルのディレクトリ名とファイル名を指定して有効なパスを取得する
+// Get a real path for a file.
 //
 char *make_valid_path(const char *dir, const char *fname)
 {
     @autoreleasepool {
-        // セーブファイルの場合
+        // If a save file:
         if(dir != NULL && strcmp(dir, SAVE_DIR) == 0) {
+            // Return a "Application Support" path.
             NSString *path = [NSString stringWithFormat:@"%@/%@/%s/save/%s",
                               NSHomeDirectory(),
                               @"/Library/Application Support",
@@ -292,17 +342,17 @@ char *make_valid_path(const char *dir, const char *fname)
             return strdup(cstr);
         }
 
-        // package.pakの場合
+        // If the package.pak:
         if(dir == NULL && strcmp(fname, PACKAGE_FILE) == 0) {
-            // package.pakのパスを返す
+            // Return a bundle resource path.
             NSString *path = [[NSBundle mainBundle] pathForResource:@"package" ofType:@"pak"];
             const char *cstr = [path UTF8String];
             return strdup(cstr);
         }
 
-        // 動画の場合
+        // If an mp4 file:
         if(dir != NULL && strcmp(dir, MOV_DIR) == 0) {
-            // 動画のパスを返す
+            // Return an bundle resource path.
             *strstr(fname, ".") = '\0';
             NSString *basename = [NSString stringWithFormat:@"mov/%s", fname];
             NSString *path = [[NSBundle mainBundle] pathForResource:basename ofType:@"mp4"];
@@ -310,11 +360,14 @@ char *make_valid_path(const char *dir, const char *fname)
             return strdup(cstr);
         }
 
-        // その他のファイルは読み込めない
+        // We cannot load other files.
         return strdup("dummy");
     }
 }
 
+//
+// This is used for long swipe.
+//
 void set_continuous_swipe_enabled(bool is_enabled)
 {
 	isContinuousSwipeEnabled = is_enabled;

@@ -22,6 +22,9 @@ static bool isContinuousSwipeEnabled;
     int _touchLastY;
 }
 
+//
+// Called when touches began.
+//
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
     _isTouch = YES;
 
@@ -34,6 +37,9 @@ static bool isContinuousSwipeEnabled;
     on_event_mouse_press(MOUSE_LEFT, _touchStartX, _touchStartY);
 }
 
+//
+// Called when touched moved.
+//
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
     UITouch *touch = [[event allTouches] anyObject];
     CGPoint touchLocation = [touch locationInView:self];
@@ -56,6 +62,9 @@ static bool isContinuousSwipeEnabled;
     on_event_mouse_move((int)touchX, (int)touchY);
 }
 
+//
+// Called when touches ended.
+//
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
     _isTouch = NO;
 
