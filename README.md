@@ -9,7 +9,7 @@ Amazingly, OpenNovel supports all of the following right out of the box!
 
 * Mobile
   * iOS 12 or later
-  * Android 5.0 or later
+  * Android 9 or later
 * Desktop
   * Windows XP or later
   * macOS 10.13 or later
@@ -31,7 +31,7 @@ Take a look at the source code and you will marvel at our flawless porting.
 We **natively** support all of the Mobile and Desktop platforms.
 "Natively" means we don't use any annoying compatibility layer such as Unity, SDL or Python.
 
-We are undoubtedly the world's greatest visual novel porters.
+We are undoubtedly the world's greatest visual novel porter.
 Our core engine is written in ANSI C, making it **the most portable visual novel engine ever**.
 
 ## Ditch the Web for Apps
