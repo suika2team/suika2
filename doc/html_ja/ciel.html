@@ -10,13 +10,13 @@
 
 <h1>Cielシステムとは</h1>
 <p>
-	Cielシステムは、YU-RIS/ERISに影響を受けたコマンド群です。
-	機能性が根本的に異なることから、
-	<a href="reference.html#bg"><code>@bg</code></a> /
-	<a href="reference.html#ch"><code>@ch</code></a> /
-	<a href="reference.html#move"><code>@move</code></a> /
-	<a href="reference.html#chch"><code>@chch</code></a>
-	との併用はできません。
+  Cielシステムは、YU-RIS/ERISに影響を受けたコマンド群です。
+  機能性が根本的に異なることから、
+  <a href="reference.html#bg"><code>@bg</code></a> /
+  <a href="reference.html#ch"><code>@ch</code></a> /
+  <a href="reference.html#move"><code>@move</code></a> /
+  <a href="reference.html#chch"><code>@chch</code></a>
+  との併用はできません。
 </p>
 
 <h2>使用例</h2>
@@ -42,63 +42,63 @@
 
 <h2>コマンド一覧</h2>
 <table>
-	<thead>
-		<tr>
-			<th>コマンド</th>
-			<th>役割</th>
-		</tr>
-	</thead>
-	<tbody>
-		<tr>
-			<td>@cl.enter name=名前</td>
-			<td>ステージにキャラを入場させる。入場は1回でよい。退場させるまで名前が有効。</td>
-		</tr>
-		<tr>
-			<td>@cl.leave name=名前</td>
-			<td>ステージからキャラを退場させる。name=allで全員退場。</td>
-		</tr>
-		<tr>
-			<td>@cl.file name=名前 file=chara001.png</td>
-			<td>指定した名前のキャラのファイルを指定する(拡張子は省略可)。name=bgで背景も指定可能。</td>
-		</tr>
-		<tr>
-			<td>@cl.pos name=名前 align=left x+=100</td>
-			<td>キャラの位置を指定する(align=,valign=,x=,x+=,x-=,y=,y+=,y-=の形式で指定可能)</td>
-		</tr>
-		<tr>
-			<td>@cl.alpha name=名前 a=255</td>
-			<td>キャラのアルファ値を指定する</td>
-		</tr>
-		<tr>
-			<td>@cl.dim name=名前 dim=true</td>
-			<td>キャラを暗くするかの手動設定を行う。dim=trueかdim=false</td>
-		</tr>
-		<tr>
-			<td>@cl.time t=0.5</td>
-			<td>フェードやアニメの時間を指定する</td>
-		</tr>
-		<tr>
-			<td>@cl.effect effect=normal</td>
-			<td>フェードのエフェクトを指定する</td>
-		</tr>
-		<tr>
-			<td>@cl.move name=名前 t=0.5 x+=100</td>
-			<td>アニメの指定を追加する。振動のような周期的なアニメを簡単に記述できる。x=,x+=,x-=,y=,y+=,y-=,a=が使える</td>
-		</tr>
-		<tr>
-			<td>@cl.run</td>
-			<td>フェードかアニメを実行する(moveが使われていればアニメとなる。そうでなければフェードとなる)</td>
-		</tr>
-		<tr>
-			<td>@cl.async</td>
-			<td>アニメを実行しながら次のコマンドに移動する</td>
-		</tr>
-	</tbody>
+  <thead>
+  <tr>
+    <th>コマンド</th>
+    <th>役割</th>
+  </tr>
+  </thead>
+  <tbody>
+	<tr>
+      <td>@cl.enter name=名前</td>
+      <td>ステージにキャラを入場させる。入場は1回でよい。退場させるまで名前が有効。</td>
+	</tr>
+	<tr>
+      <td>@cl.leave name=名前</td>
+      <td>ステージからキャラを退場させる。name=allで全員退場。</td>
+	</tr>
+	<tr>
+      <td>@cl.file name=名前 file=chara001.png</td>
+      <td>指定した名前のキャラのファイルを指定する(拡張子は省略可)。name=bgで背景も指定可能。</td>
+	</tr>
+	<tr>
+      <td>@cl.pos name=名前 align=left x+=100</td>
+      <td>キャラの位置を指定する(align=,valign=,x=,x+=,x-=,y=,y+=,y-=の形式で指定可能)</td>
+	</tr>
+	<tr>
+      <td>@cl.alpha name=名前 a=255</td>
+      <td>キャラのアルファ値を指定する</td>
+	</tr>
+	<tr>
+      <td>@cl.dim name=名前 dim=true</td>
+      <td>キャラを暗くするかの手動設定を行う。dim=trueかdim=false</td>
+	</tr>
+	<tr>
+      <td>@cl.time t=0.5</td>
+      <td>フェードやアニメの時間を指定する</td>
+	</tr>
+	<tr>
+      <td>@cl.effect effect=normal</td>
+      <td>フェードのエフェクトを指定する</td>
+	</tr>
+	<tr>
+      <td>@cl.move name=名前 t=0.5 x+=100</td>
+      <td>アニメの指定を追加する。振動のような周期的なアニメを簡単に記述できる。x=,x+=,x-=,y=,y+=,y-=,a=が使える</td>
+	</tr>
+	<tr>
+      <td>@cl.run</td>
+      <td>フェードかアニメを実行する(moveが使われていればアニメとなる。そうでなければフェードとなる)</td>
+	</tr>
+	<tr>
+      <td>@cl.async</td>
+      <td>アニメを実行しながら次のコマンドに移動する</td>
+	</tr>
+  </tbody>
 </table>
 
 <h2>アニメの例</h2>
 <p>
-	キャラクタ <code>hina</code> を頷かせます。
+  キャラクタ <code>hina</code> を頷かせます。
 </p>
 <pre><code>@cl.move name=hina t=0.3 y-=100
 @cl.move name=hina t=0.3 y+=100
@@ -106,17 +106,17 @@
 @cl.move name=hina t=0.3 y+=100
 @cl.run</code></pre>
 <p>
-	最後の <code>@cl.run</code> を <code>@cl.async</code> に置き換えると、アニメの完了を待つことなく、次のメッセージに進みます。
+  最後の <code>@cl.run</code> を <code>@cl.async</code> に置き換えると、アニメの完了を待つことなく、次のメッセージに進みます。
 </p>
 
 <h2>マクロとの組み合わせ</h2>
 <p>
-	<code>@gosub</code> やその省略形によるマクロとの組み合わせが想定されています。
+  <code>@gosub</code> やその省略形によるマクロとの組み合わせが想定されています。
 </p>
 <pre><code>&amp;hina happy</code></pre>
 <p>
-	呼び出し先のマクロは下記のように定義します。
-	引数は <code>&amp;1</code> のように番号で書くと展開されます。
+  呼び出し先のマクロは下記のように定義します。
+  引数は <code>&amp;1</code> のように番号で書くと展開されます。
 </p>
 <pre><code>:hina
 @cl.file name=hina file=001-&amp;1.png
