@@ -171,7 +171,7 @@ make -j$(nproc) libopennovel.dll
 make -j$(nproc) libopennovel.dylib
 
 # Unity Linux
-docker run -it -v `pwd`/../..:/workspace ubuntu-build /bin/sh -c 'cd /workspace/engines/unity && make libopennovel.so'
+docker run -it -v `pwd`/../..:/workspace opennovel-linux-build /bin/sh -c 'cd /workspace/engines/unity && make libopennovel.so'
 
 # Unity Switch
 docker pull yesimnathan/switchdev
