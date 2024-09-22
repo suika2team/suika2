@@ -42,26 +42,19 @@ echo ''
 
 echo 'Building Windows binaries...'
 
-cd engines/windows
-make libroot
-make -j$(nproc) game.exe
-cp game.exe "$TARGET_DIR/game.exe"
-cd ../..
+docker build -t opennovel-mingw-build engines/windows
 
-cd apps/pack
-make pack.exe
-cp pack.exe "$TARGET_DIR/tools/pack-win.exe"
-cd ../..
+docker run -it -v `pwd`:/workspace opennovel-mingw-build /bin/sh -c 'cd /workspace/engines/windows && make libroot && make -j$(nproc)'
+cp engines/windows/game.exe "$TARGET_DIR/game.exe"
 
-cd apps/exporter
-make exporter.exe
-cp exporter.exe "$TARGET_DIR/exporter.exe"
-cd ../..
+docker run -it -v `pwd`:/workspace opennovel-mingw-build /bin/sh -c 'cd /workspace/apps/pack && make pack.exe'
+cp apps/pack/pack.exe "$TARGET_DIR/tools/pack-win.exe"
 
-cd apps/web-test
-make web-test.exe
-cp web-test.exe "$TARGET_DIR/tools/web-test.exe"
-cd ../..
+docker run -it -v `pwd`:/workspace opennovel-mingw-build /bin/sh -c 'cd /workspace/apps/exporter && make exporter.exe'
+cp apps/exporter/exporter.exe "$TARGET_DIR/exporter.exe"
+
+docker run -it -v `pwd`:/workspace opennovel-mingw-build /bin/sh -c 'cd /workspace/apps/web-test && make web-test.exe'
+cp apps/web-test/web-test.exe "$TARGET_DIR/tools/web-test.exe"
 
 echo '...Done building Windows binaries.'
 echo ''
@@ -95,12 +88,12 @@ echo ''
 
 echo 'Building Linux binaries...'
 
-docker build -t ubuntu-build engines/linux
+docker build -t opennovel-linux-build engines/linux
 
-docker run -it -v `pwd`:/workspace ubuntu-build /bin/sh -c 'cd /workspace/engines/linux && make libroot && make -j$(nproc)'
+docker run -it -v `pwd`:/workspace opennovel-linux-build /bin/sh -c 'cd /workspace/engines/linux && make libroot && make -j$(nproc)'
 cp engines/linux/game-linux "$TARGET_DIR/tools/game-linux"
 
-docker run -it -v `pwd`:/workspace ubuntu-build /bin/sh -c 'cd /workspace/apps/pack && rm -f pack && make pack'
+docker run -it -v `pwd`:/workspace opennovel-linux-build /bin/sh -c 'cd /workspace/apps/pack && rm -f pack && make pack'
 cp apps/pack/pack "$TARGET_DIR/tools/pack-linux"
 
 echo '...Done building Linux binaries.'
