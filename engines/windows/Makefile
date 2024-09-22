@@ -93,7 +93,7 @@ game.exe: libroot $(OBJS) $(HDRS_MAIN) $(HDRS)
 	@$(CC) -o game.exe $(OBJS) $(CFLAGS) $(LDFLAGS)
 	@$(STRIP) --strip-all game.exe
 
-libroot: llvm
+libroot:
 	@../../external/build-libs.sh "" $(CC) "-O3 -g0 -s -fno-stack-protector -fomit-frame-pointer -msse3 -ffast-math -ftree-vectorize -ffunction-sections -fdata-sections" $(AR)
 
 #
