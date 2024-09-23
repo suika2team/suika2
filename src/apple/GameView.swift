@@ -1,5 +1,79 @@
+import SwiftUI
 import MetalKit
 
+#if os(iOS)
+private typealias ViewRepresentable = UIViewRepresentable
+#elseif os(macOS)
+private typealias ViewRepresentable = NSViewRepresentable
+#endif
+
+//
+// GameViewRepresentable
+//
+struct GameViewRepresentable: ViewRepresentable {
+    #if os(macOS)
+    typealias NSViewType = GameView
+    #else
+    typealias UIViewType = GameView
+    #endif
+
+    var view: GameView
+    var coordinator: Renderer
+
+    init() {
+        view = GameView()
+        coordinator = Renderer(view: view)
+        view.delegate = coordinator
+    }
+
+    #if os(iOS)
+    func makeCoordinator() -> Renderer { return coordinator }
+    func makeUIView(context: Context) -> MTKView { return view }
+    func updateUIView(_ uiView: GameView, context: Context) { }
+    #endif
+
+    #if os(macOS)
+    func makeCoordinator() -> Renderer { return coordinator }
+    func makeNSView(context: Context) -> GameView { return view }
+    func updateNSView(_ nsView: GameView, context: Context) { }
+    #endif
+}
+
+//
+// GameView
+//
+class GameView: MTKView {
+    #if os(iOS)
+    func touchesBegan(_: Set<UITouch>, with: UIEvent) {
+        Renderer.touchesBegan(_, with: with)
+    }
+    func touchesMoved(_: Set<UITouch>, with: UIEvent) {
+        Renderer.touchesMoved(_, with: with)
+    }
+    func touchesEnded(_: Set<UITouch>, with: UIEvent) {
+        Renderer.touchesEnded(_, with: with)
+    }
+    #endif
+
+    #if os(macOS)
+    override func mouseDown(with event: NSEvent) {
+        Renderer.mouseDown(with: event)
+    }
+    override func mouseUp(with: NSEvent) {
+        Renderer.mouseUp(with: with)
+    }
+    override func mouseDragged(with: NSEvent) {
+        Renderer.mouseDragged(with: with)
+    }
+    override func scrollWheel(with: NSEvent) {
+        Renderer.scrollWheel(with: with)
+    }
+    #endif
+}
+
+//
+// Renderer
+//
 class Renderer: NSObject, MTKViewDelegate {
     // An MTKView
     static var mtkView: MTKView?
