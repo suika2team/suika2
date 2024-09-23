@@ -51,11 +51,11 @@ echo 'Building Windows binaries...'
 docker run -it -v `pwd`:/workspace opennovel-build /bin/sh -c 'cd /workspace/engines/windows && make libroot && make -j$(nproc)'
 cp engines/windows/game.exe "$TARGET_DIR/game.exe"
 
+docker run -it -v `pwd`:/workspace opennovel-build /bin/sh -c 'cd /workspace/apps/pro-windows && make libroot && make -j$(nproc)'
+cp apps/pro-windows/editor.exe "$TARGET_DIR/editor.exe"
+
 docker run -it -v `pwd`:/workspace opennovel-build /bin/sh -c 'cd /workspace/apps/pack && make pack.exe'
 cp apps/pack/pack.exe "$TARGET_DIR/tools/pack-win.exe"
-
-docker run -it -v `pwd`:/workspace opennovel-build /bin/sh -c 'cd /workspace/apps/exporter && make exporter.exe'
-cp apps/exporter/exporter.exe "$TARGET_DIR/exporter.exe"
 
 docker run -it -v `pwd`:/workspace opennovel-build /bin/sh -c 'cd /workspace/apps/web-test && make web-test.exe'
 cp apps/web-test/web-test.exe "$TARGET_DIR/tools/web-test.exe"
