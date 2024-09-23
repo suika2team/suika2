@@ -37,23 +37,27 @@ echo '...Done making a target directory.'
 echo ''
 
 #
+# Docker container build
+#
+
+docker build -t opennovel-build .
+
+#
 # Windows Build (Binary)
 #
 
 echo 'Building Windows binaries...'
 
-docker build -t opennovel-mingw-build engines/windows
-
-docker run -it -v `pwd`:/workspace opennovel-mingw-build /bin/sh -c 'cd /workspace/engines/windows && make libroot && make -j$(nproc)'
+docker run -it -v `pwd`:/workspace opennovel-build /bin/sh -c 'cd /workspace/engines/windows && make libroot && make -j$(nproc)'
 cp engines/windows/game.exe "$TARGET_DIR/game.exe"
 
-docker run -it -v `pwd`:/workspace opennovel-mingw-build /bin/sh -c 'cd /workspace/apps/pack && make pack.exe'
+docker run -it -v `pwd`:/workspace opennovel-build /bin/sh -c 'cd /workspace/apps/pack && make pack.exe'
 cp apps/pack/pack.exe "$TARGET_DIR/tools/pack-win.exe"
 
-docker run -it -v `pwd`:/workspace opennovel-mingw-build /bin/sh -c 'cd /workspace/apps/exporter && make exporter.exe'
+docker run -it -v `pwd`:/workspace opennovel-build /bin/sh -c 'cd /workspace/apps/exporter && make exporter.exe'
 cp apps/exporter/exporter.exe "$TARGET_DIR/exporter.exe"
 
-docker run -it -v `pwd`:/workspace opennovel-mingw-build /bin/sh -c 'cd /workspace/apps/web-test && make web-test.exe'
+docker run -it -v `pwd`:/workspace opennovel-build /bin/sh -c 'cd /workspace/apps/web-test && make web-test.exe'
 cp apps/web-test/web-test.exe "$TARGET_DIR/tools/web-test.exe"
 
 echo '...Done building Windows binaries.'
@@ -88,12 +92,10 @@ echo ''
 
 echo 'Building Linux binaries...'
 
-docker build -t opennovel-linux-build engines/linux
-
-docker run -it -v `pwd`:/workspace opennovel-linux-build /bin/sh -c 'cd /workspace/engines/linux && make libroot && make -j$(nproc)'
+docker run -it -v `pwd`:/workspace opennovel-build /bin/sh -c 'cd /workspace/engines/linux && make libroot && make -j$(nproc)'
 cp engines/linux/game-linux "$TARGET_DIR/tools/game-linux"
 
-docker run -it -v `pwd`:/workspace opennovel-linux-build /bin/sh -c 'cd /workspace/apps/pack && rm -f pack && make pack'
+docker run -it -v `pwd`:/workspace opennovel-build /bin/sh -c 'cd /workspace/apps/pack && rm -f pack && make pack'
 cp apps/pack/pack "$TARGET_DIR/tools/pack-linux"
 
 echo '...Done building Linux binaries.'
@@ -171,7 +173,7 @@ make -j$(nproc) libopennovel.dll
 make -j$(nproc) libopennovel.dylib
 
 # Unity Linux
-docker run -it -v `pwd`/../..:/workspace opennovel-linux-build /bin/sh -c 'cd /workspace/engines/unity && make libopennovel.so'
+docker run -it -v `pwd`/../..:/workspace opennovel-build /bin/sh -c 'cd /workspace/engines/unity && make libopennovel.so'
 
 # Unity Switch
 docker pull yesimnathan/switchdev

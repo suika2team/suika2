@@ -101,4 +101,4 @@ libroot:
 #
 
 clean:
-	@rm -rf *.o *~ game.exe log.txt sav tmp libroot*
+	@rm -rf *.o *~ game.exe errors.txt save tmp libroot*
