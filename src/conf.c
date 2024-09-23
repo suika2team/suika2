@@ -1094,9 +1094,6 @@ bool apply_initial_values(void)
 		if (conf_click_image[click_frames - 1] != NULL)
 			break;
 
-#ifdef USE_EDITOR
-	conf_window_resize = 1;
-#endif
 	return true;
 }
 

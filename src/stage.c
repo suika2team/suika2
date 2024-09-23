@@ -3681,14 +3681,14 @@ bool set_layer_text(int layer, const char *msg)
 #if defined(USE_EDITOR)
 void clear_sysbtn_drawn(void)
 {
-	prev_sysmenu_drawn = false;
+	prev_sysbtn_drawn = false;
 }
 #endif
 
 #if defined(USE_EDITOR)
 bool get_sysbtn_drawn(void)
 {
-	if (!prev_sysmenu_drawn)
+	if (!prev_sysbtn_drawn)
 		return false;
 
 	return true;

@@ -213,14 +213,14 @@ bool game_loop_iter(void)
 		render_stage();
 
 		/* 前のコマンドがシステムメニューを表示した場合 */
-		if (get_sysmenu_drawn() || prev_command_type == COMMAND_MESSAGE)
-			render_collapsed_sysmenu(false);
+		if (get_sysbtn_drawn() || prev_command_type == COMMAND_MESSAGE)
+			render_sysbtn(false);
 
 		return true;
 	}
 
 	/* @guiコマンドに対して一行実行ボタンが押下されたとき */
-	if (get_command_type() == COMMAND_GUI && !is_gui_mode() && dbg_request_stop) {
+	if (get_command_type() == COMMAND_MENU && !is_gui_mode() && dbg_request_stop) {
 		dbg_request_stop = false;
 		dbg_request_stop_after_gui = true;
 	}
@@ -230,7 +230,7 @@ bool game_loop_iter(void)
 		/* GUI実行中でない場合 */
 		do {
 			/* システムメニューの描画状況をクリアする */
-			clear_sysmenu_drawn();
+			clear_sysbtn_drawn();
 
 			/* 前回のコマンドを設定する */
 			prev_command_type = get_command_type();
@@ -260,7 +260,7 @@ bool game_loop_iter(void)
 	} else {
 		/* GUI実行中の場合 */
 		do {
-			bool is_cmd_gui = get_command_type() == COMMAND_GUI;
+			bool is_cmd_gui = get_command_type() == COMMAND_MENU;
 
 			/* GUIのフレームを実行する */
 			if (!run_gui_mode()) {
@@ -282,9 +282,9 @@ bool game_loop_iter(void)
 					break;
 				}
 
-				/* @guiコマンド内なので、終了処理を行う */
+				/* @menuコマンド内なので、終了処理を行う */
 				if (is_cmd_gui) {
-					if (!gui_command())
+					if (!menu_command())
 						return false;
 					break;
 				}
@@ -293,7 +293,7 @@ bool game_loop_iter(void)
 			}
 
 			/* @guiコマンドの実行中に停止ボタンが押された場合 */
-			if (get_command_type() == COMMAND_GUI && dbg_request_stop) {
+			if (get_command_type() == COMMAND_MENU && dbg_request_stop) {
 				stop_gui_mode();
 				cleanup_gui();
 				is_in_repetition = false;
@@ -309,8 +309,8 @@ bool game_loop_iter(void)
 		render_stage();
 
 		/* 前のコマンドがシステムメニューを表示した場合 */
-		if (get_sysmenu_drawn() || prev_command_type == COMMAND_MESSAGE)
-			render_collapsed_sysmenu(false);
+		if (get_sysbtn_drawn() || prev_command_type == COMMAND_MESSAGE)
+			render_sysbtn(false);
 	}
 
 	post_process();
