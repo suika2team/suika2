@@ -1,16 +1,16 @@
 // -*- coding: utf-8; tab-width: 4; indent-tabs-mode: nil; -*-
 
 /*
- * Polaris Engine
+ * OpenNovel
  * Copyright (C) 2024, The Authors. All rights reserved.
  */
 
 //
-// GameShaderTypes: The Metal version of the shaders for Polaris Engine
+// GameShaderTypes: The Metal version of the shaders for OpenNovel
 //
 
-#ifndef POLARIS_ENGINE_GAMESHADERTYPES_H
-#define POLARIS_ENGINE_GAMESHADERTYPES_H
+#ifndef OPENNOVEL_GAMESHADERTYPES_H
+#define OPENNOVEL_GAMESHADERTYPES_H
 
 #include <simd/simd.h>
 

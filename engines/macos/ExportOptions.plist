@@ -6,11 +6,6 @@
   <string>upload</string>
   <key>method</key>
   <string>developer-id</string>
-  <key>provisioningProfiles</key>
-  <dict>
-    <key>com.polaris-engine.engine-macos</key>
-    <string>Polaris Engine Runtime</string>
-  </dict>
   <key>signingCertificate</key>
   <string>Developer ID Application</string>
   <key>signingStyle</key>

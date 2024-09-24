@@ -1,7 +1,7 @@
 WMS (Watermelon Script)
 =======================
 
-WMS (Watermelon Script) is a plugin language for Polaris Engine.
+WMS (Watermelon Script) is a plugin language for OpenNovel, originally written for Suika2.
 It is designed to be intuitive and easily written by anyone who has any experience with programming.
 
 This directory provides a command line interface (CLI) for WMS.

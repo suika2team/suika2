@@ -89,7 +89,7 @@ echo 'Building Linux binaries...'
 docker run -it -v `pwd`:/workspace opennovel-build /bin/sh -c 'cd /workspace/engines/linux && make libroot && make -j$(nproc)'
 cp engines/linux/game-linux "$TARGET_DIR/tools/game-linux"
 
-docker run -it -v `pwd`:/workspace opennovel-build /bin/sh -c 'cd /workspace/apps/pack && rm -f pack && make pack'
+docker run -it -v `pwd`:/workspace opennovel-build /bin/sh -c 'cd /workspace/apps/pack-linux && rm -f pack && make pack'
 cp apps/pack/pack "$TARGET_DIR/tools/pack-linux"
 
 echo '...Done building Linux binaries.'
