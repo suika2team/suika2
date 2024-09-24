@@ -28,7 +28,8 @@ read str
 echo 'Making a target directories...'
 
 TARGET_DIR="`pwd`/OpenNovel-$VERSION"
-TARGET_ZIP="`pwd`/OpenNovel-Win-$VERSION.zip"
+TARGET_EXE="`pwd`/OpenNovel-Win-Installer-$VERSION.exe"
+TARGET_ZIP="`pwd`/OpenNovel-Win-ZIP-Not-Recommended-$VERSION.zip"
 TARGET_DMG="`pwd`/OpenNovel-Mac-$VERSION.dmg"
 rm -rf "$TARGET_DIR" "$TARGET_ZIP"
 mkdir "$TARGET_DIR"
@@ -211,16 +212,44 @@ echo '...Done copying documents and sample.'
 echo ''
 
 #
+# Installer
+#
+
+echo 'Making an installer...'
+
+cp "$TARGET_DIR"/game.exe apps/installer-windows/
+cp "$TARGET_DIR"/editor.exe apps/installer-windows/
+cp -R "$TARGET_DIR"/manual apps/installer-windows/
+cp -R "$TARGET_DIR"/sample apps/installer-windows/
+cp -R "$TARGET_DIR"/tools apps/installer-windows/
+
+cd apps/installer-windows
+make
+cp opennovel-installer.exe "$TARGET_EXE"
+rm opennovel-installer.exe
+cd ../..
+
+rm apps/installer-windows/game.exe
+rm apps/installer-windows/editor.exe
+rm -rf apps/installer-windows/manual
+rm -rf apps/installer-windows/sample
+rm -rf apps/installer-windows/tools
+
+echo '...Done compressing.'
+echo ''
+
+#
 # ZIP
 #
 
 echo 'Compressing...'
 
 7z a -tzip -mx9 -aoa "$TARGET_ZIP" "$TARGET_DIR"
-rm -rf "$TARGET_DIR"
 
 echo '...Done compressing.'
 echo ''
+
+read str
 
 #
 # GitHub Release
@@ -228,8 +257,8 @@ echo ''
 
 echo 'Making a release on GitHub...'
 
-yes '' | gh release create "$VERSION" --title "$VERSION" --notes "$NOTE" "$TARGET_ZIP" "$TARGET_DMG"
-rm -f "$TARGET_ZIP" "$TARGET_DMG"
+yes '' | gh release create "$VERSION" --title "$VERSION" --notes "$NOTE" "$TARGET_EXE" "$TARGET_ZIP" "$TARGET_DMG"
+rm -rf "$TARGET_DIR" "$TARGET_EXE" "$TARGET_ZIP" "$TARGET_DMG"
 
 echo '...Done.'
 echo ''
