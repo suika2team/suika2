@@ -50,6 +50,7 @@ add_library(
   src/main/cpp/cmd_ch.c
   src/main/cpp/cmd_chapter.c
   src/main/cpp/cmd_chch.c
+  src/main/cpp/cmd_choose.c
   src/main/cpp/cmd_click.c
   src/main/cpp/cmd_config.c
   src/main/cpp/cmd_gosub.c
@@ -66,7 +67,6 @@ add_library(
   src/main/cpp/cmd_skip.c
   src/main/cpp/cmd_sound.c
   src/main/cpp/cmd_story.c
-  src/main/cpp/cmd_switch.c
   src/main/cpp/cmd_text.c
   src/main/cpp/cmd_video.c
   src/main/cpp/cmd_volume.c

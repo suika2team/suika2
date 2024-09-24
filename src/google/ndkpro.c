@@ -38,8 +38,8 @@
  * Constants
  */
 
-#define LOG_BUF_SIZE		(1024)
-#define SCROLL_DOWN_MARGIN	(5)
+#define LOG_BUF_SIZE			(1024)
+#define SCROLL_DOWN_MARGIN		(5)
 
 /*
  * Variables
@@ -87,7 +87,6 @@ static bool is_continuous_swipe_enabled;
  * Forward declarations.
  */
 static jstring make_script_jstring(void);
-static void do_delayed_remove_rfile_ref(void);
 
 /*
  * Exports
@@ -109,9 +108,6 @@ Java_com_opennovel_proandroid_MainActivity_nativeInitGame(
 	const char *cstr = (*env)->GetStringUTFChars(env, basePath, 0);
 	chdir(cstr);
 	(*env)->ReleaseStringUTFChars(env, basePath, cstr);
-
-	/* Initialize the locale. */
-	init_locale_code();
 
 	/* Initialize the config. */
 	if (!init_conf()) {
@@ -204,37 +200,6 @@ Java_com_opennovel_proandroid_MainActivity_nativeRunFrame(
 		opengl_end_rendering();
 
 	jni_env = NULL;
-}
-
-void post_delayed_remove_rfile_ref(struct rfile *rf)
-{
-	int i;
-
-	for (i = 0; i < DELAYED_RFILE_FREE_SLOTS; i++) {
-		if (delayed_rfile_free_slot[i] == NULL) {
-			delayed_rfile_free_slot[i] = rfile_ref;
-			return;
-		}
-	}
-	assert(0);
-}
-
-static void do_delayed_remove_rfile_ref(void)
-{
-	int i;
-
-	for (i = 0; i < DELAYED_RFILE_FREE_SLOTS; i++) {
-		if (delayed_rfile_free_slot[i] != NULL) {
-			(*jni_env)->ReleaseByteArrayElements(jni_env,
-							     delayed_rfile_free_slot[i]->array,
-							     (jbyte *)delayed_rfile_free_slot[i]->buf,
-							     JNI_ABORT);
-			(*jni_env)->DeleteGlobalRef(jni_env,
-						    delayed_rfile_free_slot[i]->array);
-			free(delayed_rfile_free_slot[i]);
-			delayed_rfile_free_slot[i] = NULL;
-		}
-	}
 }
 
 JNIEXPORT void JNICALL

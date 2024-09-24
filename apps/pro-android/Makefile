@@ -7,41 +7,41 @@ setup:
 	@
 	@echo 'Extracting libpng.'
 	@mkdir -p app/src/main/cpp/libpng
-	@tar xzf ../libsrc/libpng-1.6.43.tar.gz -C app/src/main/cpp/libpng --strip-components 1
+	@tar xzf ../../external/libpng-1.6.43.tar.gz -C app/src/main/cpp/libpng --strip-components 1
 	@cp app/src/main/cpp/libpng/scripts/pnglibconf.h.prebuilt app/src/main/cpp/libpng/pnglibconf.h
 	@
 	@echo 'Extracting bzip2.'
 	@mkdir -p app/src/main/cpp/bzip2
-	@tar xzf ../libsrc/bzip2-1.0.6.tar.gz -C app/src/main/cpp/bzip2 --strip-components 1
+	@tar xzf ../../external/bzip2-1.0.6.tar.gz -C app/src/main/cpp/bzip2 --strip-components 1
 	@cp cmake/bzip2.txt app/src/main/cpp/bzip2/CMakeLists.txt
 	@
 	@echo 'Extracting libwebp.'
 	@mkdir -p app/src/main/cpp/libwebp
-	@tar xzf ../libsrc/libwebp-1.3.2.tar.gz -C app/src/main/cpp/libwebp --strip-components 1
+	@tar xzf ../../external/libwebp-1.3.2.tar.gz -C app/src/main/cpp/libwebp --strip-components 1
 	@
 	@echo 'Extracting freetype2.'
 	@mkdir -p app/src/main/cpp/freetype
-	@tar xzf ../libsrc/freetype-2.13.2.tar.gz -C app/src/main/cpp/freetype --strip-components 1
+	@tar xzf ../../external/freetype-2.13.2.tar.gz -C app/src/main/cpp/freetype --strip-components 1
 	@
 	@echo 'Extracting brotli.'
 	@mkdir -p app/src/main/cpp/brotli
-	@tar xzf ../libsrc/brotli-1.1.0.tar.gz -C app/src/main/cpp/brotli --strip-components 1
+	@tar xzf ../../external/brotli-1.1.0.tar.gz -C app/src/main/cpp/brotli --strip-components 1
 	@
 	@echo 'Extracting jpeg9.'
 	@mkdir -p app/src/main/cpp/jpeg
-	@tar xzf ../libsrc/jpegsrc.v9e.tar.gz -C app/src/main/cpp/jpeg --strip-components 1
+	@tar xzf ../../external/jpegsrc.v9e.tar.gz -C app/src/main/cpp/jpeg --strip-components 1
 	@cp cmake/jpeg.txt app/src/main/cpp/jpeg/CMakeLists.txt
 	@cp app/src/main/cpp/jpeg/jconfig.txt app/src/main/cpp/jpeg/jconfig.h
 	@
 	@echo 'Extracting libogg.'
 	@mkdir -p app/src/main/cpp/libogg
-	@tar xzf ../libsrc/libogg-1.3.3.tar.gz -C app/src/main/cpp/libogg --strip-components 1
+	@tar xzf ../../external/libogg-1.3.3.tar.gz -C app/src/main/cpp/libogg --strip-components 1
 	@cp cmake/libogg.txt app/src/main/cpp/libogg/CMakeLists.txt
 	@sed -e 's/@INCLUDE_INTTYPES_H@/1/g' -e 's/@INCLUDE_STDINT_H@/1/g' -e 's/@INCLUDE_SYS_TYPES_H@/1/g' -e 's/@SIZE16@/int16_t/g' -e 's/@USIZE16@/uint16_t/g' -e 's/@SIZE32@/int32_t/g' -e 's/@USIZE32@/uint32_t/g' -e 's/@SIZE64@/int64_t/g' -e 's/@USIZE64@/uint64_t/g' < app/src/main/cpp/libogg/include/ogg/config_types.h.in > app/src/main/cpp/libogg/include/ogg/config_types.h
 	@
 	@echo 'Extracting libvorbis.'
 	@mkdir -p app/src/main/cpp/libvorbis
-	@tar xzf ../libsrc/libvorbis-1.3.6.tar.gz -C app/src/main/cpp/libvorbis --strip-components 1
+	@tar xzf ../../external/libvorbis-1.3.6.tar.gz -C app/src/main/cpp/libvorbis --strip-components 1
 	@cp cmake/libvorbis.txt app/src/main/cpp/libvorbis/CMakeLists.txt
 	@
 	@echo 'Copying source files.'
@@ -82,16 +82,12 @@ setup:
 	@cp ../../src/readwebp.c app/src/main/cpp/
 	@cp ../../src/save.c app/src/main/cpp/
 	@cp ../../src/save.h app/src/main/cpp/
-	@cp ../../src/scbuf.c app/src/main/cpp/
-	@cp ../../src/scbuf.h app/src/main/cpp/
 	@cp ../../src/script.c app/src/main/cpp/
 	@cp ../../src/script.h app/src/main/cpp/
 	@cp ../../src/seen.c app/src/main/cpp/
 	@cp ../../src/seen.h app/src/main/cpp/
 	@cp ../../src/stage.c app/src/main/cpp/
 	@cp ../../src/stage.h app/src/main/cpp/
-	@cp ../../src/uimsg.h app/src/main/cpp/
-	@cp ../../src/uimsg.c app/src/main/cpp/
 	@cp ../../src/types.h app/src/main/cpp/
 	@cp ../../src/vars.h app/src/main/cpp/
 	@cp ../../src/vars.c app/src/main/cpp/
@@ -109,6 +105,7 @@ setup:
 	@cp ../../src/cmd_chapter.c app/src/main/cpp/
 	@cp ../../src/cmd_ch.c app/src/main/cpp/
 	@cp ../../src/cmd_chch.c app/src/main/cpp/
+	@cp ../../src/cmd_choose.c app/src/main/cpp/
 	@cp ../../src/cmd_click.c app/src/main/cpp/
 	@cp ../../src/cmd_config.c app/src/main/cpp/
 	@cp ../../src/cmd_gosub.c app/src/main/cpp/
@@ -126,7 +123,6 @@ setup:
 	@cp ../../src/cmd_skip.c app/src/main/cpp/
 	@cp ../../src/cmd_sound.c app/src/main/cpp/
 	@cp ../../src/cmd_story.c app/src/main/cpp/
-	@cp ../../src/cmd_switch.c app/src/main/cpp/
 	@cp ../../src/cmd_text.c app/src/main/cpp/
 	@cp ../../src/cmd_time.c app/src/main/cpp/
 	@cp ../../src/cmd_video.c app/src/main/cpp/
@@ -139,4 +135,4 @@ setup:
 	@
 	@echo 'Create a template game zip.'
 	@mkdir -p app/src/main/assets
-	@cd ../../samole && zip -r ../../build/pro-android/app/src/main/assets/game.zip *
+	@cd ../../game && zip -r ../apps/pro-android/app/src/main/assets/game.zip *
