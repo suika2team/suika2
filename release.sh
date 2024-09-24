@@ -29,6 +29,7 @@ echo 'Making a target directories...'
 
 TARGET_DIR="`pwd`/OpenNovel-$VERSION"
 TARGET_ZIP="`pwd`/OpenNovel-$VERSION.zip"
+TARGET_DMG="`pwd`/OpenNovel-$VERSION.dmg"
 rm -rf "$TARGET_DIR" "$TARGET_ZIP"
 mkdir "$TARGET_DIR"
 mkdir "$TARGET_DIR/tools"
@@ -43,31 +44,31 @@ echo ''
 docker build -t opennovel-build .
 
 #
-# Windows Build (Binary)
+# Windows build (Binary)
 #
 
-echo 'Building Windows binaries...'
-
+echo 'Building the Windows engine...'
 docker run -it -v `pwd`:/workspace opennovel-build /bin/sh -c 'cd /workspace/engines/windows && make libroot && make -j$(nproc)'
 cp engines/windows/game.exe "$TARGET_DIR/game.exe"
+echo '...Done building the Windows engine.'
 
+echo 'Building the Windows editor...'
 docker run -it -v `pwd`:/workspace opennovel-build /bin/sh -c 'cd /workspace/apps/pro-windows && make libroot && make -j$(nproc)'
 cp apps/pro-windows/editor.exe "$TARGET_DIR/editor.exe"
+echo '...Done building the Windows editor.'
 
-docker run -it -v `pwd`:/workspace opennovel-build /bin/sh -c 'cd /workspace/apps/pack && make pack.exe'
-cp apps/pack/pack.exe "$TARGET_DIR/tools/pack-win.exe"
-
+echo 'Building the Windows web-test tool...'
 docker run -it -v `pwd`:/workspace opennovel-build /bin/sh -c 'cd /workspace/apps/web-test && make web-test.exe'
 cp apps/web-test/web-test.exe "$TARGET_DIR/tools/web-test.exe"
+echo '...Done building the Windows web-test tool.'
 
-echo '...Done building Windows binaries.'
 echo ''
 
 #
-# Mac Build (Binary)
+# macOS engine build (Binary)
 #
 
-echo 'Building macOS binaries...'
+echo 'Building the macOS engine...'
 
 cd engines/macos
 make libroot
@@ -75,19 +76,11 @@ make game.dmg
 cp game.dmg "$TARGET_DIR/tools/game-mac.dmg"
 cd ../../
 
-cd apps/pack
-rm -f pack
-make pack
-cp pack "$TARGET_DIR/tools/pack-mac"
-cd ../..
-echo 'Ok.'
-echo ''
-
-echo '...Done building macOS binaries.'
+echo '...Done building the macOS engine.'
 echo ''
 
 #
-# Linux Build (Binary)
+# Linux build (Binary)
 #
 
 echo 'Building Linux binaries...'
@@ -102,7 +95,7 @@ echo '...Done building Linux binaries.'
 echo ''
 
 #
-# Wasm Build (Binary)
+# Wasm build (Binary)
 #
 
 echo 'Building Wasm binaries...'
@@ -116,38 +109,38 @@ echo '...Done building Wasm binaries.'
 echo ''
 
 #
-# iOS Build (Source)
+# iOS source tree build (Source)
 #
 
-echo 'Building iOS source tree...'
+echo 'Building the iOS source tree...'
 
 cd engines/ios
 make
 cp -R ios-src "$TARGET_DIR/tools/"
 cd ../../
 
-echo '...Done building iOS source tree.'
+echo '...Done building the iOS source tree.'
 echo ''
 
 #
-# Android Build (Source)
+# Android source tree build (Source)
 #
 
-echo 'Building Android source tree...'
+echo 'Building the Android source tree...'
 
 cd engines/android
 make
 cp -R android-src "$TARGET_DIR/tools/"
 cd ../../
 
-echo '...Done building Android source tree.'
+echo '...Done building the Android source tree.'
 echo ''
 
 #
-# macOS Build (Source)
+# macOS source tree build (Source)
 #
 
-echo 'Building macOS source tree...'
+echo 'Building the macOS source tree...'
 
 cd engines/macos
 make libroot
@@ -155,14 +148,14 @@ make src
 cp -R macos-src "$TARGET_DIR/tools/"
 cd ../../
 
-echo '...Done building macOS source tree.'
+echo '...Done building the macOS source tree.'
 echo ''
 
 #
-# Unity Build (Source)
+# Unity source tree build (Source)
 #
 
-echo 'Building Unity source tree...'
+echo 'Building the Unity source tree...'
 
 cd engines/unity
 
@@ -185,7 +178,22 @@ make src
 cp -R unity-src "$TARGET_DIR/tools/"
 cd ../../
 
-echo '...Done building Unity source tree.'
+echo '...Done building the Unity source tree.'
+echo ''
+
+#
+# macOS editor build (Binary)
+#
+
+echo 'Building the macOS editor...'
+
+cd apps/pro-macos
+make libroot
+make opennovel.dmg
+mv opennovel.dmg "$TARGET_DMG"
+cd ../../
+
+echo '...Done building the macOS editor.'
 echo ''
 
 #
@@ -220,8 +228,8 @@ echo ''
 
 echo 'Making a release on GitHub...'
 
-yes '' | gh release create "$VERSION" --title "$VERSION" --notes "$NOTE" "$TARGET_ZIP"
-rm -f "$TARGET_ZIP"
+yes '' | gh release create "$VERSION" --title "$VERSION" --notes "$NOTE" "$TARGET_ZIP" "$TARGET_DMG"
+rm -f "$TARGET_ZIP" "$TARGET_DMG"
 
 echo '...Done.'
 echo ''

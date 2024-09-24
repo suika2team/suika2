@@ -5,7 +5,7 @@ SRCS = $(SRCS_MAIN_MINUS_FILE) $(SRCS_CSHARP)
 #
 # Make a source tree
 #
-src:
+src: libopennovel.dll libopennovel.dylib libopennovel.so libopennovel.nso
 	@echo 'Making Unity source tree...'
 	@rm -rf unity-src
 	@mkdir unity-src

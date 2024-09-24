@@ -13,15 +13,15 @@ errors.txt
 save
 xcuserdata
 
-apps/app-ios/pro-ios.xcodeproj/project.xcworkspace
-apps/app-ios/pro-ios.xcodeproj/xcuserdata
+apps/pro-macos/pro-macos.xcodeproj/project.xcworkspace
+apps/pro-macos/pro-macos.xcodeproj/xcuserdata
 
 apps/pack/pack
 apps/pack/pack.exe
 
 engines/ios/engine-ios.xcodeproj/project.xcworkspace
 engines/ios/engine-ios.xcodeproj/xcuserdata
-engines/ios/engine-ios/data01.arc
+engines/ios/engine-ios/package.pak
 engines/ios/ios-src
 
 engines/macos/engine-macos.xcodeproj/project.xcworkspace
