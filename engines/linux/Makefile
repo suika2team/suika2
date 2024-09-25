@@ -41,17 +41,16 @@ CFLAGS = \
 #
 
 LDFLAGS = \
-	-lpng \
-	-ljpeg \
-	-lwebp \
-	-lfreetype \
-	-lvorbisfile \
-	-lvorbis \
-	-logg \
-	-lbrotlicommon \
-	-lbrotlidec \
-	-lbz2 \
-	-lz \
+	./libroot/lib/libpng.a \
+	./libroot/lib/libjpeg.a \
+	./libroot/lib/libwebp.a \
+	./libroot/lib/libfreetype.a \
+	./libroot/lib/libvorbis.a \
+	./libroot/lib/libogg.a \
+	./libroot/lib/libbrotlicommon.a \
+	./libroot/lib/libbrotlidec.a \
+	./libroot/lib/libbz2.a \
+	./libroot/lib/libz.a \
 	-lasound \
 	-lX11 \
 	-lXpm \
@@ -64,18 +63,18 @@ LDFLAGS = \
 # Targets
 #
 
-all: game-linux
+all: engine-linux
 
-game-linux: $(SRCS) libroot
+engine-linux: $(SRCS) libroot
 	@$(CC) \
-		-o game-linux \
+		-o engine-linux \
 		$(CPPFLAGS) \
 		$(CFLAGS) \
 		`pkg-config --cflags gstreamer-1.0 gstreamer-video-1.0` \
 		$(SRCS) \
 		 $(LDFLAGS) \
 		`pkg-config --libs gstreamer-1.0 gstreamer-video-1.0`
-	@$(STRIP) game-linux
+	@$(STRIP) engine-linux
 
 libroot:
 	@../../external/build-libs.sh "" $(CC) "-O2 -g0" $(AR)
@@ -84,4 +83,4 @@ setup:
 	sudo apt-get install build-essential libasound2-dev libx11-dev libxpm-dev mesa-common-dev libfreetype-dev libpng-dev libjpeg-dev libwebp-dev libvorbis-dev libogg-dev libbrotli-dev libbz2-dev libz-dev libgstreamer1.0-dev libgstreamer-plugins-base1.0-dev
 
 clean:
-	@rm -rf *~ *.o game-linux errors.txt save tmp libroot
+	@rm -rf *~ *.o engine-linux errors.txt save tmp libroot

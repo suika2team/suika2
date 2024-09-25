@@ -15,6 +15,7 @@
 /* Editor */
 #include "../pro.h"
 #include "../package.h"
+#include "dialog.h"
 
 /* HAL Implementaions */
 #include "dx9render.h"		/* Graphics HAL */
@@ -59,8 +60,18 @@
 #define SCRIPT_FONT_EN		L"Courier New"
 
 /* The version string. */
-#define PROGRAM				"OpenNovel"
-#define COPYRIGHT			"Copyright (c) 2024, The Authors. All rights reserved."
+#define HELP_STRING 		\
+	"OpenNovel 1.0\n" \
+	"Copyright (c) 2024, The Authors. All rights reserved.\n" \
+	"\n" \
+	"MIT license\n" \
+	"Permission to use, copy, modify, distribute, and sell this software and its " \
+	"documentation for any purpose is hereby granted without fee, provided that " \
+	"the above copyright notice appear in all copies and that both that " \
+	"copyright notice and this permission notice appear in supporting " \
+	"documentation.  No representations are made about the suitability of this " \
+	"software for any purpose.  It is provided \"as is\" without express or " \
+	"implied warranty."
 
 /* The minimum window size. */
 #define WINDOW_WIDTH_MIN	(800)
@@ -141,17 +152,19 @@ static const wchar_t wszWindowClassEditorPanel[] = L"OpenNovelEditorPanel";
  */
 
 /* Windows objects */
-static HWND hWndMain;				/* Main window */
+HWND hWndMain;						/* Main window */
 static HWND hWndRender;				/* Rendering panel */
 static HWND hWndEditor;				/* Editor panel */
 static HWND hWndBtnContinue;		/* Continue button */
 static HWND hWndBtnNext;			/* Next button */
-static HWND hWndBtnPause;			/* Stop button */
+static HWND hWndBtnStop;			/* Stop button */
+static HWND hWndBtnEdit;			/* Edit button */
 static HWND hWndTextboxScript;		/* Textbox for file name */
 static HWND hWndBtnSelectScript;	/* Button for file select */
 static HWND hWndRichEdit;			/* RichEdit for script */
 static HWND hWndTextboxVar;			/* Textbox for variables */
 static HWND hWndBtnVar;				/* Button for update-variables */
+static HWND hWndDlgProp;			/* Property dialog */
 static HMENU hMenu;					/* Menu on the main window */
 static HMENU hMenuPopup;			/* Popup menu */
 static HACCEL hAccel;				/* Keyboard accelerator */
@@ -351,7 +364,7 @@ static VOID OnOpenProject(void);
 static VOID OnOpenGameFolder(void);
 static VOID OnOpenScript(void);
 static VOID OnReloadScript(void);
-static const wchar_t *SelectFile(const char *pszDir);
+const wchar_t *SelectFile(const char *pszDir);
 static VOID OnContinue(void);
 static VOID OnNext(void);
 static VOID OnStop(void);
@@ -406,6 +419,10 @@ static VOID OnInsertMenu(void);
 static VOID OnInsertClick(void);
 static VOID OnInsertTime(void);
 static VOID OnInsertStory(void);
+
+/* Property dialog */
+static VOID OnProperty(void);
+static VOID OnPropertyUpdate(void);
 
 /* I18n translation */
 static int get_locale_id(void);
@@ -879,11 +896,11 @@ static BOOL InitEditorPanel(HINSTANCE hInstance)
 				  L"コマンドを1つだけ実行し、停止します。");
 
 	/* Create the stop button. */
-	hWndBtnPause = CreateWindow(
+	hWndBtnStop = CreateWindow(
 		L"BUTTON",
 		bEnglish ? L"Stopped" : L"停止",
 		WS_TABSTOP | WS_VISIBLE | WS_CHILD | BS_PUSHBUTTON,
-		MulDiv(330, nDpi, 96),
+		MulDiv(230, nDpi, 96),
 		MulDiv(10, nDpi, 96),
 		MulDiv(100, nDpi, 96),
 		MulDiv(40, nDpi, 96),
@@ -891,12 +908,32 @@ static BOOL InitEditorPanel(HINSTANCE hInstance)
 		(HMENU)ID_STOP,
 		hInstance,
 		NULL);
-	EnableWindow(hWndBtnPause, FALSE);
-	SendMessage(hWndBtnPause, WM_SETFONT, (WPARAM)hFont, (LPARAM)TRUE);
-	EnableWindow(hWndBtnPause, FALSE);
-	CreateTooltip(hWndBtnPause,
+	EnableWindow(hWndBtnStop, FALSE);
+	SendMessage(hWndBtnStop, WM_SETFONT, (WPARAM)hFont, (LPARAM)TRUE);
+	EnableWindow(hWndBtnStop, FALSE);
+	CreateTooltip(hWndBtnStop,
 				  L"Stop executing scripts.",
 				  L"コマンドの実行を停止します。");
+
+	/* Create the edit button. */
+	hWndBtnEdit = CreateWindow(
+		L"BUTTON",
+		bEnglish ? L"Edit" : L"編集",
+		WS_TABSTOP | WS_VISIBLE | WS_CHILD | BS_PUSHBUTTON,
+		MulDiv(350, nDpi, 96),
+		MulDiv(10, nDpi, 96),
+		MulDiv(80, nDpi, 96),
+		MulDiv(40, nDpi, 96),
+		hWndEditor,
+		(HMENU)ID_PROPERTY,
+		hInstance,
+		NULL);
+	EnableWindow(hWndBtnEdit, TRUE);
+	SendMessage(hWndBtnEdit, WM_SETFONT, (WPARAM)hFont, (LPARAM)TRUE);
+	EnableWindow(hWndBtnEdit, FALSE);
+	CreateTooltip(hWndBtnEdit,
+				  L"Edit properties of a command.",
+				  L"コマンドのプロパティを編集します。");
 
 	/* Crreate a textbox for the script name. */
 	hWndTextboxScript = CreateWindow(
@@ -1531,7 +1568,8 @@ static VOID StartGame(void)
 		/* Make controls enabled/disabled. */
 		EnableWindow(hWndBtnContinue, TRUE);
 		EnableWindow(hWndBtnNext, TRUE);
-		EnableWindow(hWndBtnPause, FALSE);
+		EnableWindow(hWndBtnEdit, TRUE);
+		EnableWindow(hWndBtnStop, FALSE);
 		EnableWindow(hWndBtnSelectScript, TRUE);
 		EnableWindow(hWndRichEdit, TRUE);
 		EnableWindow(hWndTextboxVar, TRUE);
@@ -2197,6 +2235,12 @@ static void OnCommand(WPARAM wParam, LPARAM lParam)
 		OnPopup();
 		break;
 	/* Direction */
+	case ID_PROPERTY:
+		OnProperty();
+		break;
+	case ID_PROPERTY_UPDATE:
+		OnPropertyUpdate();
+		break;
 	case ID_CMD_MESSAGE:
 		OnInsertMessage();
 		break;
@@ -2514,7 +2558,8 @@ static void Layout(int nClientWidth, int nClientHeight)
 	/* Change the control sizes. */
 	MoveWindow(hWndBtnContinue, MulDiv(10, nDpi, 96), MulDiv(10, nDpi, 96), MulDiv(100, nDpi, 96), MulDiv(40, nDpi, 96), TRUE);
 	MoveWindow(hWndBtnNext, MulDiv(120, nDpi, 96), MulDiv(10, nDpi, 96), MulDiv(100, nDpi, 96), MulDiv(40, nDpi, 96), TRUE);
-	MoveWindow(hWndBtnPause, MulDiv(330, nDpi, 96), MulDiv(10, nDpi, 96), MulDiv(100, nDpi, 96), MulDiv(40, nDpi, 96), TRUE);
+	MoveWindow(hWndBtnStop, MulDiv(230, nDpi, 96), MulDiv(10, nDpi, 96), MulDiv(100, nDpi, 96), MulDiv(40, nDpi, 96), TRUE);
+	MoveWindow(hWndBtnEdit, MulDiv(350, nDpi, 96), MulDiv(10, nDpi, 96), MulDiv(80, nDpi, 96), MulDiv(40, nDpi, 96), TRUE);
 	MoveWindow(hWndTextboxScript, MulDiv(10, nDpi, 96), MulDiv(60, nDpi, 96), MulDiv(350, nDpi, 96), MulDiv(30, nDpi, 96), TRUE);
 	MoveWindow(hWndBtnSelectScript, MulDiv(370, nDpi, 96), MulDiv(60, nDpi, 96), MulDiv(60, nDpi, 96), MulDiv(30, nDpi, 96), TRUE);
 	MoveWindow(hWndRichEdit,MulDiv(10, nDpi, 96), MulDiv(100, nDpi, 96), MulDiv(420, nDpi, 96), nClientHeight - MulDiv(180, nDpi, 96), TRUE);
@@ -2928,7 +2973,8 @@ void on_change_running_state(bool running, bool request_stop)
 		 */
 		EnableWindow(hWndBtnContinue, FALSE);
 		EnableWindow(hWndBtnNext, FALSE);
-		EnableWindow(hWndBtnPause, FALSE);
+		EnableWindow(hWndBtnStop, FALSE);
+		EnableWindow(hWndBtnEdit, FALSE);
 		EnableWindow(hWndTextboxScript, FALSE);
 		EnableWindow(hWndBtnSelectScript, FALSE);
 		SendMessage(hWndRichEdit, EM_SETREADONLY, TRUE, 0);
@@ -2963,7 +3009,8 @@ void on_change_running_state(bool running, bool request_stop)
 		 */
 		EnableWindow(hWndBtnContinue, FALSE);
 		EnableWindow(hWndBtnNext, FALSE);
-		EnableWindow(hWndBtnPause, TRUE);
+		EnableWindow(hWndBtnStop, TRUE);
+		EnableWindow(hWndBtnEdit, FALSE);
 		EnableWindow(hWndTextboxScript, FALSE);
 		EnableWindow(hWndBtnSelectScript, FALSE);
 		SendMessage(hWndRichEdit, EM_SETREADONLY, TRUE, 0);
@@ -2998,7 +3045,8 @@ void on_change_running_state(bool running, bool request_stop)
 		 */
 		EnableWindow(hWndBtnContinue, TRUE);
 		EnableWindow(hWndBtnNext, TRUE);
-		EnableWindow(hWndBtnPause, FALSE);
+		EnableWindow(hWndBtnStop, FALSE);
+		EnableWindow(hWndBtnEdit, TRUE);
 		EnableWindow(hWndTextboxScript, TRUE);
 		EnableWindow(hWndBtnSelectScript, TRUE);
 		SendMessage(hWndRichEdit, EM_SETREADONLY, FALSE, 0);
@@ -4249,7 +4297,7 @@ static VOID OnReloadScript(void)
 }
 
 /* ファイルを開くダイアログを表示して素材ファイルを選択する */
-static const wchar_t *SelectFile(const char *pszDir)
+const wchar_t *SelectFile(const char *pszDir)
 {
 	static wchar_t wszPath[1024];
 	wchar_t wszBase[1024];
@@ -5276,11 +5324,7 @@ static VOID OnDarkMode(void)
 
 static VOID OnHelp(void)
 {
-	char buf[1024];
-
-	snprintf(buf, sizeof(buf), "%s\n%s", PROGRAM, COPYRIGHT);
-
-	MessageBox(hWndMain, conv_utf8_to_utf16(buf), TITLE, MB_OK | MB_ICONINFORMATION);
+	MessageBox(hWndMain, conv_utf8_to_utf16(HELP_STRING), TITLE, MB_OK | MB_ICONINFORMATION);
 }
 
 /*
@@ -5511,6 +5555,118 @@ static VOID OnInsertStory(void)
 	RichEdit_UpdateScriptModelFromText();
 
 	RichEdit_InsertText(L"@story file=%ls", pFile);
+}
+
+/*
+ * Property
+ */
+
+/*
+ * Called when the Edit button pressed.
+ */
+VOID OnProperty(void)
+{
+	RECT rcRichEdit, rcPanel;
+	int nLine, nCmdIndex, nCmdType, nDialogID;
+	UINT nID;
+	DLGPROC pDlgProc;
+
+	if (hWndDlgProp != NULL)
+		return;
+
+	/* Apply the current RichEdit content to the script model. */
+	RichEdit_UpdateScriptModelFromText();
+
+	/* Get the current cursor line number. */
+	nLine = RichEdit_GetCursorLine();
+
+	/* Get the command. */
+	nCmdIndex = get_command_index_from_line_num(nLine);
+	move_to_command_index(nCmdIndex);
+	nCmdType = get_command_type();
+
+	/* Convert a command type to a dialog id. */
+	switch (nCmdType)
+	{
+	case COMMAND_BG:
+		nDialogID = IDD_BG;
+		pDlgProc = DlgBgWndProc;
+		break;
+	default:
+		/* Not implemented yet. */
+		return;
+	}
+
+	/* Create a dialog as a child window. */
+	assert(hWndDlgProp == NULL);
+	hWndDlgProp = CreateDialog(NULL,
+							   MAKEINTRESOURCE(nDialogID),
+							   hWndEditor,
+							   (DLGPROC)pDlgProc);
+
+	/* Resize the dialog to fit the editor panel. */
+	GetWindowRect(hWndRichEdit, &rcRichEdit);
+	GetWindowRect(hWndEditor, &rcPanel);
+	MoveWindow(hWndDlgProp,
+			   rcRichEdit.left - rcPanel.left ,
+			   rcRichEdit.top - rcPanel.top,
+			   rcRichEdit.right - rcPanel.left,
+			   rcRichEdit.bottom - rcPanel.top,
+			   TRUE);
+
+	/* Disable buttons. */
+	EnableWindow(hWndBtnContinue, FALSE);
+	EnableWindow(hWndBtnNext, FALSE);
+	EnableWindow(hWndBtnStop, FALSE);
+	EnableWindow(hWndBtnEdit, FALSE);
+
+	/* Disable menu items. */
+	EnableMenuItem(hMenu, ID_CONTINUE, MF_GRAYED);
+	EnableMenuItem(hMenu, ID_NEXT, MF_GRAYED);
+	EnableMenuItem(hMenu, ID_STOP, MF_GRAYED);
+	EnableMenuItem(hMenu, ID_PROPERTY, MF_GRAYED);
+	for (nID = ID_CMD_MESSAGE; nID <= ID_CMD_STORY; nID++)
+		EnableMenuItem(hMenu, nID, MF_GRAYED);
+
+	/* Hide the RichEdit and the variable editor, then show the dialog. */
+	ShowWindow(hWndRichEdit, SW_HIDE);
+	ShowWindow(hWndTextboxVar, SW_HIDE);
+	ShowWindow(hWndBtnVar, SW_HIDE);
+	ShowWindow(hWndDlgProp, SW_SHOW);
+}
+
+/*
+ * Called when the property panel is finished.
+ */
+void OnPropertyUpdate(void)
+{
+	UINT nID;
+
+	/* Close the dialog. */
+	EndDialog(hWndDlgProp, 0);
+	hWndDlgProp = NULL;
+
+	/* Enable buttons. */
+	EnableWindow(hWndBtnContinue, TRUE);
+	EnableWindow(hWndBtnNext, TRUE);
+	EnableWindow(hWndBtnStop, FALSE);
+	EnableWindow(hWndBtnEdit, TRUE);
+
+	/* Enable menu items. */
+	EnableMenuItem(hMenu, ID_CONTINUE, MF_ENABLED);
+	EnableMenuItem(hMenu, ID_NEXT, MF_ENABLED);
+	EnableMenuItem(hMenu, ID_STOP, MF_ENABLED);
+	EnableMenuItem(hMenu, ID_PROPERTY, MF_ENABLED);
+	for (nID = ID_CMD_MESSAGE; nID <= ID_CMD_STORY; nID++)
+		EnableMenuItem(hMenu, nID, MF_ENABLED);
+
+	/* Show controls again. */
+	ShowWindow(hWndRichEdit, SW_SHOW);
+	ShowWindow(hWndTextboxVar, SW_SHOW);
+	ShowWindow(hWndBtnVar, SW_SHOW);
+
+	/* Update RichEdit. */
+	RichEdit_UpdateScriptModelFromText();
 }
 
 /*

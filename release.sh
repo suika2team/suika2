@@ -50,12 +50,12 @@ docker build -t opennovel-build .
 
 echo 'Building the Windows engine...'
 docker run -it -v `pwd`:/workspace opennovel-build /bin/sh -c 'cd /workspace/engines/windows && make libroot && make -j$(nproc)'
-cp engines/windows/game.exe "$TARGET_DIR/game.exe"
+cp engines/windows/engine.exe "$TARGET_DIR/engine.exe"
 echo '...Done building the Windows engine.'
 
 echo 'Building the Windows editor...'
 docker run -it -v `pwd`:/workspace opennovel-build /bin/sh -c 'cd /workspace/apps/pro-windows && make libroot && make -j$(nproc)'
-cp apps/pro-windows/editor.exe "$TARGET_DIR/editor.exe"
+cp apps/pro-windows/opennovel.exe "$TARGET_DIR/opennovel.exe"
 echo '...Done building the Windows editor.'
 
 echo 'Building the Windows web-test tool...'
@@ -73,8 +73,8 @@ echo 'Building the macOS engine...'
 
 cd engines/macos
 make libroot
-make game.dmg
-cp game.dmg "$TARGET_DIR/tools/game-mac.dmg"
+make engine.dmg
+cp engine.dmg "$TARGET_DIR/tools/engine-mac.dmg"
 cd ../../
 
 echo '...Done building the macOS engine.'
@@ -87,7 +87,7 @@ echo ''
 echo 'Building Linux binaries...'
 
 docker run -it -v `pwd`:/workspace opennovel-build /bin/sh -c 'cd /workspace/engines/linux && make libroot && make -j$(nproc)'
-cp engines/linux/game-linux "$TARGET_DIR/tools/game-linux"
+cp engines/linux/engine-linux "$TARGET_DIR/tools/engine-linux"
 
 docker run -it -v `pwd`:/workspace opennovel-build /bin/sh -c 'cd /workspace/apps/pack-linux && rm -f pack && make pack'
 cp apps/pack/pack "$TARGET_DIR/tools/pack-linux"
@@ -217,8 +217,8 @@ echo ''
 
 echo 'Making an installer...'
 
-cp "$TARGET_DIR"/game.exe apps/installer-windows/
-cp "$TARGET_DIR"/editor.exe apps/installer-windows/
+cp "$TARGET_DIR"/engine.exe apps/installer-windows/
+cp "$TARGET_DIR"/opennovel.exe apps/installer-windows/
 cp -R "$TARGET_DIR"/manual apps/installer-windows/
 cp -R "$TARGET_DIR"/sample apps/installer-windows/
 cp -R "$TARGET_DIR"/tools apps/installer-windows/
@@ -229,8 +229,8 @@ cp opennovel-installer.exe "$TARGET_EXE"
 rm opennovel-installer.exe
 cd ../..
 
-rm apps/installer-windows/game.exe
-rm apps/installer-windows/editor.exe
+rm apps/installer-windows/engine.exe
+rm apps/installer-windows/opennovel.exe
 rm -rf apps/installer-windows/manual
 rm -rf apps/installer-windows/sample
 rm -rf apps/installer-windows/tools

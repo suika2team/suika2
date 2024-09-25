@@ -7,6 +7,45 @@
 /* Accelerators */
 #define IDR_ACCEL                           110
 
+/* Dialogs */
+#define IDD_MESSAGE                         120
+#define IDD_COMMENT                         121
+#define IDD_LABEL                           122
+#define IDD_ANIME                           123
+#define IDD_BG                              124
+#define IDD_CH                              125
+#define IDD_CHAPTER                         126
+#define IDD_CHCH                            127
+#define IDD_CHOOSE                          128
+#define IDD_CLICK                           129
+#define IDD_CONFIG                          130
+#define IDD_GOSUB                           131
+#define IDD_GOTO                            132
+#define IDD_IF                              133
+#define IDD_LAYER                           134
+#define IDD_MENU                            135
+#define IDD_MOVE                            136
+#define IDD_MUSIC                           137
+#define IDD_PLUGIN                          138
+#define IDD_RETURN                          139
+#define IDD_SET                             140
+#define IDD_SHAKE                           141
+#define IDD_SKIP                            142
+#define IDD_SOUND                           143
+#define IDD_STORY                           144
+#define IDD_TEXT                            145
+#define IDD_TIME                            146
+#define IDD_VIDEO                           147
+#define IDD_VOLUME                          148
+
+/* Controls */
+#define IDC_STATIC                          300
+#define IDC_TEXT_FILE1                      301
+#define IDC_BUTTON_FILE1                    302
+#define IDC_TEXT_TIME                       303
+#define IDC_COMBO_FADE                      304
+#define IDC_TEXT_RULE                       305
+
 /* File Menu / Open Button*/
 #define ID_NEW_PROJECT_JAPANESE_ADV	    150
 #define ID_OPEN_PROJECT			    151
@@ -71,3 +110,7 @@
 
 /* Popup Menu */
 #define ID_POPUP                            260
+
+/* Property */
+#define ID_PROPERTY                         270
+#define ID_PROPERTY_UPDATE                  271

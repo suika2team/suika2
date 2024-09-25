@@ -11,7 +11,7 @@ SRCS_PROJECT = \
 
 all: game.dmg src
 
-game.dmg: libroot $(SRCS_MAIN) $(SRCS_APPLE) $(SRCS_PROJECT)
+engine.dmg: libroot $(SRCS_MAIN) $(SRCS_APPLE) $(SRCS_PROJECT)
 	@echo "Building Game.app"
 	@rm -rf build
 	@echo 'archiving...'
@@ -40,11 +40,11 @@ game.dmg: libroot $(SRCS_MAIN) $(SRCS_APPLE) $(SRCS_PROJECT)
 		sleep 10; \
 	done
 	@echo "Successfully notarized."
-	@rm -f game.dmg
+	@rm -f engine.dmg
 	@mkdir tmp
-	@cp -Rv build/Release/Game.app tmp/
-	@hdiutil create -fs HFS+ -format UDBZ -srcfolder tmp -volname Game game.dmg
-	@codesign --sign 'Developer ID Application' game.dmg
+	@cp -Rv build/Release/Game.app tmp/Engine.app
+	@hdiutil create -fs HFS+ -format UDBZ -srcfolder tmp -volname Engine engine.dmg
+	@codesign --sign 'Developer ID Application' engine.dmg
 	@rm -rf tmp
 
 src: libroot $(SRCS_MAIN) $(SRCS_APPLE) $(SRCS_PROJECT)

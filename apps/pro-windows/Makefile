@@ -117,7 +117,8 @@ SRCS_MAIN = \
 
 SRCS_WIN_C = \
 	../../src/microsoft/winpro.c \
-	../../src/microsoft/dsound.c
+	../../src/microsoft/dsound.c \
+	../../src/microsoft/dialog_bg.c
 
 SRCS_WIN_CC = \
 	../../src/microsoft/dx9render.cc \
