@@ -17,8 +17,8 @@ Page instfiles
 Section "Install"
   SetOutPath "$INSTDIR"
   RMDir /r "$INSTDIR"
-  File "editor.exe"
-  File "game.exe"
+  File "opennovel.exe"
+  File "engine.exe"
   File /r "sample"
   File /r "tools"
   File /r "manual"
@@ -42,8 +42,8 @@ SectionEnd
 
 Section "Uninstall"
   Delete "$INSTDIR\Uninstall.exe"
-  Delete "$INSTDIR\editor.exe"
-  Delete "$INSTDIR\game.exe"
+  Delete "$INSTDIR\opennovel.exe"
+  Delete "$INSTDIR\engine.exe"
   Delete "$INSTDIR\sample"
   Delete "$INSTDIR\tools"
   Delete "$INSTDIR\manual"
@@ -58,8 +58,10 @@ Section "Uninstall"
 SectionEnd
 
 Function .OnInstSuccess
-  Exec "$INSTDIR\editor.exe"
+  Exec "$INSTDIR\opennovel.exe"
 FunctionEnd
+
+!insertmacro MUI_PAGE_LICENSE "../../LICENSE"
 
 !insertmacro MUI_LANGUAGE "English"
 !insertmacro MUI_LANGUAGE "Japanese"

@@ -29,7 +29,7 @@ echo 'Making a target directories...'
 
 TARGET_DIR="`pwd`/OpenNovel-$VERSION"
 TARGET_EXE="`pwd`/OpenNovel-Win-Installer-$VERSION.exe"
-TARGET_ZIP="`pwd`/OpenNovel-Win-ZIP-Not-Recommended-$VERSION.zip"
+TARGET_ZIP="`pwd`/OpenNovel-Win-ZIP-$VERSION.zip"
 TARGET_DMG="`pwd`/OpenNovel-Mac-$VERSION.dmg"
 rm -rf "$TARGET_DIR" "$TARGET_ZIP"
 mkdir "$TARGET_DIR"
@@ -57,6 +57,11 @@ echo 'Building the Windows editor...'
 docker run -it -v `pwd`:/workspace opennovel-build /bin/sh -c 'cd /workspace/apps/pro-windows && make libroot && make -j$(nproc)'
 cp apps/pro-windows/opennovel.exe "$TARGET_DIR/opennovel.exe"
 echo '...Done building the Windows editor.'
+
+echo 'Building the Windows pack tool...'
+docker run -it -v `pwd`:/workspace opennovel-build /bin/sh -c 'cd /workspace/apps/pack-windows && make pack.exe'
+cp apps/pack/pack.exe "$TARGET_DIR/tools/pack-win.exe"
+echo '...Done building the Windows pack tool.'
 
 echo 'Building the Windows web-test tool...'
 docker run -it -v `pwd`:/workspace opennovel-build /bin/sh -c 'cd /workspace/apps/web-test && make web-test.exe'
