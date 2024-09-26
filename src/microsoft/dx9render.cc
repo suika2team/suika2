@@ -285,8 +285,10 @@ BOOL D3DInitialize(HWND hWnd)
 		pD3D->Release();
 		pD3D = NULL;
 
-		log_api_error("Direct3D::CreateDevice()");
-		log_info("Falling back to GDI.");
+#if 0
+		log_error("API Direct3D::CreateDevice() failed.");
+		log_error("Falling back to GDI.");
+#endif
 
 		if (!GDI_Init())
 		{

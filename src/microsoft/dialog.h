@@ -4,6 +4,7 @@
 #include <windows.h>
 
 /* winpro.c */
+extern BOOL bEnglish;
 extern HWND hWndMain;
 const wchar_t *conv_utf8_to_utf16(const char *utf8_message);
 const char *conv_utf16_to_utf8(const wchar_t *utf16_message);

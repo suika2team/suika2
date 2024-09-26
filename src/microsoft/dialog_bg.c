@@ -77,29 +77,29 @@ static VOID OnInit(HWND hWnd)
 
 	/* Fade */
 	hWndFade = GetDlgItem(hWnd, IDC_COMBO_FADE);
-	SendMessage(hWndFade, (UINT)CB_ADDSTRING, (WPARAM)0, (LPARAM)L"標準");
-	SendMessage(hWndFade, (UINT)CB_ADDSTRING, (WPARAM)1, (LPARAM)L"カーテン右");
-	SendMessage(hWndFade, (UINT)CB_ADDSTRING, (WPARAM)2, (LPARAM)L"カーテン左");
-	SendMessage(hWndFade, (UINT)CB_ADDSTRING, (WPARAM)3, (LPARAM)L"カーテン上");
-	SendMessage(hWndFade, (UINT)CB_ADDSTRING, (WPARAM)4, (LPARAM)L"カーテン下");
-	SendMessage(hWndFade, (UINT)CB_ADDSTRING, (WPARAM)5, (LPARAM)L"スライド右");
-	SendMessage(hWndFade, (UINT)CB_ADDSTRING, (WPARAM)6, (LPARAM)L"スライド左");
-	SendMessage(hWndFade, (UINT)CB_ADDSTRING, (WPARAM)7, (LPARAM)L"スライド上");
-	SendMessage(hWndFade, (UINT)CB_ADDSTRING, (WPARAM)8, (LPARAM)L"スライド下");
-	SendMessage(hWndFade, (UINT)CB_ADDSTRING, (WPARAM)9, (LPARAM)L"シャッター右");
-	SendMessage(hWndFade, (UINT)CB_ADDSTRING, (WPARAM)10, (LPARAM)L"シャッター左");
-	SendMessage(hWndFade, (UINT)CB_ADDSTRING, (WPARAM)11, (LPARAM)L"シャッター上");
-	SendMessage(hWndFade, (UINT)CB_ADDSTRING, (WPARAM)12, (LPARAM)L"シャッター下");
-	SendMessage(hWndFade, (UINT)CB_ADDSTRING, (WPARAM)13, (LPARAM)L"目を開く");
-	SendMessage(hWndFade, (UINT)CB_ADDSTRING, (WPARAM)14, (LPARAM)L"目をつぶる");
-	SendMessage(hWndFade, (UINT)CB_ADDSTRING, (WPARAM)15, (LPARAM)L"目を開く(縦)");
-	SendMessage(hWndFade, (UINT)CB_ADDSTRING, (WPARAM)16, (LPARAM)L"目をつぶる(縦)");
-	SendMessage(hWndFade, (UINT)CB_ADDSTRING, (WPARAM)17, (LPARAM)L"スリットを開く");
-	SendMessage(hWndFade, (UINT)CB_ADDSTRING, (WPARAM)18, (LPARAM)L"スリットを閉じる");
-	SendMessage(hWndFade, (UINT)CB_ADDSTRING, (WPARAM)19, (LPARAM)L"スリットを開く(縦)");
-	SendMessage(hWndFade, (UINT)CB_ADDSTRING, (WPARAM)20, (LPARAM)L"スリットを閉じる(縦)");
-	SendMessage(hWndFade, (UINT)CB_ADDSTRING, (WPARAM)21, (LPARAM)L"ルール画像(1bit)");
-	SendMessage(hWndFade, (UINT)CB_ADDSTRING, (WPARAM)22, (LPARAM)L"ルール画像(8bit)");
+	SendMessage(hWndFade, (UINT)CB_ADDSTRING, (WPARAM)0, (LPARAM)(bEnglish ? L"Normal" : L"標準"));
+	SendMessage(hWndFade, (UINT)CB_ADDSTRING, (WPARAM)1, (LPARAM)(bEnglish ? L"Curtain Right" : L"カーテン右"));
+	SendMessage(hWndFade, (UINT)CB_ADDSTRING, (WPARAM)2, (LPARAM)(bEnglish ? L"Curtain Left" : L"カーテン左"));
+	SendMessage(hWndFade, (UINT)CB_ADDSTRING, (WPARAM)3, (LPARAM)(bEnglish ? L"Curtain Up" : L"カーテン上"));
+	SendMessage(hWndFade, (UINT)CB_ADDSTRING, (WPARAM)4, (LPARAM)(bEnglish ? L"Curtain Down" : L"カーテン下"));
+	SendMessage(hWndFade, (UINT)CB_ADDSTRING, (WPARAM)5, (LPARAM)(bEnglish ? L"Slide Right" : L"スライド右"));
+	SendMessage(hWndFade, (UINT)CB_ADDSTRING, (WPARAM)6, (LPARAM)(bEnglish ? L"Slide Left" : L"スライド左"));
+	SendMessage(hWndFade, (UINT)CB_ADDSTRING, (WPARAM)7, (LPARAM)(bEnglish ? L"Slide Up" : L"スライド上"));
+	SendMessage(hWndFade, (UINT)CB_ADDSTRING, (WPARAM)8, (LPARAM)(bEnglish ? L"Slide Down" : L"スライド下"));
+	SendMessage(hWndFade, (UINT)CB_ADDSTRING, (WPARAM)9, (LPARAM)(bEnglish ? L"Shutter Right" : L"シャッター右"));
+	SendMessage(hWndFade, (UINT)CB_ADDSTRING, (WPARAM)10, (LPARAM)(bEnglish ? L"Shutter Left" : L"シャッター左"));
+	SendMessage(hWndFade, (UINT)CB_ADDSTRING, (WPARAM)11, (LPARAM)(bEnglish ? L"Shutter Up" : L"シャッター上"));
+	SendMessage(hWndFade, (UINT)CB_ADDSTRING, (WPARAM)12, (LPARAM)(bEnglish ? L"Shutter Down" : L"シャッター下"));
+	SendMessage(hWndFade, (UINT)CB_ADDSTRING, (WPARAM)13, (LPARAM)(bEnglish ? L"Eye Open" : L"目を開く"));
+	SendMessage(hWndFade, (UINT)CB_ADDSTRING, (WPARAM)14, (LPARAM)(bEnglish ? L"Eye Close" : L"目をつぶる"));
+	SendMessage(hWndFade, (UINT)CB_ADDSTRING, (WPARAM)15, (LPARAM)(bEnglish ? L"Eye Open Vertical" : L"目を開く(縦)"));
+	SendMessage(hWndFade, (UINT)CB_ADDSTRING, (WPARAM)16, (LPARAM)(bEnglish ? L"Eye Close Vertical" : L"目をつぶる(縦)"));
+	SendMessage(hWndFade, (UINT)CB_ADDSTRING, (WPARAM)17, (LPARAM)(bEnglish ? L"Slit Open" : L"スリットを開く"));
+	SendMessage(hWndFade, (UINT)CB_ADDSTRING, (WPARAM)18, (LPARAM)(bEnglish ? L"Slit Close" : L"スリットを閉じる"));
+	SendMessage(hWndFade, (UINT)CB_ADDSTRING, (WPARAM)19, (LPARAM)(bEnglish ? L"Slit Open Vertical" : L"スリットを開く(縦)"));
+	SendMessage(hWndFade, (UINT)CB_ADDSTRING, (WPARAM)20, (LPARAM)(bEnglish ? L"Slit Close Vertical" : L"スリットを閉じる(縦)"));
+	SendMessage(hWndFade, (UINT)CB_ADDSTRING, (WPARAM)21, (LPARAM)(bEnglish ? L"Rule Image 1-bit" : L"ルール画像(1bit)"));
+	SendMessage(hWndFade, (UINT)CB_ADDSTRING, (WPARAM)22, (LPARAM)(bEnglish ? L"Rule Image 8-bit" : L"ルール画像(8bit)"));
 	pszFade = get_string_param(BG_PARAM_METHOD);
 	for (i = 0; i < (int)(sizeof(fade) / sizeof(struct fade)); i++)
 	{
@@ -115,11 +115,6 @@ static VOID OnInit(HWND hWnd)
 	}
 }
 
-static VOID OnFinish(HWND hWnd)
-{
-	UNUSED_PARAMETER(hWnd);
-}
-
 static VOID OnCommand(HWND hWnd, UINT nID)
 {
 	if (nID == IDC_BUTTON_FILE1)
@@ -132,6 +127,78 @@ static VOID OnCommand(HWND hWnd, UINT nID)
 		}
 		return;
 	}
+
+	if (nID == IDC_BUTTON_RULE)
+	{
+		const wchar_t *pwszFile;
+		pwszFile = SelectFile(RULE_DIR);
+		if (pwszFile != NULL)
+		{
+			SetWindowText(GetDlgItem(hWnd, IDC_TEXT_RULE), pwszFile);
+		}
+		return;
+	}
+}
+
+static VOID OnFinish(HWND hWnd)
+{
+	wchar_t wszText[1024];
+	char szCmd[4096];
+	const char *tbl[] = {
+		"normal",
+		"curtain-right",
+		"curtain-left",
+		"curtain-up",
+		"curtain-down",
+		"slide-right",
+		"slide-left",
+		"slide-up",
+		"slide-down",
+		"shutter-right",
+		"shutter-left",
+		"shutter-up",
+		"shutter-down",
+		"eye-open",
+		"eye-close",
+		"eye-open-v",
+		"eye-close-v",
+		"slit-open",
+		"slit-close",
+		"slit-open-v",
+		"slit-close-v",
+		"rule:",
+		"melt:",
+	};
+	int nIndex;
+	const int RULE = 21;
+	const int MELT = 22;
+
+	strncpy(szCmd, "@bg", sizeof(szCmd) - 1);
+
+	/* File */
+	GetWindowText(GetDlgItem(hWnd, IDC_TEXT_FILE1), wszText, sizeof(wszText) / sizeof(wchar_t));
+	strncat(szCmd, " file=", sizeof(szCmd) - 1);
+	strncat(szCmd, conv_utf16_to_utf8(wszText), sizeof(szCmd) - 1);
+
+	/* Time */
+	GetWindowText(GetDlgItem(hWnd, IDC_TEXT_TIME), wszText, sizeof(wszText) / sizeof(wchar_t));
+	strncat(szCmd, " t=", sizeof(szCmd) - 1);
+	strncat(szCmd, conv_utf16_to_utf8(wszText), sizeof(szCmd) - 1);
+
+	/* Fade */
+	nIndex = SendMessage(GetDlgItem(hWnd, IDC_COMBO_FADE), CB_GETCURSEL, (WPARAM)0, (LPARAM)0);
+	strncat(szCmd, " effect=", sizeof(szCmd) - 1);
+	strncat(szCmd, tbl[nIndex], sizeof(szCmd) - 1);
+
+	/* Rule file */
+	if (nIndex == RULE || nIndex == MELT)
+	{
+		GetWindowText(GetDlgItem(hWnd, IDC_TEXT_RULE), wszText, sizeof(wszText) / sizeof(wchar_t));
+		strncat(szCmd, conv_utf16_to_utf8(wszText), sizeof(szCmd) - 1);
+	}
+
+	/* Update the script model. */
+	update_script_line(get_expanded_line_num(), szCmd);
 }
 
 BOOL CALLBACK DlgBgWndProc(HWND hWnd, UINT nMsg, WPARAM wParam, LPARAM lParam)

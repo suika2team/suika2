@@ -36,17 +36,32 @@ BEGIN
 
     LTEXT           "ÉãÅ[ÉãâÊëú:", IDC_STATIC, 16, 88, 80, 10
     EDITTEXT        IDC_TEXT_RULE, 16, 98, 100, 10
-    PUSHBUTTON      "...", IDC_BUTTON_FILE1, 120, 98, 16, 10
+    PUSHBUTTON      "...", IDC_BUTTON_RULE, 120, 98, 16, 10
 
     DEFPUSHBUTTON   "OK", IDOK, 0, 120, 50, 14
     PUSHBUTTON      "Cancel", IDCANCEL, 60, 120, 50, 14
 END
 
-IDD_MESSAGE DIALOG DISCARDABLE  0, 0, 121, 69
+IDD_BG_EN DIALOG DISCARDABLE  0, 0, 121, 69
 STYLE WS_CHILD
 FONT 9, "Yu Gothic UI"
 BEGIN
-    DEFPUSHBUTTON   "OK", IDOK, 7, 38, 50, 14
-    PUSHBUTTON      "Cancel", IDCANCEL, 61, 37, 50, 14
-    LTEXT           "TEXTTEST", IDC_STATIC, 36, 19, 48, 8
+    LTEXT           "@bg command properties", IDC_STATIC, 0, 0, 80, 10
+
+    LTEXT           "Background image file:", IDC_STATIC, 16, 16, 80, 10
+    EDITTEXT        IDC_TEXT_FILE1, 16, 26, 100, 10
+    PUSHBUTTON      "...", IDC_BUTTON_FILE1, 120, 26, 16, 10
+
+    LTEXT           "Fade time in sec:", IDC_STATIC, 16, 40, 80, 10
+    EDITTEXT        IDC_TEXT_TIME, 16, 50, 100, 10
+
+    LTEXT           "Fade type:", IDC_STATIC, 16, 64, 80, 10
+    COMBOBOX        IDC_COMBO_FADE, 16, 74, 100, 10, CBS_DROPDOWNLIST | WS_TABSTOP
+
+    LTEXT           "Rule image file:", IDC_STATIC, 16, 88, 80, 10
+    EDITTEXT        IDC_TEXT_RULE, 16, 98, 100, 10
+    PUSHBUTTON      "...", IDC_BUTTON_RULE, 120, 98, 16, 10
+
+    DEFPUSHBUTTON   "OK", IDOK, 0, 120, 50, 14
+    PUSHBUTTON      "Cancel", IDCANCEL, 60, 120, 50, 14
 END

@@ -61,17 +61,10 @@
 
 /* The version string. */
 #define HELP_STRING 		\
-	"OpenNovel 1.0\n" \
-	"Copyright (c) 2024, The Authors. All rights reserved.\n" \
+	"OpenNovel 1.0 Voyage Editor\n" \
+	"Copyright (c) 2024, OpenNovel.Org. All rights reserved.\n" \
 	"\n" \
-	"MIT license\n" \
-	"Permission to use, copy, modify, distribute, and sell this software and its " \
-	"documentation for any purpose is hereby granted without fee, provided that " \
-	"the above copyright notice appear in all copies and that both that " \
-	"copyright notice and this permission notice appear in supporting " \
-	"documentation.  No representations are made about the suitability of this " \
-	"software for any purpose.  It is provided \"as is\" without express or " \
-	"implied warranty."
+	"May this program be your ship to explore the novel world!"
 
 /* The minimum window size. */
 #define WINDOW_WIDTH_MIN	(800)
@@ -220,7 +213,7 @@ static BOOL bDShowMode;
 static BOOL bDShowSkippable;
 
 /* A flag to show whether we are in the English mode or not. */
-static BOOL bEnglish;
+BOOL bEnglish;
 
 /* A flag to show whether the game is running or not. */
 static BOOL bRunning;
@@ -4009,7 +4002,7 @@ static BOOL CreateProjectFromTemplate(const wchar_t *pszTemplate)
 			continue;
 		}
 
-		GetCurrentDirectory(sizeof(wszProjectDir), wszProjectDir);
+		GetCurrentDirectory(sizeof(wszProjectDir) / sizeof(wchar_t), wszProjectDir);
 
 		/* Finish choosing a directory. */
 		break;
@@ -4056,7 +4049,7 @@ static BOOL ChooseProject(void)
 	if(ofn. lpstrFile[0] == L'\0')
 		return FALSE;
 
-	GetCurrentDirectory(sizeof(wszProjectDir), wszProjectDir);
+	GetCurrentDirectory(sizeof(wszProjectDir) / sizeof(wchar_t), wszProjectDir);
 
 	/* Read a project file. */
 	ReadProjectFile();
@@ -4095,7 +4088,7 @@ static BOOL OpenProjectAtPath(const wchar_t *pszPath)
 				   MB_OK | MB_ICONERROR);
 		return FALSE;
 	}
-	GetCurrentDirectory(sizeof(wszProjectDir), wszProjectDir);
+	GetCurrentDirectory(sizeof(wszProjectDir) / sizeof(wchar_t), wszProjectDir);
 
 	/* Read a project file. */
 	ReadProjectFile();
@@ -4647,7 +4640,7 @@ static VOID OnExportWin(void)
 	RecreateDirectory(L".\\windows-export");
 
 	/* ファイルをコピーする */
-	if (!CopyLibraryFiles(L"game.exe", L".\\windows-export\\game.exe"))
+	if (!CopyLibraryFiles(L"engine.exe", L".\\windows-export\\engine.exe"))
 	{
 		log_info(bEnglish ?
 				 "Failed to copy exe file." :
@@ -4674,7 +4667,7 @@ static VOID OnExportWin(void)
 				   TITLE,
 				   MB_ICONQUESTION | MB_YESNO) == IDYES)
 	{
-		/* game.exeを実行する */
+		/* engine.exeを実行する */
 		RunWindowsGame();
 	}
 	else
@@ -4693,7 +4686,7 @@ static VOID RunWindowsGame(void)
 	/* プロセスを実行する */
 	ZeroMemory(&si, sizeof(STARTUPINFOW));
 	si.cb = sizeof(STARTUPINFOW);
-	CreateProcessW(L".\\windows-export\\game.exe",	/* lpApplication */
+	CreateProcessW(L".\\windows-export\\engine.exe",	/* lpApplication */
 				   NULL,	/* lpCommandLine */
 				   NULL,	/* lpProcessAttribute */
 				   NULL,	/* lpThreadAttributes */
@@ -5097,10 +5090,24 @@ static VOID RecreateDirectory(const wchar_t *path)
 {
 	wchar_t newpath[MAX_PATH];
 	SHFILEOPSTRUCT fos;
+	const int WINDOWS_XP = 5;
 
 	/* 二重のNUL終端を行う */
 	wcscpy(newpath, path);
 	newpath[wcslen(path) + 1] = L'\0';
+
+	/*
+	 * On Windows XP, SHFileOperationW() with a relative path makes 8.3 format copy.
+	 * We can avoid it by an absolute path. However, on Windows 10/11,
+	 * an absolute path raises a security dialog, and we have to avoid it.
+	 */
+	if ((DWORD)(LOBYTE(LOWORD(GetVersion()))) == WINDOWS_XP)
+	{
+		GetCurrentDirectory(sizeof(newpath) / sizeof(wchar_t), newpath);
+		wcscat(newpath, L"\\");
+		wcscat(newpath, path);
+		newpath[wcslen(newpath) + 1] = L'\0';	/* Double-NUL termination needed. */
+	}
 
 	/* コピーする */
 	ZeroMemory(&fos, sizeof(SHFILEOPSTRUCT));
@@ -5118,6 +5125,7 @@ static BOOL CopyLibraryFiles(const wchar_t *lpszSrcDir, const wchar_t *lpszDestD
 	SHFILEOPSTRUCTW fos;
 	wchar_t *pSep;
 	int ret;
+	const int WINDOWS_XP = 5;
 
 	/* コピー元を求める */
 	GetModuleFileName(NULL, from, MAX_PATH);
@@ -5129,7 +5137,20 @@ static BOOL CopyLibraryFiles(const wchar_t *lpszSrcDir, const wchar_t *lpszDestD
 
 	/* コピー先を求める */
 	wcscpy(to, lpszDestDir);
-	to[wcslen(lpszDestDir) + 1] = L'\0';	/* 二重のNUL終端を行う */
+	to[wcslen(lpszDestDir) + 1] = L'\0';	/* Double-NUL termination needed. */
+
+	/*
+	 * On Windows XP, SHFileOperationW() with a relative path makes 8.3 format copy.
+	 * We can avoid it by an absolute path. However, on Windows 10/11,
+	 * an absolute path raises a security dialog, and we have to avoid it.
+	 */
+	if ((DWORD)(LOBYTE(LOWORD(GetVersion()))) == WINDOWS_XP)
+	{
+		GetCurrentDirectory(sizeof(to) / sizeof(wchar_t), to);
+		wcscat(to, L"\\");
+		wcscat(to, lpszDestDir);
+		to[wcslen(to) + 1] = L'\0';	/* Double-NUL termination needed. */
+	}
 
 	/* コピーする */
 	ZeroMemory(&fos, sizeof(SHFILEOPSTRUCT));
@@ -5154,12 +5175,26 @@ static BOOL CopyGameFiles(const wchar_t* lpszSrcDir, const wchar_t* lpszDestDir)
 	wchar_t to[MAX_PATH];
 	SHFILEOPSTRUCTW fos;
 	int ret;
+	const int WINDOWS_XP = 5;
 
 	/* 二重のNUL終端を行う */
 	wcscpy(from, lpszSrcDir);
 	from[wcslen(lpszSrcDir) + 1] = L'\0';
 	wcscpy(to, lpszDestDir);
 	to[wcslen(lpszDestDir) + 1] = L'\0';
+
+	/*
+	 * On Windows XP, SHFileOperationW() with a relative path makes 8.3 format copy.
+	 * We can avoid it by an absolute path. However, on Windows 10/11,
+	 * an absolute path raises a security dialog, and we have to avoid it.
+	 */
+	if ((DWORD)(LOBYTE(LOWORD(GetVersion()))) == WINDOWS_XP)
+	{
+		GetCurrentDirectory(sizeof(to) / sizeof(wchar_t), to);
+		wcscat(to, L"\\");
+		wcscat(to, lpszDestDir);
+		to[wcslen(to) + 1] = L'\0';	/* Double-NUL termination needed. */
+	}
 
 	/* コピーする */
 	ZeroMemory(&fos, sizeof(SHFILEOPSTRUCT));
@@ -5183,12 +5218,22 @@ static BOOL CopyMovFiles(const wchar_t *lpszSrcDir, const wchar_t *lpszDestDir)
 	wchar_t from[MAX_PATH];
 	wchar_t to[MAX_PATH];
 	SHFILEOPSTRUCTW fos;
+	const int WINDOWS_XP = 5;
 
 	/* 二重のNUL終端を行う */
 	wcscpy(from, lpszSrcDir);
 	from[wcslen(lpszSrcDir) + 1] = L'\0';
 	wcscpy(to, lpszDestDir);
 	to[wcslen(lpszDestDir) + 1] = L'\0';
+
+	/* On Windows XP, a relative path makes 8.3 format copy. Avoid it by a absolute path. */
+	if ((DWORD)(LOBYTE(LOWORD(GetVersion()))) == WINDOWS_XP)
+	{
+		GetCurrentDirectory(sizeof(to) / sizeof(wchar_t), to);
+		wcscat(to, L"\\");
+		wcscat(to, lpszDestDir);
+		to[wcslen(to) + 1] = L'\0';	/* Double-NUL termination needed. */
+	}
 
 	/* コピーする */
 	ZeroMemory(&fos, sizeof(SHFILEOPSTRUCT));
@@ -5209,12 +5254,22 @@ static BOOL MovePackageFile(const wchar_t *lpszPkgFile, wchar_t *lpszDestDir)
 	wchar_t to[MAX_PATH];
 	SHFILEOPSTRUCTW fos;
 	int ret;
+	const int WINDOWS_XP = 5;
 
 	/* 二重のNUL終端を行う */
 	wcscpy(from, lpszPkgFile);
 	from[wcslen(lpszPkgFile) + 1] = L'\0';
 	wcscpy(to, lpszDestDir);
 	to[wcslen(lpszDestDir) + 1] = L'\0';
+
+	/* On Windows XP, a relative path makes 8.3 format copy. Avoid it by a absolute path. */
+	if ((DWORD)(LOBYTE(LOWORD(GetVersion()))) == WINDOWS_XP)
+	{
+		GetCurrentDirectory(sizeof(to) / sizeof(wchar_t), to);
+		wcscat(to, L"\\");
+		wcscat(to, lpszDestDir);
+		to[wcslen(to) + 1] = L'\0';	/* Double-NUL termination needed. */
+	}
 
 	/* 移動する */
 	ZeroMemory(&fos, sizeof(SHFILEOPSTRUCT));
@@ -5589,11 +5644,17 @@ VOID OnProperty(void)
 	switch (nCmdType)
 	{
 	case COMMAND_BG:
-		nDialogID = IDD_BG;
+		nDialogID = bEnglish ? IDD_BG_EN : IDD_BG;
 		pDlgProc = DlgBgWndProc;
 		break;
 	default:
 		/* Not implemented yet. */
+		MessageBox(hWndMain,
+				   bEnglish ?
+				   L"Not implemented for this command.\nTry on a @bg line." :
+				   L"このコマンドの編集はまだ実装されていません。\n@bg行の上で試してみてください。",
+				   TITLE,
+				   MB_OK | MB_ICONINFORMATION);
 		return;
 	}
 
@@ -5665,8 +5726,8 @@ void OnPropertyUpdate(void)
 	ShowWindow(hWndTextboxVar, SW_SHOW);
 	ShowWindow(hWndBtnVar, SW_SHOW);
 
-	/* Update RichEdit. */
-	RichEdit_UpdateScriptModelFromText();
+	/* Update RichEdit by the script model. */
+	RichEdit_SetTextByScriptModel();
 }
 
 /*
