@@ -1,13 +1,21 @@
 <html><head></head><body><ul><!-- -*- mode: html-mode; -*-
 
 <!-- BEGIN-LATEST -->
+<li>OpenNovel 1.0.8 2024/09/27
+  <ul>
+    <li>Changed the icons of the Windows EXE files</li>
+    <li>Suppressed Direct3D error messages</li>
+    <li>Fixed the file name truncation on Windows XP</li>
+    <li>Fixed the misusage of UCRT on some files</li>
+  </ul>
+</li>
+<!-- END-LATEST -->
+
 <li>OpenNovel 1.0.7 2024/09/24
   <ul>
     <li>Added the installer for Windows (to avoid some security checks)</li>
   </ul>
 </li>
-<!-- END-LATEST -->
-
 <li>OpenNovel 1.0.6 2024/09/23
   <ul>
     <li>Added the macOS version of the editor</li>
