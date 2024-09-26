@@ -6,7 +6,9 @@
     <li>Changed the icons of the Windows EXE files</li>
     <li>Suppressed Direct3D error messages</li>
     <li>Fixed the file name truncation on Windows XP</li>
-    <li>Fixed the misusage of UCRT on some files</li>
+    <li>Fixed the misusage of UCRT on exe files</li>
+    <li>Fixed the document description on how to boot the program</li>
+    <li>Added a new feature: "Edit" button for GUI editing of commands!</li>
   </ul>
 </li>
 <!-- END-LATEST -->
