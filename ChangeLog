@@ -1,7 +1,7 @@
 <html><head></head><body><ul><!-- -*- mode: html-mode; -*-
 
 <!-- BEGIN-LATEST -->
-<li>OpenNovel 1.0.8 2024/09/27
+<li>OpenNovel 1.0.9 2024/09/27
   <ul>
     <li>Changed the icons of the Windows EXE files</li>
     <li>Suppressed Direct3D error messages</li>
@@ -13,6 +13,16 @@
 </li>
 <!-- END-LATEST -->
 
+<li>OpenNovel 1.0.8 2024/09/27
+  <ul>
+    <li>Changed the icons of the Windows EXE files</li>
+    <li>Suppressed Direct3D error messages</li>
+    <li>Fixed the file name truncation on Windows XP</li>
+    <li>Fixed the misusage of UCRT on exe files</li>
+    <li>Fixed the document description on how to boot the program</li>
+    <li>Added a new feature: "Edit" button for GUI editing of commands!</li>
+  </ul>
+</li>
 <li>OpenNovel 1.0.7 2024/09/24
   <ul>
     <li>Added the installer for Windows (to avoid some security checks)</li>
