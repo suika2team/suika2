@@ -60,7 +60,7 @@ echo '...Done building the Windows editor.'
 
 echo 'Building the Windows pack tool...'
 docker run -it -v `pwd`:/workspace opennovel-build /bin/sh -c 'cd /workspace/apps/pack-windows && make pack.exe'
-cp apps/pack/pack.exe "$TARGET_DIR/tools/pack-win.exe"
+cp apps/pack-windows/pack.exe "$TARGET_DIR/tools/pack-win.exe"
 echo '...Done building the Windows pack tool.'
 
 echo 'Building the Windows web-test tool...'
