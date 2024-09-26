@@ -156,7 +156,7 @@ OBJS = \
 
 all: opennovel.exe
 
-editor.exe: libroot $(OBJS) $(HDRS_MAIN) $(HDRS)
+opennovel.exe: libroot $(OBJS) $(HDRS_MAIN) $(HDRS)
 	@$(CC) -o opennovel.exe $(OBJS) $(CFLAGS) $(LDFLAGS)
 	@$(STRIP) --strip-all opennovel.exe
 
