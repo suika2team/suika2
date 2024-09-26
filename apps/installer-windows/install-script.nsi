@@ -11,6 +11,7 @@ SetCompressor /SOLID /FINAL lzma
 SilentInstall normal
 
 !insertmacro MUI_PAGE_WELCOME
+!insertmacro MUI_PAGE_LICENSE "../../LICENSE"
 Page directory
 Page instfiles
 
@@ -60,8 +61,6 @@ SectionEnd
 Function .OnInstSuccess
   Exec "$INSTDIR\opennovel.exe"
 FunctionEnd
-
-!insertmacro MUI_PAGE_LICENSE "../../LICENSE"
 
 !insertmacro MUI_LANGUAGE "English"
 !insertmacro MUI_LANGUAGE "Japanese"

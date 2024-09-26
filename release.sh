@@ -254,6 +254,8 @@ echo 'Compressing...'
 echo '...Done compressing.'
 echo ''
 
+read str
+
 #
 # GitHub Release
 #
