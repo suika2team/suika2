@@ -16,8 +16,8 @@ SRCS = $(SRCS_MAIN) $(SRCS_LINUX) $(SRCS_OPENGL)
 
 CPPFLAGS = \
 	-I./libroot/include \
-	-I/usr/include/freetype2 \
-	-I/usr/include/png
+	-I./libroot/include/freetype2 \
+	-I./libroot/include/png
 
 #
 # CFLAGS
