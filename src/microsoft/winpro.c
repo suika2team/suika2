@@ -5574,7 +5574,7 @@ VOID OnProperty(void)
 		pDlgProc = DlgBgWndProc;
 		break;
 	case COMMAND_CH:
-		nDialogID = IDD_CH;
+		nDialogID = bEnglish ? IDD_CH_EN : IDD_CH;
 		pDlgProc = DlgChWndProc;
 		break;
 	default:

@@ -54,7 +54,7 @@ BEGIN
     EDITTEXT        IDC_TEXT_FILE1, 16, 26, 100, 10
     PUSHBUTTON      "...", IDC_BUTTON_FILE1, 120, 26, 16, 10
 
-    LTEXT           "Fade time in sec:", IDC_STATIC, 16, 40, 80, 10
+    LTEXT           "Fade time in second:", IDC_STATIC, 16, 40, 80, 10
     EDITTEXT        IDC_TEXT_TIME, 16, 50, 100, 10
     CONTROL	    "", IDC_TRACK_TIME, TRACKBAR_CLASS, TBS_AUTOTICKS, 120, 50, 100, 10
 
@@ -98,6 +98,41 @@ BEGIN
     EDITTEXT        IDC_TEXT_OFSX, 16, 156, 100, 10
 
     LTEXT           "下シフト(ピクセル):", IDC_STATIC, 16, 170, 80, 10
+    EDITTEXT        IDC_TEXT_OFSY, 16, 180, 100, 10
+
+    DEFPUSHBUTTON   "OK", IDOK, 0, 220, 50, 14
+    PUSHBUTTON      "Cancel", IDCANCEL, 60, 220, 50, 14
+END
+
+IDD_CH_EN DIALOG DISCARDABLE  0, 0, 121, 69
+STYLE WS_CHILD
+FONT 9, "Yu Gothic UI"
+BEGIN
+    LTEXT           "@ch command properties", IDC_STATIC, 0, 0, 80, 10
+
+    LTEXT           "Character position:", IDC_STATIC, 16, 16, 80, 10
+    COMBOBOX        IDC_COMBO_CHPOS, 16, 26, 100, 10, CBS_DROPDOWNLIST | WS_TABSTOP
+
+    LTEXT           "Character image file:", IDC_STATIC, 16, 40, 80, 10
+    EDITTEXT        IDC_TEXT_FILE1, 16, 50, 100, 10
+    PUSHBUTTON      "...", IDC_BUTTON_FILE1, 120, 50, 16, 10
+    CHECKBOX	    "Exit", IDC_CHECK_NONE, 16, 60, 100, 10
+
+    LTEXT           "Fade time in second:", IDC_STATIC, 16, 74, 80, 10
+    EDITTEXT        IDC_TEXT_TIME, 16, 84, 100, 10
+    CONTROL	    "", IDC_TRACK_TIME, TRACKBAR_CLASS, TBS_AUTOTICKS, 120, 84, 100, 10
+
+    LTEXT           "Fade type:", IDC_STATIC, 16, 98, 80, 10
+    COMBOBOX        IDC_COMBO_FADE, 16, 108, 100, 10, CBS_DROPDOWNLIST | WS_TABSTOP
+
+    LTEXT           "Rule image file:", IDC_STATIC, 16, 122, 80, 10
+    EDITTEXT        IDC_TEXT_RULE, 16, 132, 100, 10
+    PUSHBUTTON      "...", IDC_BUTTON_RULE, 120, 132, 16, 10
+
+    LTEXT           "Right shift in pixel:", IDC_STATIC, 16, 146, 80, 10
+    EDITTEXT        IDC_TEXT_OFSX, 16, 156, 100, 10
+
+    LTEXT           "Down shift in pixel:", IDC_STATIC, 16, 170, 80, 10
     EDITTEXT        IDC_TEXT_OFSY, 16, 180, 100, 10
 
     DEFPUSHBUTTON   "OK", IDOK, 0, 220, 50, 14
