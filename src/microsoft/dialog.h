@@ -2,6 +2,9 @@
 #define OPENNOVEL_DIALOG_DIALOG_H
 
 #include <windows.h>
+#include <commctrl.h>
+
+#define DIALOG_TITLE	L"OpenNovel"
 
 /* winpro.c */
 extern BOOL bEnglish;
@@ -12,5 +15,6 @@ const wchar_t *SelectFile(const char *pszDir);
 
 /* dialog_*.c */
 BOOL CALLBACK DlgBgWndProc(HWND hWnd, UINT nMsg, WPARAM wParam, LPARAM lParam);
+BOOL CALLBACK DlgChWndProc(HWND hWnd, UINT nMsg, WPARAM wParam, LPARAM lParam);
 
 #endif

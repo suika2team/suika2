@@ -2,7 +2,7 @@
 
 /*
  * OpenNovel
- * Copyright (C) 2024, The Authors. All rights reserved.
+ * Copyright (C) 2024, OpenNovel.Org. All rights reserved.
  */
 
 /*
@@ -683,8 +683,10 @@ static BOOL InitMainWindow(HINSTANCE hInstance, int *pnRenderWidth, int *pnRende
 	}
 	else
 	{
-		nPosX = CW_USEDEFAULT;
-		nPosY = CW_USEDEFAULT;
+//		nPosX = CW_USEDEFAULT;
+//		nPosY = CW_USEDEFAULT;
+		nPosX = 0;
+		nPosY = 0;
 	}
 
 	/* Create a window. */
@@ -2348,84 +2350,8 @@ static void OnCommand(WPARAM wParam, LPARAM lParam)
 /* WM_SIZING */
 static void OnSizing(int edge, LPRECT lpRect)
 {
-	RECT rcClient;
-	float fPadX, fPadY, fWidth, fHeight, fAspect;
-	int nOrigWidth, nOrigHeight;
-
-	/* Get the rects before a size change. */
-	GetWindowRect(hWndMain, &rcWindow);
-	GetClientRect(hWndMain, &rcClient);
-
-	/* Save the original window size. */
-	nOrigWidth = rcWindow.right - rcWindow.left + 1;
-	nOrigHeight = rcWindow.bottom - rcWindow.top + 1;
-
-	/* Calc the paddings. */
-	fPadX = (float)((rcWindow.right - rcWindow.left) -
-		(rcClient.right - rcClient.left));
-	fPadY = (float)((rcWindow.bottom - rcWindow.top) -
-		(rcClient.bottom - rcClient.top));
-
-	/* Calc the client size.*/
-	fWidth = (float)(lpRect->right - lpRect->left + 1) - fPadX;
-	fHeight = (float)(lpRect->bottom - lpRect->top + 1) - fPadY;
-
-	/* Apply adjustments.*/
-	fAspect = (float)conf_game_height / (float)conf_game_width;
-	switch (edge)
-	{
-	case WMSZ_TOP:
-		fWidth = fHeight / fAspect;
-		lpRect->top = lpRect->bottom - (int)(fHeight + fPadY + 0.5);
-		lpRect->right = lpRect->left + (int)(fWidth + fPadX + 0.5);
-		break;
-	case WMSZ_TOPLEFT:
-		fHeight = fWidth * fAspect;
-		lpRect->top = lpRect->bottom - (int)(fHeight + fPadY + 0.5);
-		lpRect->left = lpRect->right - (int)(fWidth + fPadX + 0.5);
-		break;
-	case WMSZ_TOPRIGHT:
-		fHeight = fWidth * fAspect;
-		lpRect->top = lpRect->bottom - (int)(fHeight + fPadY + 0.5);
-		lpRect->right = lpRect->left + (int)(fWidth + fPadX + 0.5);
-		break;
-	case WMSZ_BOTTOM:
-		fWidth = fHeight / fAspect;
-		lpRect->bottom = lpRect->top + (int)(fHeight + fPadY + 0.5);
-		lpRect->right = lpRect->left + (int)(fWidth + fPadX + 0.5);
-		break;
-	case WMSZ_BOTTOMRIGHT:
-		fHeight = fWidth * fAspect;
-		lpRect->bottom = lpRect->top + (int)(fHeight + fPadY + 0.5);
-		lpRect->right = lpRect->left + (int)(fWidth + fPadX + 0.5);
-		break;
-	case WMSZ_BOTTOMLEFT:
-		fHeight = fWidth * fAspect;
-		lpRect->bottom = lpRect->top + (int)(fHeight + fPadY + 0.5);
-		lpRect->left = lpRect->right - (int)(fWidth + fPadX + 0.5);
-		break;
-	case WMSZ_LEFT:
-		fHeight = fWidth * fAspect;
-		lpRect->left = lpRect->right - (int)(fWidth + fPadX + 0.5);
-		lpRect->bottom = lpRect->top + (int)(fHeight + fPadY + 0.5);
-		break;
-	case WMSZ_RIGHT:
-		fHeight = fWidth * fAspect;
-		lpRect->right = lpRect->left + (int)(fWidth + fPadX + 0.5);
-		lpRect->bottom = lpRect->top + (int)(fHeight + fPadY + 0.5);
-		break;
-	default:
-		/* Aero Snap? */
-		fHeight = fWidth * fAspect;
-		lpRect->bottom = lpRect->top + (int)(fHeight + fPadY + 0.5);
-		lpRect->right = lpRect->left + (int)(fWidth + fPadX + 0.5);
-		break;
-	}
-
-	/* If there's a size change, update the screen size with the debugger panel size. */
-	if (nOrigWidth != lpRect->right - lpRect->left + 1 ||
-		nOrigHeight != lpRect->bottom - lpRect->top + 1)
-		Layout((int)(fWidth + 0.5f), (int)(fHeight + 0.5f));
+	UNUSED_PARAMETER(edge);
+	UNUSED_PARAMETER(lpRect);
 }
 
 /* WM_SIZE */
@@ -5646,6 +5572,10 @@ VOID OnProperty(void)
 	case COMMAND_BG:
 		nDialogID = bEnglish ? IDD_BG_EN : IDD_BG;
 		pDlgProc = DlgBgWndProc;
+		break;
+	case COMMAND_CH:
+		nDialogID = IDD_CH;
+		pDlgProc = DlgChWndProc;
 		break;
 	default:
 		/* Not implemented yet. */
