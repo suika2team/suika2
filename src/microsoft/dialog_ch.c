@@ -222,7 +222,7 @@ static VOID OnCommand(HWND hWnd, UINT nID)
 		int nPos;
 		wchar_t wszText[128];
 		nPos = SendMessage(GetDlgItem(hWnd, IDC_TRACK_TIME), TBM_GETPOS, (WPARAM)0, (LPARAM)0);
-		swprintf(wszText, sizeof(wszText) / sizeof(wchar_t), L"%f", nPos / 10.0);
+		swprintf(wszText, sizeof(wszText) / sizeof(wchar_t), L"%0.1f", nPos / 10.0);
 		SetWindowText(GetDlgItem(hWnd, IDC_TEXT_TIME), wszText);
 		return;
 	}
