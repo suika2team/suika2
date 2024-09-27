@@ -108,8 +108,8 @@ static VOID OnInit(HWND hWnd)
 	{
 		if (strcmp(pszText, fade[i].name) == 0)
 		{
-			SendMessage(hWndFade, CB_SETCURSEL, (WPARAM)fade[i].index, (LPARAM)0);
-				break;
+			SendMessage(hWndFade, (UINT)CB_SETCURSEL, (WPARAM)fade[i].index, (LPARAM)0);
+			break;
 		}
 	}
 	if (strncmp(pszText, "rule:", 5) == 0)

@@ -8,12 +8,12 @@
 #define IDR_ACCEL                           110
 
 /* Dialogs */
-#define IDD_BG                              120
-#define IDD_BG_EN                           121
-#define IDD_CH                              122
-#define IDD_CH_EN                           123
-#define IDD_MESSAGE                         124
-#define IDD_COMMENT                         125
+#define IDD_MESSAGE                         120
+#define IDD_MESSAGE_EN                      121
+#define IDD_BG                              122
+#define IDD_BG_EN                           123
+#define IDD_CH                              124
+#define IDD_CH_EN                           125
 #define IDD_LABEL                           126
 #define IDD_ANIME                           127
 #define IDD_CHAPTER                         128
@@ -122,3 +122,7 @@
 #define IDC_TEXT_OFSY                       309
 #define IDC_CHECK_NONE                      310
 #define IDC_TRACK_TIME                      311
+#define IDC_TEXT_NAME                       312
+#define IDC_TEXT_MESSAGE                    313
+#define IDC_COMBO_ESCAPE                    314
+#define IDC_BUTTON_INSERT                   315

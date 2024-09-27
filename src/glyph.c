@@ -2362,7 +2362,7 @@ static bool process_escape_sequence_background(struct draw_msg_context *context)
 	if (*(p + 2) != '{')
 		return false;
 
-	/* \k{OFF} */
+	/* \k{DEF} */
 	if (*(p + 3) == 'D' &&
 	    *(p + 4) == 'E' &&
 	    *(p + 5) == 'F' &&
@@ -2393,7 +2393,7 @@ static bool process_escape_sequence_background(struct draw_msg_context *context)
 		context->fill_bg = true;
 	}
 
-	/* "\\#{" + "RRGGBB" + "}" */
+	/* "\\k{" + "RRGGBB" + "}" */
 	context->msg += 3 + 6 + 1;
 	return true;
 }

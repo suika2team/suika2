@@ -14,6 +14,7 @@ const char *conv_utf16_to_utf8(const wchar_t *utf16_message);
 const wchar_t *SelectFile(const char *pszDir);
 
 /* dialog_*.c */
+BOOL CALLBACK DlgMessageWndProc(HWND hWnd, UINT nMsg, WPARAM wParam, LPARAM lParam);
 BOOL CALLBACK DlgBgWndProc(HWND hWnd, UINT nMsg, WPARAM wParam, LPARAM lParam);
 BOOL CALLBACK DlgChWndProc(HWND hWnd, UINT nMsg, WPARAM wParam, LPARAM lParam);
 

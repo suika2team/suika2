@@ -342,7 +342,6 @@ static VOID RichEdit_DelayedHighligth(void);
 static VOID __stdcall OnTimerFormat(HWND hWnd, UINT nID, UINT_PTR uTime, DWORD dwParam);
 
 /* Project */
-static VOID __stdcall OnTimerUpdate(HWND hWnd, UINT nID, UINT_PTR uTime, DWORD dwParam);
 static BOOL CreateProjectFromTemplate(const wchar_t *pszTemplate);
 static BOOL ChooseProject(void);
 static BOOL OpenProjectAtPath(const wchar_t *pszPath);
@@ -515,11 +514,10 @@ static BOOL InitApp(HINSTANCE hInstance, int nCmdShow)
 		if (OpenProjectAtPath(__wargv[1]))
 		{
 			StartGame();
-			SetTimer(hWndMain, ID_TIMER_UPDATE, 1000 * 60 * 5, OnTimerUpdate);
 		}
 	}
 
-	SetTimer(hWndMain, ID_TIMER_FORMAT, 1000, OnTimerFormat);
+	SetTimer(hWndMain, ID_TIMER_FORMAT, 100, OnTimerFormat);
 
 	return TRUE;
 }
@@ -3746,7 +3744,7 @@ static VOID RichEdit_UpdateTheme(void)
 
 static VOID RichEdit_DelayedHighligth(void)
 {
-	SetTimer(hWndMain, ID_TIMER_FORMAT, 2000, OnTimerFormat);
+	SetTimer(hWndMain, ID_TIMER_FORMAT, 100, OnTimerFormat);
 }
 
 static VOID __stdcall OnTimerFormat(HWND hWnd, UINT nID, UINT_PTR uTime, DWORD dwParam)
@@ -3844,18 +3842,6 @@ static VOID __stdcall OnTimerFormat(HWND hWnd, UINT nID, UINT_PTR uTime, DWORD d
 
 	/* フォーカスを戻す */
 	SetFocus(hWndRichEdit);
-}
-
-static VOID __stdcall OnTimerUpdate(HWND hWnd, UINT nID, UINT_PTR uTime, DWORD dwParam)
-{
-	UNUSED_PARAMETER(hWnd);
-	UNUSED_PARAMETER(nID);
-	UNUSED_PARAMETER(uTime);
-	UNUSED_PARAMETER(dwParam);
-
-	KillTimer(hWndMain, ID_TIMER_UPDATE);
-	if (bProjectOpened)
-		return;
 }
 
 /*
@@ -4170,7 +4156,6 @@ static VOID OnNewProject(const wchar_t *pszTemplate)
 	RecordLastProjectPath();
 
 	StartGame();
-	SetTimer(hWndMain, ID_TIMER_UPDATE, 1000 * 60 * 5, OnTimerUpdate);
 }
 
 /* ゲームプロジェクトを開く */
@@ -4182,7 +4167,6 @@ static VOID OnOpenProject(void)
 	RecordLastProjectPath();
 
 	StartGame();
-	SetTimer(hWndMain, ID_TIMER_UPDATE, 1000 * 60 * 5, OnTimerUpdate);
 }
 
 /* ゲームフォルダオープン */
@@ -4244,7 +4228,8 @@ const wchar_t *SelectFile(const char *pszDir)
 	ofn.lpstrInitialDir = wszBase;
 	ofn.Flags = OFN_FILEMUSTEXIST | OFN_NOCHANGEDIR;
 	if (strcmp(pszDir, BG_DIR) == 0 ||
-		strcmp(pszDir, CH_DIR) == 0)
+		strcmp(pszDir, CH_DIR) == 0 ||
+		strcmp(pszDir, RULE_DIR) == 0)
 	{
 		ofn.lpstrFilter = bEnglish ?
 			L"Image Files\0*.png;*.jpg;*.webp;\0All Files(*.*)\0*.*\0\0" : 
@@ -4252,7 +4237,8 @@ const wchar_t *SelectFile(const char *pszDir)
 		ofn.lpstrDefExt = L"png";
 	}
 	else if (strcmp(pszDir, BGM_DIR) == 0 ||
-			 strcmp(pszDir, SE_DIR) == 0)
+			 strcmp(pszDir, SE_DIR) == 0 ||
+			 strcmp(pszDir, CV_DIR) == 0)
 	{
 		ofn.lpstrFilter = bEnglish ?
 			L"Sound Files\0*.ogg;\0All Files(*.*)\0*.*\0\0" : 
@@ -5569,6 +5555,11 @@ VOID OnProperty(void)
 	/* Convert a command type to a dialog id. */
 	switch (nCmdType)
 	{
+	case COMMAND_MESSAGE:
+	case COMMAND_SERIF:
+		nDialogID = bEnglish ? IDD_MESSAGE_EN : IDD_MESSAGE;
+		pDlgProc = DlgMessageWndProc;
+		break;
 	case COMMAND_BG:
 		nDialogID = bEnglish ? IDD_BG_EN : IDD_BG;
 		pDlgProc = DlgBgWndProc;
@@ -5658,6 +5649,7 @@ void OnPropertyUpdate(void)
 
 	/* Update RichEdit by the script model. */
 	RichEdit_SetTextByScriptModel();
+	RichEdit_DelayedHighligth();
 }
 
 /*

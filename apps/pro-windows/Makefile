@@ -118,6 +118,7 @@ SRCS_MAIN = \
 SRCS_WIN_C = \
 	../../src/microsoft/winpro.c \
 	../../src/microsoft/dsound.c \
+	../../src/microsoft/dialog_message.c \
 	../../src/microsoft/dialog_bg.c \
 	../../src/microsoft/dialog_ch.c
 
