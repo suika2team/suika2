@@ -234,6 +234,9 @@ static int nLineChanged;			/* The running line. */
 static BOOL bIgnoreChange;			/* Ignore changes to the RichEdit control. */
 static BOOL bNeedUpdateVars;		/* "Update Vars" is pressed. */
 
+/* Property */
+static int nLineProperty;			/* Line in edit by property dialog. */
+
 /* Colors */
 static DWORD dwColorBgDefault = LIGHT_BG_DEFAULT;
 static DWORD dwColorFgDefault = LIGHT_FG_DEFAULT;
@@ -5329,6 +5332,8 @@ static VOID OnInsertBg(void)
 	RichEdit_InsertText(L"@bg file=%ls t=1.0", pFile);
 
 	RichEdit_UpdateScriptModelFromText();
+
+	OnProperty();
 }
 
 static VOID OnInsertBgOnly(void)
@@ -5342,6 +5347,8 @@ static VOID OnInsertBgOnly(void)
 	RichEdit_InsertText(L"@chch bg=%ls t=1.0", pFile);
 
 	RichEdit_UpdateScriptModelFromText();
+
+	OnProperty();
 }
 
 static VOID OnInsertCh(void)
@@ -5355,13 +5362,17 @@ static VOID OnInsertCh(void)
 	RichEdit_UpdateScriptModelFromText();
 
 	RichEdit_InsertText(L"@ch pos=center file=%ls t=1.0", pFile);
+
+	OnProperty();
 }
 
 static VOID OnInsertChch(void)
 {
 	RichEdit_UpdateScriptModelFromText();
 
-	RichEdit_InsertText(L"@chch left=file-name.png center=file-name.png right=file-name.png bg=file-name.png t=1.0");
+	RichEdit_InsertText(L"@chch t=1.0");
+
+	OnProperty();
 }
 
 static VOID OnInsertMusic(void)
@@ -5619,6 +5630,9 @@ VOID OnProperty(void)
 	ShowWindow(hWndTextboxVar, SW_HIDE);
 	ShowWindow(hWndBtnVar, SW_HIDE);
 	ShowWindow(hWndDlgProp, SW_SHOW);
+
+	/* Save the line in edit. */
+	nLineProperty = nLine;
 }
 
 /*
@@ -5654,6 +5668,10 @@ void OnPropertyUpdate(void)
 	/* Update RichEdit by the script model. */
 	RichEdit_SetTextByScriptModel();
 	RichEdit_DelayedHighligth();
+
+	/* Change the execution line. */
+	bExecLineChanged = TRUE;
+	nLineChanged = nLineProperty;
 }
 
 /*
