@@ -5568,6 +5568,10 @@ VOID OnProperty(void)
 		nDialogID = bEnglish ? IDD_CH_EN : IDD_CH;
 		pDlgProc = DlgChWndProc;
 		break;
+	case COMMAND_CHCH:
+		nDialogID = IDD_CHCH;
+		pDlgProc = DlgChchWndProc;
+		break;
 	default:
 		/* Not implemented yet. */
 		MessageBox(hWndMain,
