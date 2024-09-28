@@ -8,7 +8,7 @@
 #include "opennovel.h"
 
 #define PNG_DEBUG 3
-#if defined(OPENNOVEL_TARGET_WASM) || defined(OPENNOVEL_TARGET_ANDROID) || defined(OPENNOVEL_TARGET_POSIX)
+#if defined(OPENNOVEL_TARGET_WASM) || defined(OPENNOVEL_TARGET_ANDROID) || defined(OPENNOVEL_TARGET_POSIX) || defined(_MSC_VER)
 #include <png.h>
 #else
 #include <png/png.h>

@@ -37,7 +37,7 @@
 /*
  * コマンドの引数の最大数 (コマンド名[0]も含めた数)
  */
-#define PARAM_SIZE	(32)
+#define PARAM_SIZE	(40)
 
 /* コマンド配列 */
 static struct command {

@@ -51,7 +51,7 @@
 #include "wave.h"	/* The sound stream subsystem */
 #include "wms.h"	/* The WMS subsystem */
 #if defined(USE_EDITOR)
-#include "pro.h"    /* The editor extension */
+#include "pro.h"	/* The editor extension */
 #endif
 
 /*

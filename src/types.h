@@ -14,8 +14,8 @@
  *   - MSVC 14 or later
  */
 
-#ifndef POLARIS_TYPES_H
-#define POLARIS_TYPES_H
+#ifndef OPENNOVEL_TYPES_H
+#define OPENNOVEL_TYPES_H
 
 /*
  * Define macros that indicate a target platform we are compiling to.
@@ -109,6 +109,7 @@
  * POSIX libc to MSVCRT mapping
  */
 #define strdup _strdup
+#define strcasecmp _stricmp
 
 #endif /* End of MSVC */
 

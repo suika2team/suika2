@@ -5300,22 +5300,22 @@ static VOID OnHelp(void)
 
 static VOID OnInsertMessage(void)
 {
-	RichEdit_UpdateScriptModelFromText();
-
 	if (bEnglish)
-		RichEdit_InsertText(L"Edit this message and press return.");
+		RichEdit_InsertText(L"Edit this message.");
 	else
-		RichEdit_InsertText(L"この行のメッセージを編集して改行してください。");
+		RichEdit_InsertText(L"この行のメッセージを編集してください。");
+
+	RichEdit_UpdateScriptModelFromText();
 }
 
 static VOID OnInsertSerif(void)
 {
-	RichEdit_UpdateScriptModelFromText();
-
 	if (bEnglish)
 		RichEdit_InsertText(L"*Name*Edit this line and press return.");
 	else
-		RichEdit_InsertText(L"名前「このセリフを編集して改行してください。」");
+		RichEdit_InsertText(L"名前「このセリフを編集してください。」");
+
+	RichEdit_UpdateScriptModelFromText();
 }
 
 static VOID OnInsertBg(void)
@@ -5326,9 +5326,9 @@ static VOID OnInsertBg(void)
 	if (pFile == NULL)
 		return;
 
-	RichEdit_UpdateScriptModelFromText();
-
 	RichEdit_InsertText(L"@bg file=%ls t=1.0", pFile);
+
+	RichEdit_UpdateScriptModelFromText();
 }
 
 static VOID OnInsertBgOnly(void)
@@ -5339,9 +5339,9 @@ static VOID OnInsertBgOnly(void)
 	if (pFile == NULL)
 		return;
 
-	RichEdit_UpdateScriptModelFromText();
-
 	RichEdit_InsertText(L"@chch bg=%ls t=1.0", pFile);
+
+	RichEdit_UpdateScriptModelFromText();
 }
 
 static VOID OnInsertCh(void)
