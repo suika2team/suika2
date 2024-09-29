@@ -399,17 +399,11 @@ static VOID OnInsertBgOnly(void);
 static VOID OnInsertCh(void);
 static VOID OnInsertChch(void);
 static VOID OnInsertMusic(void);
-static VOID OnInsertMusicStop(void);
-static VOID OnInsertVolumeMusic(void);
 static VOID OnInsertSound(void);
-static VOID OnInsertSoundStop(void);
-static VOID OnInsertVolumeSound(void);
+static VOID OnInsertVolume(void);
 static VOID OnInsertVideo(void);
-static VOID OnInsertShakeH(void);
-static VOID OnInsertShakeV(void);
-static VOID OnInsertChoose3(void);
-static VOID OnInsertChoose2(void);
-static VOID OnInsertChoose1(void);
+static VOID OnInsertShake(void);
+static VOID OnInsertChoose(void);
 static VOID OnInsertMenu(void);
 static VOID OnInsertClick(void);
 static VOID OnInsertTime(void);
@@ -1332,7 +1326,7 @@ static VOID InitMenu(HWND hWnd)
 	mi.wID = ID_CMD_CHCH;
 	mi.dwTypeData = bEnglish ?
 		L"Change Multiple Characters" :
-		L"キャラクタを同時に変更";
+		L"キャラクタを複数同時に変更";
 	InsertMenuItem(hMenuDirection, nOrder++, TRUE, &mi);
 	EnableMenuItem(hMenu, ID_CMD_CHCH, MF_GRAYED);
 
@@ -1344,45 +1338,21 @@ static VOID InitMenu(HWND hWnd)
 	InsertMenuItem(hMenuDirection, nOrder++, TRUE, &mi);
 	EnableMenuItem(hMenu, ID_CMD_MUSIC, MF_GRAYED);
 
-	/* Create a menu item for Stop Music. */
-	mi.wID = ID_CMD_MUSIC_STOP;
-	mi.dwTypeData = bEnglish ?
-		L"Stop BGM" :
-		L"音楽を停止";
-	InsertMenuItem(hMenuDirection, nOrder++, TRUE, &mi);
-	EnableMenuItem(hMenu, ID_CMD_MUSIC_STOP, MF_GRAYED);
-
-	/* Create a menu item for Music Volume. */
-	mi.wID = ID_CMD_VOLUME_MUSIC;
-	mi.dwTypeData = bEnglish ?
-		L"Music Volume" :
-		L"音楽の音量";
-	InsertMenuItem(hMenuDirection, nOrder++, TRUE, &mi);
-	EnableMenuItem(hMenu, ID_CMD_VOLUME_MUSIC, MF_GRAYED);
-
 	/* Create a menu item for Play Sound Effect. */
 	mi.wID = ID_CMD_SOUND;
 	mi.dwTypeData = bEnglish ?
 		L"Play Sound Effect" :
-		L"効果音を再生";
+		L"効果音を再生する";
 	InsertMenuItem(hMenuDirection, nOrder++, TRUE, &mi);
 	EnableMenuItem(hMenu, ID_CMD_SOUND, MF_GRAYED);
 
-	/* Create a menu item for Stop Sound Effect. */
-	mi.wID = ID_CMD_SOUND_STOP;
-	mi.dwTypeData = bEnglish ?
-		L"Stop Sound Effect" :
-		L"効果音を停止";
-	InsertMenuItem(hMenuDirection, nOrder++, TRUE, &mi);
-	EnableMenuItem(hMenu, ID_CMD_SOUND_STOP, MF_GRAYED);
-
 	/* Create a menu item for Sound Effect Volume. */
-	mi.wID = ID_CMD_VOLUME_SOUND;
+	mi.wID = ID_CMD_VOLUME;
 	mi.dwTypeData = bEnglish ?
-		L"Sound Effect Volume" :
-		L"効果音の音量";
+		L"Sound Volume" :
+		L"音量を変更する";
 	InsertMenuItem(hMenuDirection, nOrder++, TRUE, &mi);
-	EnableMenuItem(hMenu, ID_CMD_VOLUME_SOUND, MF_GRAYED);
+	EnableMenuItem(hMenu, ID_CMD_VOLUME, MF_GRAYED);
 
 	/* Create a menu item for Play Video. */
 	mi.wID = ID_CMD_VIDEO;
@@ -1393,50 +1363,26 @@ static VOID InitMenu(HWND hWnd)
 	EnableMenuItem(hMenu, ID_CMD_VIDEO, MF_GRAYED);
 
 	/* Create a menu item for Shake Screen Horizontally. */
-	mi.wID = ID_CMD_SHAKE_H;
+	mi.wID = ID_CMD_SHAKE;
 	mi.dwTypeData = bEnglish ?
-		L"Shake Screen Horizontally" :
-		L"画面を横に揺らす";
+		L"Shake Screen" :
+		L"画面を揺らす";
 	InsertMenuItem(hMenuDirection, nOrder++, TRUE, &mi);
-	EnableMenuItem(hMenu, ID_CMD_SHAKE_H, MF_GRAYED);
-
-	/* Create a menu item for Shake Screen Vertically. */
-	mi.wID = ID_CMD_SHAKE_V;
-	mi.dwTypeData = bEnglish ?
-		L"Shake Screen Vertically" :
-		L"画面を縦に揺らす";
-	InsertMenuItem(hMenuDirection, nOrder++, TRUE, &mi);
-	EnableMenuItem(hMenu, ID_CMD_SHAKE_V, MF_GRAYED);
+	EnableMenuItem(hMenu, ID_CMD_SHAKE, MF_GRAYED);
 
 	/* Create a menu item for Options (3). */
-	mi.wID = ID_CMD_CHOOSE_3;
+	mi.wID = ID_CMD_CHOOSE;
 	mi.dwTypeData = bEnglish ?
-		L"Options (3)" :
-		L"選択肢(3)";
+		L"Show Options" :
+		L"選択肢を表示する";
 	InsertMenuItem(hMenuDirection, nOrder++, TRUE, &mi);
-	EnableMenuItem(hMenu, ID_CMD_CHOOSE_3, MF_GRAYED);
-
-	/* Create a menu item for Options (2). */
-	mi.wID = ID_CMD_CHOOSE_2;
-	mi.dwTypeData = bEnglish ?
-		L"Options (2)" :
-		L"選択肢(2)";
-	InsertMenuItem(hMenuDirection, nOrder++, TRUE, &mi);
-	EnableMenuItem(hMenu, ID_CMD_CHOOSE_2, MF_GRAYED);
-
-	/* Create a menu item for Options (1). */
-	mi.wID = ID_CMD_CHOOSE_1;
-	mi.dwTypeData = bEnglish ?
-		L"Option (1)" :
-		L"選択肢(1)";
-	InsertMenuItem(hMenuDirection, nOrder++, TRUE, &mi);
-	EnableMenuItem(hMenu, ID_CMD_CHOOSE_1, MF_GRAYED);
+	EnableMenuItem(hMenu, ID_CMD_CHOOSE, MF_GRAYED);
 
 	/* Create a menu item for Menu Screen. */
 	mi.wID = ID_CMD_MENU;
 	mi.dwTypeData = bEnglish ?
 		L"Menu Screen" :
-		L"メニュー画面";
+		L"メニュー画面を表示する";
 	InsertMenuItem(hMenuDirection, nOrder++, TRUE, &mi);
 	EnableMenuItem(hMenu, ID_CMD_MENU, MF_GRAYED);
 
@@ -1444,7 +1390,7 @@ static VOID InitMenu(HWND hWnd)
 	mi.wID = ID_CMD_CLICK;
 	mi.dwTypeData = bEnglish ?
 		L"Click Wait" :
-		L"クリック待ち";
+		L"クリックを待つ";
 	InsertMenuItem(hMenuDirection, nOrder++, TRUE, &mi);
 	EnableMenuItem(hMenu, ID_CMD_CLICK, MF_GRAYED);
 
@@ -1452,7 +1398,7 @@ static VOID InitMenu(HWND hWnd)
 	mi.wID = ID_CMD_TIME;
 	mi.dwTypeData = bEnglish ?
 		L"Timed Wait" :
-		L"時間指定待ち";
+		L"指定時間待つ";
 	InsertMenuItem(hMenuDirection, nOrder++, TRUE, &mi);
 	EnableMenuItem(hMenu, ID_CMD_TIME, MF_GRAYED);
 
@@ -1460,7 +1406,7 @@ static VOID InitMenu(HWND hWnd)
 	mi.wID = ID_CMD_STORY;
 	mi.dwTypeData = bEnglish ?
 		L"Load Other Story" :
-		L"他のスクリプトへ移動";
+		L"他のスクリプトへ移動する";
 	InsertMenuItem(hMenuDirection, nOrder++, TRUE, &mi);
 	EnableMenuItem(hMenu, ID_CMD_STORY, MF_GRAYED);
 
@@ -2258,38 +2204,20 @@ static void OnCommand(WPARAM wParam, LPARAM lParam)
 	case ID_CMD_MUSIC:
 		OnInsertMusic();
 		break;
-	case ID_CMD_MUSIC_STOP:
-		OnInsertMusicStop();
-		break;
-	case ID_CMD_VOLUME_MUSIC:
-		OnInsertVolumeMusic();
-		break;
 	case ID_CMD_SOUND:
 		OnInsertSound();
 		break;
-	case ID_CMD_SOUND_STOP:
-		OnInsertSoundStop();
-		break;
-	case ID_CMD_VOLUME_SOUND:
-		OnInsertVolumeSound();
+	case ID_CMD_VOLUME:
+		OnInsertVolume();
 		break;
 	case ID_CMD_VIDEO:
 		OnInsertVideo();
 		break;
-	case ID_CMD_SHAKE_H:
-		OnInsertShakeH();
+	case ID_CMD_SHAKE:
+		OnInsertShake();
 		break;
-	case ID_CMD_SHAKE_V:
-		OnInsertShakeV();
-		break;
-	case ID_CMD_CHOOSE_3:
-		OnInsertChoose3();
-		break;
-	case ID_CMD_CHOOSE_2:
-		OnInsertChoose2();
-		break;
-	case ID_CMD_CHOOSE_1:
-		OnInsertChoose1();
+	case ID_CMD_CHOOSE:
+		OnInsertChoose();
 		break;
 	case ID_CMD_MENU:
 		OnInsertMenu();
@@ -5390,20 +5318,8 @@ static VOID OnInsertMusic(void)
 	RichEdit_UpdateScriptModelFromText();
 
 	RichEdit_InsertText(L"@music file=%ls", pFile);
-}
 
-static VOID OnInsertMusicStop(void)
-{
-	RichEdit_UpdateScriptModelFromText();
-
-	RichEdit_InsertText(L"@bgm stop");
-}
-
-static VOID OnInsertVolumeMusic(void)
-{
-	RichEdit_UpdateScriptModelFromText();
-
-	RichEdit_InsertText(L"@volume track=bgm vol=1.0 t=1.0");
+	OnProperty();
 }
 
 static VOID OnInsertSound(void)
@@ -5419,18 +5335,11 @@ static VOID OnInsertSound(void)
 	RichEdit_InsertText(L"@sound file=%ls", pFile);
 }
 
-static VOID OnInsertSoundStop(void)
+static VOID OnInsertVolume(void)
 {
 	RichEdit_UpdateScriptModelFromText();
 
-	RichEdit_InsertText(L"@sound stop");
-}
-
-static VOID OnInsertVolumeSound(void)
-{
-	RichEdit_UpdateScriptModelFromText();
-
-	RichEdit_InsertText(L"@volume track=se vol=1.0 t=1.0");
+	RichEdit_InsertText(L"@volume track=bgm vol=1.0 t=1.0");
 }
 
 static VOID OnInsertVideo(void)
@@ -5455,21 +5364,14 @@ static VOID OnInsertVideo(void)
 	RichEdit_InsertText(L"@video file=%ls", buf);
 }
 
-static VOID OnInsertShakeH(void)
+static VOID OnInsertShake(void)
 {
 	RichEdit_UpdateScriptModelFromText();
 
 	RichEdit_InsertText(L"@shake dir=horizontal t=1.0 count=3 amp=100");
 }
 
-static VOID OnInsertShakeV(void)
-{
-	RichEdit_UpdateScriptModelFromText();
-
-	RichEdit_InsertText(L"@shake dir=vertical t=1.0 count=3 amp=100");
-}
-
-static VOID OnInsertChoose3(void)
+static VOID OnInsertChoose(void)
 {
 	RichEdit_UpdateScriptModelFromText();
 
@@ -5477,26 +5379,6 @@ static VOID OnInsertChoose3(void)
 		RichEdit_InsertText(L"@choose L1 \"Option1\" L2 \"Option2\" L3 \"Option3\"");
 	else
 		RichEdit_InsertText(L"@choose L1 \"選択肢1\" L2 \"選択肢2\" L3 \"選択肢3\"");
-}
-
-static VOID OnInsertChoose2(void)
-{
-	RichEdit_UpdateScriptModelFromText();
-
-	if (bEnglish)
-		RichEdit_InsertText(L"@choose L1 \"Option1\" L2 \"Option2\"");
-	else
-		RichEdit_InsertText(L"@choose L1 \"選択肢1\" L2 \"選択肢2\"");
-}
-
-static VOID OnInsertChoose1(void)
-{
-	RichEdit_UpdateScriptModelFromText();
-
-	if (bEnglish)
-		RichEdit_InsertText(L"@choose L1 \"Option1\"");
-	else
-		RichEdit_InsertText(L"@choose L1 \"選択肢1\"");
 }
 
 static VOID OnInsertMenu(void)
@@ -5584,8 +5466,12 @@ VOID OnProperty(void)
 		pDlgProc = DlgChWndProc;
 		break;
 	case COMMAND_CHCH:
-		nDialogID = IDD_CHCH;
+		nDialogID = bEnglish ? IDD_CHCH_EN : IDD_CHCH;
 		pDlgProc = DlgChchWndProc;
+		break;
+	case COMMAND_MUSIC:
+		nDialogID = bEnglish ? IDD_MUSIC_EN : IDD_MUSIC;
+		pDlgProc = DlgMusicWndProc;
 		break;
 	default:
 		/* Not implemented yet. */

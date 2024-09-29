@@ -14,33 +14,12 @@
 #define IDD_BG_EN                           123
 #define IDD_CH                              124
 #define IDD_CH_EN                           125
-#define IDD_LABEL                           126
-#define IDD_ANIME                           127
-#define IDD_CHAPTER                         128
-#define IDD_CHCH                            129
-#define IDD_CHOOSE                          130
-#define IDD_CLICK                           131
-#define IDD_CONFIG                          132
-#define IDD_GOSUB                           133
-#define IDD_GOTO                            134
-#define IDD_IF                              135
-#define IDD_LAYER                           136
-#define IDD_MENU                            137
-#define IDD_MOVE                            138
-#define IDD_MUSIC                           139
-#define IDD_PLUGIN                          140
-#define IDD_RETURN                          141
-#define IDD_SET                             142
-#define IDD_SHAKE                           143
-#define IDD_SKIP                            144
-#define IDD_SOUND                           145
-#define IDD_STORY                           146
-#define IDD_TEXT                            147
-#define IDD_TIME                            148
-#define IDD_VIDEO                           149
-#define IDD_VOLUME                          150
+#define IDD_CHCH                            126
+#define IDD_CHCH_EN                         127
+#define IDD_MUSIC                           128
+#define IDD_MUSIC_EN                        129
 
-/* File Menu / Open Button*/
+/* File Menu / Open Button */
 #define ID_NEW_PROJECT_JAPANESE_ADV	    160
 #define ID_OPEN_PROJECT			    161
 #define ID_OPEN_GAME_FOLDER		    162
@@ -65,21 +44,15 @@
 #define ID_CMD_CH			    184
 #define ID_CMD_CHCH			    185
 #define ID_CMD_MUSIC			    186
-#define ID_CMD_MUSIC_STOP		    187
-#define ID_CMD_VOLUME_MUSIC		    188
-#define ID_CMD_SOUND			    189
-#define ID_CMD_SOUND_STOP		    190
-#define ID_CMD_VOLUME_SOUND		    191
-#define ID_CMD_VIDEO			    192
-#define ID_CMD_SHAKE_H			    193
-#define ID_CMD_SHAKE_V			    194
-#define ID_CMD_CHOOSE_3			    195
-#define ID_CMD_CHOOSE_2			    196
-#define ID_CMD_CHOOSE_1			    197
-#define ID_CMD_MENU			    198
-#define ID_CMD_CLICK			    199
-#define ID_CMD_TIME			    200
-#define ID_CMD_STORY			    201
+#define ID_CMD_SOUND			    187
+#define ID_CMD_VOLUME			    188
+#define ID_CMD_VIDEO			    189
+#define ID_CMD_SHAKE			    190
+#define ID_CMD_CHOOSE			    191
+#define ID_CMD_MENU			    192
+#define ID_CMD_CLICK			    193
+#define ID_CMD_TIME			    194
+#define ID_CMD_STORY			    195
 
 /* View Menu */
 #define ID_FONT		                    210
@@ -174,3 +147,5 @@
 #define IDC_TEXT_BGX                        361
 #define IDC_TEXT_BGY                        362
 #define IDC_TEXT_BGA                        363
+#define IDC_CHECK_STOP                      364
+#define IDC_CHECK_ONCE                      365

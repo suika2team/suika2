@@ -48,20 +48,20 @@ IDD_BG_EN DIALOG DISCARDABLE  0, 0, 121, 69
 STYLE WS_CHILD
 FONT 9, "Yu Gothic UI"
 BEGIN
-    LTEXT           "@bg command properties", IDC_STATIC, 0, 0, 80, 10
+    LTEXT           "@bg Command Properties", IDC_STATIC, 0, 0, 80, 10
 
-    LTEXT           "Background image file:", IDC_STATIC, 16, 16, 80, 10
+    LTEXT           "Background Image File:", IDC_STATIC, 16, 16, 80, 10
     EDITTEXT        IDC_TEXT_FILE1, 16, 26, 100, 10, ES_AUTOHSCROLL
     PUSHBUTTON      "...", IDC_BUTTON_FILE1, 120, 26, 16, 10
 
-    LTEXT           "Fade time in second:", IDC_STATIC, 16, 40, 80, 10
+    LTEXT           "Fade Time In Seconds:", IDC_STATIC, 16, 40, 80, 10
     EDITTEXT        IDC_TEXT_TIME, 16, 50, 100, 10, ES_AUTOHSCROLL
     CONTROL	    "", IDC_TRACK_TIME, TRACKBAR_CLASS, TBS_AUTOTICKS, 120, 50, 100, 10
 
-    LTEXT           "Fade type:", IDC_STATIC, 16, 64, 80, 10
+    LTEXT           "Fade Type:", IDC_STATIC, 16, 64, 80, 10
     COMBOBOX        IDC_COMBO_FADE, 16, 74, 100, 10, CBS_DROPDOWNLIST | WS_TABSTOP
 
-    LTEXT           "Rule image file:", IDC_STATIC, 16, 88, 80, 10
+    LTEXT           "Rule Image File:", IDC_STATIC, 16, 88, 80, 10
     EDITTEXT        IDC_TEXT_RULE, 16, 98, 100, 10, ES_AUTOHSCROLL
     PUSHBUTTON      "...", IDC_BUTTON_RULE, 120, 98, 16, 10
 
@@ -108,31 +108,31 @@ IDD_CH_EN DIALOG DISCARDABLE  0, 0, 121, 69
 STYLE WS_CHILD
 FONT 9, "Yu Gothic UI"
 BEGIN
-    LTEXT           "@ch command properties", IDC_STATIC, 0, 0, 80, 10
+    LTEXT           "@ch Command Properties", IDC_STATIC, 0, 0, 80, 10
 
-    LTEXT           "Character position:", IDC_STATIC, 16, 16, 80, 10
+    LTEXT           "Character Position:", IDC_STATIC, 16, 16, 80, 10
     COMBOBOX        IDC_COMBO_CHPOS, 16, 26, 100, 10, CBS_DROPDOWNLIST | WS_TABSTOP
 
-    LTEXT           "Character image file:", IDC_STATIC, 16, 40, 80, 10
+    LTEXT           "Character Image File:", IDC_STATIC, 16, 40, 80, 10
     EDITTEXT        IDC_TEXT_FILE1, 16, 50, 100, 10, ES_AUTOHSCROLL
     PUSHBUTTON      "...", IDC_BUTTON_FILE1, 120, 50, 16, 10
     CHECKBOX	    "Exit", IDC_CHECK_NONE, 16, 60, 100, 10
 
-    LTEXT           "Fade time in second:", IDC_STATIC, 16, 74, 80, 10
+    LTEXT           "Fade Time In Seconds:", IDC_STATIC, 16, 74, 80, 10
     EDITTEXT        IDC_TEXT_TIME, 16, 84, 100, 10
     CONTROL	    "", IDC_TRACK_TIME, TRACKBAR_CLASS, TBS_AUTOTICKS, 120, 84, 100, 10
 
-    LTEXT           "Fade type:", IDC_STATIC, 16, 98, 80, 10
+    LTEXT           "Fade Type:", IDC_STATIC, 16, 98, 80, 10
     COMBOBOX        IDC_COMBO_FADE, 16, 108, 100, 10, CBS_DROPDOWNLIST | WS_TABSTOP
 
-    LTEXT           "Rule image file:", IDC_STATIC, 16, 122, 80, 10
+    LTEXT           "Rule Image File:", IDC_STATIC, 16, 122, 80, 10
     EDITTEXT        IDC_TEXT_RULE, 16, 132, 100, 10, ES_AUTOHSCROLL
     PUSHBUTTON      "...", IDC_BUTTON_RULE, 120, 132, 16, 10
 
-    LTEXT           "Right shift in pixel:", IDC_STATIC, 16, 146, 80, 10
+    LTEXT           "Right Shift In Pixels:", IDC_STATIC, 16, 146, 80, 10
     EDITTEXT        IDC_TEXT_OFSX, 16, 156, 100, 10
 
-    LTEXT           "Down shift in pixel:", IDC_STATIC, 16, 170, 80, 10
+    LTEXT           "Down Shift In Pixels:", IDC_STATIC, 16, 170, 80, 10
     EDITTEXT        IDC_TEXT_OFSY, 16, 180, 100, 10
 
     DEFPUSHBUTTON   "OK", IDOK, 0, 220, 50, 14
@@ -166,7 +166,7 @@ IDD_MESSAGE_EN DIALOG DISCARDABLE  0, 0, 121, 69
 STYLE WS_CHILD
 FONT 9, "Yu Gothic UI"
 BEGIN
-    LTEXT           "Message properties", IDC_STATIC, 0, 0, 80, 10
+    LTEXT           "Message Properties", IDC_STATIC, 0, 0, 80, 10
 
     LTEXT           "Character name:", IDC_STATIC, 16, 16, 80, 10
     EDITTEXT        IDC_TEXT_NAME, 16, 26, 100, 10, ES_AUTOHSCROLL | WS_TABSTOP
@@ -272,4 +272,125 @@ BEGIN
 
     DEFPUSHBUTTON   "OK", IDOK, 0, 240, 50, 14
     PUSHBUTTON      "Cancel", IDCANCEL, 60, 240, 50, 14
+END
+
+IDD_CHCH_EN DIALOG DISCARDABLE  0, 0, 121, 69
+STYLE WS_CHILD
+FONT 9, "Yu Gothic UI"
+BEGIN
+    LTEXT           "@chch Command Properties", IDC_STATIC, 0, 0, 80, 10
+
+    LTEXT           "Change:",   IDC_STATIC,     40,  16,  20, 10
+    LTEXT           "File:",     IDC_STATIC,     85,  16,  30, 10
+    LTEXT           "Alpha:",    IDC_STATIC,    145,  16,  20, 10
+    LTEXT           "Right:",    IDC_STATIC,    170,  16,  20, 10
+    LTEXT           "Down:",     IDC_STATIC,    195,  16,  20, 10
+    LTEXT           "Dim:",      IDC_STATIC,    220,  16,  20, 10
+
+    LTEXT           "Center:",   IDC_STATIC,     11,  30,  25, 10
+    COMBOBOX                     IDC_COMBO_C,    40,  30,  40, 10, CBS_DROPDOWNLIST | WS_TABSTOP
+    EDITTEXT                     IDC_TEXT_C,     85,  30,  40, 10, ES_AUTOHSCROLL | WS_TABSTOP
+    PUSHBUTTON      "...",       IDC_BUTTON_C,  128,  30,  13, 10
+    EDITTEXT                     IDC_TEXT_CA,   145,  30,  20, 10, WS_TABSTOP
+    EDITTEXT                     IDC_TEXT_CX,   170,  30,  20, 10, WS_TABSTOP
+    EDITTEXT                     IDC_TEXT_CY,   195,  30,  20, 10, WS_TABSTOP
+    COMBOBOX                     IDC_COMBO_CD,  220,  30,  30, 10, CBS_DROPDOWNLIST | WS_TABSTOP
+
+    LTEXT           "Left:",     IDC_STATIC,     11,  44,  40, 10
+    COMBOBOX                     IDC_COMBO_L,    40,  44,  40, 10, CBS_DROPDOWNLIST | WS_TABSTOP
+    EDITTEXT                     IDC_TEXT_L,     85,  44,  40, 10, ES_AUTOHSCROLL | WS_TABSTOP
+    PUSHBUTTON      "...",       IDC_BUTTON_L,  128,  44,  13, 10
+    EDITTEXT                     IDC_TEXT_LA,   145,  44,  20, 10, WS_TABSTOP
+    EDITTEXT                     IDC_TEXT_LX,   170,  44,  20, 10, WS_TABSTOP
+    EDITTEXT                     IDC_TEXT_LY,   195,  44,  20, 10, WS_TABSTOP
+    COMBOBOX                     IDC_COMBO_LD,  220,  44,  30, 10, CBS_DROPDOWNLIST | WS_TABSTOP
+
+    LTEXT           "Right:",    IDC_STATIC,     11,  58,  40, 10
+    COMBOBOX                     IDC_COMBO_R,    40,  58,  40, 10, CBS_DROPDOWNLIST | WS_TABSTOP
+    EDITTEXT                     IDC_TEXT_R,     85,  58,  40, 10, ES_AUTOHSCROLL | WS_TABSTOP
+    PUSHBUTTON      "...",       IDC_BUTTON_R,  128,  58,  13, 10
+    EDITTEXT                     IDC_TEXT_RA,   145,  58,  20, 10, WS_TABSTOP
+    EDITTEXT                     IDC_TEXT_RX,   170,  58,  20, 10, WS_TABSTOP
+    EDITTEXT                     IDC_TEXT_RY,   195,  58,  20, 10, WS_TABSTOP
+    COMBOBOX                     IDC_COMBO_RD,  220,  58,  30, 10, CBS_DROPDOWNLIST | WS_TABSTOP
+
+    LTEXT           "LC:",       IDC_STATIC,     11,  72,  40, 10
+    COMBOBOX                     IDC_COMBO_LC,   40,  72,  40, 10, CBS_DROPDOWNLIST | WS_TABSTOP
+    EDITTEXT                     IDC_TEXT_LC,    85,  72,  40, 10, ES_AUTOHSCROLL | WS_TABSTOP
+    PUSHBUTTON      "...",       IDC_BUTTON_LC, 128,  72,  13, 10
+    EDITTEXT                     IDC_TEXT_LCA,  145,  72,  20, 10, WS_TABSTOP
+    EDITTEXT                     IDC_TEXT_LCX,  170,  72,  20, 10, WS_TABSTOP
+    EDITTEXT                     IDC_TEXT_LCY,  195,  72,  20, 10, WS_TABSTOP
+    COMBOBOX                     IDC_COMBO_LCD, 220,  72,  30, 10, CBS_DROPDOWNLIST | WS_TABSTOP
+
+    LTEXT           "RC:",       IDC_STATIC,     11,  86,  40, 10
+    COMBOBOX                     IDC_COMBO_RC,   40,  86,  40, 10, CBS_DROPDOWNLIST | WS_TABSTOP
+    EDITTEXT                     IDC_TEXT_RC,    85,  86,  40, 10, ES_AUTOHSCROLL | WS_TABSTOP
+    PUSHBUTTON      "...",       IDC_BUTTON_RC, 128,  86,  13, 10
+    EDITTEXT                     IDC_TEXT_RCA,  145,  86,  20, 10, WS_TABSTOP
+    EDITTEXT                     IDC_TEXT_RCX,  170,  86,  20, 10, WS_TABSTOP
+    EDITTEXT                     IDC_TEXT_RCY,  195,  86,  20, 10, WS_TABSTOP
+    COMBOBOX                     IDC_COMBO_RCD, 220,  86,  30, 10, CBS_DROPDOWNLIST | WS_TABSTOP
+
+    LTEXT           "Back:",     IDC_STATIC,     11, 100,  40, 10
+    COMBOBOX                     IDC_COMBO_B,    40, 100,  40, 10, CBS_DROPDOWNLIST | WS_TABSTOP
+    EDITTEXT                     IDC_TEXT_B,     85, 100,  40, 10, ES_AUTOHSCROLL | WS_TABSTOP
+    PUSHBUTTON      "...",       IDC_BUTTON_B,  128, 100,  13, 10
+    EDITTEXT                     IDC_TEXT_BA,   145, 100,  20, 10, WS_TABSTOP
+    EDITTEXT                     IDC_TEXT_BX,   170, 100,  20, 10, WS_TABSTOP
+    EDITTEXT                     IDC_TEXT_BY,   195, 100,  20, 10, WS_TABSTOP
+    COMBOBOX                     IDC_COMBO_BD,  220, 100,  30, 10, CBS_DROPDOWNLIST | WS_TABSTOP
+
+    LTEXT           "Bg:",       IDC_STATIC,     11, 114,  40, 10
+    COMBOBOX                     IDC_COMBO_BG,   40, 114,  40, 10, CBS_DROPDOWNLIST | WS_TABSTOP
+    EDITTEXT                     IDC_TEXT_BG,    85, 114,  40, 10, ES_AUTOHSCROLL | WS_TABSTOP
+    PUSHBUTTON      "...",       IDC_BUTTON_BG, 128, 114,  13, 10
+    EDITTEXT                     IDC_TEXT_BGX,  170, 114,  20, 10, WS_TABSTOP
+    EDITTEXT                     IDC_TEXT_BGY,  195, 114,  20, 10, WS_TABSTOP
+
+    LTEXT           "Fade Time In Seconds:", IDC_STATIC, 16, 140, 80, 10
+    EDITTEXT        IDC_TEXT_TIME, 16, 154, 100, 10, ES_AUTOHSCROLL
+    CONTROL	    "", IDC_TRACK_TIME, TRACKBAR_CLASS, TBS_AUTOTICKS, 120, 154, 100, 10
+
+    LTEXT           "Fade Type:", IDC_STATIC, 16, 168, 80, 10
+    COMBOBOX        IDC_COMBO_FADE, 16, 182, 100, 10, CBS_DROPDOWNLIST | WS_TABSTOP
+
+    LTEXT           "Rule Image File:", IDC_STATIC, 16, 196, 80, 10
+    EDITTEXT        IDC_TEXT_RULE, 16, 210, 100, 10, ES_AUTOHSCROLL
+    PUSHBUTTON      "...", IDC_BUTTON_RULE, 120, 210, 16, 10
+
+    DEFPUSHBUTTON   "OK", IDOK, 0, 240, 50, 14
+    PUSHBUTTON      "Cancel", IDCANCEL, 60, 240, 50, 14
+END
+
+IDD_MUSIC DIALOG DISCARDABLE  0, 0, 121, 69
+STYLE WS_CHILD
+FONT 9, "Yu Gothic UI"
+BEGIN
+    LTEXT           "@music コマンドの編集", IDC_STATIC, 0, 0, 80, 10
+
+    LTEXT           "音楽ファイル:", IDC_STATIC, 16, 16, 80, 10
+    EDITTEXT        IDC_TEXT_FILE1, 16, 26, 100, 10, ES_AUTOHSCROLL
+    PUSHBUTTON      "...", IDC_BUTTON_FILE1, 120, 26, 16, 10
+    CHECKBOX	    "停止する", IDC_CHECK_STOP, 16, 36, 100, 10
+    CHECKBOX	    "繰り返さない", IDC_CHECK_ONCE, 16, 46, 100, 10
+
+    DEFPUSHBUTTON   "OK", IDOK, 0, 70, 50, 14
+    PUSHBUTTON      "Cancel", IDCANCEL, 60, 70, 50, 14
+END
+
+IDD_MUSIC_EN DIALOG DISCARDABLE  0, 0, 121, 69
+STYLE WS_CHILD
+FONT 9, "Yu Gothic UI"
+BEGIN
+    LTEXT           "@music Command Properties", IDC_STATIC, 0, 0, 80, 10
+
+    LTEXT           "Music File:", IDC_STATIC, 16, 16, 80, 10
+    EDITTEXT        IDC_TEXT_FILE1, 16, 26, 100, 10, ES_AUTOHSCROLL
+    PUSHBUTTON      "...", IDC_BUTTON_FILE1, 120, 26, 16, 10
+    CHECKBOX	    "Stop Playing", IDC_CHECK_STOP, 16, 36, 100, 10
+    CHECKBOX	    "Don't Repeat", IDC_CHECK_ONCE, 16, 46, 100, 10
+
+    DEFPUSHBUTTON   "OK", IDOK, 0, 70, 50, 14
+    PUSHBUTTON      "Cancel", IDCANCEL, 60, 70, 50, 14
 END
