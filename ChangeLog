@@ -1,13 +1,18 @@
 <html><head></head><body><ul><!-- -*- mode: html-mode; -*-
 
 <!-- BEGIN-LATEST -->
+<li>OpenNovel 1.0.12 2024/09/29
+  <ul>
+    <li>Improved the "Edit" button (messages, bg, ch, chch)<li>
+  </ul>
+</li>
+<!-- END-LATEST -->
+
 <li>OpenNovel 1.0.11 2024/09/29
   <ul>
     <li>Improved "Edit" button (messages, bg, ch, chch)<li>
   </ul>
 </li>
-<!-- END-LATEST -->
-
 <li>OpenNovel 1.0.10 2024/09/28
   <ul>
     <li>Improved a new feature: "Edit" button (currently for messages, bg and ch)<li>
