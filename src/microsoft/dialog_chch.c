@@ -26,35 +26,37 @@ enum {
 	COMBO_DARK = 2,
 };
 
-static VOID InitFor(HWND hWnd, int nFileParam, int nXOfsParam, int nYOfsParam, int nDimParam, int nStateID, int nFileID, int nXOfsID, int nYOfsID, int nDimID);
+static VOID InitFor(HWND hWnd, int nFileParam, int nAlphaParam, int nXOfsParam, int nYOfsParam, int nDimParam, int nStateID, int nFileID, int nAlphaID, int nXOfsID, int nYOfsID, int nDimID);
 static VOID InitTimeAndFade(HWND hWnd);
 static VOID OnComboState(HWND hWnd, int nComboID, int nTextID, int nButtonID);
 static VOID OnFileButton(HWND hWnd, const char *pszDir, int nTextID);
 static VOID OnComboFade(HWND hWnd);
 static VOID OnButtonRule(HWND hWnd);
 static VOID OnTrackbar(HWND hWnd);
-static BOOL FinalizeItem(HWND hWnd, char *pszCmd, size_t nLen, const char *pszFile, const char *pszX, const char *pszY, const char *pszDim, int nComboFileID, int nTextFileID, int nTextXID, int nTextYID, int nComboDimID);
+static BOOL FinalizeItem(HWND hWnd, char *pszCmd, size_t nLen, const char *pszFile, const char *pszAlpha, const char *pszX, const char *pszY, const char *pszDim, int nComboFileID, int nTextFileID, int nTextAlphaID, int nTextXID, int nTextYID, int nComboDimID);
 
 static VOID OnInit(HWND hWnd)
 {
-	InitFor(hWnd, CHCH_PARAM_C,  CHCH_PARAM_CX,  CHCH_PARAM_CY,  CHCH_PARAM_CD,  IDC_COMBO_C,  IDC_TEXT_C,  IDC_TEXT_CX,  IDC_TEXT_CY,  IDC_COMBO_CD);
-	InitFor(hWnd, CHCH_PARAM_L,  CHCH_PARAM_LX,  CHCH_PARAM_LY,  CHCH_PARAM_LD,  IDC_COMBO_L,  IDC_TEXT_L,  IDC_TEXT_LX,  IDC_TEXT_LY,  IDC_COMBO_LD);
-	InitFor(hWnd, CHCH_PARAM_R,  CHCH_PARAM_RX,  CHCH_PARAM_RY,  CHCH_PARAM_RD,  IDC_COMBO_R,  IDC_TEXT_R,  IDC_TEXT_RX,  IDC_TEXT_RY,  IDC_COMBO_RD);
-	InitFor(hWnd, CHCH_PARAM_LC, CHCH_PARAM_LCX, CHCH_PARAM_LCY, CHCH_PARAM_LCD, IDC_COMBO_LC, IDC_TEXT_LC, IDC_TEXT_LCX, IDC_TEXT_LCY, IDC_COMBO_LCD);
-	InitFor(hWnd, CHCH_PARAM_RC, CHCH_PARAM_RCX, CHCH_PARAM_RCY, CHCH_PARAM_RCD, IDC_COMBO_RC, IDC_TEXT_RC, IDC_TEXT_RCX, IDC_TEXT_RCY, IDC_COMBO_RCD);
-	InitFor(hWnd, CHCH_PARAM_B,  CHCH_PARAM_BX,  CHCH_PARAM_BY,  CHCH_PARAM_BD,  IDC_COMBO_B,  IDC_TEXT_B,  IDC_TEXT_BX,  IDC_TEXT_BY,  IDC_COMBO_BD);
-	InitFor(hWnd, CHCH_PARAM_BG, CHCH_PARAM_BGX, CHCH_PARAM_BGY, -1,             IDC_COMBO_BG, IDC_TEXT_BG, IDC_TEXT_BGX, IDC_TEXT_BGY, -1);
+	InitFor(hWnd, CHCH_PARAM_C,  CHCH_PARAM_CA,  CHCH_PARAM_CX,  CHCH_PARAM_CY,  CHCH_PARAM_CD,  IDC_COMBO_C,  IDC_TEXT_C,  IDC_TEXT_CA,  IDC_TEXT_CX,  IDC_TEXT_CY,  IDC_COMBO_CD);
+	InitFor(hWnd, CHCH_PARAM_L,  CHCH_PARAM_LA,  CHCH_PARAM_LX,  CHCH_PARAM_LY,  CHCH_PARAM_LD,  IDC_COMBO_L,  IDC_TEXT_L,  IDC_TEXT_LA,  IDC_TEXT_LX,  IDC_TEXT_LY,  IDC_COMBO_LD);
+	InitFor(hWnd, CHCH_PARAM_R,  CHCH_PARAM_RA,  CHCH_PARAM_RX,  CHCH_PARAM_RY,  CHCH_PARAM_RD,  IDC_COMBO_R,  IDC_TEXT_R,  IDC_TEXT_RA,  IDC_TEXT_RX,  IDC_TEXT_RY,  IDC_COMBO_RD);
+	InitFor(hWnd, CHCH_PARAM_LC, CHCH_PARAM_LCA, CHCH_PARAM_LCX, CHCH_PARAM_LCY, CHCH_PARAM_LCD, IDC_COMBO_LC, IDC_TEXT_LC, IDC_TEXT_LCA, IDC_TEXT_LCX, IDC_TEXT_LCY, IDC_COMBO_LCD);
+	InitFor(hWnd, CHCH_PARAM_RC, CHCH_PARAM_RCA, CHCH_PARAM_RCX, CHCH_PARAM_RCY, CHCH_PARAM_RCD, IDC_COMBO_RC, IDC_TEXT_RC, IDC_TEXT_RCA, IDC_TEXT_RCX, IDC_TEXT_RCY, IDC_COMBO_RCD);
+	InitFor(hWnd, CHCH_PARAM_B,  CHCH_PARAM_BA,  CHCH_PARAM_BX,  CHCH_PARAM_BY,  CHCH_PARAM_BD,  IDC_COMBO_B,  IDC_TEXT_B,  IDC_TEXT_BA,  IDC_TEXT_BX,  IDC_TEXT_BY,  IDC_COMBO_BD);
+	InitFor(hWnd, CHCH_PARAM_BG, CHCH_PARAM_BGA, CHCH_PARAM_BGX, CHCH_PARAM_BGY, -1,             IDC_COMBO_BG, IDC_TEXT_BG, IDC_TEXT_BGA, IDC_TEXT_BGX, IDC_TEXT_BGY, -1);
 	InitTimeAndFade(hWnd);
 }
 
 static VOID InitFor(
 	HWND hWnd,
 	int nFileParam,
+	int nAlphaParam,
 	int nXOfsParam,
 	int nYOfsParam,
 	int nDimParam,
 	int nStateID,
 	int nFileID,
+	int nAlphaID,
 	int nXOfsID,
 	int nYOfsID,
 	int nDimID)
@@ -86,6 +88,10 @@ static VOID InitFor(
 		SendMessage(hWndCombo, CB_SETCURSEL, (WPARAM)COMBO_CHANGE, (LPARAM)0);
 		SetWindowText(GetDlgItem(hWnd, nFileID), conv_utf8_to_utf16(pszText));
 	}
+
+	/* Alpha */
+	pszText = get_string_param(nAlphaParam);
+	SetWindowText(GetDlgItem(hWnd, nAlphaID), conv_utf8_to_utf16(pszText));
 
 	/* X Offset */
 	pszText = get_string_param(nXOfsParam);
@@ -389,19 +395,19 @@ static BOOL OnFinish(HWND hWnd)
 	strncpy(szCmd, "@chch", sizeof(szCmd) - 1);
 
 	/* Images */
-	if (!FinalizeItem(hWnd, szCmd, sizeof(szCmd), "c", "cx", "cy", "cd", IDC_COMBO_C, IDC_TEXT_C, IDC_TEXT_CX, IDC_TEXT_CY, IDC_COMBO_CD))
+	if (!FinalizeItem(hWnd, szCmd, sizeof(szCmd), "c", "ca", "cx", "cy", "cd", IDC_COMBO_C, IDC_TEXT_C, IDC_TEXT_CA, IDC_TEXT_CX, IDC_TEXT_CY, IDC_COMBO_CD))
 		return FALSE;
-	if (!FinalizeItem(hWnd, szCmd, sizeof(szCmd), "l", "lx", "ly", "ld", IDC_COMBO_L, IDC_TEXT_L, IDC_TEXT_LX, IDC_TEXT_LY, IDC_COMBO_LD))
+	if (!FinalizeItem(hWnd, szCmd, sizeof(szCmd), "l", "la", "lx", "ly", "ld", IDC_COMBO_L, IDC_TEXT_L, IDC_TEXT_LA, IDC_TEXT_LX, IDC_TEXT_LY, IDC_COMBO_LD))
 		return FALSE;
-	if (!FinalizeItem(hWnd, szCmd, sizeof(szCmd), "r", "rx", "ry", "rd", IDC_COMBO_R, IDC_TEXT_R, IDC_TEXT_RX, IDC_TEXT_RY, IDC_COMBO_RD))
+	if (!FinalizeItem(hWnd, szCmd, sizeof(szCmd), "r", "ra", "rx", "ry", "rd", IDC_COMBO_R, IDC_TEXT_R, IDC_TEXT_RA, IDC_TEXT_RX, IDC_TEXT_RY, IDC_COMBO_RD))
 		return FALSE;
-	if (!FinalizeItem(hWnd, szCmd, sizeof(szCmd), "lc", "lcx", "lcy", "lcd", IDC_COMBO_LC, IDC_TEXT_LC, IDC_TEXT_LCX, IDC_TEXT_LCY, IDC_COMBO_LCD))
+	if (!FinalizeItem(hWnd, szCmd, sizeof(szCmd), "lc", "lca", "lcx", "lcy", "lcd", IDC_COMBO_LC, IDC_TEXT_LC, IDC_TEXT_LCA, IDC_TEXT_LCX, IDC_TEXT_LCY, IDC_COMBO_LCD))
 		return FALSE;
-	if (!FinalizeItem(hWnd, szCmd, sizeof(szCmd), "rc", "rcx", "rcy", "rcd", IDC_COMBO_RC, IDC_TEXT_RC, IDC_TEXT_RCX, IDC_TEXT_RCY, IDC_COMBO_RCD))
+	if (!FinalizeItem(hWnd, szCmd, sizeof(szCmd), "rc", "rca", "rcx", "rcy", "rcd", IDC_COMBO_RC, IDC_TEXT_RC, IDC_TEXT_RCA, IDC_TEXT_RCX, IDC_TEXT_RCY, IDC_COMBO_RCD))
 		return FALSE;
-	if (!FinalizeItem(hWnd, szCmd, sizeof(szCmd), "b", "bx", "by", "bd", IDC_COMBO_B, IDC_TEXT_B, IDC_TEXT_BX, IDC_TEXT_BY, IDC_COMBO_BD))
+	if (!FinalizeItem(hWnd, szCmd, sizeof(szCmd), "b", "ba", "bx", "by", "bd", IDC_COMBO_B, IDC_TEXT_B, IDC_TEXT_BA, IDC_TEXT_BX, IDC_TEXT_BY, IDC_COMBO_BD))
 		return FALSE;
-	if (!FinalizeItem(hWnd, szCmd, sizeof(szCmd), "bg", "bgx", "bgy", NULL, IDC_COMBO_BG, IDC_TEXT_BG, IDC_TEXT_BGX, IDC_TEXT_BGY, -1))
+	if (!FinalizeItem(hWnd, szCmd, sizeof(szCmd), "bg", NULL, "bgx", "bgy", NULL, IDC_COMBO_BG, IDC_TEXT_BG, -1, IDC_TEXT_BGX, IDC_TEXT_BGY, -1))
 		return FALSE;
 
 	/* Time */
@@ -445,11 +451,13 @@ FinalizeItem(
 	char *pszCmd,
 	size_t nLen,
 	const char *pszFile,
+	const char *pszAlpha,
 	const char *pszX,
 	const char *pszY,
 	const char *pszDim,
 	int nComboFileID,
 	int nTextFileID,
+	int nTextAlphaID,
 	int nTextXID,
 	int nTextYID,
 	int nComboDimID)
@@ -480,6 +488,19 @@ FinalizeItem(
 	else if (nIndex == COMBO_NONE)
 	{
 		strncat(pszCmd, " c=none", nLen - 1);
+	}
+
+	/* Alpha */
+	if (pszAlpha != NULL)
+	{
+		GetWindowText(GetDlgItem(hWnd, nTextAlphaID), wszText, sizeof(wszText) / sizeof(wchar_t));
+		if (wcscmp(wszText, L"") != 0)
+		{
+			strncat(pszCmd, " ", nLen - 1);
+			strncat(pszCmd, pszAlpha, nLen - 1);
+			strncat(pszCmd, "=", nLen - 1);
+			strncat(pszCmd, conv_utf16_to_utf8(wszText), nLen - 1);
+		}
 	}
 
 	/* X */

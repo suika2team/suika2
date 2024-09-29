@@ -5309,6 +5309,8 @@ static VOID OnInsertMessage(void)
 		RichEdit_InsertText(L"この行のメッセージを編集してください。");
 
 	RichEdit_UpdateScriptModelFromText();
+
+	OnProperty();
 }
 
 static VOID OnInsertSerif(void)
@@ -5319,6 +5321,8 @@ static VOID OnInsertSerif(void)
 		RichEdit_InsertText(L"名前「このセリフを編集してください。」");
 
 	RichEdit_UpdateScriptModelFromText();
+
+	OnProperty();
 }
 
 static VOID OnInsertBg(void)
@@ -5406,7 +5410,7 @@ static VOID OnInsertSound(void)
 {
 	const wchar_t *pFile;
 
-	pFile = SelectFile(BGM_DIR);
+	pFile = SelectFile(SE_DIR);
 	if (pFile == NULL)
 		return;
 
