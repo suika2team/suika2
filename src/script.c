@@ -3085,6 +3085,7 @@ static bool replace_command_by_command(int index, const char *text)
 	int save_parse_line;
 	int save_expanded_line;
 	int top;
+	int i;
 	bool ret;
 
 	assert(index >= 0 && index < cmd_size);
@@ -3105,6 +3106,8 @@ static bool replace_command_by_command(int index, const char *text)
 		free(c->param[0]);
 		c->param[0] = NULL;
 	}
+	for (i = 0; i < PARAM_SIZE; i++)
+		c->param[i] = NULL;
 
 	/* ロケールを処理する */
 	top = 0;

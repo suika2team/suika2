@@ -5375,6 +5375,7 @@ static VOID OnInsertChoose(void)
 		RichEdit_InsertText(L"@choose L1 \"選択肢1\" L2 \"選択肢2\" L3 \"選択肢3\"");
 
 	RichEdit_UpdateScriptModelFromText();
+	OnProperty();
 }
 
 static VOID OnInsertMenu(void)

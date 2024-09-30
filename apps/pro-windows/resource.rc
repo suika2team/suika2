@@ -583,3 +583,37 @@ BEGIN
     DEFPUSHBUTTON   "OK", IDOK, 0, 140, 50, 14
     PUSHBUTTON      "Cancel", IDCANCEL, 60, 140, 50, 14
 END
+
+IDD_CHOOSE_EN DIALOG DISCARDABLE  0, 0, 121, 69
+STYLE WS_CHILD
+FONT 9, "Yu Gothic UI"
+BEGIN
+    LTEXT           "@choose Command Properties", IDC_STATIC, 0, 0, 80, 10
+
+    LTEXT           "Text:",     IDC_STATIC,        16,  16, 100,  10
+    LTEXT           "Goto:",     IDC_STATIC,       120,  16,  40,  10
+
+    EDITTEXT                     IDC_TEXT_OPT1,     16,  30, 100,  10, ES_AUTOHSCROLL
+    EDITTEXT                     IDC_TEXT_LABEL1,  120,  30,  40,  10, ES_AUTOHSCROLL
+    EDITTEXT                     IDC_TEXT_OPT2,     16,  40, 100,  10, ES_AUTOHSCROLL
+    EDITTEXT                     IDC_TEXT_LABEL2,  120,  40,  40,  10, ES_AUTOHSCROLL
+    EDITTEXT                     IDC_TEXT_OPT3,     16,  50, 100,  10, ES_AUTOHSCROLL
+    EDITTEXT                     IDC_TEXT_LABEL3,  120,  50,  40,  10, ES_AUTOHSCROLL
+    EDITTEXT                     IDC_TEXT_OPT4,     16,  60, 100,  10, ES_AUTOHSCROLL
+    EDITTEXT                     IDC_TEXT_LABEL3,  120,  60,  40,  10, ES_AUTOHSCROLL
+    EDITTEXT                     IDC_TEXT_OPT5,     16,  70, 100,  10, ES_AUTOHSCROLL
+    EDITTEXT                     IDC_TEXT_LABEL5,  120,  70,  40,  10, ES_AUTOHSCROLL
+    EDITTEXT                     IDC_TEXT_OPT6,     16,  80, 100,  10, ES_AUTOHSCROLL
+    EDITTEXT                     IDC_TEXT_LABEL6,  120,  80,  40,  10, ES_AUTOHSCROLL
+    EDITTEXT                     IDC_TEXT_OPT7,     16,  90, 100,  10, ES_AUTOHSCROLL
+    EDITTEXT                     IDC_TEXT_LABEL7,  120,  90,  40,  10, ES_AUTOHSCROLL
+    EDITTEXT                     IDC_TEXT_OPT8,     16, 100, 100,  10, ES_AUTOHSCROLL
+    EDITTEXT                     IDC_TEXT_LABEL8,  120, 100,  40,  10, ES_AUTOHSCROLL
+    EDITTEXT                     IDC_TEXT_OPT9,     16, 110, 100,  10, ES_AUTOHSCROLL
+    EDITTEXT                     IDC_TEXT_LABEL9,  120, 110,  40,  10, ES_AUTOHSCROLL
+    EDITTEXT                     IDC_TEXT_OPT10,    16, 120, 100,  10, ES_AUTOHSCROLL
+    EDITTEXT                     IDC_TEXT_LABEL10, 120, 120,  40,  10, ES_AUTOHSCROLL
+
+    DEFPUSHBUTTON   "OK", IDOK, 0, 140, 50, 14
+    PUSHBUTTON      "Cancel", IDCANCEL, 60, 140, 50, 14
+END
