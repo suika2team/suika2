@@ -10,7 +10,7 @@
  */
 
 #include <windows.h>
-#include <process.h>
+//#include <process.h>
 
 #include <math.h>
 
@@ -94,6 +94,11 @@ static int bLastTouch[MIXER_STREAMS];
 static float fInitialVol[MIXER_STREAMS] = {1.0f, 1.0f, 1.0f};
 
 /*
+ * Successfully initialized?
+ */
+static BOOL bInitialized;
+
+/*
  * Internal functions
  */
 static BOOL CreatePrimaryBuffer();
@@ -157,6 +162,7 @@ BOOL DSInitialize(HWND hWnd)
 	SetBufferVolume(VOICE_STREAM, fInitialVol[VOICE_STREAM]);
 	SetBufferVolume(SE_STREAM, fInitialVol[SE_STREAM]);
 
+	bInitialized = TRUE;
 	return TRUE;
 }
 
@@ -221,6 +227,9 @@ VOID DSCleanup()
  */
 bool play_sound(int stream, struct wave *w)
 {
+	if (!bInitialized)
+		return true;
+
 	assert(pDS != NULL);
 	assert(stream >= 0 && stream < MIXER_STREAMS);
 	assert(w != NULL);
@@ -238,6 +247,9 @@ bool play_sound(int stream, struct wave *w)
  */
 bool stop_sound(int stream)
 {
+	if (!bInitialized)
+		return true;
+
 	assert(pDS != NULL);
 	assert(stream >= 0 && stream < MIXER_STREAMS);
 
@@ -252,6 +264,9 @@ bool stop_sound(int stream)
  */
 bool set_sound_volume(int stream, float vol)
 {
+	if (!bInitialized)
+		return true;
+
 	assert(stream >= 0 && stream < MIXER_STREAMS);
 
 	if (pDS == NULL)
@@ -268,6 +283,9 @@ bool set_sound_volume(int stream, float vol)
  */
 bool is_sound_finished(int stream)
 {
+	if (!bInitialized)
+		return true;
+
     if (bFinish[stream])
         return true;
 

@@ -271,7 +271,6 @@ static BOOL InitApp(HINSTANCE hInstance, int nCmdShow)
 	if (!DSInitialize(hWndMain))
 	{
 		log_error(get_ui_message(UIMSG_NO_SOUND_DEVICE));
-		return FALSE;
 	}
 
 	if (conf_tts)
