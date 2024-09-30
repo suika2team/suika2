@@ -51,7 +51,14 @@
     <ClCompile Include="..\..\src\main.c" />
     <ClCompile Include="..\..\src\microsoft\dialog_bg.c" />
     <ClCompile Include="..\..\src\microsoft\dialog_ch.c" />
+    <ClCompile Include="..\..\src\microsoft\dialog_chch.c" />
+    <ClCompile Include="..\..\src\microsoft\dialog_choose.c" />
     <ClCompile Include="..\..\src\microsoft\dialog_message.c" />
+    <ClCompile Include="..\..\src\microsoft\dialog_music.c" />
+    <ClCompile Include="..\..\src\microsoft\dialog_shake.c" />
+    <ClCompile Include="..\..\src\microsoft\dialog_sound.c" />
+    <ClCompile Include="..\..\src\microsoft\dialog_video.c" />
+    <ClCompile Include="..\..\src\microsoft\dialog_volume.c" />
     <ClCompile Include="..\..\src\microsoft\dx9render.cc" />
     <ClCompile Include="..\..\src\microsoft\dsound.c" />
     <ClCompile Include="..\..\src\microsoft\dsvideo.cc" />
@@ -110,6 +117,10 @@
     <ClInclude Include="..\..\src\wms.h" />
     <ClInclude Include="..\..\src\wms_core.h" />
     <ClInclude Include="..\..\src\wms_parser.tab.h" />
+    <ClInclude Include="resource.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="..\pro-windows\resource.rc" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
