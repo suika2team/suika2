@@ -5236,7 +5236,6 @@ static VOID OnInsertMessage(void)
 		RichEdit_InsertText(L"この行のメッセージを編集してください。");
 
 	RichEdit_UpdateScriptModelFromText();
-
 	OnProperty();
 }
 
@@ -5248,7 +5247,6 @@ static VOID OnInsertSerif(void)
 		RichEdit_InsertText(L"名前「このセリフを編集してください。」");
 
 	RichEdit_UpdateScriptModelFromText();
-
 	OnProperty();
 }
 
@@ -5261,9 +5259,7 @@ static VOID OnInsertBg(void)
 		return;
 
 	RichEdit_InsertText(L"@bg file=%ls t=1.0", pFile);
-
 	RichEdit_UpdateScriptModelFromText();
-
 	OnProperty();
 }
 
@@ -5276,9 +5272,7 @@ static VOID OnInsertBgOnly(void)
 		return;
 
 	RichEdit_InsertText(L"@chch bg=%ls t=1.0", pFile);
-
 	RichEdit_UpdateScriptModelFromText();
-
 	OnProperty();
 }
 
@@ -5290,19 +5284,15 @@ static VOID OnInsertCh(void)
 	if (pFile == NULL)
 		return;
 
-	RichEdit_UpdateScriptModelFromText();
-
 	RichEdit_InsertText(L"@ch pos=center file=%ls t=1.0", pFile);
-
+	RichEdit_UpdateScriptModelFromText();
 	OnProperty();
 }
 
 static VOID OnInsertChch(void)
 {
-	RichEdit_UpdateScriptModelFromText();
-
 	RichEdit_InsertText(L"@chch t=1.0");
-
+	RichEdit_UpdateScriptModelFromText();
 	OnProperty();
 }
 
@@ -5314,10 +5304,8 @@ static VOID OnInsertMusic(void)
 	if (pFile == NULL)
 		return;
 
-	RichEdit_UpdateScriptModelFromText();
-
 	RichEdit_InsertText(L"@music file=%ls", pFile);
-
+	RichEdit_UpdateScriptModelFromText();
 	OnProperty();
 }
 
@@ -5329,18 +5317,16 @@ static VOID OnInsertSound(void)
 	if (pFile == NULL)
 		return;
 
-	RichEdit_UpdateScriptModelFromText();
-
 	RichEdit_InsertText(L"@sound file=%ls", pFile);
-
+	RichEdit_UpdateScriptModelFromText();
 	OnProperty();
 }
 
 static VOID OnInsertVolume(void)
 {
-	RichEdit_UpdateScriptModelFromText();
-
 	RichEdit_InsertText(L"@volume track=bgm vol=1.0 t=1.0");
+	RichEdit_UpdateScriptModelFromText();
+	OnProperty();
 }
 
 static VOID OnInsertVideo(void)
@@ -5360,26 +5346,25 @@ static VOID OnInsertVideo(void)
 	if (pExt != NULL)
 		*pExt = L'\0';
 
-	RichEdit_UpdateScriptModelFromText();
-
 	RichEdit_InsertText(L"@video file=%ls", buf);
+	RichEdit_UpdateScriptModelFromText();
+	OnProperty();
 }
 
 static VOID OnInsertShake(void)
 {
-	RichEdit_UpdateScriptModelFromText();
-
 	RichEdit_InsertText(L"@shake dir=horizontal t=1.0 count=3 amp=100");
+	RichEdit_UpdateScriptModelFromText();
 }
 
 static VOID OnInsertChoose(void)
 {
-	RichEdit_UpdateScriptModelFromText();
-
 	if (bEnglish)
 		RichEdit_InsertText(L"@choose L1 \"Option1\" L2 \"Option2\" L3 \"Option3\"");
 	else
 		RichEdit_InsertText(L"@choose L1 \"選択肢1\" L2 \"選択肢2\" L3 \"選択肢3\"");
+
+	RichEdit_UpdateScriptModelFromText();
 }
 
 static VOID OnInsertMenu(void)
@@ -5390,23 +5375,20 @@ static VOID OnInsertMenu(void)
 	if (pFile == NULL)
 		return;
 
-	RichEdit_UpdateScriptModelFromText();
-
 	RichEdit_InsertText(L"@menu file=%ls", pFile);
+	RichEdit_UpdateScriptModelFromText();
 }
 
 static VOID OnInsertClick(void)
 {
-	RichEdit_UpdateScriptModelFromText();
-
 	RichEdit_InsertText(L"@click");
+	RichEdit_UpdateScriptModelFromText();
 }
 
 static VOID OnInsertTime(void)
 {
-	RichEdit_UpdateScriptModelFromText();
-
 	RichEdit_InsertText(L"@time t=1.0");
+	RichEdit_UpdateScriptModelFromText();
 }
 
 static VOID OnInsertStory(void)
@@ -5417,9 +5399,8 @@ static VOID OnInsertStory(void)
 	if (pFile == NULL)
 		return;
 
-	RichEdit_UpdateScriptModelFromText();
-
 	RichEdit_InsertText(L"@story file=%ls", pFile);
+	RichEdit_UpdateScriptModelFromText();
 }
 
 /*
@@ -5477,6 +5458,14 @@ VOID OnProperty(void)
 	case COMMAND_SOUND:
 		nDialogID = bEnglish ? IDD_SOUND_EN : IDD_SOUND;
 		pDlgProc = DlgSoundWndProc;
+		break;
+	case COMMAND_VOLUME:
+		nDialogID = bEnglish ? IDD_VOLUME_EN : IDD_VOLUME;
+		pDlgProc = DlgVolumeWndProc;
+		break;
+	case COMMAND_VIDEO:
+		nDialogID = bEnglish ? IDD_VIDEO_EN : IDD_VIDEO;
+		pDlgProc = DlgVideoWndProc;
 		break;
 	default:
 		/* Not implemented yet. */

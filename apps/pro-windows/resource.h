@@ -20,6 +20,10 @@
 #define IDD_MUSIC_EN                        129
 #define IDD_SOUND                           130
 #define IDD_SOUND_EN                        131
+#define IDD_VOLUME                          132
+#define IDD_VOLUME_EN                       133
+#define IDD_VIDEO                           134
+#define IDD_VIDEO_EN                        135
 
 /* File Menu / Open Button */
 #define ID_NEW_PROJECT_JAPANESE_ADV	    160
@@ -152,3 +156,7 @@
 #define IDC_CHECK_STOP                      364
 #define IDC_CHECK_ONCE                      365
 #define IDC_CHECK_LOOP                      366
+#define IDC_COMBO_TRACK                     367
+#define IDC_TEXT_VOLUME                     368
+#define IDC_TRACK_VOLUME                    369
+#define IDC_CHECK_SKIP                      370

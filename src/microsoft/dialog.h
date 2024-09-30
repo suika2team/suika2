@@ -20,5 +20,7 @@ BOOL CALLBACK DlgChWndProc(HWND hWnd, UINT nMsg, WPARAM wParam, LPARAM lParam);
 BOOL CALLBACK DlgChchWndProc(HWND hWnd, UINT nMsg, WPARAM wParam, LPARAM lParam);
 BOOL CALLBACK DlgMusicWndProc(HWND hWnd, UINT nMsg, WPARAM wParam, LPARAM lParam);
 BOOL CALLBACK DlgSoundWndProc(HWND hWnd, UINT nMsg, WPARAM wParam, LPARAM lParam);
+BOOL CALLBACK DlgVolumeWndProc(HWND hWnd, UINT nMsg, WPARAM wParam, LPARAM lParam);
+BOOL CALLBACK DlgVideoWndProc(HWND hWnd, UINT nMsg, WPARAM wParam, LPARAM lParam);
 
 #endif
