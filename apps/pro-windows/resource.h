@@ -26,6 +26,8 @@
 #define IDD_VIDEO_EN                        135
 #define IDD_SHAKE                           136
 #define IDD_SHAKE_EN                        137
+#define IDD_CHOOSE                          138
+#define IDD_CHOOSE_EN                       139
 
 /* File Menu / Open Button */
 #define ID_NEW_PROJECT_JAPANESE_ADV	    160
@@ -167,3 +169,23 @@
 #define IDC_TRACK_PIXEL                     373
 #define IDC_TEXT_COUNT                      374
 #define IDC_TRACK_COUNT                     375
+#define IDC_TEXT_OPT1                       376
+#define IDC_TEXT_OPT2                       377
+#define IDC_TEXT_OPT3                       378
+#define IDC_TEXT_OPT4                       379
+#define IDC_TEXT_OPT5                       380
+#define IDC_TEXT_OPT6                       381
+#define IDC_TEXT_OPT7                       382
+#define IDC_TEXT_OPT8                       383
+#define IDC_TEXT_OPT9                       384
+#define IDC_TEXT_OPT10                      385
+#define IDC_TEXT_LABEL1                     386
+#define IDC_TEXT_LABEL2                     387
+#define IDC_TEXT_LABEL3                     388
+#define IDC_TEXT_LABEL4                     389
+#define IDC_TEXT_LABEL5                     390
+#define IDC_TEXT_LABEL6                     391
+#define IDC_TEXT_LABEL7                     392
+#define IDC_TEXT_LABEL8                     393
+#define IDC_TEXT_LABEL9                     394
+#define IDC_TEXT_LABEL10                    395

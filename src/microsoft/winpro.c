@@ -5481,6 +5481,10 @@ VOID OnProperty(void)
 		nDialogID = bEnglish ? IDD_SHAKE_EN : IDD_SHAKE;
 		pDlgProc = DlgShakeWndProc;
 		break;
+	case COMMAND_CHOOSE:
+		nDialogID = bEnglish ? IDD_CHOOSE_EN : IDD_CHOOSE;
+		pDlgProc = DlgChooseWndProc;
+		break;
 	default:
 		/* Not implemented yet. */
 		MessageBox(hWndMain,
