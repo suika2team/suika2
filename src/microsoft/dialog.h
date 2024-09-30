@@ -22,5 +22,6 @@ BOOL CALLBACK DlgMusicWndProc(HWND hWnd, UINT nMsg, WPARAM wParam, LPARAM lParam
 BOOL CALLBACK DlgSoundWndProc(HWND hWnd, UINT nMsg, WPARAM wParam, LPARAM lParam);
 BOOL CALLBACK DlgVolumeWndProc(HWND hWnd, UINT nMsg, WPARAM wParam, LPARAM lParam);
 BOOL CALLBACK DlgVideoWndProc(HWND hWnd, UINT nMsg, WPARAM wParam, LPARAM lParam);
+BOOL CALLBACK DlgShakeWndProc(HWND hWnd, UINT nMsg, WPARAM wParam, LPARAM lParam);
 
 #endif

@@ -1077,32 +1077,32 @@ static VOID InitMenu(HWND hWnd)
 	/* Create File(F) */
 	nOrder = 0;
 	mi.hSubMenu = hMenuFile;
-	mi.dwTypeData = bEnglish ? L"File(&F)": L"ファイル(&F)";
+	mi.dwTypeData = bEnglish ? L"File": L"ファイル";
 	InsertMenuItem(hMenu, nOrder++, TRUE, &mi);
 
 	/* Create Run(R)を作成する */
 	mi.hSubMenu = hMenuRun;
-	mi.dwTypeData = bEnglish ? L"Run(&R)": L"実行(&R)";
+	mi.dwTypeData = bEnglish ? L"Run": L"実行";
 	InsertMenuItem(hMenu, nOrder++, TRUE, &mi);
 
 	/* Create Direction(D) */
 	mi.hSubMenu = hMenuDirection;
-	mi.dwTypeData = bEnglish ? L"Direction(&D)": L"演出(&D)";
+	mi.dwTypeData = bEnglish ? L"Direction": L"演出";
 	InsertMenuItem(hMenu, nOrder++, TRUE, &mi);
 
 	/* Create Export(E) */
 	mi.hSubMenu = hMenuExport;
-	mi.dwTypeData = bEnglish ? L"Export(&E)": L"エクスポート(&E)";
+	mi.dwTypeData = bEnglish ? L"Export": L"エクスポート";
 	InsertMenuItem(hMenu, nOrder++, TRUE, &mi);
 
 	/* Create Preference(P) */
 	mi.hSubMenu = hMenuPref;
-	mi.dwTypeData = bEnglish ? L"Preference(&P)": L"設定(&P)";
+	mi.dwTypeData = bEnglish ? L"Preference": L"設定";
 	InsertMenuItem(hMenu, nOrder++, TRUE, &mi);
 
 	/* Create Help(H) */
 	mi.hSubMenu = hMenuHelp;
-	mi.dwTypeData = bEnglish ? L"Help(&H)": L"ヘルプ(&H)";
+	mi.dwTypeData = bEnglish ? L"Help": L"ヘルプ";
 	InsertMenuItem(hMenu, nOrder++, TRUE, &mi);
 
 	/*
@@ -1130,8 +1130,8 @@ static VOID InitMenu(HWND hWnd)
 	/* Create a menu item for Open game. */
 	mi.wID = ID_OPEN_PROJECT;
 	mi.dwTypeData = bEnglish ?
-		L"Open game" :
-		L"ゲームを開く";
+		L"Open game\tCtrl+G" :
+		L"ゲームを開く\tCtrl+G";
 	InsertMenuItem(hMenuFile, nOrder++, TRUE, &mi);
 
 	/* Create a menu item for Open game folder. */
@@ -1145,24 +1145,24 @@ static VOID InitMenu(HWND hWnd)
 	/* Create a menu item for Open script. */
 	mi.wID = ID_OPEN;
 	mi.dwTypeData = bEnglish ?
-		L"Open script(&O)\tCtrl+O" :
-		L"スクリプトを開く(&O)\tCtrl+O";
+		L"Open script\tCtrl+O" :
+		L"スクリプトを開く\tCtrl+O";
 	InsertMenuItem(hMenuFile, nOrder++, TRUE, &mi);
 	EnableMenuItem(hMenu, ID_OPEN, MF_GRAYED);
 
 	/* Create a menu item for Reload script. */
 	mi.wID = ID_RELOAD;
 	mi.dwTypeData = bEnglish ?
-		L"Reload script(&L)\tCtrl+L" :
-		L"スクリプトをリロードする(&L)\tCtrl+L";
+		L"Reload script\tCtrl+L" :
+		L"スクリプトをリロードする\tCtrl+L";
 	InsertMenuItem(hMenuFile, nOrder++, TRUE, &mi);
 	EnableMenuItem(hMenu, ID_RELOAD, MF_GRAYED);
 
 	/* Create a menu item for Pverwrite script. */
 	mi.wID = ID_SAVE;
 	mi.dwTypeData = bEnglish ?
-		L"Overwrite script(&S)\tCtrl+S" :
-		L"スクリプトを上書き保存する(&S)\tCtrl+S";
+		L"Overwrite script\tCtrl+S" :
+		L"スクリプトを上書き保存する\tCtrl+S";
 	InsertMenuItem(hMenuFile, nOrder++, TRUE, &mi);
 	EnableMenuItem(hMenu, ID_SAVE, MF_GRAYED);
 
@@ -1176,8 +1176,8 @@ static VOID InitMenu(HWND hWnd)
 	/* Create a menu item for Quit. */
 	mi.wID = ID_QUIT;
 	mi.dwTypeData = bEnglish ?
-		L"Quit(&Q)\tCtrl+Q" :
-		L"終了(&Q)\tCtrl+Q";
+		L"Quit\tCtrl+Q" :
+		L"終了\tCtrl+Q";
 	InsertMenuItem(hMenuFile, nOrder++, TRUE, &mi);
 
 	/*
@@ -1188,32 +1188,32 @@ static VOID InitMenu(HWND hWnd)
 	nOrder = 0;
 	mi.wID = ID_CONTINUE;
 	mi.dwTypeData = bEnglish ?
-		L"Continue(&R)\tCtrl+R" :
-		L"続ける(&R)\tCtrl+R";
+		L"Continue\tCtrl+R" :
+		L"続ける\tCtrl+R";
 	InsertMenuItem(hMenuRun, nOrder++, TRUE, &mi);
 	EnableMenuItem(hMenu, ID_CONTINUE, MF_GRAYED);
 
 	/* Create a menu item for Next. */
 	mi.wID = ID_NEXT;
 	mi.dwTypeData = bEnglish ?
-		L"Next(&N)\tCtrl+N" :
-		L"次へ(&N)\tCtrl+N";
+		L"Next\tCtrl+N" :
+		L"次へ\tCtrl+N";
 	InsertMenuItem(hMenuRun, nOrder++, TRUE, &mi);
 	EnableMenuItem(hMenu, ID_NEXT, MF_GRAYED);
 
 	/* Create a menu item for Stop. */
 	mi.wID = ID_STOP;
 	mi.dwTypeData = bEnglish ?
-		L"Stop(&P)\tCtrl+P" :
-		L"停止(&P)\tCtrl+P";
+		L"Stop\tCtrl+P" :
+		L"停止\tCtrl+P";
 	InsertMenuItem(hMenuRun, nOrder++, TRUE, &mi);
 	EnableMenuItem(hMenu, ID_STOP, MF_GRAYED);
 
 	/* Create a menu item for Go to next error. */
 	mi.wID = ID_ERROR;
 	mi.dwTypeData = bEnglish ?
-		L"Go to next error(&E)\tCtrl+E" :
-		L"次のエラー箇所へ移動(&E)\tCtrl+E";
+		L"Go to next error\tCtrl+E" :
+		L"次のエラー箇所へ移動\tCtrl+E";
 	InsertMenuItem(hMenuRun, nOrder++, TRUE, &mi);
 	EnableMenuItem(hMenu, ID_ERROR, MF_GRAYED);
 
@@ -1332,8 +1332,8 @@ static VOID InitMenu(HWND hWnd)
 	/* Create a menu item for Play Music. */
 	mi.wID = ID_CMD_MUSIC;
 	mi.dwTypeData = bEnglish ?
-		L"Play Music" :
-		L"音楽を再生";
+		L"Play Background Music" :
+		L"音楽(BGM)を再生";
 	InsertMenuItem(hMenuDirection, nOrder++, TRUE, &mi);
 	EnableMenuItem(hMenu, ID_CMD_MUSIC, MF_GRAYED);
 
@@ -1341,7 +1341,7 @@ static VOID InitMenu(HWND hWnd)
 	mi.wID = ID_CMD_SOUND;
 	mi.dwTypeData = bEnglish ?
 		L"Play Sound Effect" :
-		L"効果音を再生する";
+		L"効果音(SE)を再生する";
 	InsertMenuItem(hMenuDirection, nOrder++, TRUE, &mi);
 	EnableMenuItem(hMenu, ID_CMD_SOUND, MF_GRAYED);
 
@@ -1349,7 +1349,7 @@ static VOID InitMenu(HWND hWnd)
 	mi.wID = ID_CMD_VOLUME;
 	mi.dwTypeData = bEnglish ?
 		L"Sound Volume" :
-		L"音量を変更する";
+		L"ボリュームを変更する";
 	InsertMenuItem(hMenuDirection, nOrder++, TRUE, &mi);
 	EnableMenuItem(hMenu, ID_CMD_VOLUME, MF_GRAYED);
 
@@ -1703,8 +1703,17 @@ static BOOL PretranslateMessage(MSG* pMsg)
 		PostMessage(hWndMain, WM_COMMAND, (WPARAM)ID_POPUP, 0);
 		return FALSE;
 	}
+	
+	/* Ctrl-Gを処理する */
+	if (pMsg->message == WM_KEYDOWN &&
+		pMsg->message == WM_KEYDOWN &&
+		pMsg->wParam == 'G')
+	{
+		/* ゲームを開くためのWM_COMMANDをポストする */
+		PostMessage(hWndMain, WM_COMMAND, (WPARAM)ID_OPEN_PROJECT, 0);
+	}
 
-	/* キー押下を処理する */
+	/* リッチエディットでのキー押下を処理する */
 	if (pMsg->hwnd == hWndRichEdit && pMsg->message == WM_KEYDOWN)
 	{
 		switch (pMsg->wParam)
@@ -5355,6 +5364,7 @@ static VOID OnInsertShake(void)
 {
 	RichEdit_InsertText(L"@shake dir=horizontal t=1.0 count=3 amp=100");
 	RichEdit_UpdateScriptModelFromText();
+	OnProperty();
 }
 
 static VOID OnInsertChoose(void)
@@ -5466,6 +5476,10 @@ VOID OnProperty(void)
 	case COMMAND_VIDEO:
 		nDialogID = bEnglish ? IDD_VIDEO_EN : IDD_VIDEO;
 		pDlgProc = DlgVideoWndProc;
+		break;
+	case COMMAND_SHAKE:
+		nDialogID = bEnglish ? IDD_SHAKE_EN : IDD_SHAKE;
+		pDlgProc = DlgShakeWndProc;
 		break;
 	default:
 		/* Not implemented yet. */

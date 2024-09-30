@@ -24,6 +24,8 @@
 #define IDD_VOLUME_EN                       133
 #define IDD_VIDEO                           134
 #define IDD_VIDEO_EN                        135
+#define IDD_SHAKE                           136
+#define IDD_SHAKE_EN                        137
 
 /* File Menu / Open Button */
 #define ID_NEW_PROJECT_JAPANESE_ADV	    160
@@ -160,3 +162,8 @@
 #define IDC_TEXT_VOLUME                     368
 #define IDC_TRACK_VOLUME                    369
 #define IDC_CHECK_SKIP                      370
+#define IDC_COMBO_DIRECTION                 371
+#define IDC_TEXT_PIXEL                      372
+#define IDC_TRACK_PIXEL                     373
+#define IDC_TEXT_COUNT                      374
+#define IDC_TRACK_COUNT                     375

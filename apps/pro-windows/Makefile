@@ -125,7 +125,8 @@ SRCS_WIN_C = \
 	../../src/microsoft/dialog_music.c \
 	../../src/microsoft/dialog_sound.c \
 	../../src/microsoft/dialog_volume.c \
-	../../src/microsoft/dialog_video.c
+	../../src/microsoft/dialog_video.c \
+	../../src/microsoft/dialog_shake.c
 
 SRCS_WIN_CC = \
 	../../src/microsoft/dx9render.cc \
