@@ -5332,6 +5332,8 @@ static VOID OnInsertSound(void)
 	RichEdit_UpdateScriptModelFromText();
 
 	RichEdit_InsertText(L"@sound file=%ls", pFile);
+
+	OnProperty();
 }
 
 static VOID OnInsertVolume(void)
@@ -5471,6 +5473,10 @@ VOID OnProperty(void)
 	case COMMAND_MUSIC:
 		nDialogID = bEnglish ? IDD_MUSIC_EN : IDD_MUSIC;
 		pDlgProc = DlgMusicWndProc;
+		break;
+	case COMMAND_SOUND:
+		nDialogID = bEnglish ? IDD_SOUND_EN : IDD_SOUND;
+		pDlgProc = DlgSoundWndProc;
 		break;
 	default:
 		/* Not implemented yet. */

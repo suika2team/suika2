@@ -18,6 +18,8 @@
 #define IDD_CHCH_EN                         127
 #define IDD_MUSIC                           128
 #define IDD_MUSIC_EN                        129
+#define IDD_SOUND                           130
+#define IDD_SOUND_EN                        131
 
 /* File Menu / Open Button */
 #define ID_NEW_PROJECT_JAPANESE_ADV	    160
@@ -149,3 +151,4 @@
 #define IDC_TEXT_BGA                        363
 #define IDC_CHECK_STOP                      364
 #define IDC_CHECK_ONCE                      365
+#define IDC_CHECK_LOOP                      366
