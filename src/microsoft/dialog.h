@@ -24,5 +24,8 @@ BOOL CALLBACK DlgVolumeWndProc(HWND hWnd, UINT nMsg, WPARAM wParam, LPARAM lPara
 BOOL CALLBACK DlgVideoWndProc(HWND hWnd, UINT nMsg, WPARAM wParam, LPARAM lParam);
 BOOL CALLBACK DlgShakeWndProc(HWND hWnd, UINT nMsg, WPARAM wParam, LPARAM lParam);
 BOOL CALLBACK DlgChooseWndProc(HWND hWnd, UINT nMsg, WPARAM wParam, LPARAM lParam);
+BOOL CALLBACK DlgMenuWndProc(HWND hWnd, UINT nMsg, WPARAM wParam, LPARAM lParam);
+BOOL CALLBACK DlgTimeWndProc(HWND hWnd, UINT nMsg, WPARAM wParam, LPARAM lParam);
+BOOL CALLBACK DlgStoryWndProc(HWND hWnd, UINT nMsg, WPARAM wParam, LPARAM lParam);
 
 #endif

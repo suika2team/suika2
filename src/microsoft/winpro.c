@@ -61,10 +61,8 @@
 
 /* The version string. */
 #define HELP_STRING 		\
-	"OpenNovel 1.0 Voyage Editor\n" \
-	"Copyright (c) 2024, OpenNovel.Org. All rights reserved.\n" \
-	"\n" \
-	"May this program be your ship to explore the novel world!"
+	"OpenNovel 1.0\n" \
+	"Copyright (c) 2024, OpenNovel.Org. All rights reserved.\n"
 
 /* The minimum window size. */
 #define WINDOW_WIDTH_MIN	(800)
@@ -160,7 +158,6 @@ static HWND hWndBtnVar;				/* Button for update-variables */
 static HWND hWndDlgProp;			/* Property dialog */
 static HMENU hMenu;					/* Menu on the main window */
 static HMENU hMenuPopup;			/* Popup menu */
-static HACCEL hAccel;				/* Keyboard accelerator */
 
 /* Project root directory. */
 static wchar_t wszProjectDir[1024];
@@ -742,8 +739,6 @@ static BOOL InitMainWindow(HINSTANCE hInstance, int *pnRenderWidth, int *pnRende
 	*pnRenderHeight = nRenderHeight;
 
 	SetCursor(LoadCursor(NULL, IDC_ARROW));
-
-	hAccel = LoadAccelerators(hInstance, L"IDR_ACCEL");
 
 	return TRUE;
 }
@@ -5388,6 +5383,7 @@ static VOID OnInsertMenu(void)
 
 	RichEdit_InsertText(L"@menu file=%ls", pFile);
 	RichEdit_UpdateScriptModelFromText();
+	OnProperty();
 }
 
 static VOID OnInsertClick(void)
@@ -5400,6 +5396,7 @@ static VOID OnInsertTime(void)
 {
 	RichEdit_InsertText(L"@time t=1.0");
 	RichEdit_UpdateScriptModelFromText();
+	OnProperty();
 }
 
 static VOID OnInsertStory(void)
@@ -5412,6 +5409,7 @@ static VOID OnInsertStory(void)
 
 	RichEdit_InsertText(L"@story file=%ls", pFile);
 	RichEdit_UpdateScriptModelFromText();
+	OnProperty();
 }
 
 /*
@@ -5486,12 +5484,24 @@ VOID OnProperty(void)
 		nDialogID = bEnglish ? IDD_CHOOSE_EN : IDD_CHOOSE;
 		pDlgProc = DlgChooseWndProc;
 		break;
+	case COMMAND_MENU:
+		nDialogID = bEnglish ? IDD_MENU_EN : IDD_MENU;
+		pDlgProc = DlgMenuWndProc;
+		break;
+	case COMMAND_TIME:
+		nDialogID = bEnglish ? IDD_TIME_EN : IDD_TIME;
+		pDlgProc = DlgTimeWndProc;
+		break;
+	case COMMAND_STORY:
+		nDialogID = bEnglish ? IDD_STORY_EN : IDD_STORY;
+		pDlgProc = DlgStoryWndProc;
+		break;
 	default:
 		/* Not implemented yet. */
 		MessageBox(hWndMain,
 				   bEnglish ?
-				   L"Not implemented for this command.\nTry on a @bg line." :
-				   L"このコマンドの編集はまだ実装されていません。\n@bg行の上で試してみてください。",
+				   L"Not implemented for this command." :
+				   L"このコマンドの編集はまだ実装されていません。",
 				   TITLE,
 				   MB_OK | MB_ICONINFORMATION);
 		return;

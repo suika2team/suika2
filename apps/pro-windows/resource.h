@@ -28,6 +28,12 @@
 #define IDD_SHAKE_EN                        137
 #define IDD_CHOOSE                          138
 #define IDD_CHOOSE_EN                       139
+#define IDD_MENU                            140
+#define IDD_MENU_EN                         141
+#define IDD_TIME                            142
+#define IDD_TIME_EN                         143
+#define IDD_STORY                           144
+#define IDD_STORY_EN                        145
 
 /* File Menu / Open Button */
 #define ID_NEW_PROJECT_JAPANESE_ADV	    160
