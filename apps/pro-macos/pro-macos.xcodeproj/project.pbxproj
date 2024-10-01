@@ -72,8 +72,6 @@
 		2639F9722CA260410035E975 /* japanese-light.png in Resources */ = {isa = PBXBuildFile; fileRef = 26B806B22BC2900A00A92A02 /* japanese-light.png */; };
 		2639F9732CA260410035E975 /* japanese-novel.png in Resources */ = {isa = PBXBuildFile; fileRef = 26B806B42BC2900A00A92A02 /* japanese-novel.png */; };
 		2639F9742CA260410035E975 /* japanese-tategaki.png in Resources */ = {isa = PBXBuildFile; fileRef = 26B806B12BC2900A00A92A02 /* japanese-tategaki.png */; };
-		2639F9752CA260410035E975 /* game.exe in Resources */ = {isa = PBXBuildFile; fileRef = 2639F9002CA1DC4D0035E975 /* game.exe */; };
-		2639F9762CA260410035E975 /* game.dmg in Resources */ = {isa = PBXBuildFile; fileRef = 2639F8FE2CA1DC140035E975 /* game.dmg */; };
 		2639F9782CA261BF0035E975 /* game in Resources */ = {isa = PBXBuildFile; fileRef = 2639F9772CA261BF0035E975 /* game */; };
 		2639F9792CA26E7B0035E975 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2610CC832B2878C900300004 /* Assets.xcassets */; };
 		26495D112B2A7BFD0050EDDF /* GameShaders.metal in Sources */ = {isa = PBXBuildFile; fileRef = 26495D0C2B2A7BFD0050EDDF /* GameShaders.metal */; };
@@ -87,6 +85,8 @@
 		2669F7DC2B284675001AEF17 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2669F7D62B284675001AEF17 /* ViewController.m */; };
 		267E34142BAB7D0A007AE3BE /* ciel.c in Sources */ = {isa = PBXBuildFile; fileRef = 267E34132BAB7D0A007AE3BE /* ciel.c */; };
 		269D04722B28891C00934EE2 /* ScriptTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 269D04712B28891C00934EE2 /* ScriptTextView.m */; };
+		26E54CEE2CAC6E9900BF052C /* engine.exe in Resources */ = {isa = PBXBuildFile; fileRef = 26E54CED2CAC6E9900BF052C /* engine.exe */; };
+		26E54CF02CAC6ECF00BF052C /* engine.dmg in Resources */ = {isa = PBXBuildFile; fileRef = 26E54CEF2CAC6ECF00BF052C /* engine.dmg */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -170,8 +170,6 @@
 		2639F4D42CA1D2D50035E975 /* cmd_bg.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = cmd_bg.c; path = ../../src/cmd_bg.c; sourceTree = "<group>"; };
 		2639F4D52CA1D2D50035E975 /* cmd_skip.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = cmd_skip.c; path = ../../src/cmd_skip.c; sourceTree = "<group>"; };
 		2639F4F12CA1D31D0035E975 /* opennovel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = opennovel.h; path = ../../src/opennovel.h; sourceTree = "<group>"; };
-		2639F8FE2CA1DC140035E975 /* game.dmg */ = {isa = PBXFileReference; lastKnownFileType = file; name = game.dmg; path = ../../../engines/macos/game.dmg; sourceTree = "<group>"; };
-		2639F9002CA1DC4D0035E975 /* game.exe */ = {isa = PBXFileReference; lastKnownFileType = file; name = game.exe; path = ../../../engines/windows/game.exe; sourceTree = "<group>"; };
 		2639F9612CA1DFA60035E975 /* android-src */ = {isa = PBXFileReference; lastKnownFileType = folder; name = "android-src"; path = "../../../engines/android/android-src"; sourceTree = "<group>"; };
 		2639F9652CA1DFE00035E975 /* ios-src */ = {isa = PBXFileReference; lastKnownFileType = folder; name = "ios-src"; path = "../../../engines/ios/ios-src"; sourceTree = "<group>"; };
 		2639F9662CA1DFEF0035E975 /* html */ = {isa = PBXFileReference; lastKnownFileType = folder; name = html; path = ../../../engines/wasm/html; sourceTree = "<group>"; };
@@ -208,6 +206,8 @@
 		26B806B32BC2900A00A92A02 /* english.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = english.png; sourceTree = "<group>"; };
 		26B806B42BC2900A00A92A02 /* japanese-novel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "japanese-novel.png"; sourceTree = "<group>"; };
 		26B806B52BC2900A00A92A02 /* japanese-dark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "japanese-dark.png"; sourceTree = "<group>"; };
+		26E54CED2CAC6E9900BF052C /* engine.exe */ = {isa = PBXFileReference; lastKnownFileType = file; path = engine.exe; sourceTree = "<group>"; };
+		26E54CEF2CAC6ECF00BF052C /* engine.dmg */ = {isa = PBXFileReference; lastKnownFileType = file; path = engine.dmg; sourceTree = "<group>"; };
 		26F4E5B02B32CE61003E4B5A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		CE6CD5A02C204D4F00AAA0B2 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Main.strings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -328,8 +328,8 @@
 				26B806B22BC2900A00A92A02 /* japanese-light.png */,
 				26B806B42BC2900A00A92A02 /* japanese-novel.png */,
 				26B806B12BC2900A00A92A02 /* japanese-tategaki.png */,
-				2639F9002CA1DC4D0035E975 /* game.exe */,
-				2639F8FE2CA1DC140035E975 /* game.dmg */,
+				26E54CEF2CAC6ECF00BF052C /* engine.dmg */,
+				26E54CED2CAC6E9900BF052C /* engine.exe */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -455,11 +455,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				26E54CEE2CAC6E9900BF052C /* engine.exe in Resources */,
 				2639F9792CA26E7B0035E975 /* Assets.xcassets in Resources */,
 				2639F96A2CA260410035E975 /* unity-src in Resources */,
 				2639F96B2CA260410035E975 /* macos-src in Resources */,
 				2639F9782CA261BF0035E975 /* game in Resources */,
 				2639F96C2CA260410035E975 /* html in Resources */,
+				26E54CF02CAC6ECF00BF052C /* engine.dmg in Resources */,
 				2639F96D2CA260410035E975 /* ios-src in Resources */,
 				2639F96E2CA260410035E975 /* android-src in Resources */,
 				2639F96F2CA260410035E975 /* english.png in Resources */,
@@ -468,8 +470,6 @@
 				2639F9722CA260410035E975 /* japanese-light.png in Resources */,
 				2639F9732CA260410035E975 /* japanese-novel.png in Resources */,
 				2639F9742CA260410035E975 /* japanese-tategaki.png in Resources */,
-				2639F9752CA260410035E975 /* game.exe in Resources */,
-				2639F9762CA260410035E975 /* game.dmg in Resources */,
 				2639F9692CA1E0480035E975 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
