@@ -27,7 +27,7 @@ static VOID OnCommand(HWND hWnd, UINT nID)
 	if (nID == IDC_BUTTON_FILE1)
 	{
 		const wchar_t *pwszFile;
-		pwszFile = SelectFile(WMS_DIR);
+		pwszFile = SelectFile(GUI_DIR);
 		if (pwszFile != NULL)
 		{
 			SetWindowText(GetDlgItem(hWnd, IDC_TEXT_FILE1), pwszFile);

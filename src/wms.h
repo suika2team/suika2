@@ -1,6 +1,6 @@
 /*
  * OpenNovel
- * Copyright (c) 2024, The Authors. All rights reserved.
+ * Copyright (c) 2024, OpenNovel.Org. All rights reserved.
  */
 
 #ifndef WMS_H

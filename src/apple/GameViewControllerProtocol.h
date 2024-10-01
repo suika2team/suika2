@@ -2,7 +2,7 @@
 
 /*
  * OpenNovel
- * Copyright (C) 2024, The Authors. All rights reserved.
+ * Copyright (C) 2024, OpenNovel.Org. All rights reserved.
  */
 
 #import <Foundation/Foundation.h>
