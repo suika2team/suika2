@@ -5259,7 +5259,6 @@ static VOID OnDocument(void)
 	wcscat(wszURL, bEnglish ?
 		   L"/manual/html_en/index.html" :
 		   L"/manual/html_ja/index.html");
-	log_info(conv_utf16_to_utf8(wszURL));
 	ShellExecuteW(NULL, L"open", wszURL, NULL, NULL, SW_SHOWNORMAL);
 }
 
