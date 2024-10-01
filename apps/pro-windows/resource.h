@@ -77,7 +77,7 @@
 
 /* Help Menu */
 #define ID_VERSION                          220
-#define ID_AUTOUPDATE                       221
+#define ID_DOCUMENT                         221
 
 /* Export Menu */
 #define ID_EXPORT_IOS                       230

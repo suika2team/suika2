@@ -60,7 +60,7 @@
 #define SCRIPT_FONT_EN		L"Courier New"
 
 /* The version string. */
-#define HELP_STRING 		\
+#define VERSION_STRING 		\
 	"OpenNovel 1.0\n" \
 	"Copyright (c) 2024, OpenNovel.Org. All rights reserved.\n"
 
@@ -379,7 +379,8 @@ static VOID OnExportUnity(void);
 static VOID OnFont(void);
 static VOID OnHighlightMode(void);
 static VOID OnDarkMode(void);
-static VOID OnHelp(void);
+static VOID OnVersion(void);
+static VOID OnDocument(void);
 
 /* Export Helpers */
 static VOID RecreateDirectory(const wchar_t *path);
@@ -1442,6 +1443,13 @@ static VOID InitMenu(HWND hWnd)
 		L"バージョン";
 	InsertMenuItem(hMenuHelp, nOrder++, TRUE, &mi);
 
+	/* Create a menu item for Document. */
+	mi.wID = ID_DOCUMENT;
+	mi.dwTypeData = bEnglish ?
+		L"Document" :
+		L"ドキュメント";
+	InsertMenuItem(hMenuHelp, nOrder++, TRUE, &mi);
+
 	/* Set the menu to the main window. */
 	SetMenu(hWnd, hMenu);
 }
@@ -2268,7 +2276,10 @@ static void OnCommand(WPARAM wParam, LPARAM lParam)
 		break;
 	/* Help */
 	case ID_VERSION:
-		OnHelp();
+		OnVersion();
+		break;
+	case ID_DOCUMENT:
+		OnDocument();
 		break;
 	/* Button */
 	case ID_VARS:
@@ -5223,9 +5234,33 @@ static VOID OnDarkMode(void)
 	RichEdit_UpdateTheme();
 }
 
-static VOID OnHelp(void)
+static VOID OnVersion(void)
 {
-	MessageBox(hWndMain, conv_utf8_to_utf16(HELP_STRING), TITLE, MB_OK | MB_ICONINFORMATION);
+	MessageBox(hWndMain, conv_utf8_to_utf16(VERSION_STRING), TITLE, MB_OK | MB_ICONINFORMATION);
+}
+
+static VOID OnDocument(void)
+{
+	wchar_t wszURL[1024];
+	wchar_t wszPath[1024];
+	wchar_t *pSep;
+
+	/* Get the installed directory. */
+	GetModuleFileName(NULL, wszPath, MAX_PATH);
+	pSep = wcsrchr(wszPath, L'\\');
+	if (pSep != NULL)
+		*pSep = L'\0';
+	while ((pSep = wcschr(wszPath, L'\\')))
+		   *pSep = L'/';
+
+	/* Open */
+	wcscpy(wszURL, L"file:///");
+	wcscat(wszURL, wszPath);
+	wcscat(wszURL, bEnglish ?
+		   L"/manual/html_en/index.html" :
+		   L"/manual/html_ja/index.html");
+	log_info(conv_utf16_to_utf8(wszURL));
+	ShellExecuteW(NULL, L"open", wszURL, NULL, NULL, SW_SHOWNORMAL);
 }
 
 /*

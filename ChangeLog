@@ -1,13 +1,18 @@
 <html><head></head><body><ul><!-- -*- mode: html-mode; -*-
 
 <!-- BEGIN-LATEST -->
+<li>OpenNovel 1.0.16 2024/10/02
+  <ul>
+    <li>Added the "Document" help menu<li>
+  </ul>
+</li>
+<!-- END-LATEST -->
+
 <li>OpenNovel 1.0.15 2024/10/01
   <ul>
     <li>Fixed a bug of the menu command dialog<li>
   </ul>
 </li>
-<!-- END-LATEST -->
-
 <li>OpenNovel 1.0.14 2024/10/01
   <ul>
     <li>Finished implementing the "Edit" button for the basic commands<li>
