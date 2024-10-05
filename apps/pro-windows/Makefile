@@ -166,11 +166,11 @@ OBJS = \
 # Target
 #
 
-all: opennovel.exe
+all: editor.exe
 
-opennovel.exe: libroot $(OBJS) $(HDRS_MAIN) $(HDRS)
-	@$(CC) -o opennovel.exe $(OBJS) $(CFLAGS) $(LDFLAGS)
-	@$(STRIP) --strip-all opennovel.exe
+editor.exe: libroot $(OBJS) $(HDRS_MAIN) $(HDRS)
+	@$(CC) -o editor.exe $(OBJS) $(CFLAGS) $(LDFLAGS)
+	@$(STRIP) --strip-all editor.exe
 
 libroot:
 	@../../external/build-libs.sh "" $(CC) "-O3 -g0 -s -fno-stack-protector -fomit-frame-pointer -msse3 -ffast-math -ftree-vectorize -ffunction-sections -fdata-sections" $(AR)
