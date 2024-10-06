@@ -1,13 +1,18 @@
 <html><head></head><body><ul><!-- -*- mode: html-mode; -*-
 
 <!-- BEGIN-LATEST -->
+<li>OpenNovel 1.0.20 2024/10/06
+  <ul>
+    <li>Fixed a missing app icon link</li>
+  </ul>
+</li>
+<!-- END-LATEST -->
+
 <li>OpenNovel 1.0.19 2024/10/06
   <ul>
     <li>Temporarily removed macOS binaries</li>
   </ul>
 </li>
-<!-- END-LATEST -->
-
 <li>OpenNovel 1.0.18 2024/10/06
   <ul>
     <li>Temporarily removed macOS binaries</li>
