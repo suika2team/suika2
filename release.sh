@@ -172,10 +172,9 @@ cp -R "$TARGET_DIR"/tools apps/installer-windows/
 cd apps/installer-windows
 make
 cp opennovel-installer.exe "$TARGET_EXE"
-rm opennovel-installer.exe
 cd ../..
 
-echo '...Done compressing.'
+echo '...Done making an installer.'
 echo ''
 
 #
@@ -187,6 +186,6 @@ echo 'Making a release on GitHub...'
 yes '' | gh release create "$VERSION" --title "$VERSION" --notes "$NOTE" "$TARGET_EXE"
 rm -rf "$TARGET_DIR" "$TARGET_EXE"
 
-echo '...Done.'
+echo '...Done releasing on GitHub.'
 echo ''
 echo 'Release completed!'
