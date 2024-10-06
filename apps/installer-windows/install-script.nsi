@@ -25,7 +25,7 @@ Section "Install"
   File "icon.ico"
   WriteUninstaller "$INSTDIR\Uninstall.exe"
   CreateDirectory "$SMPROGRAMS\OpenNovel"
-  CreateShortcut "$SMPROGRAMS\OpenNovel\OpenNovel.lnk" "$INSTDIR\OpenNovel.exe" ""
+  CreateShortcut "$SMPROGRAMS\OpenNovel\OpenNovel.lnk" "$INSTDIR\editor.exe" ""
   WriteRegStr HKCU "Software\Microsoft\Windows\CurrentVersion\Uninstall\OpenNovel" "InstDir" '"$INSTDIR"'
   WriteRegStr HKCU "Software\Microsoft\Windows\CurrentVersion\Uninstall\OpenNovel" "DisplayName" "OpenNovel"
   WriteRegStr HKCU "Software\Microsoft\Windows\CurrentVersion\Uninstall\OpenNovel" "DisplayIcon" '"$INSTDIR\icon.ico"'
