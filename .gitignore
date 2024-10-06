@@ -48,3 +48,7 @@ engines/unity/libopennovel.dll
 engines/unity/libopennovel.dylib
 engines/unity/libopennovel.so
 engines/unity/libopennovel.nso
+
+apps/installer-windows/manual
+apps/installer-windows/sample
+apps/installer-windows/tools

@@ -4581,6 +4581,7 @@ static VOID OnExportMac(void)
 	/* フォルダを再作成する */
 	RecreateDirectory(L".\\macos-export");
 
+#if 0
 	if (MessageBox(hWndMain,
 				   bEnglish ?
 				   L"Do you want to export an prebuilt app?." :
@@ -4617,6 +4618,7 @@ static VOID OnExportMac(void)
 		ShellExecuteW(NULL, L"explore", L".\\macos-export", NULL, NULL, SW_SHOW);
 		return;
 	}
+#endif
 
 	/* ソースツリーをコピーする */
 	if (!CopyLibraryFiles(L"tools\\macos-src", L".\\macos-export"))

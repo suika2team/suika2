@@ -5,7 +5,7 @@ SRCS = $(SRCS_MAIN_MINUS_FILE) $(SRCS_CSHARP)
 #
 # Make a source tree
 #
-src: libopennovel.dll libopennovel.dylib libopennovel.so libopennovel.nso
+src: libopennovel.dll
 	@echo 'Making Unity source tree...'
 	@rm -rf unity-src
 	@mkdir unity-src
@@ -21,9 +21,6 @@ src: libopennovel.dll libopennovel.dylib libopennovel.so libopennovel.nso
 	@cp -v Assets/Resources/RuleShader.shader unity-src/Assets/Resources/
 	@cp -v Assets/Resources/MeltShader.shader unity-src/Assets/Resources/
 	@cp libopennovel.dll unity-src/Assets/libopennovel.dll
-	@cp libopennovel.dylib unity-src/Assets/libopennovel.dylib
-	@cp libopennovel.so unity-src/Assets/libopennovel.so
-	@cp libopennovel.nso unity-src/Assets/libopennovel.nso
 	@cp README.md unity-src/
 	@echo 'Done making Unity source tree...'
 	@echo ''

@@ -151,8 +151,6 @@ echo ''
 
 echo 'Copying documents and sample...'
 
-find . -name .DS_Store | xargs rm
-
 cp -R doc "$TARGET_DIR/manual"
 cp -R game "$TARGET_DIR/sample"
 
