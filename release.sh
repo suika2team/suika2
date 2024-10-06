@@ -9,7 +9,7 @@ set -eu
 # Get the version string.
 VERSION=`grep -a1 '<!-- BEGIN-LATEST -->' ChangeLog | tail -n1`
 VERSION=`echo $VERSION | cut -d ' ' -f 2`
-NOTE=`cat ChangeLog | awk '/BEGIN-LATEST/,/END-LATEST/' | tail -n +2 | ghead -n -1`
+NOTE=`cat ChangeLog | awk '/BEGIN-LATEST/,/END-LATEST/' | tail -n +2 | head -n -1`
 
 # Show the version and the release note.
 echo "Going to release the version $VERSION of the OpenNovel project."
@@ -29,18 +29,12 @@ echo 'Making a target directories...'
 
 TARGET_DIR="`pwd`/OpenNovel-$VERSION"
 TARGET_EXE="`pwd`/OpenNovel-Installer-$VERSION.exe"
-rm -rf "$TARGET_DIR" "$TARGET_ZIP"
+rm -rf "$TARGET_DIR"
 mkdir "$TARGET_DIR"
 mkdir "$TARGET_DIR/tools"
 
 echo '...Done making a target directory.'
 echo ''
-
-#
-# Docker container build
-#
-
-docker build -t opennovel-build .
 
 #
 # Windows build (Binary)

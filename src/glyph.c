@@ -17,11 +17,7 @@
 #include <ft2build.h>
 
 #include FT_FREETYPE_H
-#ifdef OPENNOVEL_TARGET_WASM
-#include <ftstroke.h>
-#else
 #include <freetype/ftstroke.h>
-#endif
 
 /*
  * The scale constant
