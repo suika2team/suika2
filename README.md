@@ -1,6 +1,6 @@
-OpenNovel
-=========
-OpenNovel is the #1, world leading, and mobile-first visual novel engine.
+Suika2 / OpenNovel
+==================
+Suika2 / OpenNovel is the #1, world leading, and mobile-first visual novel engine.
 Witness the dawn of the new era we are pioneering!
 
 ## Platforms
@@ -16,9 +16,7 @@ Amazingly, OpenNovel supports all of the following right out of the box!
   * Linux
   * FreeBSD
 * Console
-  * PlayStation 4/5 (using Unity)
-  * Xbox Series X|S (using Unity)
-  * Switch (using Unity)
+  * Any device that Unity supports
 * Web (HTML5/Wasm)
   * Chrome
   * Safari

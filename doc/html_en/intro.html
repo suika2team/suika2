@@ -12,99 +12,94 @@
 
 <h2>Introduction</h2>
 <p>
-	This tutorial shows how to make a game with OpenNovel.
+  This tutorial shows how to make a game with OpenNovel.
 </p>
 <p>
-	It's very easy and takes just one hour.
+  It's very easy and takes just one hour.
 </p>
 
 <h2>Setup</h2>
 <p>
-	We use Windows here.
-	Download the latest ZIP and extract it.
+  We use Windows here.
+  Download the latest ZIP and extract it.
 </p>
 
 <h2>Checking the sample game</h2>
 <p>
-	Open the <code>sample/</code> folder.
-	Each folder is the content of the sample game.
-	The following is our game folder structure.
+  Open a new game folder.
+  Each folder is the content of the sample game.
+  The following is our game folder structure.
 </p>
 <ul>
-	<li>story ... Story texts.</li>
-	<li>image
-		<ul>
-			<li>bg ... Background images.</li>
-			<li>ch ... Character images.</li>
-			<li>emoji ... Emoticon images.</li>
-			<li>rule ... Universal transition template images.</li>
-			<li>system ... System UI images.</li>
-			<li>title ... Title menu images.</li>
-		</ul>
-	</li>
-	<li>sound
-		<ul>
-			<li>music ... Background music.</li>
-			<li>effect ... Sound effects.</li>
-			<li>voice ... Character voice.</li>
-		</ul>
-	</li>
-	<li>script
-		<ul>
-			<li>anime ... Anime scripts.</li>
-			<li>menu ... Menu scripts.</li>
-			<li>plugin ... Plugin scripts.</li>
-		</ul>
-	</li>
-	<li>font</li>
-	<li>video</li>
-	<li>project.txt ... Setting file.</li>
+  <li>story ... Story texts.</li>
+  <li>image
+    <ul>
+      <li>bg ... Background images.</li>
+      <li>ch ... Character images.</li>
+      <li>emoji ... Emoticon images.</li>
+      <li>rule ... Universal transition template images.</li>
+      <li>system ... System UI images.</li>
+      <li>title ... Title menu images.</li>
+    </ul>
+  </li>
+  <li>sound
+    <ul>
+      <li>music ... Background music.</li>
+      <li>effect ... Sound effects.</li>
+      <li>voice ... Character voice.</li>
+    </ul>
+  </li>
+  <li>script
+    <ul>
+      <li>anime ... Anime scripts.</li>
+      <li>menu ... Menu scripts.</li>
+      <li>plugin ... Plugin scripts.</li>
+    </ul>
+  </li>
+  <li>font</li>
+  <li>video</li>
+  <li>project.txt ... Setting file.</li>
 </ul>
-
-<h2>Running sample game</h2>
-<p>
-	Copy <code>game.exe</code> to the <code>sample/</code> folder, then double click on it.
-</p>
 
 <h2>Showing a background image</h2>
 <p>
-	The story file that is executed at boot time is <code>story/story.txt</code>.
-	Here, we'll edit the file.
-	Remove the file content, then copy-and-paste the following.
-	After that, run the game.
+  The story file that is executed at boot time is <code>story/story.txt</code>.
+  Here, we'll edit the file.
+  Remove the file content, then copy-and-paste the following.
+  After that, run the game.
 </p>
 
 <pre><code>@bg roof.png 1.0</code></pre>
 
 <p>
-	You'll see the rooftop image.
-	<code>@bg</code> is a command to show background.
-	<code>roof.png</code> is a file name in the <code>image/bg</code> folder.
-	<code>1.0</code> indicates the transition takes one second.
+  You'll see the rooftop image.
+  <code>@bg</code> is a command to show background.
+  <code>roof.png</code> is a file name in the <code>image/bg</code> folder.
+  <code>1.0</code> indicates the transition takes one second.
 </p>
 
 <h2>Showing a character image</h2>
 <p>
-	Remove the content of <code>story.txt</code>, then copy-and-paste the following.
-	After that, run the game.
+  Remove the content of <code>story.txt</code>, then copy-and-paste the following.
+  After that, run the game.
 </p>
 
 <pre><code>@bg roof.png 1.0
 @ch center chara001.png 1.0</code></pre>
 
 <p>
-	You'll first see the rooftop background image, then a character image.
-	After clicking the screen, game will close.
-	<code>@ch</code> is a command to show a character.
-	<code>center</code> means a horizontal position.
-	<code>chara001.png</code> is a file name in the <code>image/ch</code> folder.
-	<code>1.0</code> indicates the transition takes one second.
+  You'll first see the rooftop background image, then a character image.
+  After clicking the screen, game will close.
+  <code>@ch</code> is a command to show a character.
+  <code>center</code> means a horizontal position.
+  <code>chara001.png</code> is a file name in the <code>image/ch</code> folder.
+  <code>1.0</code> indicates the transition takes one second.
 </p>
 
 <h2>Showing a message</h2>
 <p>
-	Remove the content of the <code>story.txt</code> file, then copy-and-paste the following.
-	After that, run the game.
+  Remove the content of the <code>story.txt</code> file, then copy-and-paste the following.
+  After that, run the game.
 </p>
 
 <pre><code>@bg roof.png 1.0
@@ -114,13 +109,13 @@ A message shows a text on the message box.
 *Name*001.ogg*A line can have a voice.</code></pre>
 
 <p>
-	You'll see messages.
+  You'll see messages.
 </p>
 
 <h2>Playing a music</h2>
 <p>
-	Remove the content of the <code>story.txt</code> file, then copy-and-paste the following.
-	After that, run the game.
+  Remove the content of the <code>story.txt</code> file, then copy-and-paste the following.
+  After that, run the game.
 </p>
 
 <pre><code>@bgm adventure.ogg
@@ -128,19 +123,19 @@ A message shows a text on the message box.
 @ch center chara001.png 1.0</code></pre>
 
 <p>
-	You'll hear a background music.
-	<code>@music</code> is a command to play a background music.
-	<code>01.ogg</code> is a file name in the <code>bgm</code> folder.
+  You'll hear a background music.
+  <code>@music</code> is a command to play a background music.
+  <code>01.ogg</code> is a file name in the <code>bgm</code> folder.
 </p>
 
 <p>
-	再生できるファイルは、44.1kHzのOgg Vorbis形式です。ステレオ、モノラルのどちらでも構いません。
+  再生できるファイルは、44.1kHzのOgg Vorbis形式です。ステレオ、モノラルのどちらでも構いません。
 </p>
 
 <h2>Showing options</h2>
 <p>
-	Remove the content of the <code>story.txt</code> file, then copy-and-paste the following.
-	After that, run the game.
+  Remove the content of the <code>story.txt</code> file, then copy-and-paste the following.
+  After that, run the game.
 </p>
 
 <pre><code>@bg roof.png 1.0
@@ -156,16 +151,16 @@ Ok, I'll ride my bike.
 :end</code></pre>
 
 <p>
-	You'll see two options.
-	<code>@choose</code> is a command to show options.
-	<code>WALK</code> and <code>BIKE</code> are destination labels for when a option is selected.
-	A label and an option text are a pair.
-	<code>:WALK</code> is a label.
+  You'll see two options.
+  <code>@choose</code> is a command to show options.
+  <code>WALK</code> and <code>BIKE</code> are destination labels for when a option is selected.
+  A label and an option text are a pair.
+  <code>:WALK</code> is a label.
 </p>
 
 <h3>Better way to write options</h3>
 <p>
-	You can ommit labels.
+  You can ommit labels.
 </p>
 
 <pre><code>@bg roof.png 1.0
@@ -185,9 +180,9 @@ case "I'll ride my bike.":
 
 <h2>Branching a story</h2>
 <p>
-	Next, we'll branch a story by a flag.
-	Remove the content of the <code>story.txt</code> file, then copy-and-paste the following.
-	After that, run the game.
+  Next, we'll branch a story by a flag.
+  Remove the content of the <code>story.txt</code> file, then copy-and-paste the following.
+  After that, run the game.
 </p>
 
 <pre><code>@bg roof.png 1.0
@@ -214,27 +209,27 @@ I found some money on the ground.
 :NO_MONEY</code></pre>
 
 <p>
-	You'll see "I found some money on the ground." when you chose "I'll have a walk."
+  You'll see "I found some money on the ground." when you chose "I'll have a walk."
 </p>
 
 <h3>Flags</h3>
 <p>
-	We used <code>@set</code> and <code>@if</code> here.
+  We used <code>@set</code> and <code>@if</code> here.
 </p>
 <p>
-	<code>@set</code> is a command to set a flag.
-	<code>$1 = true</code> means raising a flag on the variable number <code>1</code>.
-	The initial values of variables are all <code>0</code>.
+  <code>@set</code> is a command to set a flag.
+  <code>$1 = true</code> means raising a flag on the variable number <code>1</code>.
+  The initial values of variables are all <code>0</code>.
 </p>
 <p>
-	<code>@if</code> is a command to branch by a condition.
-	<code>$1 == false</code> means a condition where the variable <code>$1</code> is <code>false</code>.
-	<code>NO_MONEY</code> is a destination to go to when the condition is met.
+  <code>@if</code> is a command to branch by a condition.
+  <code>$1 == false</code> means a condition where the variable <code>$1</code> is <code>false</code>.
+  <code>NO_MONEY</code> is a destination to go to when the condition is met.
 </p>
 
 <h3>Better way to write a branch</h3>
 <p>
-	You can write a branch without a label.
+  You can write a branch without a label.
 </p>
 
 <pre><code>&lt;&lt;&lt;
@@ -246,8 +241,8 @@ if $1 == 0 {
 <h2>Showing a menu screen</h2>
 
 <p>
-	Remove the content of the <code>story.txt</code> file, then copy-and-paste the following.
-	After that, run the game.
+  Remove the content of the <code>story.txt</code> file, then copy-and-paste the following.
+  After that, run the game.
 </p>
 
 <pre><code>@menu title.txt
@@ -257,24 +252,24 @@ if $1 == 0 {
 :QUIT</code></pre>
 
 <p>
-	You'll see a menu screen.
+  You'll see a menu screen.
 </p>
 <p>
-	<code>@menu title.txt</code> is a command to call a menu script.
-	Here, we call <code>title.txt</code> in the <code>script/menu</code> folder.
+  <code>@menu title.txt</code> is a command to call a menu script.
+  Here, we call <code>title.txt</code> in the <code>script/menu</code> folder.
 </p>
 <p>
-	Refer to <a href="menu.html">this document</a> for more information.
+  Refer to <a href="menu.html">this document</a> for more information.
 </p>
 
 <h2>Dividing a story file</h2>
 <p>
-	You can divide a story file.
-	Make a copy of the <code>story.txt</code> file in the <code>story</code> folder,
-	then rename it to <code>second.txt</code>.
+  You can divide a story file.
+  Make a copy of the <code>story.txt</code> file in the <code>story</code> folder,
+  then rename it to <code>second.txt</code>.
 </p>
 <p>
-	Copy-and-paste the following, then run the game.
+  Copy-and-paste the following, then run the game.
 </p>
 
 <p>story.txt:</p>
@@ -287,12 +282,7 @@ We are in init.txt.
 <pre><code>We are moved to second.txt.</code></pre>
 
 <p>
-	You'll understand you have moved to <code>second.txt</code>.
-</p>
-
-<h2>Packaging assets</h2>
-<p>
-	Use <code>exporter.exe</code>.
+  You'll understand you have moved to <code>second.txt</code>.
 </p>
 
 </body>
