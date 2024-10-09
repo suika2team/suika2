@@ -1,6 +1,6 @@
-Suika2 / OpenNovel
+Suika2/OpenNovel
 ==================
-Suika2 / OpenNovel is the #1, world leading, and mobile-first visual novel engine.
+Suika2/OpenNovel is the #1, world leading, and mobile-first visual novel engine.
 Witness the dawn of the new era we are pioneering!
 
 ## Platforms
@@ -16,7 +16,7 @@ Amazingly, OpenNovel supports all of the following right out of the box!
   * Linux
   * FreeBSD
 * Console
-  * Any device that Unity supports
+  * Any device (via Unity)
 * Web (HTML5/Wasm)
   * Chrome
   * Safari
@@ -48,6 +48,10 @@ If you notice that, move onto Apps!
 
 ## Forum
 Currently we don't have a dedicated forum and please feel free to write to GitHub Issues.
+
+## Developers
+Current developers are Maiku and Tenshi.
+Maiku is from Japan, and Tenshi is from Taiwan.
 
 ## Contact
 Please contact us at `info@opennovel.org` anytime.

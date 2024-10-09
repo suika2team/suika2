@@ -224,7 +224,6 @@ public class OpenNovelScript : MonoBehaviour
                                                       IntPtr write_save_file,
                                                       IntPtr close_save_file);
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)] unsafe delegate int delegate_init_conf();
-    [UnmanagedFunctionPointer(CallingConvention.Cdecl)] unsafe delegate void delegate_init_locale_code();
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)] unsafe delegate int delegate_on_event_init();
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)] unsafe delegate void delegate_on_event_cleanup();
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)] unsafe delegate int delegate_on_event_frame();
@@ -281,7 +280,6 @@ public class OpenNovelScript : MonoBehaviour
     static delegate_close_save_file d_close_save_file;
     static delegate_init_hal_func_table d_init_hal_func_table;
     static delegate_init_conf d_init_conf;
-    static delegate_init_locale_code d_init_locale_code;
     static delegate_on_event_init d_on_event_init;
     static delegate_on_event_cleanup d_on_event_cleanup;
     static delegate_on_event_frame d_on_event_frame;
@@ -338,7 +336,6 @@ public class OpenNovelScript : MonoBehaviour
     static IntPtr p_close_save_file;
     static IntPtr p_init_hal_func_table;
     static IntPtr p_init_conf;
-    static IntPtr p_init_locale_code;
     static IntPtr p_on_event_init;
     static IntPtr p_on_event_cleanup;
     static IntPtr p_on_event_frame;
@@ -416,7 +413,6 @@ public class OpenNovelScript : MonoBehaviour
         d_close_save_file = new delegate_close_save_file(close_save_file);
         d_init_hal_func_table = new delegate_init_hal_func_table(init_hal_func_table);
         d_init_conf = new delegate_init_conf(init_conf);
-        d_init_locale_code = new delegate_init_locale_code(init_locale_code);
         d_on_event_init = new delegate_on_event_init(on_event_init);
         d_on_event_cleanup = new delegate_on_event_cleanup(on_event_cleanup);
         d_on_event_frame = new delegate_on_event_frame(on_event_frame);
@@ -471,7 +467,6 @@ public class OpenNovelScript : MonoBehaviour
         p_close_save_file = Marshal.GetFunctionPointerForDelegate(d_close_save_file);
         p_init_hal_func_table = Marshal.GetFunctionPointerForDelegate(d_init_hal_func_table);
         p_init_conf = Marshal.GetFunctionPointerForDelegate(d_init_conf);
-        p_init_locale_code = Marshal.GetFunctionPointerForDelegate(d_init_locale_code);
         p_on_event_init = Marshal.GetFunctionPointerForDelegate(d_on_event_init);
         p_on_event_cleanup = Marshal.GetFunctionPointerForDelegate(d_on_event_cleanup);
         p_on_event_frame = Marshal.GetFunctionPointerForDelegate(d_on_event_frame);
@@ -524,10 +519,8 @@ public class OpenNovelScript : MonoBehaviour
         GCHandle.Alloc(p_open_save_file, GCHandleType.Pinned);
         GCHandle.Alloc(p_write_save_file, GCHandleType.Pinned);
         GCHandle.Alloc(p_close_save_file, GCHandleType.Pinned);
-        GCHandle.Alloc(p_init_locale_code, GCHandleType.Pinned);
         GCHandle.Alloc(p_init_hal_func_table, GCHandleType.Pinned);
         GCHandle.Alloc(p_init_conf, GCHandleType.Pinned);
-        GCHandle.Alloc(p_init_locale_code, GCHandleType.Pinned);
         GCHandle.Alloc(p_on_event_init, GCHandleType.Pinned);
         GCHandle.Alloc(p_on_event_cleanup, GCHandleType.Pinned);
         GCHandle.Alloc(p_on_event_frame, GCHandleType.Pinned);
@@ -635,10 +628,6 @@ public class OpenNovelScript : MonoBehaviour
             p_close_save_file);
         GC.KeepAlive(this);
 
-        // Initialize the locale code.
-        d_init_locale_code();
-        GC.KeepAlive(this);
-
         // Initialize the config subsystem.
         if (d_init_conf() == 0) {
             Debug.Log("Failed to load config.");
@@ -698,10 +687,6 @@ public class OpenNovelScript : MonoBehaviour
         IntPtr open_save_file,
         IntPtr write_save_file,
         IntPtr close_save_file);
-
-    [DllImport("libopennovel")]
-    [AOT.MonoPInvokeCallback(typeof(delegate_init_locale_code))]
-    static extern unsafe void init_locale_code();
 
     [DllImport("libopennovel")]
     [AOT.MonoPInvokeCallback(typeof(delegate_init_conf))]
@@ -1036,18 +1021,20 @@ public class OpenNovelScript : MonoBehaviour
             imageDict[rule_img] = ruleImage;
         }
 
+        int dst_width = srcImage.width;
+        int dst_height = srcImage.height;
         Vector3[] vertices = new Vector3[] {
-            new Vector3(-0.5f, 0.5f, 0),
-            new Vector3(0.5f, 0.5f, 0),
             new Vector3(-0.5f, -0.5f, 0),
-            new Vector3(0.5f, -0.5f, 0)
+            new Vector3(dst_width / (float)viewportWidth - 0.5f, -0.5f, 0),
+            new Vector3(-0.5f, dst_height / (float)viewportHeight - 0.5f, 0),
+            new Vector3(dst_width / (float)viewportWidth - 0.5f, dst_height / (float)viewportHeight - 0.5f, 0),
         };
 
         Vector2[] uv = new Vector2[] {
             new Vector2(0, 0),
-            new Vector2(1, 0),
-            new Vector2(0, 1),
-            new Vector2(1, 1)
+            new Vector2(1.0f, 0),
+            new Vector2(0, 1.0f),
+            new Vector2(1.0f, 1.0f)
         };
 
         Color[] colors = new Color[] {
@@ -1057,7 +1044,7 @@ public class OpenNovelScript : MonoBehaviour
             new Color(0, 0, 0, threshold / 255.0f)
         };
 
-        int[] triangles = new int[] {0, 1, 2, 1, 3, 2};
+        int[] triangles = new int[] { 0, 1, 2, 1, 3, 2 };
 
         Vector3[] normals = new Vector3[] {
             new Vector3(0, 0, -1),
@@ -1102,18 +1089,20 @@ public class OpenNovelScript : MonoBehaviour
             imageDict[rule_img] = ruleImage;
         }
 
+        int dst_width = srcImage.width;
+        int dst_height = srcImage.height;
         Vector3[] vertices = new Vector3[] {
-            new Vector3(-0.5f, 0.5f, 0),
-            new Vector3(0.5f, 0.5f, 0),
             new Vector3(-0.5f, -0.5f, 0),
-            new Vector3(0.5f, -0.5f, 0)
+            new Vector3(dst_width / (float)viewportWidth - 0.5f, -0.5f, 0),
+            new Vector3(-0.5f, dst_height / (float)viewportHeight - 0.5f, 0),
+            new Vector3(dst_width / (float)viewportWidth - 0.5f, dst_height / (float)viewportHeight - 0.5f, 0),
         };
 
         Vector2[] uv = new Vector2[] {
             new Vector2(0, 0),
-            new Vector2(1, 0),
-            new Vector2(0, 1),
-            new Vector2(1, 1)
+            new Vector2(1.0f, 0),
+            new Vector2(0, 1.0f),
+            new Vector2(1.0f, 1.0f)
         };
 
         Color[] colors = new Color[] {
@@ -1123,7 +1112,7 @@ public class OpenNovelScript : MonoBehaviour
             new Color(0, 0, 0, progress / 255.0f)
         };
 
-        int[] triangles = new int[] {0, 1, 2, 1, 3, 2};
+        int[] triangles = new int[] { 0, 1, 2, 1, 3, 2 };
 
         Vector3[] normals = new Vector3[] {
             new Vector3(0, 0, -1),
