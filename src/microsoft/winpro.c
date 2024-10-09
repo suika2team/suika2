@@ -1070,33 +1070,33 @@ static VOID InitMenu(HWND hWnd)
 	mi.fType = MFT_STRING;
 	mi.fState = MFS_ENABLED;
 
-	/* Create File(F) */
+	/* Create "File" */
 	nOrder = 0;
 	mi.hSubMenu = hMenuFile;
 	mi.dwTypeData = bEnglish ? L"File": L"ファイル";
 	InsertMenuItem(hMenu, nOrder++, TRUE, &mi);
 
-	/* Create Run(R)を作成する */
+	/* Create "Run" */
 	mi.hSubMenu = hMenuRun;
 	mi.dwTypeData = bEnglish ? L"Run": L"実行";
 	InsertMenuItem(hMenu, nOrder++, TRUE, &mi);
 
-	/* Create Direction(D) */
+	/* Create "Novel Option" */
 	mi.hSubMenu = hMenuDirection;
-	mi.dwTypeData = bEnglish ? L"Direction": L"演出";
+	mi.dwTypeData = bEnglish ? L"Novel Option": L"演出";
 	InsertMenuItem(hMenu, nOrder++, TRUE, &mi);
 
-	/* Create Export(E) */
+	/* Create "Export" */
 	mi.hSubMenu = hMenuExport;
 	mi.dwTypeData = bEnglish ? L"Export": L"エクスポート";
 	InsertMenuItem(hMenu, nOrder++, TRUE, &mi);
 
-	/* Create Preference(P) */
+	/* Create "Preference" */
 	mi.hSubMenu = hMenuPref;
 	mi.dwTypeData = bEnglish ? L"Preference": L"設定";
 	InsertMenuItem(hMenu, nOrder++, TRUE, &mi);
 
-	/* Create Help(H) */
+	/* Create "Help" */
 	mi.hSubMenu = hMenuHelp;
 	mi.dwTypeData = bEnglish ? L"Help": L"ヘルプ";
 	InsertMenuItem(hMenu, nOrder++, TRUE, &mi);
@@ -1105,16 +1105,16 @@ static VOID InitMenu(HWND hWnd)
 	 * New Game
 	 */
 
-	/* Create a second layer for Create a new game. */
+	/* Create a second layer for Create a new project. */
 	mi.hSubMenu = hMenuProject;
-	mi.dwTypeData = bEnglish ? L"Create a new game" : L"新規ゲームを作成";
+	mi.dwTypeData = bEnglish ? L"Create a new project" : L"新規プロジェクトを作成";
 	InsertMenuItem(hMenuFile, 0, TRUE, &mi);
 
-	/* Create a menu item for Japanese ADV. */
+	/* Create a menu item for Japanese Adventure. */
 	nOrder = 0;
 	mi.fMask = MIIM_TYPE | MIIM_ID;
 	mi.wID = ID_NEW_PROJECT_JAPANESE_ADV;
-	mi.dwTypeData = bEnglish ? L"Japanese ADV" : L"日本語アドベンチャー";
+	mi.dwTypeData = bEnglish ? L"Japanese Adventure" : L"日本語アドベンチャー形式";
 	InsertMenuItem(hMenuProject, nOrder++, TRUE, &mi);
 
 	/*
@@ -1126,15 +1126,15 @@ static VOID InitMenu(HWND hWnd)
 	/* Create a menu item for Open game. */
 	mi.wID = ID_OPEN_PROJECT;
 	mi.dwTypeData = bEnglish ?
-		L"Open game\tCtrl+G" :
-		L"ゲームを開く\tCtrl+G";
+		L"Open project\tCtrl+G" :
+		L"プロジェクトを開く\tCtrl+G";
 	InsertMenuItem(hMenuFile, nOrder++, TRUE, &mi);
 
 	/* Create a menu item for Open game folder. */
 	mi.wID = ID_OPEN_GAME_FOLDER;
 	mi.dwTypeData = bEnglish ?
-		L"Open game folder" :
-		L"ゲームフォルダを開く";
+		L"Open project folder" :
+		L"プロジェクトフォルダを表示";
 	InsertMenuItem(hMenuFile, nOrder++, TRUE, &mi);
 	EnableMenuItem(hMenu, ID_OPEN_GAME_FOLDER, MF_GRAYED);
 
@@ -4478,7 +4478,7 @@ static VOID OnExportPackage(void)
 static VOID OnExportWin(void)
 {
 	if (MessageBox(hWndMain, bEnglish ?
-				   L"Takes a while. Are you sure?\n" :
+				   L"The process may take some time. Do you wish to proceed?\n" :
 				   L"エクスポートには時間がかかります。よろしいですか？",
 				   TITLE,
 				   MB_ICONWARNING | MB_OKCANCEL) != IDOK)
@@ -4563,7 +4563,7 @@ static VOID RunWindowsGame(void)
 static VOID OnExportMac(void)
 {
 	if (MessageBox(hWndMain, bEnglish ?
-				   L"Takes a while. Are you sure?\n" :
+				   L"The process may take some time. Do you wish to proceed?\n" :
 				   L"エクスポートには時間がかかります。よろしいですか？",
 				   TITLE,
 				   MB_ICONWARNING | MB_OKCANCEL) != IDOK)
@@ -4655,7 +4655,7 @@ static VOID OnExportMac(void)
 static VOID OnExportWeb(void)
 {
 	if (MessageBox(hWndMain, bEnglish ?
-				   L"Takes a while. Are you sure?\n" :
+				   L"The process may take some time. Do you wish to proceed?\n" :
 				   L"エクスポートには時間がかかります。よろしいですか？",
 				   TITLE,
 				   MB_ICONWARNING | MB_OKCANCEL) != IDOK)
@@ -4750,7 +4750,7 @@ static VOID RunWebTest(void)
 static VOID OnExportAndroid(void)
 {
 	if (MessageBox(hWndMain, bEnglish ?
-				   L"Takes a while. Are you sure?\n" :
+				   L"The process may take some time. Do you wish to proceed?\n" :
 				   L"エクスポートには時間がかかります。よろしいですか？",
 				   TITLE,
 				   MB_ICONWARNING | MB_OKCANCEL) != IDOK)
@@ -4846,7 +4846,7 @@ static VOID RunAndroidBuild(void)
 static VOID OnExportIOS(void)
 {
 	if (MessageBox(hWndMain, bEnglish ?
-				   L"Takes a while. Are you sure?\n" :
+				   L"The process may take some time. Do you wish to proceed?\n" :
 				   L"エクスポートには時間がかかります。よろしいですか？",
 				   TITLE,
 				   MB_ICONWARNING | MB_OKCANCEL) != IDOK)
@@ -4902,9 +4902,7 @@ static VOID OnExportIOS(void)
 static VOID OnExportUnity(void)
 {
 	if (MessageBox(hWndMain, bEnglish ?
-				   L"Attention: This feature is still in alpha version.\n"
-				   L"Takes a while. Are you sure?\n" :
-				   L"注意: Unityエクスポートはまだアルファ版であり、これから改善されます。\n"
+				   L"The process may take some time. Do you wish to proceed?\n" :
 				   L"エクスポートには時間がかかります。よろしいですか？",
 				   TITLE,
 				   MB_ICONWARNING | MB_OKCANCEL) != IDOK)

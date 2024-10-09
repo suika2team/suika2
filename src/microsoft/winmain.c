@@ -1590,7 +1590,7 @@ static const char *get_ui_message(int id)
 		case LOCALE_EN:
 			return U8("Are you sure you want to quit?");
 		case LOCALE_JA:
-			return U8("ゲームを終了しますか？");
+			return U8("終了しますか？");
 		case LOCALE_ZH:
 			return U8("游戏结束了吗？");
 		case LOCALE_TW:
@@ -1744,9 +1744,9 @@ static const char *get_ui_message(int id)
 	case UIMSG_NO_GAME_FILES:
 		switch (locale_id) {
 		case LOCALE_JA:
-			return U8("ゲームデータがありません。");
+			return U8("データがありません。");
 		default:
-			return U8("No game data.");
+			return U8("No data found.");
 		}
 		break;
 #ifdef OPENNOVEL_TARGET_WIN32
