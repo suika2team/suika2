@@ -26,6 +26,10 @@ src: libopennovel.dll
 	@echo ''
 
 #
+# The following are examples of `HOW TO BUILD A DLL'
+#
+
+#
 # Windows / Xbox Series X|S x86_64 DLL
 #
 libopennovel.dll: $(SRCS)

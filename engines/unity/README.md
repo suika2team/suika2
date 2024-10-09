@@ -8,5 +8,6 @@ How to build
 * Tie `BGM`, `SE`, `Voice` and `SYSSE` to `OpenNovelAudio.cs`
 * Run
 
-## For PS4/5
-* Please recompile `libopennovel.so` on the Orbis SDK
+## About DLL
+* Please recompile `libopennovel` on a game console SDK
+* There are some examples in the Makefile in `suika2/engines/unity`
