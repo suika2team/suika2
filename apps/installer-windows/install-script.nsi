@@ -29,7 +29,7 @@ Section "Install"
   WriteRegStr HKCU "Software\Microsoft\Windows\CurrentVersion\Uninstall\Suika2" "InstDir" '"$INSTDIR"'
   WriteRegStr HKCU "Software\Microsoft\Windows\CurrentVersion\Uninstall\Suika2" "DisplayName" "Suika2"
   WriteRegStr HKCU "Software\Microsoft\Windows\CurrentVersion\Uninstall\Suika2" "DisplayIcon" '"$INSTDIR\icon.ico"'
-  WriteRegStr HKCU "Software\Microsoft\Windows\CurrentVersion\Uninstall\Suika2" "DisplayVersion" "1"
+  WriteRegStr HKCU "Software\Microsoft\Windows\CurrentVersion\Uninstall\Suika2" "DisplayVersion" "22.0"
   WriteRegStr HKCU "Software\Microsoft\Windows\CurrentVersion\Uninstall\Suika2" "Publisher" "The Suika2 Team"
   WriteRegStr HKCU "Software\Microsoft\Windows\CurrentVersion\Uninstall\Suika2" "UninstallString" '"$INSTDIR\Uninstall.exe"'
   WriteRegStr HKCU "Software\Classes\.suika2" "" "Suika2.project"
