@@ -478,7 +478,7 @@ static BOOL InitApp(HINSTANCE hInstance, int nCmdShow)
 {
 	conf_game_width = 1280;
 	conf_game_height = 720;
-	conf_game_title = strdup("OpenNovel");
+	conf_game_title = strdup("Suika2");
 
 	/* Initialize the window. */
 	if (!InitWindow(hInstance, nCmdShow))
