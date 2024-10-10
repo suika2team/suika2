@@ -50,7 +50,7 @@
  */
 
 /* The window title of message boxes. */
-#define TITLE				L"OpenNovel"
+#define TITLE				L"Suika2"
 
 /* The font name for the controls. */
 #define CONTROL_FONT		L"Yu Gothic UI"
@@ -61,8 +61,8 @@
 
 /* The version string. */
 #define VERSION_STRING 		\
-	"OpenNovel 1.0\n" \
-	"Copyright (c) 2024, OpenNovel.org. All rights reserved.\n"
+	"Suika2 22.0 - An OpenNovel.org Engine\n" \
+	"Copyright (c) 2001-2024, OpenNovel.org. All rights reserved.\n"
 
 /* The minimum window size. */
 #define WINDOW_WIDTH_MIN	(800)
@@ -465,10 +465,10 @@ static void SIGSEGV_Handler(int n)
 	bEnglish = strcmp(get_system_locale(), "ja") != 0;
 
 	log_error(bEnglish ?
-			  "Sorry, OpenNovel was crashed.\n"
+			  "Sorry, Suika2 was crashed.\n"
 			  "Please send a bug report to the project." :
 			  "ご迷惑をかけ申し訳ございません。\n"
-			  "OpenNovelがクラッシュしました。\n"
+			  "Suika2がクラッシュしました。\n"
 			  "バグ報告をいただけますと幸いです。\n");
 	exit(1);
 }
@@ -3808,16 +3808,16 @@ static BOOL CreateProjectFromTemplate(const wchar_t *pszTemplate)
 	{
 		/* Show a save dialog. */
 		ZeroMemory(&ofn, sizeof(OPENFILENAMEW));
-		wcscpy(&wszPath[0], L"game.opennovel");
+		wcscpy(&wszPath[0], L"game.suika2");
 		ofn.lStructSize = sizeof(OPENFILENAMEW);
 		ofn.nFilterIndex  = 1;
 		ofn.lpstrFile = wszPath;
 		ofn.nMaxFile = sizeof(wszPath) / sizeof(wchar_t);
 		ofn.Flags = OFN_OVERWRITEPROMPT;
 		ofn.lpstrFilter = bEnglish ?
-			L"OpenNovel Project Files\0*.opennovel\0\0" :
-			L"OpenNovel プロジェクトファイル\0*.opennovel\0\0";
-		ofn.lpstrDefExt = L".opennovel";
+			L"Suika2 Project Files\0*.suika2\0\0" :
+			L"Suika2 プロジェクトファイル\0*.suika2\0\0";
+		ofn.lpstrDefExt = L".suika2";
 		if (!GetSaveFileNameW(&ofn))
 			return FALSE;
 		if (ofn.lpstrFile[0] == L'\0')
@@ -3885,7 +3885,7 @@ static BOOL ChooseProject(void)
 
 	/* Open a file dialog. */
 	ZeroMemory(&ofn, sizeof(OPENFILENAMEW));
-	wcscpy(&wszPath[0], L"game.opennovel");
+	wcscpy(&wszPath[0], L"game.suika2");
 	ofn.lStructSize = sizeof(OPENFILENAMEW);
 	ofn.nFilterIndex = 1;
 	ofn.lpstrFile = wszPath;
@@ -3893,9 +3893,9 @@ static BOOL ChooseProject(void)
 	ofn.nMaxFile = sizeof(wszPath) / sizeof(wchar_t);
 	ofn.Flags = OFN_FILEMUSTEXIST;
 	ofn.lpstrFilter = bEnglish ?
-		L"OpenNovel Project Files\0*.opennovel\0\0" :
-		L"OpenNovel プロジェクトファイル\0*.opennovel\0\0";
-	ofn.lpstrDefExt = L".opennovel";
+		L"Suika2 Project Files\0*.suika2\0\0" :
+		L"Suika2 プロジェクトファイル\0*.suika2\0\0";
+	ofn.lpstrDefExt = L".suika2";
 
 	/* This will set the working directory to the game directory. */
 	bRet = GetOpenFileNameW(&ofn);
@@ -3979,7 +3979,7 @@ static void ReadProjectFile(void)
 	CheckMenuItem(hMenu, ID_DARKMODE, MF_UNCHECKED);
 
 	/* Read the preference. */
-	fp = fopen("game.opennovel", "r");
+	fp = fopen("game.suika2", "r");
 	if (fp == NULL)
 		log_info("failed to read the project file.");
 	while (1)
@@ -4030,7 +4030,7 @@ static void WriteProjectFile(void)
 {
 	FILE *fp;
 
-	fp = fopen("game.opennovel", "w");
+	fp = fopen("game.suika2", "w");
 	if (fp == NULL)
 		return;
 
@@ -5263,7 +5263,7 @@ static VOID OnDocument(void)
 }
 
 /*
- * OpenNovelコマンドの挿入
+ * コマンドの挿入
  */
 
 static VOID OnInsertMessage(void)

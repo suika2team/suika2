@@ -12,7 +12,7 @@ VERSION=`echo $VERSION | cut -d ' ' -f 2`
 NOTE=`cat ChangeLog | awk '/BEGIN-LATEST/,/END-LATEST/' | tail -n +2 | head -n -1`
 
 # Show the version and the release note.
-echo "Going to release the version $VERSION of the OpenNovel project."
+echo "Going to release the version $VERSION of the Suika2 project."
 echo ''
 echo '[Note]'
 echo "$NOTE"
@@ -27,8 +27,8 @@ read str
 
 echo 'Making a target directories...'
 
-TARGET_DIR="`pwd`/OpenNovel-$VERSION"
-TARGET_EXE="`pwd`/OpenNovel-Installer-$VERSION.exe"
+TARGET_DIR="`pwd`/Suika2-$VERSION"
+TARGET_EXE="`pwd`/Suika2-$VERSION.exe"
 rm -rf "$TARGET_DIR"
 mkdir "$TARGET_DIR"
 mkdir "$TARGET_DIR/tools"
@@ -171,7 +171,7 @@ cp -R "$TARGET_DIR"/tools apps/installer-windows/
 
 cd apps/installer-windows
 make
-cp opennovel-installer.exe "$TARGET_EXE"
+cp suika2-installer.exe "$TARGET_EXE"
 cd ../..
 
 echo '...Done making an installer.'
@@ -180,6 +180,8 @@ echo ''
 #
 # GitHub Release
 #
+
+read str
 
 echo 'Making a release on GitHub...'
 

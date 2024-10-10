@@ -1,14 +1,19 @@
 <html><head></head><body><ul><!-- -*- mode: html-mode; -*-
 
 <!-- BEGIN-LATEST -->
+<li>Suika2 22.0.0 2024/10/11
+  <ul>
+    <li>Improved English translations</li>
+  </ul>
+</li>
+<!-- END-LATEST -->
+
 <li>Suika2/OpenNovel 1.0.22 2024/10/09
   <ul>
     <li>Fixed a bug where Unity port can't run</li>
     <li>Fixed a bug where Unity port can't show rule and melt effects</li>
   </ul>
 </li>
-<!-- END-LATEST -->
-
 <li>Suika2/OpenNovel 1.0.21 2024/10/07
   <ul>
     <li>Merged into the Suika2 project</li>

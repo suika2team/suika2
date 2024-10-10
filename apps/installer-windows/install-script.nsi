@@ -2,9 +2,9 @@
 !define MUI_ICON "icon.ico"
 !define MUI_UNICON "icon.ico"
 
-Name "OpenNovel"
-OutFile "opennovel-installer.exe"
-InstallDir "$APPDATA\Local\OpenNovel"
+Name "Suika2"
+OutFile "suika2-installer.exe"
+InstallDir "$APPDATA\Local\Suika2"
 
 RequestExecutionLevel user
 SetCompressor /SOLID /FINAL lzma
@@ -24,20 +24,20 @@ Section "Install"
   File /r "manual"
   File "icon.ico"
   WriteUninstaller "$INSTDIR\Uninstall.exe"
-  CreateDirectory "$SMPROGRAMS\OpenNovel"
-  CreateShortcut "$SMPROGRAMS\OpenNovel\OpenNovel.lnk" "$INSTDIR\editor.exe" ""
-  WriteRegStr HKCU "Software\Microsoft\Windows\CurrentVersion\Uninstall\OpenNovel" "InstDir" '"$INSTDIR"'
-  WriteRegStr HKCU "Software\Microsoft\Windows\CurrentVersion\Uninstall\OpenNovel" "DisplayName" "OpenNovel"
-  WriteRegStr HKCU "Software\Microsoft\Windows\CurrentVersion\Uninstall\OpenNovel" "DisplayIcon" '"$INSTDIR\icon.ico"'
-  WriteRegStr HKCU "Software\Microsoft\Windows\CurrentVersion\Uninstall\OpenNovel" "DisplayVersion" "1"
-  WriteRegStr HKCU "Software\Microsoft\Windows\CurrentVersion\Uninstall\OpenNovel" "Publisher" "The OpenNovel Authors"
-  WriteRegStr HKCU "Software\Microsoft\Windows\CurrentVersion\Uninstall\OpenNovel" "UninstallString" '"$INSTDIR\Uninstall.exe"'
-  WriteRegStr HKCU "Software\Classes\.opennovel" "" "OpenNovel.project"
-  WriteRegStr HKCU "Software\Classes\OpenNovel.project" "" "OpenNovel Project"
-  WriteRegStr HKCU "Software\Classes\OpenNovel.project\DefaultIcon" "" "$INSTDIR\editor.exe"
-  WriteRegStr HKCU "Software\Classes\OpenNovel.project\Shell\open\command" "" '"$INSTDIR\editor.exe" "%1"'
+  CreateDirectory "$SMPROGRAMS\Suika2"
+  CreateShortcut "$SMPROGRAMS\Suika2\Suika2.lnk" "$INSTDIR\editor.exe" ""
+  WriteRegStr HKCU "Software\Microsoft\Windows\CurrentVersion\Uninstall\Suika2" "InstDir" '"$INSTDIR"'
+  WriteRegStr HKCU "Software\Microsoft\Windows\CurrentVersion\Uninstall\Suika2" "DisplayName" "Suika2"
+  WriteRegStr HKCU "Software\Microsoft\Windows\CurrentVersion\Uninstall\Suika2" "DisplayIcon" '"$INSTDIR\icon.ico"'
+  WriteRegStr HKCU "Software\Microsoft\Windows\CurrentVersion\Uninstall\Suika2" "DisplayVersion" "1"
+  WriteRegStr HKCU "Software\Microsoft\Windows\CurrentVersion\Uninstall\Suika2" "Publisher" "The Suika2 Team"
+  WriteRegStr HKCU "Software\Microsoft\Windows\CurrentVersion\Uninstall\Suika2" "UninstallString" '"$INSTDIR\Uninstall.exe"'
+  WriteRegStr HKCU "Software\Classes\.suika2" "" "Suika2.project"
+  WriteRegStr HKCU "Software\Classes\Suika2.project" "" "Suika2 Project"
+  WriteRegStr HKCU "Software\Classes\Suika2.project\DefaultIcon" "" "$INSTDIR\editor.exe"
+  WriteRegStr HKCU "Software\Classes\Suika2.project\Shell\open\command" "" '"$INSTDIR\editor.exe" "%1"'
   SetShellVarContext current
-  CreateShortCut "$DESKTOP\OpenNovel.lnk" "$INSTDIR\editor.exe"
+  CreateShortCut "$DESKTOP\Suika2.lnk" "$INSTDIR\editor.exe"
 SectionEnd
 
 Section "Uninstall"
@@ -47,14 +47,14 @@ Section "Uninstall"
   Delete "$INSTDIR\sample"
   Delete "$INSTDIR\tools"
   Delete "$INSTDIR\manual"
-  Delete "$SMPROGRAMS\OpenNovel\OpenNovel.lnk"
-  RMDir "$SMPROGRAMS\OpenNovel"
-  DeleteRegKey HKCU "Software\Microsoft\Windows\CurrentVersion\Uninstall\OpenNovel"
-  Delete "$DESKTOP\OpenNovel.lnk"
-  DeleteRegKey HKCU "Software\Classes\.opennovel"
-  DeleteRegKey HKCU "Software\Classes\OpenNovel.project"
-  DeleteRegKey HKCU "Software\Classes\OpenNovel.project\DefaultIcon"
-  DeleteRegKey HKCU "Software\Classes\OpenNovel.project\Shell\open\command"
+  Delete "$SMPROGRAMS\Suika2\Suika2.lnk"
+  RMDir "$SMPROGRAMS\Suika2"
+  DeleteRegKey HKCU "Software\Microsoft\Windows\CurrentVersion\Uninstall\Suika2"
+  Delete "$DESKTOP\Suika2.lnk"
+  DeleteRegKey HKCU "Software\Classes\.suika2"
+  DeleteRegKey HKCU "Software\Classes\Suika2.project"
+  DeleteRegKey HKCU "Software\Classes\Suika2.project\DefaultIcon"
+  DeleteRegKey HKCU "Software\Classes\Suika2.project\Shell\open\command"
 SectionEnd
 
 Function .OnInstSuccess

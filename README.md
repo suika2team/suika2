@@ -7,8 +7,6 @@ an integrated GUI editor.
 This project is a fork from the original Suika2 Visual Novel Engine
 and [Polaris Engine](https://github.com/polaris-engine-foundation/polaris-engine).
 
-This project is a fork from the original Suika2 Visual Novel Engine and [Polaris Engine](https://github.com/polaris-engine-foundation/polaris-engine). 
-
 ## Platforms
 
 Suika2 supports all of the following right out of the box.
