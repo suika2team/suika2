@@ -2,7 +2,7 @@
 
 /*
  * OpenNovel
- * Copyright (C) 2024, OpenNovel.Org. All rights reserved.
+ * Copyright (c) 2001-2024, OpenNovel.org. All rights reserved.
  */
 
 /*
@@ -984,7 +984,7 @@ const char license_info[]
  /* Don't remove this string even if it's not referenced. */
  __attribute__((used))
 #endif
- = "OpenNovel: Copyright (c) 2024, OpenNovel.Org. All rights reserved.\n"
+ = "OpenNovel: Copyright (c) 2024, OpenNovel.org. All rights reserved.\n"
    "zlib: Copyright (C) 1995-2013 Jean-loup Gailly and Mark Adler. All rights reserved.\n"
    "libpng: Copyright (C) 2000-2002, 2004, 2006-2016, Glenn Randers-Pehrson and the original authors. All rights reserved.\n"
    "jpeg: copyright (C) 1991-2022, Thomas G. Lane, Guido Vollbeding. All rights reserved.\n"

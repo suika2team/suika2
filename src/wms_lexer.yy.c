@@ -694,7 +694,7 @@ static const flex_int16_t yy_chk[186] =
 #line 2 "../../src/wms_lexer.l"
 /*
  * Watermelon Script
- * Copyright (c) 2022, OpenNovel.Org. All rights reserved.
+ * Copyright (c) 2022, OpenNovel.org. All rights reserved.
  */
 
 #include "wms_parser.tab.h"

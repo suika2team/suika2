@@ -5,6 +5,9 @@
   <meta name="viewport" content="width=device-width">
   <title>OpenNovel</title>
   <link rel="stylesheet" href="../css/style.css">
+  <style>
+    code { background-color: #CF9; }
+  </style>
 </head>
 <body>
 
@@ -12,7 +15,7 @@
 
 <h2>Introduction</h2>
 <p>
-  This tutorial shows how to make a game with OpenNovel.
+  This tutorial shows how to make a visual novel with OpenNovel.
 </p>
 <p>
   It's very easy and takes just one hour.
@@ -20,14 +23,13 @@
 
 <h2>Setup</h2>
 <p>
-  We use Windows here.
-  Download the latest ZIP and extract it.
+  Download the latest release.
 </p>
 
-<h2>Checking the sample game</h2>
+<h2>Examining the sample visual novel project</h2>
 <p>
-  Open a new game folder.
-  Each folder is the content of the sample game.
+  Open a new project folder.
+  It contains all necessary visual novel elements.
   The following is our game folder structure.
 </p>
 <ul>
@@ -51,29 +53,29 @@
   </li>
   <li>script
     <ul>
-      <li>anime ... Anime scripts.</li>
+      <li>anime ... Animation scripts.</li>
       <li>menu ... Menu scripts.</li>
       <li>plugin ... Plugin scripts.</li>
     </ul>
   </li>
   <li>font</li>
   <li>video</li>
-  <li>project.txt ... Setting file.</li>
+  <li>project.txt ... Project settings.</li>
 </ul>
 
 <h2>Showing a background image</h2>
 <p>
   The story file that is executed at boot time is <code>story/story.txt</code>.
   Here, we'll edit the file.
-  Remove the file content, then copy-and-paste the following.
+  Remove the contents, then copy-and-paste the following.
   After that, run the game.
 </p>
 
-<pre><code>@bg roof.png 1.0</code></pre>
+<pre><code>@bg sakura.png 1.0</code></pre>
 
 <p>
   You'll see the rooftop image.
-  <code>@bg</code> is a command to show background.
+  <code>@bg</code> is a command to show backgrounds.
   <code>roof.png</code> is a file name in the <code>image/bg</code> folder.
   <code>1.0</code> indicates the transition takes one second.
 </p>
@@ -104,15 +106,15 @@
 
 <pre><code>@bg roof.png 1.0
 @ch center chara001.png 1.0
-A message shows a text on the message box.
-*Name*A line shows a name on the name box and a text on the message box.
-*Name*001.ogg*A line can have a voice.</code></pre>
+A message shows a text in the message box.
+*Name*A line shows a name in a name box and a text in a message box.
+*Name*001.ogg*A voice file can be played.</code></pre>
 
 <p>
   You'll see messages.
 </p>
 
-<h2>Playing a music</h2>
+<h2>Playing a music file</h2>
 <p>
   Remove the content of the <code>story.txt</code> file, then copy-and-paste the following.
   After that, run the game.
@@ -129,7 +131,8 @@ A message shows a text on the message box.
 </p>
 
 <p>
-  再生できるファイルは、44.1kHzのOgg Vorbis形式です。ステレオ、モノラルのどちらでも構いません。
+  Music files should be 44.1kHz Ogg Vorbis format. Either stereo or monaural
+  ones are acceptable.
 </p>
 
 <h2>Showing options</h2>
@@ -141,26 +144,26 @@ A message shows a text on the message box.
 <pre><code>@bg roof.png 1.0
 @ch center chara001.png 1.0
 I'm going to my school.
-@choose WALK "I'll have a walk." BIKE "I'll ride my bike."
+@choose WALK "I'll take a walk." BIKE "I'll ride my bike."
 :WALK
-Ok, I'll walk.
+OK, I'll walk.
 @goto end
 :BIKE
-Ok, I'll ride my bike.
+OK, I'll ride my bike.
 @goto end
 :end</code></pre>
 
 <p>
   You'll see two options.
   <code>@choose</code> is a command to show options.
-  <code>WALK</code> and <code>BIKE</code> are destination labels for when a option is selected.
-  A label and an option text are a pair.
+  <code>WALK</code> and <code>BIKE</code> are our option target labels for when a option is selected.
+  A label and sine text next to it form a pair.
   <code>:WALK</code> is a label.
 </p>
 
 <h3>Better way to write options</h3>
 <p>
-  You can ommit labels.
+  You may ommit labels.
 </p>
 
 <pre><code>@bg roof.png 1.0
@@ -180,7 +183,7 @@ case "I'll ride my bike.":
 
 <h2>Branching a story</h2>
 <p>
-  Next, we'll branch a story by a flag.
+  Next, we'll branch a story by using a flag.
   Remove the content of the <code>story.txt</code> file, then copy-and-paste the following.
   After that, run the game.
 </p>
@@ -279,10 +282,10 @@ We are in init.txt.
 @story second.txt</code></pre>
 
 <p>second.txt:</p>
-<pre><code>We are moved to second.txt.</code></pre>
+<pre><code>We move to second.txt.</code></pre>
 
 <p>
-  You'll understand you have moved to <code>second.txt</code>.
+  You'll see that you have moved to <code>second.txt</code>.
 </p>
 
 </body>

@@ -1,59 +1,73 @@
-Suika2/OpenNovel
-==================
-Suika2/OpenNovel is the #1, world leading, and mobile-first visual novel engine.
-Witness the dawn of the new era we are pioneering!
+Suika2 - An OpenNovel.org Engine
+================================
+
+Suika2 is a very portable and mobile-friendly visual novel engine with
+an integrated GUI editor.
+
+This project is a fork from the original Suika2 Visual Novel Engine
+and [Polaris Engine](https://github.com/polaris-engine-foundation/polaris-engine).
 
 This project is a fork from the original Suika2 Visual Novel Engine and [Polaris Engine](https://github.com/polaris-engine-foundation/polaris-engine). 
 
 ## Platforms
-Do you understand that no such engine has ever existed before?
-Amazingly, OpenNovel supports all of the following right out of the box!
 
-* Mobile
-  * iOS 12 or later
-  * Android 10 or later (4.4 is okay with slight edits on properties)
-* Desktop
-  * Windows XP or later
-  * macOS 10.13 or later
-  * Linux
-  * FreeBSD
-* Console
-  * Any device (via Unity)
-* Web (HTML5/Wasm)
-  * Chrome
-  * Safari
-  * Edge
-  * Firefox
+Suika2 supports all of the following right out of the box.
+
+### Mobile
+
+|Platform |Version             |
+|---------|--------------------|
+|iPhone   |iOS 12.0 or  later  |
+|Android  |Android 4.4 or later|
+
+### Desktop
+
+|Platform |Version             |
+|---------|--------------------|
+|Windows  |11, 10, 8, Vista, XP|
+|macOS    |10.13 or later      |
+|Linux    |2.6 or later        |
+|FreeBSD  |11 or later         |
+
+### Gaming Console
+
+|Platform |Version             |
+|---------|--------------------|
+|Unity    |2022.3              |
+
+### Web (HTML5/Wasm)
+
+|Platform |Version             |
+|---------|--------------------|
+|Chrome   |Current             |
+|Safari   |Current             |
+|Edge     |Current             |
+|Firefox  |Current             |
 
 ## Portability
-Take a look at the source code and you will marvel at our flawless porting.
 
-We **natively** support all of the Mobile and Desktop platforms.
-"Natively" means we don't use any annoying compatibility layer such as Unity, SDL or Python.
+Our core engine is written in ANSI C and it's all native.  We port a
+thin "Hardware Abstraction Layer" for each platform in a native
+language, instead of using a thirdparty framework or a scripting
+language.
 
-We are undoubtedly the world's greatest visual novel porter.
-Our core engine is written in ANSI C, making it **the most portable visual novel engine ever**.
+## Integrated Development Environment
 
-## Advanced GUI Editor
-OpenNovel has an easy-to-use IDE app. There are three benefits to use it.
+Suika2 has an easy-to-use IDE. There are three benefits to use it.
 
-* You can write and edit story scripts by using GUI.
-* You can export your game to a target platform by a mouse click.
-* You can play back your changes to story on-the-fly.
+* GUI edit
+* One-click export
+* On-the-fly playback
 
-The editor in the IDE is not perfect, so please consider using your favorite editor with the IDE.
-Even if you use an other editor mainly, you can receive benefits from the IDE by using it supplimentary.
-
-## Ditch the Web for Apps
-Let me tell you the truth, the Web is old fashion.
-If you notice that, move onto Apps!
-
-## Forum
-Currently we don't have a dedicated forum and please feel free to write to GitHub Issues.
+The editor in the IDE is not perfect, so please consider using your
+favorite editor with the IDE.  Even if you use an other editor mainly,
+you can receive benefits from the IDE by using it supplimentary.
 
 ## Developers
-Current developers are Maiku and Tenshi.
-Maiku is from Japan, and Tenshi is from Taiwan.
+
+The current developers are Maiku and Tenshi.  Maiku is from Japan, and
+Tenshi is from Taiwan.
 
 ## Contact
+
 Please contact us at `info@opennovel.org` anytime.

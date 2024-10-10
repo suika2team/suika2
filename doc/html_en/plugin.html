@@ -5,6 +5,9 @@
   <meta name="viewport" content="width=device-width">
   <title>OpenNovel</title>
   <link rel="stylesheet" href="../css/style.css">
+  <style>
+    code { background-color: #CF9; }
+  </style>
 </head>
 <body>
 
@@ -12,17 +15,18 @@
 
 <h2>About Plugin Script</h2>
 <p>
-	Story scripts of <code>OpenNovel</code> focus flows of natural stories,
-	and thus, it is not able to write a complex logic.
+  <code>OpenNovel</code> story scripts focus on how ordinary stories flow,
+  they are incapable of handling complex logic projects.
+  Plugin script should be used for such purposes.
 </p>
 <p>
-	Plugin script is available for a complex logic.
-	Calling a plugin script from a story script makes it possible to write complex logic.
+  Plugin script is available for a complex logic.
+  Calling a plugin script from a story script makes it possible to write complex logic.
 </p>
 
 <h2>Basics</h2>
 <p>
-	A script to change the color of the message box is the following.
+  A script to change a color of a message box is the following.
 </p>
 <pre><code>func main() {
     onvl_set_config("msgbox.font.r", "128");
@@ -31,7 +35,7 @@
 }</code></pre>
 
 <p>
-	Use this script from <code>story.txt</code>.
+  Use this script from <code>story.txt</code>.
 </p>
 <pre><code>We will change the color.
 @plugin change-color.txt
@@ -71,7 +75,7 @@ func myfunc(a, b, c) {
 
 <h3>Types and Variables</h3>
 <p>
-	A program can use integer, floating point, string, or array variables.
+  A program can use integer, floating point, string, or array variables.
 </p>
 <pre><code>func main() {
     // Integer
@@ -92,7 +96,7 @@ func myfunc(a, b, c) {
         print("c is string");
     }
 
-    // Array (with interger index)
+    // Array (with integer index)
     d[0] = 0;
     if(isarray(d)) {
         print("d is array");
@@ -110,45 +114,45 @@ func myfunc(a, b, c) {
 
 <h3>Calculation</h3>
 <p>
-	Integer and floating point values can be added, subtracted, multiplied, or divided.
+  Integer and floating point values can be added, subtracted, multiplied, or divided.
 </p>
 <p>
-	For integers:
+  For integers:
 </p>
 <pre><code>a = 1;
 b = 2;
 c = a + b;
 // a += b; form is not supported.</code></pre>
 <p>
-	For floating-points:
+  For floating-points:
 </p>
 <pre><code>a = 1.0;
 b = 2.0;
 c = a + b;</code></pre>
 <p>
-	For integer and floating-point:
+  For integer and floating-point:
 </p>
 <pre><code>a = 1;
 b = 2.0;
 c = a + b; // c is floating-point (promoted)</code></pre>
 <p>
-	For integer reminder:
+  For integer reminder:
 </p>
 <pre><code>a = 3;
 b = a % 2; // The result is the reminder of 3/2, i.e., 1</code></pre>
 <p>
-	Strings can be concatenated by a plus operator:
+  Strings can be concatenated by a plus operator:
 </p>
 <pre><code>a = "aaa";
 b = "bbb";
 c = a + b;</code></pre>
 <p>
-	String + integer will be a string, but integer + string will be integer.
+  A string + an integer will be a string, but an integer + a string will be an integer.
 </p>
 
 <h3>For loop with a simple counter</h3>
 <p>
-	Repeats for the specified count:
+  Repeats for the specified count:
 </p>
 <pre><code>func main() {
     for(i in 0..9) {
@@ -177,7 +181,7 @@ c = a + b;</code></pre>
     }
 }</code></pre>
 
-<h3>Simple while loop:</h3>
+<h3>Simple "while" loop:</h3>
 <pre><code>func main() {
     a = 10;
     while (a &gt; 0) {
@@ -200,7 +204,7 @@ c = a + b;</code></pre>
 
 <h3>Branches</h3>
 <p>
-	if - else if - else
+  if - else if - else
 </p>
 <pre><code>func main() {
     a = foo();
@@ -219,18 +223,18 @@ func foo() {
 
 <h3>Array</h3>
 <p>
-	An array element has a key (index), and key can be one of integer, floating point, or string type.
-	Elements can have different key types in an array.
+  An array element has a key (index), and key can be one of these: integer, floating point, or string type.
+  Elements can have different key types in an array.
 </p>
 <p>
-	To make an array, assign a value to a variable by [key] syntax.
+  To make an array, assign a value to a variable by [key] syntax.
 </p>
 <pre><code>func main() {
     a[0] = 0;
     print(a);
 }</code></pre>
 <p>
-	To remove an array element, use remove().
+  To remove an array element, use remove().
 </p>
 <pre><code>func main() {
     a[0] = 0;
@@ -238,7 +242,7 @@ func foo() {
     print(a);
 }</code></pre>
 <p>
-	配列の要素数を取得するには、size() を使います。
+  You can use "size()" to get the number of array elements.
 </p>
 <pre><code>func main() {
     a[0] = 0;
@@ -247,56 +251,56 @@ func foo() {
 
 <h3>Type Conversion</h3>
 <p>
-	Integer to string:
+  Integer to string:
 </p>
 <pre><code>s = "" + 123;</code></pre>
 <p>
-	Floating point to string:
+  Floating point to string:
 </p>
 <pre><code>s = "" + 1.23;</code></pre>
 <p>
-	整数から浮動小数点数:
+  Integer to floating point:
 </p>
 <pre><code>f = 0.0 + 123;</code></pre>
 <p>
-	文字列から整数:
+  String to integer:
 </p>
 <pre><code>i = 0 + "123";</code></pre>
 <p>
-	文字列から浮動小数点数:
+  String to floating point:
 </p>
 <pre><code>f = 0.0 + "1.23";</code></pre>
 <p>
-	文法については以上です。
+  That's all about the grammer.
 </p>
 
 <h2>Calling OpenNovel Engine</h2>
 <p>
-	Main game engine provides some functions to the plugin language.
-	Those functions have the onvl_ prefix in their names.
+  Main game engine provides some functions to the plugin language.
+  Those functions have the onvl_ prefix in their names.
 </p>
 
 <h3>Getting a flag variable</h3>
 <p>
-	<code>onvl_get_variable()</code> is a function to get a flag value.
+  <code>onvl_get_variable()</code> is a function to get a flag value.
 </p>
 <pre><code>value = onvl_get_variable(100);</code></pre>
 
 <h3>Setting a flag value</h3>
 <p>
-	<code>onvl_set_variable()</code> is a function to set a flag value.
+  <code>onvl_set_variable()</code> is a function to set a flag value.
 </p>
 <pre><code>onvl_set_variable(100, 1);</code></pre>
 
 <h3>Getting a random number</h3>
 <p>
-	<code>onvl_random()</code> returns a random number of <code>0</code> to <code>9999</code>.
+  <code>onvl_random()</code> returns a random number between <code>0</code> and <code>9999</code>.
 </p>
 <pre><code>value = onvl_random();</code></pre>
 
 <h3>Overwriting a config</h3>
 <p>
-	<code>onvl_set_config()</code> overwrites a config.
+  <code>onvl_set_config()</code> overwrites a config.
 </p>
 <pre><code>onvl_set_config("msgbox.x", "0");
 onvl_set_config("msgbox.speed", "20.0");
@@ -306,10 +310,10 @@ onvl_set_config("msgbox.speed", "20.0");
 
 <h1 id="-">Usage</h1>
 <p>
-	Please copy and paste the following examples.
+  Please test the following examples.
 </p>
 
-<h2>Get a flag variable value, calc, then write back a flag</h2>
+<h2>Get a flag variable value, calculate, then write back a flag</h2>
 <pre><code>func main() {
     // Get variable values.
     a = onvl_get_variable(0);
@@ -325,7 +329,7 @@ onvl_set_config("msgbox.speed", "20.0");
 
 <h2>Getting real calendar date</h2>
 <p>
-	get-datetime.txt
+  get-datetime.txt
 </p>
 <pre><code>func main() {
     // Get date.
@@ -342,14 +346,14 @@ onvl_set_config("msgbox.speed", "20.0");
     onvl_set_variable(2, now_d);
 }</code></pre>
 <p>
-	In a story file:
+  In a story file:
 </p>
 <pre><code>@plugin get-datetime.txt
 
-@if $1 == 4 april
+@if $1 == 4 on_april
 @goto not_birthday
 
-:april
+:on_april
 @if $2 == 14 birthday
 @goto not_birthday
 
@@ -358,7 +362,7 @@ Happy birthday!
 @goto common
 
 :not_birthday
-Normal day.
+Regular date.
 
 :common
 # Common</code></pre>

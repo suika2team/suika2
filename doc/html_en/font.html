@@ -5,54 +5,57 @@
   <meta name="viewport" content="width=device-width">
   <title>OpenNovel</title>
   <link rel="stylesheet" href="../css/style.css">
+  <style>
+    code { background-color: #CF9; }
+  </style>
 </head>
 <body>
 <p>
-	You can specify up to 4 fonts in the <code>project.txt</code> file.
+  You can specify up to 4 fonts in the <code>project.txt</code> file.
 </p>
 <table>
-	<thead>
-		<tr>
-			<td>Font Type</td>
-			<td>Explanation</td>
-		</tr>
-	</thead>
-	<tbody>
-		<tr>
-			<td>Font 1</td>
-			<td>Default font to be selected at the config screen.</td>
-		</tr>
-		<tr>
-			<td>Font 2</td>
-			<td>A fixed font.</td>
-		</tr>
-		<tr>
-			<td>Font 3</td>
-			<td>A fixed font.</td>
-		</tr>
-		<tr>
-			<td>Font 4</td>
-			<td>A fixed font.</td>
-		</tr>
-	</tbody>
+  <thead>
+    <tr>
+      <td>Font Type</td>
+      <td>Explanation</td>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Font 1</td>
+      <td>Default font to be selected at the config screen.</td>
+    </tr>
+    <tr>
+      <td>Font 2</td>
+      <td>A fixed font.</td>
+    </tr>
+    <tr>
+      <td>Font 3</td>
+      <td>A fixed font.</td>
+    </tr>
+    <tr>
+      <td>Font 4</td>
+      <td>A fixed font.</td>
+    </tr>
+  </tbody>
 </table>
 
 <p>
-	You can choose a font for the message box as the following.
+  Choosing a message box font:
 </p>
 <pre><code># Choose Font 1
 @config msgbox.font 1</code></pre>
 <p>
-	You can choose fonts inside messages temporalily.
+  You can temporary choose fonts within messages.
 </p>
 <pre><code>In a message, \f{1}you can choose Font 1 like this.
 In a message, \f{2}you can choose Font 1 like this.
 In a message, \f{3}you can choose Font 1 like this.
 In a message, \f{3}you can choose Font 1 like this.</code></pre>
 <p>
-	Because Font 1 will be saved to the save file,
-	an error will be shown after changes to font file name of Font 1 in the <code>project.txt</code> file.
-	In that case, please remove your save files.
+  Because 'Font 1' is stored in the save file,
+  an error will be shown after changes to font file name of Font 1 in the <code>project.txt</code> file.
+  In that case, please remove your save files.
 </p>
 
 </body>

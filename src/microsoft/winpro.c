@@ -2,7 +2,7 @@
 
 /*
  * OpenNovel
- * Copyright (C) 2024, OpenNovel.Org. All rights reserved.
+ * Copyright (c) 2001-2024, OpenNovel.org. All rights reserved.
  */
 
 /*
@@ -62,7 +62,7 @@
 /* The version string. */
 #define VERSION_STRING 		\
 	"OpenNovel 1.0\n" \
-	"Copyright (c) 2024, OpenNovel.Org. All rights reserved.\n"
+	"Copyright (c) 2024, OpenNovel.org. All rights reserved.\n"
 
 /* The minimum window size. */
 #define WINDOW_WIDTH_MIN	(800)

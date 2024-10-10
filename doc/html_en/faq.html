@@ -5,12 +5,208 @@
   <meta name="viewport" content="width=device-width">
   <title>OpenNovel</title>
   <link rel="stylesheet" href="../css/style.css">
+  <style>
+    code { background-color: #CF9; }
+  </style>
 </head>
 <body>
 
+<h1>Comparison With Other Game Engines</h1>
+
+<h2>What are the features of OpenNovel?</h2>
+<ul>
+  <li>OpenNovel is one of the leading novel engines for iOS and Android;</li>
+  <li>On smartphones, OpenNovel does not employ Unity or other third-party engines;</li>
+  <li>OpenNovel provides a Unity version to enable home game console porting.</li>
+</ul>
+
+<h2>Is it possible to switch to OpenNovel from other engines?</h2>
+<ul>
+  <li>Switching works best if one plans to make creations for iOS and Android only.</li>
+</ul>
+
+<h2>Where can works made with OpenNovel be published?</h2>
+<ul>
+  <li>Windows / Web browsers
+  <ul>
+    <li>For beginners, OpenNovel recommends “<a href="https://freem.ne.jp/change_language/change/en" target="_blank">Freem!</a>”;</li>
+    <li>For advanced users, OpenNovel recommends publishing on “<a href="https://store.steampowered.com" target="_blank">Steam</a>” (Windows) and “<a href="https://itch.io" target="_blank">itch.io</a>” (Web browsers);</li>
+    <li>If a submitted project does not break any website rules, it should be eagerly accepted there.</li>
+  </ul>
+  </li>
+  <li>iPhone / iPad / Vision Pro
+    <ul>
+      <li>1. One may install an app on an Apple ID device (through Apple Development);</li>
+      <li>2. If a device ID is registered in advance, one may install an app with AirDrop for up to 100 devices (through Ad Hoc);</li>
+      <li>3. App Store publishing requires a comprehensive review of app contents by Apple (through App Store Connect).</li>
+    </ul>
+  </li>
+  <li>Android
+    <ul>
+      <li>An APK file may be uploaded to a suitable location (such as Google Drive) as an independent app;</li>
+      <li>It takes confirmations of many app testers to release one’s app on Google Play Store.</li>
+    </ul>
+  </li>
+  <li>Home game consoles
+    <ul>
+      <li>Register as a developer on game console websites and submit your work;</li>
+      <li>When filling out an application, specify “Unity” in the required “Middleware” and “Game Engine” fields;
+</li>
+      <li>Obtain a Unity release made for game consoles.</li>
+    </ul>
+  </li>
+</ul>
+
+<h2>Can features of other engines be implemented in OpenNovel?</h2>
 <p>
-	No English translation for this article.
+  That depends: For example, PCs are usually a hundred times more powerful than smartphones, thus, certain features must not be implemented in consideration of software porting.
 </p>
+
+<h1>Installation Issues</h1>
+
+<h2>The downloaded OpenNovel release does not run!</h2>
+<ul>
+  <li>It may be that antivirus software has mistakenly identified OpenNovel as a virus.</li>
+  <li>Solutions:
+    <ul>
+      <li>Do Windows update;</li>
+      <li>Update virus definition files;</li>
+      <li>Temporarily disable virus scanning;</li>
+      <li>Examine antivirus quarantined files and unmark OpenNovel;</li>
+      <li>Download OpenNovel to a different folder;</li>
+      <li>Install OpenNovel from a different folder;</li>
+      <li>Change the location of OpenNovel projects.</li>
+    </ul>
+  </li>
+</ul>
+
+<h1>Creating Works With OpenNovel</h1>
+
+<h2>Can multiple characters be displayed on a screen?</h2>
+<ul>
+  <li>That can be achieved through OpenNovel rendering system called <a href="ciel.html">Ciel</a> (similar to YU-RIS/ERIS engine);</li>
+  <li>For those who find Ciel too complicated, <a href="reference.html#chch"><code>@chch</code></a>  command should be used instead.</li>
+</ul>
+
+<h2>Can a message box stay displayed while a character is changed?</h2>
+<p>
+  Change =0 to =1 in the project.txt file (as in the following example): 
+</p>
+<pre><code>msgbox.show.on.ch=1</code></pre>
+
+<h2>Can a character’s face be displayed next to a message box?</h2>
+<p>
+  An image of a character can be displayed at a special position via <code>face</code> instruction. Note that fade-in&nbsp;/&nbsp;fade-out time specifications are ignored for such images.
+</p>
+<pre><code>@ch face filename.png</code></pre>
+
+<h2>Can facial expression changes be done using only face parts?</h2>
+<ul>
+  <li>For smartphones, such changes&nbsp;— considering loading time, memory use, and composing time&nbsp;— may be impracticable, therefore, these features have not been implemented.</li>
+</ul>
+
+<h2>Resolving font change issues:</h2>
+<ul>
+  <li>A font file name is recorded in the saved data, which may cause problems (such as not being able to change the font, or being told that a font file&nbsp;— that should not have been specified&nbsp;— cannot be opened).</li>
+  <li>This issue can be solved by closing the program, deleting “<code>save</code>” folder (saved data), and restarting the program.  </li>
+</ul>
+
+<h2>What are the steps to create a title screen?</h2>
+<p>
+  Please refer to “<a href="menu.html">How to Make a Menu Screen</a>” for the instructions.
+</p>
+
+<h2>What are the options for a protagonist’s name?</h2>
+<p>
+  One can enter up to twenty-six names (from “%a” to “%z”).
+</p>
+
+<h2>How to generate blinking eyes effect?</h2>
+<p>
+  Please refer to “<a href="eye-blink.html">Eye Blink</a>.”
+</p>
+
+<h2>How to produce lip synchronization?</h2>
+<p>
+  Please refer to “<a href="lip-sync.html">Lip Sync</a>.”
+</p>
+
+<h2>How to display dates and correspondences?</h2>
+<ul>
+  <li>Please use text layer and <a href="reference.html#text"><code>@text</code></a>.</li>
+</ul>
+
+<h2>How to apply a filter to the entire screen?</h2>
+<ul>
+  <li>Use the effect layer;</li>
+  <li>Cheap Android smartphones incapable of good image rendering are not recommended;</li>
+  <li>Try creating an image closest to the color filter applied.</li>
+</ul>
+
+<h2>Does OpenNovel has a macro function?</h2>
+<ul>
+  <li>Yes, there is <a href="reference.html#gosub"><code>@gosub</code></a> command available.</li>
+  <li>Apply <a href="reference.html#using"><code>using</code></a> instruction to place macros into an external file.</li>
+</ul>
+
+<h2>Does OpenNovel support CG viewing mode?</h2>
+<ul>
+  <li>Yes, using <a href="reference.html#menu"><code>@menu</code></a> command.</li>
+  <li>Specify in the button configuration&nbsp;— <code>type: gallery;</code> and variable (for example)&nbsp;— <code>var: $1;</code></li>
+  <li>If variable is 0, the button is not displayed;</li>
+  <li>If variable is not 0, the button is displayed.</li>
+</ul>
+
+<h2>Can a branch chart be created?</h2>
+<ul>
+  <li>Yes, using <a href="reference.html#menu"><code>@menu</code></a> command.</li>
+</ul>
+
+<h2>Can a full-screen project be produced?</h2>
+<p>
+  Yes.
+</p>
+
+<h2>Is it possible to center a ruby?</h2>
+<p>
+  Yes, it can be manually adjusted using half-width spaces (in fact, that is how professional developers do it). 
+</p>
+
+<h2>Does OpenNovel support multiple languages?</h2>
+<p>
+  Yes, please refer to “<a href="multilingual.html">Multilingualization</a>.”
+</p>
+
+<h2>Are there instructions on how to use plugin scripts?</h2>
+<p>
+  Yes, please refer to “<a href="plugin.html">Plugin Script</a>.”
+</p>
+
+<h2>What bit rate should be used for audio files?</h2>
+<ul>
+  <li>For PCs:
+    <ul>
+      <li>BGM&nbsp;— Stereo 128&nbsp;Kbps;</li>
+      <li>SE&nbsp;— Stereo 128&nbsp;Kbps;</li>
+      <li>Voice&nbsp;— Mono 64&nbsp;Kbps;</li>
+    </ul>
+  </li>
+  <li>For smartphones:
+    <ul>
+      <li>All Mono&nbsp;— 48&nbsp;Kbps;</li>
+      <li>Mono because there is usually only one speaker;</li>
+      <li>Stereo quality is inconsiderable for small speakers of smartphones, therefore, low bit rates are recommended to reduce one’s distribution size;</li>
+      <li>However, if earphones are to be used, the same settings as for PCs may be recommended so that one’s playback is unaffected. </li>
+    </ul>
+  </li>
+</ul>
+
+<h2>How to manage flags properly?</h2>
+<ul>
+  <li>Please name flags in your configuration file and comment on their purpose;</li>
+  <li>Over time, good project maintenance depends on that;</li>
+  <li>Comments should be phrased in such a way that they can be easily read and understood even a year later.</li>
+</ul>
 
 </body>
 </html>

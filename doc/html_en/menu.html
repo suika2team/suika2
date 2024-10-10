@@ -5,35 +5,38 @@
   <meta name="viewport" content="width=device-width">
   <title>OpenNovel</title>
   <link rel="stylesheet" href="../css/style.css">
+  <style>
+    code { background-color: #CF9; }
+  </style>
 </head>
 <body>
 
-<h1>How to make a menu screen</h1>
+<h1>How To Make A Menu Screen</h1>
 <p>
-	This page shows how to make a menu screen with OpenNovel.
+  This page shows how to make a menu screen with OpenNovel.
 </p>
 
 <h2>Introduction</h2>
 <p>
-	Let's dive into the sample game.
+  Let's dive into the sample project.
 </p>
 
-<h3>Calling site of the title screen</h3>
+<h3>Working with the title screen</h3>
 <p>
-	In the <code>story/story.txt</code> file, find a line that is described as <code>@menu title.txt</code>.
-	That is a menu calling site.
-	The title screen is realized by a menu script.
+  In the <code>story/story.txt</code> file, find <code>@menu title.txt</code>.
+  The title screen is created by @menu command invoking the contents of
+  title.txt file located within <code>script/menu</code> folder.
 </p>
 <p>
-	<code>title.txt</code> means the <code>script/menu/title.txt</code> file.
+  <code>title.txt</code> means the <code>script/menu/title.txt</code> file.
 </p>
 
 <h3>Contents of title.txt</h3>
 <p>
-	Open the <code>script/menu/title.txt</code> file.
-	At the top of the file, you will see:
+  Open the <code>script/menu/title.txt</code> file.
+  At the top of the file, you will see:
 </p>
-<pre><code># File Setting
+<pre><code># Setting
 global {
     # Use the following images.
     base:   title/idle.png;
@@ -41,68 +44,68 @@ global {
     hover:  title/hover.png;
     active: title/hover.png;
 
-    # Fading-in time (second)
+    # Fading-in time (seconds)
     fadein: 0.2;
 
-    # Fading-out time (second)
+    # Fading-out time (seconds)
     fadeout: 0.2;
 }</code></pre>
 
 <table>
-	<thead>
-		<tr>
-			<th>Specifier</th>
-			<th>Meaning</th>
-		</tr>
-	</thead>
-	<tbody>
-		<tr>
-			<td>base</td>
-			<td>
-				Back most layer.
-				If none is specified, stage layers (e.g. background and characters) will be shown.
-				If a file is specified, an image will be shown.
-			</td>
-		</tr>
-		<tr>
-			<td>idle</td>
-			<td>
-				An image to show when a button is not pointed my a mouse.
-			</td>
-		</tr>
-		<tr>
-			<td>hover</td>
-			<td>
-				An image to show when a button is pointed by a mouse.
-			</td>
-		</tr>
-		<tr>
-			<td>active</td>
-			<td>
-				Not used in a simple title screen.
-				Specify the same file as idle or hover.
-			</td>
-		</tr>
-		<tr>
-			<td>fadein</td>
-			<td>Fading-in time (second)</td>
-		</tr>
-		<tr>
-			<td>fadeout</td>
-			<td>Fading-out time (second)</td>
-		</tr>
-	</tbody>
+  <thead>
+    <tr>
+      <th>Command</th>
+      <th>Meaning</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>base</td>
+      <td>
+        General basic layer.
+        If none is specified, stage layers (e.g. background and characters) will be shown.
+        If a file is specified, an image will be shown.
+      </td>
+    </tr>
+    <tr>
+      <td>idle</td>
+      <td>
+        An image to show when a the mouse cursor is not over a button.
+      </td>
+    </tr>
+    <tr>
+      <td>hover</td>
+      <td>
+        An image to show when a button is pointed by a mouse.
+      </td>
+    </tr>
+    <tr>
+      <td>active</td>
+      <td>
+        Not used in a simple title screen.
+        Specify the same file as idle or hover.
+      </td>
+    </tr>
+    <tr>
+      <td>fadein</td>
+      <td>Fading-in time (second)</td>
+    </tr>
+    <tr>
+      <td>fadeout</td>
+      <td>Fading-out time (second)</td>
+    </tr>
+  </tbody>
 </table>
 
 <h3>About Images</h3>
 <ul>
-	<li>We use screen-sized images instead of per-button images.</li>
-	<li>To create those images, please use a painting software that has layer function.</li>
+  <li>We use screen-sized images instead of per-button images.</li>
+  <li>To create these images, please use painting software that supports image layers.</li>
 </ul>
 
 <h3>Structure of title.txt</h3>
 <p>
-	<code>title.txt</code> has 3 button blocks.
+  <code>title.txt</code> has 3 button blocks.
 </p>
 <pre><code>START {
     ...
@@ -113,10 +116,6 @@ LOAD {
 }
 
 CONFIG {
-    ...
-}
-
-QUIT {
     ...
 }</code></pre>
 
@@ -144,27 +143,27 @@ START {
 
 <h3>type: goto;</h3>
 <p>
-	<code>type: goto;</code> means a goto jump will occur when the button is clicked.
+  <code>type: goto;</code> means a goto jump will occur when the button is clicked.
 </p>
 <p>
-	<code>label: START;</code> means the jump destination is <code>:START</code>.
+  <code>label: START;</code> means the jump destination is <code>:START</code>.
 </p>
 
 <h3>Position and Size</h3>
 <p>
-	Please check the position and the size on <code>Photoshop</code>, <code>CLIP STUDIO PAINT</code>, or equivalent tools.
+  Please check the position and size in <code>Photoshop</code>, <code>CLIP STUDIO PAINT</code>, or similar software.
 </p>
 
 <h2>Color Adjustments</h2>
 <p>
-	If a fringe is shown on a save/load/history slot, please add the following settings.
+  If a fringe is shown in a save/load/history slot, please add the following settings.
 </p>
 <pre><code># Clear color
 clear-r: 255;
 clear-g: 255;
 clear-b: 255;</code></pre>
 <p>
-	Sample:
+  Sample:
 </p>
 <pre><code># Save data slot #1
 SAVESLOT1 {
@@ -195,6 +194,18 @@ SAVESLOT1 {
    clickse: click.ogg;
 
 }</code></pre>
+
+<h3>pointse:</h3>
+<p>
+  <code>pointse: btn-change.ogg;</code> indicates a sound effect file is
+  played back when the mouse cursor enters the button.
+</p>
+
+<h3>clickse:</h3>
+<p>
+  <code>clickse: click.ogg;</code> indicates a sound effect file is
+  played back when the button is clicked.
+</p>
 
 </body>
 </html>

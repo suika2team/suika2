@@ -79,7 +79,7 @@
 
 /*
  * Watermelon Script
- * Copyright (c) 2022, OpenNovel.Org. All rights reserved.
+ * Copyright (c) 2022, OpenNovel.org. All rights reserved.
  */
 #include <stdio.h>
 #include "wms_core.h"

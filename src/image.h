@@ -2,7 +2,7 @@
 
 /*
  * OpenNovel
- * Copyright (C) 2024, OpenNovel.Org. All rights reserved.
+ * Copyright (c) 2001-2024, OpenNovel.org. All rights reserved.
  */
 
 /*

@@ -2,7 +2,7 @@
 
 /*
  * OpenNovel
- * Copyright (C) 2024, The Authors. All rights reserved.
+ * Copyright (c) 2001-2024, OpenNovel.org. All rights reserved.
  */
 
 #import "ViewController.h"
@@ -545,7 +545,7 @@ static const char *get_ui_message(int id);
 
 - (IBAction)onAbout:(id)sender {
     NSAlert *alert = [[NSAlert alloc] init];
-    [alert setMessageText:@"OpenNovel\nCopyright (C) 2024, The Authors. All rights reserved."];
+    [alert setMessageText:@"OpenNovel\nCopyright (c) 2001-2024, OpenNovel.org. All rights reserved."];
     [alert setAlertStyle:NSAlertStyleInformational];
     [alert runModal];
 }

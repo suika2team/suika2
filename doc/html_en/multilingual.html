@@ -5,94 +5,96 @@
   <meta name="viewport" content="width=device-width">
   <title>OpenNovel</title>
   <link rel="stylesheet" href="../css/style.css">
+  <style>
+    code { background-color: #CF9; }
+  </style>
 </head>
 <body>
 
 <h1>Multilingualization</h1>
 <p>
-	In a story file, you can write a message with a language specifier.
+  In a story file, you can write a message with a language specifier.
 </p>
 
 <pre><code>+en+This is an English message.
 +ja+日本語のメッセージです。</code></pre>
 
 <p>
-	Do the same thing for a line with a name.
+  The same rule applies to lines with characters' names.
 </p>
 
 <pre><code>+en+*Hina*This is an English message.
 +ja+*ひな*日本語のメッセージです。</code></pre>
 
 <p>
-	<code>+en+</code> means a message will be shown only if the system locale is English.
+  <code>+en+</code> means a message will be shown only if the system locale is English.
 </p>
 <p>
-	Available languages are the following.
+  Available languages are the following.
 </p>
 
 <table>
-	<thead>
-		<tr>
-			<th>ID</th>
-			<th>Language</th>
-		</tr>
-	</thead>
-	<tbody>
-		<tr>
-			<td>ja</td>
-			<td>Japanese</td>
-		</tr>
-		<tr>
-			<td>en</td>
-			<td>English</td>
-		</tr>
-		<tr>
-			<td>fr</td>
-			<td>French</td>
-		</tr>
-		<tr>
-			<td>it</td>
-			<td>Italian</td>
-		</tr>
-		<tr>
-			<td>es</td>
-			<td>Spanish</td>
-		</tr>
-		<tr>
-			<td>de</td>
-			<td>Deutsch</td>
-		</tr>
-		<tr>
-			<td>el</td>
-			<td>Greek</td>
-		</tr>
-		<tr>
-			<td>ru</td>
-			<td>Russian</td>
-		</tr>
-		<tr>
-			<td>zh</td>
-			<td>Chinese (Simplified)</td>
-		</tr>
-		<tr>
-			<td>tw</td>
-			<td>Chinese (Traditional)</td>
-		</tr>
-		<tr>
-			<td>other</td>
-			<td>Other languages</td>
-		</tr>
-	</tbody>
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Language</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>ja</td>
+      <td>Japanese</td>
+    </tr>
+    <tr>
+      <td>en</td>
+      <td>English</td>
+    </tr>
+    <tr>
+      <td>fr</td>
+      <td>French</td>
+    </tr>
+    <tr>
+      <td>it</td>
+      <td>Italian</td>
+    </tr>
+    <tr>
+      <td>es</td>
+      <td>Spanish</td>
+    </tr>
+    <tr>
+      <td>de</td>
+      <td>Deutsch</td>
+    </tr>
+    <tr>
+      <td>el</td>
+      <td>Greek</td>
+    </tr>
+    <tr>
+      <td>ru</td>
+      <td>Russian</td>
+    </tr>
+    <tr>
+      <td>zh</td>
+      <td>Chinese (Simplified)</td>
+    </tr>
+    <tr>
+      <td>tw</td>
+      <td>Chinese (Traditional)</td>
+    </tr>
+    <tr>
+      <td>other</td>
+      <td>Other languages</td>
+    </tr>
+  </tbody>
 </table>
 
 <p>
-	If you want to make a language choose inside a game, write:
+  If you wish to make a language selection while running a visual novel, write:
 </p>
 <pre><code>@config locale.force en</code></pre>
 <p>
-	This will force-set the current language.
+  This will force-set the current language.
 </p>
 
 </body>
 </html>
-

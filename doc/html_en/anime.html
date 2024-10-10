@@ -5,19 +5,21 @@
   <meta name="viewport" content="width=device-width">
   <title>OpenNovel</title>
   <link rel="stylesheet" href="../css/style.css">
+  <style>
+    code { background-color: #CF9; }
+  </style>
 </head>
 <body>
 
 <h1>Anime</h1>
-
 <p>
-	The command <a href="referene.html#anime"><code>@anime</code></a> plays an anime script.
-	An anime script contains sequences of animation.
+  The command <a href="reference.html#anime"><code>@anime</code></a> plays an anime script.
+  An anime script contains sequences of animation.
 </p>
 
 <h2>Sequence</h2>
 <p>
-	To move the message box 100px right in a second, write the following sequence in an anime script.
+  To move the message box 100px right in a second, write the following sequence in an anime script.
 </p>
 <pre><code>move {
     # This is a layer specifier.
@@ -38,13 +40,13 @@
     to-x: +100;
     to-y: +0;
 
-    # This is an final alpha specifier.
+    # This is a final alpha specifier.
     to-a: 255;
 }</code></pre>
 
 <h2>Layer Structure</h2>
 <p>
-	We have a layer structure and the layers are the following.
+  The layer structure and its layers are the following.
 </p>
 <pre><code>text8
 text7
@@ -80,8 +82,8 @@ bg2  (second background)
 bg   (background)</code></pre>
 
 <p>
-	<code>effect1-effect4</code> is typically for weather animations.
-	<code>text1-text8</code> are layers to draw text using the <a href="referene.html#text"><code>@text</code></a> command.
+  <code>effect1-effect4</code> are typically for weather animations.
+  <code>text1-text8</code> are layers to draw text using the <a href="reference.html#text"><code>@text</code></a> command.
 </p>
 
 <h2>Scaling and Rotation</h2>
@@ -142,36 +144,36 @@ test2 {
 
 <h2>Resetting Anime</h2>
 <p>
-	You can use the <code>@anime reset</code> command to reset animation parameters.
+  You can use the <code>@anime reset</code> command to reset animation parameters.
 </p>
 <pre><code>@anime reset layer-bg,xy,scale,rotate
 @anime reset layer-chc,xy,scale,rotate
 @anime reset layer-all,xy,scale,rotate</code></pre>
 
 <p>
-	<code>layer-bg</code> means resetting the background layer parameters.
-	<code>layer-chc</code> means resetting the center character layer parameters.
-	<code>layer-all</code> means resetting all layer parameters.
+  <code>layer-bg</code> means resetting the background layer parameters.
+  <code>layer-chc</code> means resetting the center character layer parameters.
+  <code>layer-all</code> means resetting all layer parameters.
 
-	<code>xy</code> means resetting x and y parameters.
-	<code>scale</code> means resetting scaling parameters.
-	<code>rotate</code> means resetting rotation parameters.
+  <code>xy</code> means resetting x and y parameters.
+  <code>scale</code> means resetting scaling parameters.
+  <code>rotate</code> means resetting rotation parameters.
 
-	For example, the following resets the scale factor of the background.
+  For example, the following resets the scale factor of the background.
 </p>
 <pre><code>@anime reset layer-bg,scale</code></pre>
 
 <h2>Clearing Anime</h2>
 <p>
-	If you want to force-quit an anime of a specific layer, use the <code>@anime clear</code> command.
+  If you want to force-quit an anime of a specific layer, use the <code>@anime clear</code> command.
 </p>
 <pre><code>@anime clear layer-bg,layer-chc</code></pre>
 <p>
-	If you want to wait until all anime finish, use the <code>@anime finish-all</code> command.
+  If you want to wait until all anime finish, use the <code>@anime finish-all</code> command.
 </p>
 <pre><code>@anime finish-all</code></pre>
 <p>
-	If you want to cancel all the animations, use the <code>layer-all</code> option.
+  If you want to cancel all animations, use the <code>layer-all</code> option.
 </p>
 <pre><code>@anime clear layer-all</code></pre>
 

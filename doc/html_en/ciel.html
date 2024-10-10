@@ -5,21 +5,24 @@
   <meta name="viewport" content="width=device-width">
   <title>OpenNovel</title>
   <link rel="stylesheet" href="../css/style.css">
+  <style>
+    code { background-color: #CF9; }
+  </style>
 </head>
 <body>
 
 <h1>About Ciel</h1>
 <p>
-	<code>Ciel</code> is a system of direction commands influenced by a visual novel engine <code>YU-RIS/ERIS</code>.
+  <code>Ciel</code> is a system of direction commands influenced by the visual novel engine <code>YU-RIS/ERIS</code>.
 </p>
 <p>
-	Because Ciel is very different from the normal commands, you cannot use the following commands with Ciel.
+  Because Ciel is very different from the regular commands, you cannot use the following commands with Ciel.
 </p>
 <ul>
-	<li><a href="reference.html#bg"><code>@bg</code></a></li>
-	<li><a href="reference.html#ch"><code>@ch</code></a></li>
-	<li><a href="reference.html#move"><code>@move</code></a></li>
-	<li><a href="reference.html#chch"><code>@chch</code></a></li>
+  <li><a href="reference.html#bg"><code>@bg</code></a></li>
+  <li><a href="reference.html#ch"><code>@ch</code></a></li>
+  <li><a href="reference.html#move"><code>@move</code></a></li>
+  <li><a href="reference.html#chch"><code>@chch</code></a></li>
 </ul>
 
 <h2>Usage</h2>
@@ -45,63 +48,63 @@
 
 <h2>Command List</h2>
 <table>
-	<thead>
-		<tr>
-			<th>Command</th>
-			<th>Role</th>
-		</tr>
-	</thead>
-	<tbody>
-		<tr>
-			<td>@cl.enter name=NAME</td>
-			<td>Let a character enter to the stage. The name will be valid until a leave.</td>
-		</tr>
-		<tr>
-			<td>@cl.leave name=NAME</td>
-			<td>Let a character leave from the stage. If name=all, all characters will leave.</td>
-		</tr>
-		<tr>
-			<td>@cl.file name=NAME file=chara001.png</td>
-			<td>Specify an image file to a character. If name=bg, a background will be changed.</td>
-		</tr>
-		<tr>
-			<td>@cl.pos name=NAME align=left x+=100</td>
-			<td>Specify a position of a character. Use align=, valign=, x=, x+=, x-=, y=, y+=, and y-=.</td>
-		</tr>
-		<tr>
-			<td>@cl.alpha name=NAME a=255</td>
-			<td>Specify an alpha value of a character.</td>
-		</tr>
-		<tr>
-			<td>@cl.dim name=NAME dim=true</td>
-			<td>Specify a character dimming. Use dim=true or dim=false.</td>
-		</tr>
-		<tr>
-			<td>@cl.time t=0.5</td>
-			<td>Specify a time for fading or anime.</td>
-		</tr>
-		<tr>
-			<td>@cl.effect effect=normal</td>
-			<td>Specify a type of fading.</td>
-		</tr>
-		<tr>
-			<td>@cl.move name=NAME t=0.5 x+=100</td>
-			<td>Queue an anime. Use x=, x+=, x-=, y=, y+=, y-=, and a=</td>
-		</tr>
-		<tr>
-			<td>@cl.run</td>
-			<td>Run a fading or an anime. If a move exists, the command will be an anime. Otherwise, it will be a fading.</td>
-		</tr>
-		<tr>
-			<td>@cl.async</td>
-			<td>Run an anime asynchronously and move to the next command.</td>
-		</tr>
-	</tbody>
+  <thead>
+    <tr>
+      <th>Command</th>
+      <th>Role</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>@cl.enter name=NAME</td>
+      <td>Let a character enter the stage. The name will be valid until that character leaves.</td>
+    </tr>
+    <tr>
+      <td>@cl.leave name=NAME</td>
+      <td>Let a character leave the stage. If name=all, all characters will leave.</td>
+    </tr>
+    <tr>
+      <td>@cl.file name=NAME file=chara001.png</td>
+      <td>Assign an image file to a character. If name=bg, the background will be changed.</td>
+    </tr>
+    <tr>
+      <td>@cl.pos name=NAME align=left x+=100</td>
+      <td>Specify a position of a character. Use align=, valign=, x=, x+=, x-=, y=, y+=, and y-=.</td>
+    </tr>
+    <tr>
+      <td>@cl.alpha name=NAME a=255</td>
+      <td>Specify an alpha value of a character.</td>
+    </tr>
+    <tr>
+      <td>@cl.dim name=NAME dim=true</td>
+      <td>Specify a character dimming. Use dim=true or dim=false.</td>
+    </tr>
+    <tr>
+      <td>@cl.time t=0.5</td>
+      <td>Specify a time for fading or anime.</td>
+    </tr>
+    <tr>
+      <td>@cl.effect effect=normal</td>
+      <td>Specify a type of fading.</td>
+    </tr>
+    <tr>
+      <td>@cl.move name=NAME t=0.5 x+=100</td>
+      <td>Queue an anime. Use x=, x+=, x-=, y=, y+=, y-=, and a=</td>
+    </tr>
+    <tr>
+      <td>@cl.run</td>
+      <td>Run a fading or an anime. If a move exists, the command will be an anime. Otherwise, it will be a fading.</td>
+    </tr>
+    <tr>
+      <td>@cl.async</td>
+      <td>Run an anime asynchronously and move to the next command.</td>
+    </tr>
+  </tbody>
 </table>
 
 <h2>Example of Anime</h2>
 <p>
-	This will move a character <code>hina</code>.
+  This will move <code>hina</code>.
 </p>
 <pre><code>@cl.move name=hina t=0.3 y-=100
 @cl.move name=hina t=0.3 y+=100
@@ -109,17 +112,17 @@
 @cl.move name=hina t=0.3 y+=100
 @cl.run</code></pre>
 <p>
-	You can use <code>@cl.async</code> instead of <code>@cl.run</code> in order to show anime without waiting for a finish of it.
+  You can use <code>@cl.async</code> instead of <code>@cl.run</code> in order to show anime without waiting for it to finish.
 </p>
 
 <h2>Macro</h2>
 <p>
-	Ciel must be used with <code>@gosub</code>, or its abbreviated for.
+  Ciel must be used with <code>@gosub</code>, or its abbreviation.
 </p>
 <pre><code>&amp;hina happy</code></pre>
 <p>
-	Macro should be defined as the following.
-	(Arguments are able to be reffered as <code>&amp;1</code>)
+  Macro should be defined as the following.
+  (Arguments should be reffered to as <code>&amp;1</code>)
 </p>
 <pre><code>:hina
 @cl.file name=hina file=001-&amp;1.png
