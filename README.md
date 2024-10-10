@@ -3,6 +3,8 @@ Suika2/OpenNovel
 Suika2/OpenNovel is the #1, world leading, and mobile-first visual novel engine.
 Witness the dawn of the new era we are pioneering!
 
+This project is a fork from the original Suika2 Visual Novel Engine and [Polaris Engine](https://github.com/polaris-engine-foundation/polaris-engine). 
+
 ## Platforms
 Do you understand that no such engine has ever existed before?
 Amazingly, OpenNovel supports all of the following right out of the box!
