@@ -4,8 +4,7 @@ Suika2 - An OpenNovel.org Engine
 Suika2 is a very portable and mobile-friendly visual novel engine with
 an integrated GUI editor.
 
-This project is a fork from the original Suika2 Visual Novel Engine
-and [Polaris Engine](https://github.com/polaris-engine-foundation/polaris-engine).
+This project is a fork of Suika2 17.0 and Polaris Engine 2.0.
 
 ## Platforms
 
@@ -60,11 +59,6 @@ Suika2 has an easy-to-use IDE. There are three benefits to use it.
 The editor in the IDE is not perfect, so please consider using your
 favorite editor with the IDE.  Even if you use an other editor mainly,
 you can receive benefits from the IDE by using it supplimentary.
-
-## Developers
-
-The current developers are Maiku and Tenshi.  Maiku is from Japan, and
-Tenshi is from Taiwan.
 
 ## Contact
 
