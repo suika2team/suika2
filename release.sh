@@ -56,13 +56,6 @@ cd ../../
 cp apps/pro-windows/editor.exe "$TARGET_DIR/editor.exe"
 echo '...Done building the Windows editor.'
 
-echo 'Building the Windows pack tool...'
-cd apps/pack-windows
-make pack.exe
-cd ../..
-cp apps/pack-windows/pack.exe "$TARGET_DIR/tools/pack-win.exe"
-echo '...Done building the Windows pack tool.'
-
 echo 'Building the Windows web-test tool...'
 cd apps/web-test
 make web-test.exe
