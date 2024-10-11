@@ -1,13 +1,18 @@
 <html><head></head><body><ul><!-- -*- mode: html-mode; -*-
 
 <!-- BEGIN-LATEST -->
+<li>Suika2 22.0.4 2024/10/12
+  <ul>
+    <li>Fixed a crash bug of the Unity version</li>
+  </ul>
+</li>
+<!-- END-LATEST -->
+
 <li>Suika2 22.0.3 2024/10/12
   <ul>
     <li>sample: added Midori</li>
   </ul>
 </li>
-<!-- END-LATEST -->
-
 <li>Suika2 22.0.2 2024/10/11
   <ul>
     <li>Updated the documents</li>
