@@ -21,20 +21,22 @@
 
 背景を表示します。
 
-@bg sakura.png 0.5
+@bg coast.png 0.5
 
 キャラを表示します。
 
-@ch center chara001.png 0.5
+@ch center 001-happy.png 0.5
 
 キャラ「セリフのテストです。カギカッコで囲うと名前表示がつきます。」
 
-選択肢のテストです。
+選択肢のテストです。背景を変更しますか？
 
 @choose YES "はい" NO "いいえ"
 
 :YES
 はいが選択されました。
+背景を変更します。
+@bg roof.png 0.5
 @goto END_CHOOSE
 
 :NO
@@ -43,3 +45,4 @@
 :END_CHOOSE
 
 終了します。
+@goto START
