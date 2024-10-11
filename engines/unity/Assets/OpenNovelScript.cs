@@ -1382,8 +1382,10 @@ public class OpenNovelScript : MonoBehaviour
     // HAL helpers
     //
 
-    static unsafe string _saveFile;
-    static unsafe string _saveData;
+    private static unsafe string _saveFile;
+    private static unsafe byte[] _saveData;
+    private static int _saveSize;
+    private static int SAVE_DATA_MAX = 10 * 1024 * 1024;
 
     [AOT.MonoPInvokeCallback(typeof(delegate_free_shared))]
     static unsafe void free_shared(IntPtr p)
@@ -1395,7 +1397,7 @@ public class OpenNovelScript : MonoBehaviour
     static unsafe int check_file_exist(byte *pFileName)
     {
         string FileName = BytePtrToString(pFileName);
-        if (FileName.StartsWith("sav/"))
+        if (FileName.StartsWith("save/"))
         {
             string s = PlayerPrefs.GetString(FileName.Split("/")[1], "");
             if (s == "")
@@ -1415,17 +1417,17 @@ public class OpenNovelScript : MonoBehaviour
     {
         IntPtr ret = IntPtr.Zero;
         string FileName = BytePtrToString(pFileName);
-        if (FileName.StartsWith("sav/"))
+        if (FileName.StartsWith("save/"))
         {
             string s = PlayerPrefs.GetString(FileName.Split("/")[1], "");
             if (s == "")
                 return IntPtr.Zero;
-            byte[] base64Utf8 = Convert.FromBase64String(s);
-            if (base64Utf8 == null)
+            byte[] decoded = Convert.FromBase64String(s);
+            if (decoded == null)
                 return IntPtr.Zero;
-            ret = Marshal.AllocCoTaskMem(base64Utf8.Length);
-            Marshal.Copy(base64Utf8, 0, ret, base64Utf8.Length);
-            *len = base64Utf8.Length;
+            ret = Marshal.AllocCoTaskMem(decoded.Length);
+            Marshal.Copy(decoded, 0, ret, decoded.Length);
+            *len = decoded.Length;
         }
         else
         {
@@ -1469,20 +1471,19 @@ public class OpenNovelScript : MonoBehaviour
 
     [AOT.MonoPInvokeCallback(typeof(delegate_open_save_file))]
     static unsafe void open_save_file(byte *pFileName) {
-        _saveFile = BytePtrToString(pFileName).Split("/")[1];
-        _saveData = "";
+        _saveFile = BytePtrToString(pFileName);
+        _saveData = new byte[SAVE_DATA_MAX];
+		_saveSize = 0;
     }
 
     [AOT.MonoPInvokeCallback(typeof(delegate_write_save_file))]
     static unsafe void write_save_file(int b) {
-        byte[] InArray = new byte[1];
-        char[] OutArray = new char[1];
-        InArray[0] = (byte)(b & 0xff);
-        _saveData = _saveData + Convert.ToBase64CharArray(InArray, 0, 1, OutArray, 0, 0).ToString();
+        _saveData[_saveSize++] = (byte)b;
     }
 
     [AOT.MonoPInvokeCallback(typeof(delegate_close_save_file))]
     static unsafe void close_save_file() {
-        string s = PlayerPrefs.GetString(_saveFile, _saveData);
+        string val = Convert.ToBase64String(_saveData, 0, _saveSize);
+        string old = PlayerPrefs.GetString(_saveFile, val);
     }
 }
