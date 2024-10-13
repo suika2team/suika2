@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>Suika2 By OpenNovel.org Manual</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<h1>Eye Blinking</h1>
+
+<p>
+  An eye blinking image must be stored in the "eye" folder that is located in the same folder as the main character image exists.
+</p>
+<ul>
+  <li>happy.png (main character file)</li>
+  <li>eye
+    <ul>
+      <li>happy.png (eye blinking file)</li>
+    </ul>
+  </li>
+</ul>
+
+<p>
+  An eye blinking image consists of image(s) of eye blinking difference(s).
+  A frame must be as the same size as the main character image is.
+  Frames must be stored horizontally in the left to right order.
+</p>
+<p>
+  Alpha values on borders must be smoothed.
+  Please use "Blur Selected" and "Delete" in an image editing software.
+</p>
+<p>
+  The eye blinking interval may be specified in the <code>project.txt</code> file.
+  Intervals are slightly randomized, and sometimes double-blinkings are occured.
+</p>
+<pre><code>#
+# Eye blinking interval (seconds)
+#
+character.eyeblink.interval=4.0
+
+#
+# Eye blining frame length (seconds per frame)
+#
+character.eyeblink.frame=0.15</code></pre>
+
+
+</body>
+</html>

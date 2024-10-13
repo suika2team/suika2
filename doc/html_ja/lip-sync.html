@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ja-JP">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>Suika2 By OpenNovel.org マニュアル</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<h1>口パク</h1>
+
+<p>
+  口パク画像ファイルは、キャラクタ本体画像と同じフォルダの中に、<code>lip</code> というフォルダを作って格納します。
+</p>
+<ul>
+  <li>happy.png (本体ファイル)</li>
+  <li>lip
+    <ul>
+      <li>happy.png (口パクファイル)</li>
+    </ul>
+  </li>
+</ul>
+
+<p>
+  口パクファイルは、口パクのフレーム数の分だけ、キャラの口の差分を横につなげたものです。
+  １フレームの幅と高さは、本体ファイルの幅と同じにします。
+</p>
+<p>
+  差分の境界の透明度は、なめらかにする必要があります。
+  画像編集ツールで、選択範囲のぼかしと削除を利用してください。
+</p>
+<p>
+  口パクの間隔は、<code>project.txt</code> の下記の箇所で変更できます。
+</p>
+<pre><code>#
+# 口パクの1フレームの秒数
+#
+character.lipsync.frame=0.3
+
+#
+# 口パクを何文字ごとに行うか
+#
+character.lipsync.chars=3</code></pre>
+
+</body>
+</html>

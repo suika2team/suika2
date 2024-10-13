@@ -167,6 +167,12 @@ make
 cp suika2-installer.exe "$TARGET_EXE"
 cd ../..
 
+rm -rf apps/installer-windows/engine.exe
+rm -rf apps/installer-windows/editor.exe
+rm -rf apps/installer-windows/manual
+rm -rf apps/installer-windows/sample
+rm -rf apps/installer-windows/tools
+
 echo '...Done making an installer.'
 echo ''
 

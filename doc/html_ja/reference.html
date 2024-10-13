@@ -4,10 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width">
   <title>Suika2 By OpenNovel.org マニュアル</title>
-  <link rel="stylesheet" href="../css/style.css">
-  <style>
-    code { background-color: #CF9; }
-  </style>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
@@ -15,59 +12,59 @@
 
 <h2>索引</h2>
 <ul>
-	<li><a href="#about">命令とは</a></li>
-	<li>画面表示系の命令
-		<ul>
-			<li><a href="#message">メッセージ</a></li>
-			<li><a href="#serif">セリフ</a></li>
-			<li><a href="#bg">@bg 背景の表示</a></li>
-			<li><a href="#ch">@ch キャラの表示</a></li>
-			<li><a href="#chch">@chch 複数キャラと背景の一括変更</a></li>
-			<li><a href="#move">@move キャラの移動</a></li>
-			<li><a href="#shake">@shake 画面を揺らす</a></li>
-			<li><a href="#video">@video 動画の再生</a></li>
-			<li><a href="#anime">@anime アニメーションの表示</a></li>
-			<li><a href="#layer">@layer レイヤーへの画像読み込み</a></li>
-			<li><a href="#text">@text テキストレイヤへの描画</a></li>
-		</ul>
-	</li>
-	<li>音声再生系の命令
-		<ul>
-			<li><a href="#music">@music BGMの再生</a></li>
-			<li><a href="#sound">@sound SEの再生</a></li>
-			<li><a href="#@volume">@volume ボリュームの変更</a></li>
-		</ul>
-	</li>
-	<li>選択肢表示系の命令
-		<ul>
-			<li><a href="#choose">@choose 選択肢の表示</a></li>
-			<li><a href="#ichoose">@ichoose インライン選択肢の表示</a></li>
-			<li><a href="#menu">@menu メニューの表示</a></li>
-		</ul>
-	</li>
-	<li>ウェイト系の命令
-		<ul>
-			<li><a href="#click">@click クリックされるまで待機</a></li>
-			<li><a href="#time">@time 指定した時間だけ待機</a></li>
-			<li><a href="#skip">@skip ウェイトのスキップを禁止</a></li>
-		</ul>
-	</li>
-	<li>シナリオ分岐系の命令
-		<ul>
-			<li><a href="#ラベル">ラベル</a></li>
-			<li><a href="#goto">@goto ラベルにジャンプ</a></li>
-			<li><a href="#set">@set 変数に値を設定</a></li>
-			<li><a href="#if">@if 変数の値でジャンプ</a></li>
-			<li><a href="#story">@story ストーリーファイルにジャンプ</a></li>
-			<li><a href="#chapter">@chapter 章のタイトルを設定</a></li>
-		</ul>
-	</li>
-	<li>システム系の命令
-		<ul>
-			<li><a href="#config">@config コンフィグの書き換え</a></li>
-			<li><a href="#using">using マクロの取り込み</a></li>
-		</ul>
-	</li>
+  <li><a href="#about">命令とは</a></li>
+  <li>画面表示系の命令
+    <ul>
+      <li><a href="#message">メッセージ</a></li>
+      <li><a href="#serif">セリフ</a></li>
+      <li><a href="#bg">@bg 背景の表示</a></li>
+      <li><a href="#ch">@ch キャラの表示</a></li>
+      <li><a href="#chch">@chch 複数キャラと背景の一括変更</a></li>
+      <li><a href="#move">@move キャラの移動</a></li>
+      <li><a href="#shake">@shake 画面を揺らす</a></li>
+      <li><a href="#video">@video 動画の再生</a></li>
+      <li><a href="#anime">@anime アニメーションの表示</a></li>
+      <li><a href="#layer">@layer レイヤーへの画像読み込み</a></li>
+      <li><a href="#text">@text テキストレイヤへの描画</a></li>
+    </ul>
+  </li>
+  <li>音声再生系の命令
+    <ul>
+      <li><a href="#music">@music BGMの再生</a></li>
+      <li><a href="#sound">@sound SEの再生</a></li>
+      <li><a href="#@volume">@volume ボリュームの変更</a></li>
+    </ul>
+  </li>
+  <li>選択肢表示系の命令
+    <ul>
+      <li><a href="#choose">@choose 選択肢の表示</a></li>
+      <li><a href="#ichoose">@ichoose インライン選択肢の表示</a></li>
+      <li><a href="#menu">@menu メニューの表示</a></li>
+    </ul>
+  </li>
+  <li>ウェイト系の命令
+    <ul>
+      <li><a href="#click">@click クリックされるまで待機</a></li>
+      <li><a href="#time">@time 指定した時間だけ待機</a></li>
+      <li><a href="#skip">@skip ウェイトのスキップを禁止</a></li>
+    </ul>
+  </li>
+  <li>シナリオ分岐系の命令
+    <ul>
+      <li><a href="#label">ラベル</a></li>
+      <li><a href="#goto">@goto ラベルにジャンプ</a></li>
+      <li><a href="#set">@set 変数に値を設定</a></li>
+      <li><a href="#if">@if 変数の値でジャンプ</a></li>
+      <li><a href="#story">@story ストーリーファイルにジャンプ</a></li>
+      <li><a href="#chapter">@chapter 章のタイトルを設定</a></li>
+    </ul>
+  </li>
+  <li>システム系の命令
+    <ul>
+      <li><a href="#config">@config コンフィグの書き換え</a></li>
+      <li><a href="#using">using マクロの取り込み</a></li>
+    </ul>
+  </li>
 </ul>
 
 <hr>
@@ -75,12 +72,12 @@
 <a name="about">
 <h2>命令とは</h2>
 <p>
-	命令とは、<code>OpenNovel</code> を使ってゲームを作る上で必要なもので、
-	<code>OpenNovel</code> に対する指示のことです。
-	ほとんどの命令は <code>@</code> マークから始まります。
+  命令とは、<code>OpenNovel</code> を使ってゲームを作る上で必要なもので、
+  <code>OpenNovel</code> に対する指示のことです。
+  ほとんどの命令は <code>@</code> マークから始まります。
 </p>
 <p>
-	命令の名前を覚える必要はなく、このページを見ながら書いたり、一度使ったものをコピペして使うなどしてください。
+  命令の名前を覚える必要はなく、このページを見ながら書いたり、一度使ったものをコピペして使うなどしてください。
 </p>
 
 <hr>
@@ -92,25 +89,25 @@
 @anime [file=ファイル名] (オプション群)</code></pre>
 
 <p>
-	アニメスクリプトを実行します。
-	アニメはレイヤーの移動・拡大・縮小・回転に使います。
-	アニメスクリプトはフォルダ <code>script/anime</code> に配置する必要があります。
+  アニメスクリプトを実行します。
+  アニメはレイヤーの移動・拡大・縮小・回転に使います。
+  アニメスクリプトはフォルダ <code>script/anime</code> に配置する必要があります。
 </p>
 <p>
-	レイヤーに画像を読み込むには <a href="#layer">@layer</a> コマンドを利用してください。
+  レイヤーに画像を読み込むには <a href="#layer">@layer</a> コマンドを利用してください。
 </p>
 
 <h3>使い方1</h3>
 <p>
-	<code>script/anime/anime1.txt</code> を再生します。
-	再生完了まで待ちます。
+  <code>script/anime/anime1.txt</code> を再生します。
+  再生完了まで待ちます。
 </p>
 <pre><code>@anime anime1.txt</code></pre>
 
 <h3>使い方2</h3>
 <p>
-	<code>script/anime/anime1.txt</code> を再生します。
-	再生完了を待たず、裏側で次のメッセージを表示します。(async)
+  <code>script/anime/anime1.txt</code> を再生します。
+  再生完了を待たず、裏側で次のメッセージを表示します。(async)
 </p>
 <pre><code>@anime</span> anime1.txt async
 裏側で表示するメッセージを書きます。
@@ -118,24 +115,24 @@
 
 <h3>使い方3</h3>
 <p>
-	<code>script/anime/anime1.txt</code> を再生します。
-	システムボタンを表示しません。(nosysbtn)
+  <code>script/anime/anime1.txt</code> を再生します。
+  システムボタンを表示しません。(nosysbtn)
 </p>
 <pre><code>@anime anime1.txt nosysbtn</code></pre>
 
 <h3>使い方4</h3>
 <p>
-	<code>script/anime/anime1.txt</code> を再生します。
-	メッセージボックスを表示します。(showmsgbox)
+  <code>script/anime/anime1.txt</code> を再生します。
+  メッセージボックスを表示します。(showmsgbox)
 </p>
 <pre><code>@anime anime1.txt showmsgbox</code></pre>
 
 <h3>使い方5</h3>
 <p>
-	ループアニメ <code>script/anime/loop-anime1.txt</code> を再生します。
-	<code>reg00</code> というのは、登録アニメの <code>00</code> 番という意味です。
-	登録されたアニメだけがセーブ・ロードされます。
-	登録番号には、<code>reg00</code>, <code>reg01</code>, ..., <code>reg15</code> が利用できます。
+  ループアニメ <code>script/anime/loop-anime1.txt</code> を再生します。
+  <code>reg00</code> というのは、登録アニメの <code>00</code> 番という意味です。
+  登録されたアニメだけがセーブ・ロードされます。
+  登録番号には、<code>reg00</code>, <code>reg01</code>, ..., <code>reg15</code> が利用できます。
 </p>
 <pre><code>@anime loop-anime1.txt async,reg00
 なにかメッセージを表示します。
@@ -143,7 +140,7 @@
 
 <h3>アニメファイルの記述例</h3>
 <p>
-	詳細は <a href="anime.html">アニメ</a> をご参照ください。下記は例です。
+  詳細は <a href="anime.html">アニメ</a> をご参照ください。下記は例です。
 </p>
 <pre><code># アニメーションファイル
 
@@ -195,101 +192,101 @@ move {
 @layer [name=レイヤ名] [file=ファイル名] [x=X] [y=Y] [a=アルファ]</code></pre>
 
 <p>
-	レイヤに画像を読み込みます。
-	次の表示系コマンドに進むまで画面には反映されませんのでちらつきません。
+  レイヤに画像を読み込みます。
+  次の表示系コマンドに進むまで画面には反映されませんのでちらつきません。
 </p>
 <p>
-	ファイル名にnoneを指定すると削除します。
+  ファイル名にnoneを指定すると削除します。
 </p>
 <p>
-	利用できるレイヤ名は下記です。
+  利用できるレイヤ名は下記です。
 </p>
 
 <table>
-	<thead>
-		<tr>
-			<th>レイヤの名前</th>
-		</tr>
-	</thead>
-	<tbody>
-		<tr>
-			<td>bg</td>
-		</tr>
-		<tr>
-			<td>bg2</td>
-		</tr>
-		<tr>
-			<td>effect5</td>
-		</tr>
-		<tr>
-			<td>effect6</td>
-		</tr>
-		<tr>
-			<td>effect7</td>
-		</tr>
-		<tr>
-			<td>effect8</td>
-		</tr>
-		<tr>
-			<td>chb</td>
-		</tr>
-		<tr>
-			<td>chl</td>
-		</tr>
-		<tr>
-			<td>chlc</td>
-		</tr>
-		<tr>
-			<td>chr</td>
-		</tr>
-		<tr>
-			<td>chrc</td>
-		</tr>
-		<tr>
-			<td>chc</td>
-		</tr>
-		<tr>
-			<td>effect1</td>
-		</tr>
-		<tr>
-			<td>effect2</td>
-		</tr>
-		<tr>
-			<td>effect3</td>
-		</tr>
-		<tr>
-			<td>effect4</td>
-		</tr>
-		<tr>
-			<td>text3</td>
-		</tr>
-		<tr>
-			<td>text4</td>
-		</tr>
-		<tr>
-			<td>text5</td>
-		</tr>
-		<tr>
-			<td>text6</td>
-		</tr>
-		<tr>
-			<td>text7</td>
-		</tr>
-		<tr>
-			<td>text8</td>
-		</tr>
-	</tbody>
+  <thead>
+    <tr>
+      <th>レイヤの名前</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>bg</td>
+    </tr>
+    <tr>
+      <td>bg2</td>
+    </tr>
+    <tr>
+      <td>effect5</td>
+    </tr>
+    <tr>
+      <td>effect6</td>
+    </tr>
+    <tr>
+      <td>effect7</td>
+    </tr>
+    <tr>
+      <td>effect8</td>
+    </tr>
+    <tr>
+      <td>chb</td>
+    </tr>
+    <tr>
+      <td>chl</td>
+    </tr>
+    <tr>
+      <td>chlc</td>
+    </tr>
+    <tr>
+      <td>chr</td>
+    </tr>
+    <tr>
+      <td>chrc</td>
+    </tr>
+    <tr>
+      <td>chc</td>
+    </tr>
+    <tr>
+      <td>effect1</td>
+    </tr>
+    <tr>
+      <td>effect2</td>
+    </tr>
+    <tr>
+      <td>effect3</td>
+    </tr>
+    <tr>
+      <td>effect4</td>
+    </tr>
+    <tr>
+      <td>text3</td>
+    </tr>
+    <tr>
+      <td>text4</td>
+    </tr>
+    <tr>
+      <td>text5</td>
+    </tr>
+    <tr>
+      <td>text6</td>
+    </tr>
+    <tr>
+      <td>text7</td>
+    </tr>
+    <tr>
+      <td>text8</td>
+    </tr>
+  </tbody>
 </table>
 
 <h3>使い方1</h3>
 <p>
-	レイヤに画像をロードします。
+  レイヤに画像をロードします。
 </p>
 <pre><code>@layer name=text1 file=switch-bg.png x=0 y=0 a=255</code></pre>
 
 <h3>使い方2</h3>
 <p>
-	レイヤの画像を削除します。
+  レイヤの画像を削除します。
 </p>
 <pre><code>@layer name=text1 file=none</code></pre>
 
@@ -302,162 +299,162 @@ move {
 @bg [file=ファイル名] (t=秒) (effect=エフェクト)</code></pre>
 
 <p>
-	背景を変更します。背景の変更後、キャラクタはステージ上からいなくなります。
+  背景を変更します。背景の変更後、キャラクタはステージ上からいなくなります。
 </p>
 
 <h3>使い方1</h3>
 <p>
-	<code>sample.png</code> を <code>1.5</code> 秒かけて背景にセットします。
+  <code>sample.png</code> を <code>1.5</code> 秒かけて背景にセットします。
 </p>
 <pre><code>@bg sample.png 1.5</code></pre>
 
 <h3>使い方2</h3>
 <p>
-	<code>sample.png</code> を即座に背景にセットします。
+  <code>sample.png</code> を即座に背景にセットします。
 </p>
 <pre><code>@bg sample.png</code></pre>
 
 <h3>使い方3</h3>
 <p>
-	<code>sample.png</code> を <code>1.5</code> 秒かけて右方向カーテンフェードで背景にセットします。
+  <code>sample.png</code> を <code>1.5</code> 秒かけて右方向カーテンフェードで背景にセットします。
 </p>
 <pre><code>@bg sample.png 1.5 c</code></pre>
 
 <h3>使い方4</h3>
 <p>
-	色を指定して <code>1.5</code> 秒かけて左方向カーテンフェードで背景にセットします。
+  色を指定して <code>1.5</code> 秒かけて左方向カーテンフェードで背景にセットします。
 </p>
 <pre><code>@bg #ff8080 1.5 curtain-left</code></pre>
 
 <h3>使い方5</h3>
 <p>
-	ルール画像を使ってトランジションを行います。
-	ルール画像はグレースケールで、黒い部分から白い部分にかけて順に描画されます。
+  ルール画像を使ってトランジションを行います。
+  ルール画像はグレースケールで、黒い部分から白い部分にかけて順に描画されます。
 </p>
 <pre><code>@bg sample.png 1.5 rule:star.png</code></pre>
 
 <h3>背景/キャラで共通のエフェクト</h3>
 <p>
-	フェードには次のエフェクトを指定できます。
+  フェードには次のエフェクトを指定できます。
 </p>
 
 <table>
-	<thead>
-		<tr>
-			<th>エフェクトの種類</th>
-			<th>エフェクト名</th>
-			<th>エフェクト短縮名1</th>
-			<th>エフェクト短縮名2</th>
-			<th>日本語名</th>
-		</tr>
-	</thead>
-	<tbody>
-		<tr>
-			<td>標準のアルファブレンド</td>
-			<td>normal</td>
-			<td>n</td>
-			<td></td>
-			<td>標準</td>
-		</tr>
-		<tr>
-			<td>ルール指定トランジション(1-bit)</td>
-			<td>rule:ルール画像ファイル</td>
-			<td></td>
-			<td></td>
-			<td></td>
-		</tr>
-		<tr>
-			<td>ルール指定トランジション(8-bit)</td>
-			<td>melt:ルール画像ファイル</td>
-			<td></td>
-			<td></td>
-			<td></td>
-		</tr>
-		<tr>
-			<td>右方向カーテン</td>
-			<td>curtain-right</td>
-			<td>curtain</td>
-			<td>c</td>
-			<td>右カーテン</td>
-		</tr>
-		<tr>
-			<td>左方向カーテン</td>
-			<td>curtain-left</td>
-			<td>cl</td>
-			<td></td>
-			<td>左カーテン</td>
-		</tr>
-		<tr>
-			<td>上方向カーテン</td>
-			<td>curtain-up</td>
-			<td>cu</td>
-			<td></td>
-			<td>上カーテン</td>
-		</tr>
-		<tr>
-			<td>下方向カーテン</td>
-			<td>curtain-down</td>
-			<td>cd</td>
-			<td></td>
-			<td>下カーテン</td>
-		</tr>
-		<tr>
-			<td>右方向スライド</td>
-			<td>slide-right</td>
-			<td>sr</td>
-			<td></td>
-			<td>右スライド</td>
-		</tr>
-		<tr>
-			<td>左方向スライド</td>
-			<td>slide-left</td>
-			<td>sl</td>
-			<td></td>
-			<td>左スライド</td>
-		</tr>
-		<tr>
-			<td>上方向スライド</td>
-			<td>slide-up</td>
-			<td>su</td>
-			<td></td>
-			<td>上スライド</td>
-		</tr>
-		<tr>
-			<td>下方向スライド</td>
-			<td>slide-down</td>
-			<td>sd</td>
-			<td></td>
-			<td>下スライド</td>
-		</tr>
-		<tr>
-			<td>右方向シャッター</td>
-			<td>shutter-right</td>
-			<td>shr</td>
-			<td></td>
-			<td>右シャッター</td>
-		</tr>
-		<tr>
-			<td>左方向シャッター</td>
-			<td>shutter-left</td>
-			<td>shl</td>
-			<td></td>
-			<td>左シャッター</td>
-		</tr>
-		<tr>
-			<td>上方向シャッター</td>
-			<td>shutter-up</td>
-			<td>shu</td>
-			<td></td>
-			<td>上シャッター</td>
-		</tr>
-		<tr>
-			<td>下方向シャッター</td>
-			<td>shutter-down</td>
-			<td>shd</td>
-			<td></td>
-			<td>下シャッター</td>
-		</tr>
-	</tbody>
+  <thead>
+    <tr>
+      <th>エフェクトの種類</th>
+      <th>エフェクト名</th>
+      <th>エフェクト短縮名1</th>
+      <th>エフェクト短縮名2</th>
+      <th>日本語名</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>標準のアルファブレンド</td>
+      <td>normal</td>
+      <td>n</td>
+      <td></td>
+      <td>標準</td>
+    </tr>
+    <tr>
+      <td>ルール指定トランジション(1-bit)</td>
+      <td>rule:ルール画像ファイル</td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>ルール指定トランジション(8-bit)</td>
+      <td>melt:ルール画像ファイル</td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>右方向カーテン</td>
+      <td>curtain-right</td>
+      <td>curtain</td>
+      <td>c</td>
+      <td>右カーテン</td>
+    </tr>
+    <tr>
+      <td>左方向カーテン</td>
+      <td>curtain-left</td>
+      <td>cl</td>
+      <td></td>
+      <td>左カーテン</td>
+    </tr>
+    <tr>
+      <td>上方向カーテン</td>
+      <td>curtain-up</td>
+      <td>cu</td>
+      <td></td>
+      <td>上カーテン</td>
+    </tr>
+    <tr>
+      <td>下方向カーテン</td>
+      <td>curtain-down</td>
+      <td>cd</td>
+      <td></td>
+      <td>下カーテン</td>
+    </tr>
+    <tr>
+      <td>右方向スライド</td>
+      <td>slide-right</td>
+      <td>sr</td>
+      <td></td>
+      <td>右スライド</td>
+    </tr>
+    <tr>
+      <td>左方向スライド</td>
+      <td>slide-left</td>
+      <td>sl</td>
+      <td></td>
+      <td>左スライド</td>
+    </tr>
+    <tr>
+      <td>上方向スライド</td>
+      <td>slide-up</td>
+      <td>su</td>
+      <td></td>
+      <td>上スライド</td>
+    </tr>
+    <tr>
+      <td>下方向スライド</td>
+      <td>slide-down</td>
+      <td>sd</td>
+      <td></td>
+      <td>下スライド</td>
+    </tr>
+    <tr>
+      <td>右方向シャッター</td>
+      <td>shutter-right</td>
+      <td>shr</td>
+      <td></td>
+      <td>右シャッター</td>
+    </tr>
+    <tr>
+      <td>左方向シャッター</td>
+      <td>shutter-left</td>
+      <td>shl</td>
+      <td></td>
+      <td>左シャッター</td>
+    </tr>
+    <tr>
+      <td>上方向シャッター</td>
+      <td>shutter-up</td>
+      <td>shu</td>
+      <td></td>
+      <td>上シャッター</td>
+    </tr>
+    <tr>
+      <td>下方向シャッター</td>
+      <td>shutter-down</td>
+      <td>shd</td>
+      <td></td>
+      <td>下シャッター</td>
+    </tr>
+  </tbody>
 </table>
 
 <hr>
@@ -469,37 +466,37 @@ move {
 @music [file=ファイル名] (once)</code></pre>
 
 <p>
-	BGMを再生します。
+  BGMを再生します。
 </p>
 <p>
-	BGMファイルはフォルダ <code>sound/music</code> に格納されている必要があります。
+  BGMファイルはフォルダ <code>sound/music</code> に格納されている必要があります。
 </p>
 <p>
-	再生可能なファイル形式は、44.1kHzのOgg Vorbisのみです。
-	もし特定の音楽ファイルが遅く聞こえたり、早く聞こえたりした場合は、そのファイルのサンプリングレートを44.1kHzに変換してください。
+  再生可能なファイル形式は、44.1kHzのOgg Vorbisのみです。
+  もし特定の音楽ファイルが遅く聞こえたり、早く聞こえたりした場合は、そのファイルのサンプリングレートを44.1kHzに変換してください。
 </p>
 
 <h3>使い方1</h3>
 <p>
-	<code>sample.ogg</code>を再生します。
+  <code>sample.ogg</code>を再生します。
 </p>
 <pre><code>@music sample.ogg</code></pre>
 
 <h3>使い方2</h3>
 <p>
-	BGMを停止します。
+  BGMを停止します。
 </p>
 <pre><code>@music stop</code></pre>
 
 <h3>使い方3</h3>
 <p>
-	BGMをループしないで1回だけ再生します。
+  BGMをループしないで1回だけ再生します。
 </p>
 <pre><code>@music sample.ogg once</code></pre>
 
 <h3>応用例</h3>
 <p>
-	BGMを2秒かけてフェードアウトします。
+  BGMを2秒かけてフェードアウトします。
 </p>
 <pre><code>@volume bgm 0 2
 @time 2
@@ -514,35 +511,35 @@ move {
 @sound [file=ファイル名] (loop)</code></pre>
 
 <p>
-	SE(効果音)を再生します。
+  SE(効果音)を再生します。
 </p>
 <p>
-	SEファイルはフォルダ <code>sound/effect</code> に格納されている必要があります。
-	再生可能なファイル形式は、44.1kHzのOgg Vorbisのみです。
+  SEファイルはフォルダ <code>sound/effect</code> に格納されている必要があります。
+  再生可能なファイル形式は、44.1kHzのOgg Vorbisのみです。
 </p>
 
 <h3>使い方1</h3>
 <p>
-	SEを再生します。
+  SEを再生します。
 </p>
 <pre><code>@sound click.ogg</code></pre>
 
 <h3>使い方2</h3>
 <p>
-	SEを停止します。
+  SEを停止します。
 </p>
 <pre><code>@sound stop</code></pre>
 
 <h3>使い方3</h3>
 <p>
-	SEをループ再生します。
+  SEをループ再生します。
 </p>
 <pre><code>@sound sample.ogg loop</code></pre>
 
 <h3>特殊な使い方</h3>
 <p>
-	ボイストラックでSEを再生します。
-	音声ファイルは <code>sound/voice</code> フォルダのものが用いられます。
+  ボイストラックでSEを再生します。
+  音声ファイルは <code>sound/voice</code> フォルダのものが用いられます。
 </p>
 <pre><code>@sound click.ogg voice</code></pre>
 
@@ -555,52 +552,52 @@ move {
 @volume [track=トラック名] [vol=音量] (t=秒)</code></pre>
 
 <p>
-	時間を指定してボリュームを調整します。
+  時間を指定してボリュームを調整します。
 </p>
 <p>
-	トラックの種類は下記の通りです。
+  トラックの種類は下記の通りです。
 </p>
 
 <table>
-	<thead>
-		<th>
-			<td>トラック名</td>
-			<td>省略形</td>
-			<td>用途</td>
-		</th>
-	</thead>
-	<tbody>
-		<tr>
-			<td>bgm</td>
-			<td>b</td>
-			<td>BGMの音量</td>
-		</tr>
-		<tr>
-			<td>voice</td>
-			<td>v</td>
-			<td>ボイスの音量</td>
-		</tr>
-		<tr>
-			<td>se</td>
-			<td>s</td>
-			<td>SEの音量</td>
-		</tr>
-	</tbody>
+  <thead>
+    <th>
+      <td>トラック名</td>
+      <td>省略形</td>
+      <td>用途</td>
+    </th>
+  </thead>
+  <tbody>
+    <tr>
+      <td>bgm</td>
+      <td>b</td>
+      <td>BGMの音量</td>
+    </tr>
+    <tr>
+      <td>voice</td>
+      <td>v</td>
+      <td>ボイスの音量</td>
+    </tr>
+    <tr>
+      <td>se</td>
+      <td>s</td>
+      <td>SEの音量</td>
+    </tr>
+  </tbody>
 </table>
 
 <p>
-	音量の値は <code>0.0</code> から <code>1.0</code> の範囲で指定できます。
-	<code>0.0</code> が無音で、 <code>1.0</code> が最大音量です。
+  音量の値は <code>0.0</code> から <code>1.0</code> の範囲で指定できます。
+  <code>0.0</code> が無音で、 <code>1.0</code> が最大音量です。
 </p>
 <p>
-	音量は初期値で <code>1.0</code> で、セーブデータごとに別な値に変化します。
+  音量は初期値で <code>1.0</code> で、セーブデータごとに別な値に変化します。
 </p>
 
 <h3>使い方</h3>
 <p>
-	BGMの音量を <code>1.0</code> 秒かけて <code>0.5</code> にします。
-	音量の変化に <code>1.0</code> 秒かかるので、
-	<code>@time</code> を使用して <code>1.0</code> 秒の間、待機しています。
+  BGMの音量を <code>1.0</code> 秒かけて <code>0.5</code> にします。
+  音量の変化に <code>1.0</code> 秒かかるので、
+  <code>@time</code> を使用して <code>1.0</code> 秒の間、待機しています。
 </p>
 <pre><code>@volume bgm 0.5 1.0
 @time 1.0</code></pre>
@@ -614,22 +611,22 @@ move {
 @time [t=秒]</code></pre>
 
 <p>
-	時間を指定して待機します。
+  時間を指定して待機します。
 </p>
 <p>
-	途中、キーボードやマウスの入力があれば待機を終了します。
-	デフォルトでは、待機中、メッセージボックスが表示されません。
+  途中、キーボードやマウスの入力があれば待機を終了します。
+  デフォルトでは、待機中、メッセージボックスが表示されません。
 </p>
 
 <h3>使い方1</h3>
 <p>
-	<code>5</code> 秒待ちます。
+  <code>5</code> 秒待ちます。
 </p>
 <pre><code>@time 5.0</code></pre>
 
 <h3>使い方2</h3>
 <p>
-	5秒待ちます。待機中、メッセージボックスと名前ボックスを表示します。
+  5秒待ちます。待機中、メッセージボックスと名前ボックスを表示します。
 </p>
 <pre><code>@time 5.0 showmsgbox,shownamebox</code></pre>
 
@@ -643,115 +640,115 @@ move {
 </code></pre>
 
 <p>
-	キャラクタを表示、変更、消去します。
-	<a href="eye-blink.html">目パチ</a> と <a href="lip-sync.html">口パク</a> に対応しています。
+  キャラクタを表示、変更、消去します。
+  <a href="eye-blink.html">目パチ</a> と <a href="lip-sync.html">口パク</a> に対応しています。
 </p>
 <p>
-	キャラクタの位置は、上位レイヤから順に、次のものがあります。
+  キャラクタの位置は、上位レイヤから順に、次のものがあります。
 </p>
 <table>
-	<thead>
-		<tr>
-			<th>表示位置</th>
-			<th>コマンドでの指定方法</th>
-			<th>短縮形</th>
-		</tr>
-	</thead>
-	<tbody>
-		<tr>
-			<td>顔</td>
-			<td>face</td>
-			<td>f</td>
-		</tr>
-		<tr>
-			<td>左</td>
-			<td>left</td>
-			<td>l</td>
-		</tr>
-		<tr>
-			<td>左中</td>
-			<td>left-center</td>
-			<td>lc</td>
-		</tr>
-		<tr>
-			<td>中央</td>
-			<td>center</td>
-			<td>c</td>
-		</tr>
-		<tr>
-			<td>右中</td>
-			<td>right-center</td>
-			<td>rc</td>
-		</tr>
-		<tr>
-			<td>右</td>
-			<td>right</td>
-			<td>r</td>
-		</tr>
-		<tr>
-			<td>背面</td>
-			<td>back</td>
-			<td>b</td>
-		</tr>
-	</tbody>
+  <thead>
+    <tr>
+      <th>表示位置</th>
+      <th>コマンドでの指定方法</th>
+      <th>短縮形</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>顔</td>
+      <td>face</td>
+      <td>f</td>
+    </tr>
+    <tr>
+      <td>左</td>
+      <td>left</td>
+      <td>l</td>
+    </tr>
+    <tr>
+      <td>左中</td>
+      <td>left-center</td>
+      <td>lc</td>
+    </tr>
+    <tr>
+      <td>中央</td>
+      <td>center</td>
+      <td>c</td>
+    </tr>
+    <tr>
+      <td>右中</td>
+      <td>right-center</td>
+      <td>rc</td>
+    </tr>
+    <tr>
+      <td>右</td>
+      <td>right</td>
+      <td>r</td>
+    </tr>
+    <tr>
+      <td>背面</td>
+      <td>back</td>
+      <td>b</td>
+    </tr>
+  </tbody>
 </table>
 
 <p>
-	エフェクトの種類は <a href="#bg"><code>@bg</code></a> と同じです。
+  エフェクトの種類は <a href="#bg"><code>@bg</code></a> と同じです。
 </p>
 
 <h3>使い方1</h3>
 <p>
-	<code>sample.png</code> を <code>0.5</code> 秒かけて中央前面にセットします。
+  <code>sample.png</code> を <code>0.5</code> 秒かけて中央前面にセットします。
 </p>
 <pre><code>@ch center sample.png 0.5</code></pre>
 
 <h3>使い方2</h3>
 <p>
-	<code>center</code> は <code>c</code> と省略して構いません。
-	また、ファイル名の拡張子は省略できます。
+  <code>center</code> は <code>c</code> と省略して構いません。
+  また、ファイル名の拡張子は省略できます。
 </p>
 <pre><code>@ch c sample 0.5</code></pre>
 
 <h3>使い方3</h3>
 <p>
-	<code>none</code> を指定するとキャラクタを退場させます。
+  <code>none</code> を指定するとキャラクタを退場させます。
 </p>
 <pre><code>@ch c none 0.5</code></pre>
 
 <h3>使い方4</h3>
 <p>
-	時間を指定しないと即座に表示されます。
+  時間を指定しないと即座に表示されます。
 </p>
 <pre><code>@ch c sample</code></pre>
 
 <h3>使い方5</h3>
 <p>
-	エフェクトに <code>normal</code> あるいは省略形の <code>n</code> を指定すると、通常のアルファブレンドが用いられます。
-	指定を省略したときにも通常のアルファブレンドが用いられます。
+  エフェクトに <code>normal</code> あるいは省略形の <code>n</code> を指定すると、通常のアルファブレンドが用いられます。
+  指定を省略したときにも通常のアルファブレンドが用いられます。
 </p>
 <pre><code>@ch c sample.png 1.0 normal</code></pre>
 
 <h3>使い方7</h3>
 <p>
-	キャラクタ表示位置をずらすことができます。
-	下記の例では右に100ピクセル、下に50ピクセルずらします。
+  キャラクタ表示位置をずらすことができます。
+  下記の例では右に100ピクセル、下に50ピクセルずらします。
 </p>
 <pre><code>@ch c sample.png 1.0 n 100 50</code></pre>
 
 <h3>使い方8</h3>
 <p>
-	キャラクタのアルファ値を指定することができます。
-	アルファ値には <code>0</code> から <code>255</code> を指定できます。
-	また、アルファ値には <code>255</code> の別名で <code>show</code> を指定できるほか、
-	<code>0</code> の別名で <code>hide</code> を指定できます。
+  キャラクタのアルファ値を指定することができます。
+  アルファ値には <code>0</code> から <code>255</code> を指定できます。
+  また、アルファ値には <code>255</code> の別名で <code>show</code> を指定できるほか、
+  <code>0</code> の別名で <code>hide</code> を指定できます。
 </p>
 <pre><code>@ch c sample.png 1.0 n 0 0 show</code></pre>
 
 <h3>使い方9</h3>
 <p>
-	メッセージボックスの上にキャラの顔を表示します。
-	消す場合はファイル名にnoneを指定します。
+  メッセージボックスの上にキャラの顔を表示します。
+  消す場合はファイル名にnoneを指定します。
 </p>
 <pre><code>@ch face face-001.png</code></pre>
 
@@ -764,32 +761,32 @@ move {
 @move [pos=位置] [t=秒] [accel=加速方法] [x=X移動量] [y=Y移動量] [alpha=アルファ値]</code></pre>
 
 <p>
-	キャラクタの移動をアニメで行います。
-	アニメスクリプトを書かなくても簡易的なアニメを利用できます。
-	キャラクタの位置の指定とアルファ値の指定方法 <a href="#ch"><code>@ch</code></a> を参照してください。
+  キャラクタの移動をアニメで行います。
+  アニメスクリプトを書かなくても簡易的なアニメを利用できます。
+  キャラクタの位置の指定とアルファ値の指定方法 <a href="#ch"><code>@ch</code></a> を参照してください。
 </p>
 
 <h3>使い方1</h3>
 <p>
-	中央に表示したキャラクタを <code>1.0</code> 秒かけて左側に <code>600</code> ピクセル移動して非表示にします。
+  中央に表示したキャラクタを <code>1.0</code> 秒かけて左側に <code>600</code> ピクセル移動して非表示にします。
 </p>
 <pre><code>@move center 1.0 move -600 0 hide</code></pre>
 
 <h3>使い方2</h3>
 <p>
-	使い方1との差分は、移動を加速(アクセル)しながら行うことです。
+  使い方1との差分は、移動を加速(アクセル)しながら行うことです。
 </p>
 <pre><code>@move center 1.0 accel -600 0 hide</code></pre>
 
 <h3>使い方3</h3>
 <p>
-	使い方1との差分は、移動を減速(ブレーキ)しながら行うことです。
+  使い方1との差分は、移動を減速(ブレーキ)しながら行うことです。
 </p>
 <pre><code>@move center 1.0 brake -600 0 hide</code></pre>
 
 <h3>使い方4</h3>
 <p>
-	初めに画面の外にキャラクタを読み込んでおいて、画面の中に移動させます。
+  初めに画面の外にキャラクタを読み込んでおいて、画面の中に移動させます。
 </p>
 <pre><code>@ch right sample.png 0 n 600 0 hide
 @move right 2.0 move -600 0 show</code></pre>
@@ -803,8 +800,8 @@ move {
 @chapter title="章タイトル"</code></pre>
 
 <p>
-	章のタイトルを設定します。
-	設定されたタイトルはセーブデータの項目に反映されます。
+  章のタイトルを設定します。
+  設定されたタイトルはセーブデータの項目に反映されます。
 </p>
 
 <h3>使い方</h3>
@@ -819,12 +816,12 @@ move {
 @choose [l1=行き先1] [t1=選択肢] (l2=行き先2) (t2=選択肢2) ... (l10=行き先10) (t10=選択肢10)</code></pre>
 
 <p>
-	選択肢を表示してラベルにジャンプします。選択肢の数は最大で8つです。
+  選択肢を表示してラベルにジャンプします。選択肢の数は最大で8つです。
 </p>
 
 <h3>使い方1</h3>
 <p>
-	3つの選択肢を表示します。
+  3つの選択肢を表示します。
 </p>
 <pre><code>@choose label1 おはよう label2 こんにちは label3 こんばんは
 :label1
@@ -839,7 +836,7 @@ move {
 
 <h3>使い方2</h3>
 <p>
-	ラベルを書くのが面倒な場合、拡張switch文を利用できます。
+  ラベルを書くのが面倒な場合、拡張switch文を利用できます。
 </p>
 <pre><code>&lt;&lt;&lt;
 switch "おはよう" "こんにちは" "こんばんは" {
@@ -867,13 +864,13 @@ case "こんばんは":
 @ichoose [l1=行き先1] [t1=選択肢1] (l2=行き先2) (t2=選択肢2) ... (l10=行き先10) (t10=選択肢10)</code></pre>
 
 <p>
-	メッセージボックス内に選択肢を表示してラベルにジャンプします。
+  メッセージボックス内に選択肢を表示してラベルにジャンプします。
 </p>
 <p>
-	選択肢をメッセージボックス内に表示する以外は、<a href="choose"><code>@choose</code></a> と同じです。
+  選択肢をメッセージボックス内に表示する以外は、<a href="choose"><code>@choose</code></a> と同じです。
 </p>
 <p>
-	この機能を使用するときには、コンフィグの <code>choose.bg.image</code> と <code>choose.fg.image</code> に透明な画像を指定してください。
+  この機能を使用するときには、コンフィグの <code>choose.bg.image</code> と <code>choose.fg.image</code> に透明な画像を指定してください。
 </p>
 
 <hr>
@@ -884,244 +881,244 @@ case "こんばんは":
 <pre><code>@chch 引数は自由</code></pre>
 
 <p>
-	キャラクタの一括変更を行います。
-	背景のみの変更や、キャラクタと同時に背景も変更できます。
+  キャラクタの一括変更を行います。
+  背景のみの変更や、キャラクタと同時に背景も変更できます。
 </p>
 <p>
-	※高度な演出が必要な場合は @chch の代わりに <a href="ciel.html">Ciel</a> の利用をご検討ください。
+  ※高度な演出が必要な場合は @chch の代わりに <a href="ciel.html">Ciel</a> の利用をご検討ください。
 </p>
 <p>
-	このコマンドに限って、 <code>center=</code> のような引数の名前が必須です。
-	その代わり、引数の指定順に制限がありません。
+  このコマンドに限って、 <code>center=</code> のような引数の名前が必須です。
+  その代わり、引数の指定順に制限がありません。
 </p>
 <p>
-	引数の一覧は以下です。
+  引数の一覧は以下です。
 </p>
 
 <table>
-	<thead>
-		<tr>
-			<th>指定</th>
-			<th>引数・英語</th>
-			<th>短縮形</th>
-		</tr>
-	</thead>
-	<tbody>
-		<tr>
-			<td>中央キャラ画像</td>
-			<td>center=</td>
-			<td>c=</td>
-		</tr>
-		<tr>
-			<td>中央キャラのXオフセット</td>
-			<td>center-x=</td>
-			<td>cx=</td>
-		</tr>
-		<tr>
-			<td>中央キャラのYオフセット</td>
-			<td>center-y=</td>
-			<td>cy=</td>
-		</tr>
-		<tr>
-			<td>中央キャラのアルファ</td>
-			<td>center-a</td>
-			<td>ca=</td>
-		</tr>
-		<tr>
-			<td>中央キャラを暗くする</td>
-			<td>center-dim</td>
-			<td>cd=</td>
-		</tr>
-		<tr>
-			<td>右キャラ画像</td>
-			<td>right=</td>
-			<td>r=</td>
-		</tr>
-		<tr>
-			<td>右キャラのXオフセット</td>
-			<td>right-x=</td>
-			<td>rx=</td>
-		</tr>
-		<tr>
-			<td>右キャラのYオフセット</td>
-			<td>right-y=</td>
-			<td>ry=</td>
-		</tr>
-		<tr>
-			<td>右キャラのアルファ</td>
-			<td>right-a=</td>
-			<td>ra=</td>
-		</tr>
-		<tr>
-			<td>右キャラを暗くする</td>
-			<td>right-dim=</td>
-			<td>rd=</td>
-		</tr>
-		<tr>
-			<td>右中キャラ画像</td>
-			<td>right-center=</td>
-			<td>rc=<td>
-		</tr>
-		<tr>
-			<td>右中キャラのXオフセット</td>
-			<td>right-center-x=</td>
-			<td>rcx=<td>
-		</tr>
-		<tr>
-			<td>右中キャラのYオフセット</td>
-			<td>right-center-y=</td>
-			<td>rcy=</td>
-		</tr>
-		<tr>
-			<td>右中キャラのアルファ</td>
-			<td>right-center-a=</td>
-			<td>rca=</td>
-		</tr>
-		<tr>
-			<td>左キャラ画像</td>
-			<td>left=</td>
-			<td>l=</td>
-		</tr>
-		<tr>
-			<td>左キャラのXオフセット</td>
-			<td>left-x=</td>
-			<td>lx=</td>
-		</tr>
-		<tr>
-			<td>左キャラのYオフセット</td>
-			<td>left-y=</td>
-			<td>ly=</td>
-		</tr>
-		<tr>
-			<td>左キャラのアルファ</td>
-			<td>left-a=</td>
-			<td>la=</td>
-		</tr>
-		<tr>
-			<td>左キャラを暗くする</td>
-			<td>left-dim=</td>
-			<td>ld=</td>
-		</tr>
-		<tr>
-			<td>左中キャラ画像</td>
-			<td>left-center=</td>
-			<td>lc=</td>
-		</tr>
-		<tr>
-			<td>左中キャラのXオフセット</td>
-			<td>left-center-x=</td>
-			<td>lcx=</td>
-		</tr>
-		<tr>
-			<td>左中キャラのYオフセット</td>
-			<td>left-center-y=</td>
-			<td>lcy=</td>
-		</tr>
-		<tr>
-			<td>左中のアルファ</td>
-			<td>left-center-a=</td>
-			<td>lca=</td>
-		</tr>
-		<tr>
-			<td>左中キャラを暗くするか</td>
-			<td>left-center-dim=</td>
-			<td>lcd=</td>
-		</tr>
-		<tr>
-			<td>中央背面キャラ画像</td>
-			<td>back=</td>
-			<td>b=</td>
-		</tr>
-		<tr>
-			<td>中央背面キャラのXオフセット</td>
-			<td>back-x=</td>
-			<td>bx=</td>
-		</tr>
-		<tr>
-			<td>中央背面キャラのYオフセット</td>
-			<td>back-y=</td>
-			<td>by=</td>
-		</tr>
-		<tr>
-			<td>中央背面キャラのアルファ</td>
-			<td>back-a=</td>
-			<td>ba=</td>
-		</tr>
-		<tr>
-			<td>背景画像</td>
-			<td>background=</td>
-			<td>bg=</td>
-		</tr>
-		<tr>
-			<td>背景のXオフセット</td>
-			<td>bg-x=</td>
-			<td>bgx=</td>
-		</tr>
-		<tr>
-			<td>背景のYオフセット</td>
-			<td>bg-y=</td>
-			<td>bgy=</td>
-		</tr>
-		<tr>
-			<td>エフェクト</td>
-			<td>effect=</td>
-			<td>e=</td>
-		</tr>
-		<tr>
-			<td>演出時間</td>
-			<td>t=</td>
-			<td><td>
-		</tr>
-	</tbody>
+  <thead>
+    <tr>
+      <th>指定</th>
+      <th>引数・英語</th>
+      <th>短縮形</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>中央キャラ画像</td>
+      <td>center=</td>
+      <td>c=</td>
+    </tr>
+    <tr>
+      <td>中央キャラのXオフセット</td>
+      <td>center-x=</td>
+      <td>cx=</td>
+    </tr>
+    <tr>
+      <td>中央キャラのYオフセット</td>
+      <td>center-y=</td>
+      <td>cy=</td>
+    </tr>
+    <tr>
+      <td>中央キャラのアルファ</td>
+      <td>center-a</td>
+      <td>ca=</td>
+    </tr>
+    <tr>
+      <td>中央キャラを暗くする</td>
+      <td>center-dim</td>
+      <td>cd=</td>
+    </tr>
+    <tr>
+      <td>右キャラ画像</td>
+      <td>right=</td>
+      <td>r=</td>
+    </tr>
+    <tr>
+      <td>右キャラのXオフセット</td>
+      <td>right-x=</td>
+      <td>rx=</td>
+    </tr>
+    <tr>
+      <td>右キャラのYオフセット</td>
+      <td>right-y=</td>
+      <td>ry=</td>
+    </tr>
+    <tr>
+      <td>右キャラのアルファ</td>
+      <td>right-a=</td>
+      <td>ra=</td>
+    </tr>
+    <tr>
+      <td>右キャラを暗くする</td>
+      <td>right-dim=</td>
+      <td>rd=</td>
+    </tr>
+    <tr>
+      <td>右中キャラ画像</td>
+      <td>right-center=</td>
+      <td>rc=<td>
+    </tr>
+    <tr>
+      <td>右中キャラのXオフセット</td>
+      <td>right-center-x=</td>
+      <td>rcx=<td>
+    </tr>
+    <tr>
+      <td>右中キャラのYオフセット</td>
+      <td>right-center-y=</td>
+      <td>rcy=</td>
+    </tr>
+    <tr>
+      <td>右中キャラのアルファ</td>
+      <td>right-center-a=</td>
+      <td>rca=</td>
+    </tr>
+    <tr>
+      <td>左キャラ画像</td>
+      <td>left=</td>
+      <td>l=</td>
+    </tr>
+    <tr>
+      <td>左キャラのXオフセット</td>
+      <td>left-x=</td>
+      <td>lx=</td>
+    </tr>
+    <tr>
+      <td>左キャラのYオフセット</td>
+      <td>left-y=</td>
+      <td>ly=</td>
+    </tr>
+    <tr>
+      <td>左キャラのアルファ</td>
+      <td>left-a=</td>
+      <td>la=</td>
+    </tr>
+    <tr>
+      <td>左キャラを暗くする</td>
+      <td>left-dim=</td>
+      <td>ld=</td>
+    </tr>
+    <tr>
+      <td>左中キャラ画像</td>
+      <td>left-center=</td>
+      <td>lc=</td>
+    </tr>
+    <tr>
+      <td>左中キャラのXオフセット</td>
+      <td>left-center-x=</td>
+      <td>lcx=</td>
+    </tr>
+    <tr>
+      <td>左中キャラのYオフセット</td>
+      <td>left-center-y=</td>
+      <td>lcy=</td>
+    </tr>
+    <tr>
+      <td>左中のアルファ</td>
+      <td>left-center-a=</td>
+      <td>lca=</td>
+    </tr>
+    <tr>
+      <td>左中キャラを暗くするか</td>
+      <td>left-center-dim=</td>
+      <td>lcd=</td>
+    </tr>
+    <tr>
+      <td>中央背面キャラ画像</td>
+      <td>back=</td>
+      <td>b=</td>
+    </tr>
+    <tr>
+      <td>中央背面キャラのXオフセット</td>
+      <td>back-x=</td>
+      <td>bx=</td>
+    </tr>
+    <tr>
+      <td>中央背面キャラのYオフセット</td>
+      <td>back-y=</td>
+      <td>by=</td>
+    </tr>
+    <tr>
+      <td>中央背面キャラのアルファ</td>
+      <td>back-a=</td>
+      <td>ba=</td>
+    </tr>
+    <tr>
+      <td>背景画像</td>
+      <td>background=</td>
+      <td>bg=</td>
+    </tr>
+    <tr>
+      <td>背景のXオフセット</td>
+      <td>bg-x=</td>
+      <td>bgx=</td>
+    </tr>
+    <tr>
+      <td>背景のYオフセット</td>
+      <td>bg-y=</td>
+      <td>bgy=</td>
+    </tr>
+    <tr>
+      <td>エフェクト</td>
+      <td>effect=</td>
+      <td>e=</td>
+    </tr>
+    <tr>
+      <td>演出時間</td>
+      <td>t=</td>
+      <td><td>
+    </tr>
+  </tbody>
 </table>
 
 <p>
-	変更のないキャラは指定しなくて構いません。
-	退場させるキャラには <code>center=none</code> のように <code>none</code> を指定します。
+  変更のないキャラは指定しなくて構いません。
+  退場させるキャラには <code>center=none</code> のように <code>none</code> を指定します。
 </p>
 <p>
-	エフェクトの種類は <a href="#bg"><code>@bg</code></a> と同じです。
+  エフェクトの種類は <a href="#bg"><code>@bg</code></a> と同じです。
 </p>
 <p>
-	オフセット値はキャラ画像の変更と共に初期位置に戻されます。
-	オフセット値の変更を継続しつつ画像を変更する場合、オフセット指定に <code>keep</code> と指定します。
-	（そのような演出は煩雑であるため、<a href="ciel.html">Ciel</a> の使用をおすすめします。）
+  オフセット値はキャラ画像の変更と共に初期位置に戻されます。
+  オフセット値の変更を継続しつつ画像を変更する場合、オフセット指定に <code>keep</code> と指定します。
+  （そのような演出は煩雑であるため、<a href="ciel.html">Ciel</a> の使用をおすすめします。）
 </p>
 
 <h3>使い方1</h3>
 <p>
-	中央と右にキャラクタを <code>1.0</code> 秒かけて表示します。
-	他のキャラクタは変更しません。
+  中央と右にキャラクタを <code>1.0</code> 秒かけて表示します。
+  他のキャラクタは変更しません。
 </p>
 <pre><code>@chch center=center.png right=right.png t=1.0</code></pre>
 
 <h3>使い方2</h3>
 <p>
-	中央のキャラクタを <code>1.0</code> 秒かけて退場させます(none の指定)。
-	他のキャラクタは変更しません。
+  中央のキャラクタを <code>1.0</code> 秒かけて退場させます(none の指定)。
+  他のキャラクタは変更しません。
 </p>
 <pre><code>@chch center=none t=1.0</code></pre>
 
 <h3>使い方3</h3>
 <p>
-	キャラクタを表示させたまま(<code>stay</code> の指定)、背景を <code>1.0</code> 秒かけて変更します。
+  キャラクタを表示させたまま(<code>stay</code> の指定)、背景を <code>1.0</code> 秒かけて変更します。
 </p>
 <pre><code>@chch bg=background.png t=1.0</code></pre>
 
 <h3>使い方4</h3>
 <p>
-	中央のキャラクタを <code>1.0</code> 秒かけて変更します。
-	背景も変更します。
-	エフェクトはカーテンです。
+  中央のキャラクタを <code>1.0</code> 秒かけて変更します。
+  背景も変更します。
+  エフェクトはカーテンです。
 </p>
 <pre><code>@chch center=center.png bg=background.png effect=curtain t=1.0</code></pre>
 
 <h3>使い方5</h3>
 <p>
-	中央のキャラクタを <code>1.0</code> 秒かけて変更します。
-	背景も変更します。
-	キャラクタのX位置とY位置は前に指定していたものを継続しています。
-	引数は省略形を用いています。
+  中央のキャラクタを <code>1.0</code> 秒かけて変更します。
+  背景も変更します。
+  キャラクタのX位置とY位置は前に指定していたものを継続しています。
+  引数は省略形を用いています。
 </p>
 <pre><code>@chch bg=bg.png c=center.png cx=keep cy=keep t=1.0</code></pre>
 
@@ -1133,13 +1130,13 @@ case "こんばんは":
 <pre><code>@click</code></pre>
 
 <p>
-	クリックされるのを待ちます。
-	待っている間、メッセージボックスは非表示となります。
+  クリックされるのを待ちます。
+  待っている間、メッセージボックスは非表示となります。
 </p>
 
 <h3>使い方</h3>
 <p>
-	クリックを待ちます。
+  クリックを待ちます。
 </p>
 <pre><code>@click</code></pre>
 
@@ -1151,16 +1148,16 @@ case "こんばんは":
 <pre><code>@gosub [ラベル名]</code></pre>
 
 <p>
-	サブルーチンにジャンプします。 <a href="#@return">@return</a> で戻ります。
+  サブルーチンにジャンプします。 <a href="#@return">@return</a> で戻ります。
 </p>
 <p>
-	サブルーチンはファイルにまとめておいて、
-	<a href="#using"><code>using</code></a>で取り込むことができます。
+  サブルーチンはファイルにまとめておいて、
+  <a href="#using"><code>using</code></a>で取り込むことができます。
 </p>
 
 <h3>使い方1</h3>
 <p>
-	サブルーチン <code>SUB</code> を実行します。
+  サブルーチン <code>SUB</code> を実行します。
 </p>
 <pre><code>@gosub SUB
 ...
@@ -1170,7 +1167,7 @@ case "こんばんは":
 
 <h3>使い方2</h3>
 <p>
-	省略記法があります。引数も使えます。
+  省略記法があります。引数も使えます。
 </p>
 <pre><code>&SUB sample.png
 ...
@@ -1187,16 +1184,16 @@ case "こんばんは":
 @goto [label=ラベル]</code></pre>
 
 <p>
-	ラベルにジャンプします。
-	前方にジャンプすればループを作成でき、ループから抜け出す際にも使用します。
+  ラベルにジャンプします。
+  前方にジャンプすればループを作成でき、ループから抜け出す際にも使用します。
 </p>
 <p>
-	また、拡張if文や拡張switch文が導入されたため、ラベルを作らなくても分岐が可能です。
+  また、拡張if文や拡張switch文が導入されたため、ラベルを作らなくても分岐が可能です。
 </p>
 
 <h3>使い方1</h3>
 <p>
-	ラベル abc にジャンプします。
+  ラベル abc にジャンプします。
 </p>
 <pre><code>:abc
 ここに何らかの処理やメッセージを記述します。ループします。
@@ -1211,34 +1208,34 @@ case "こんばんは":
 @menu [file=ファイル名]</code></pre>
 
 <p>
-	メニューを表示します。
-	メニューでは最大128個のボタンを作成できます。
+  メニューを表示します。
+  メニューでは最大128個のボタンを作成できます。
 </p>
 <p>
-	ボタンの種類には、押されるとラベルにジャンプするものや、フラグがセットされているときだけ表示されるものなどがあります。
+  ボタンの種類には、押されるとラベルにジャンプするものや、フラグがセットされているときだけ表示されるものなどがあります。
 </p>
 <p>
-	なお、メニュー定義ファイルはコンフィグ画面やセーブ・ロード・履歴画面の定義にも利用されます。
+  なお、メニュー定義ファイルはコンフィグ画面やセーブ・ロード・履歴画面の定義にも利用されます。
 </p>
 <p>
-	メニュー定義ファイルの作り方は、<a href="menu.html">メニュー画面の作り方</a> をご覧ください。
+  メニュー定義ファイルの作り方は、<a href="menu.html">メニュー画面の作り方</a> をご覧ください。
 </p>
 
 <h3>使い方1</h3>
 <p>
-	メニュー定義ファイル <code>menu.txt</code> を読み込んでメニューを実行します。
+  メニュー定義ファイル <code>menu.txt</code> を読み込んでメニューを実行します。
 </p>
 <pre><code>@menu menu.txt</code></pre>
 
 <h3>使い方2</h3>
 <p>
-	ロード画面を表示します。
+  ロード画面を表示します。
 </p>
 <pre><code>@menu load.txt</code></pre>
 
 <h3 id="3">使い方3</h3>
 <p>
-	コンフィグ画面を表示します。
+  コンフィグ画面を表示します。
 </p>
 <pre><code>@menu config.txt</code></pre>
 
@@ -1250,72 +1247,72 @@ case "こんばんは":
 <pre><code>@if [変数名] [条件式] [値] [ラベル名]</code></pre>
 
 <p>
-	条件式とマッチするときだけラベルにジャンプします。
+  条件式とマッチするときだけラベルにジャンプします。
 </p>
 <p>
-	拡張if文を使えば、ラベルなしで分岐が行えます。
+  拡張if文を使えば、ラベルなしで分岐が行えます。
 </p>
 <p>
-	利用できる条件の種類は下記の通りです。
-	単純にするために、<code>==</code> (等しい場合) だけの利用を推奨します。
+  利用できる条件の種類は下記の通りです。
+  単純にするために、<code>==</code> (等しい場合) だけの利用を推奨します。
 </p>
 
 <table>
-	<thead>
-		<tr>
-			<th>条件の種類</th>
-			<th>意味</th>
-		</tr>
-	</thead>
-	<tbody>
-		<tr>
-			<td>&gt;</td>
-			<td>a &gt; b (aがbより大きい)</td>
-		</tr>
-		<tr>
-			<td>&gt;=</td>
-			<td>a ≧ b (aがbより大きいか等しい)</td>
-		</tr>
-		<tr>
-			<td>==</td>
-			<td>a = b (aとbが等しい)</td>
-		</tr>
-		<tr>
-			<td>&lt;=</td>
-			<td>a ≦ b (aがbより小さいか等しい)</td>
-		</tr>
-		<tr>
-			<td>&lt;</td>
-			<td>a &lt; b (aがbより小さい)</td>
-		</tr>
-		<tr>
-			<td>!=</td>
-			<td>a ≒ b (aとbが等しくない)</td>
-		</tr>
-	</tbody>
+  <thead>
+    <tr>
+      <th>条件の種類</th>
+      <th>意味</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>&gt;</td>
+      <td>a &gt; b (aがbより大きい)</td>
+    </tr>
+    <tr>
+      <td>&gt;=</td>
+      <td>a ≧ b (aがbより大きいか等しい)</td>
+    </tr>
+    <tr>
+      <td>==</td>
+      <td>a = b (aとbが等しい)</td>
+    </tr>
+    <tr>
+      <td>&lt;=</td>
+      <td>a ≦ b (aがbより小さいか等しい)</td>
+    </tr>
+    <tr>
+      <td>&lt;</td>
+      <td>a &lt; b (aがbより小さい)</td>
+    </tr>
+    <tr>
+      <td>!=</td>
+      <td>a ≒ b (aとbが等しくない)</td>
+    </tr>
+  </tbody>
 </table>
 
 <p>
-	条件文の左側はローカル変数名(<code>$0</code> など)か、
-	グローバル変数名(<code>$10000</code> など)か、
-	名前変数名(<code>%a</code> など)である必要があります。
+  条件文の左側はローカル変数名(<code>$0</code> など)か、
+  グローバル変数名(<code>$10000</code> など)か、
+  名前変数名(<code>%a</code> など)である必要があります。
 </p>
 <p>
-	条件文の左側がローカル変数名かグローバル変数名のとき、
-	条件文の右側は整数(<code>1</code> など)か、
-	ローカル変数名(<code>$0</code> など)か、
-	グローバル変数名(<code>$10000</code> など)を指定できます。
+  条件文の左側がローカル変数名かグローバル変数名のとき、
+  条件文の右側は整数(<code>1</code> など)か、
+  ローカル変数名(<code>$0</code> など)か、
+  グローバル変数名(<code>$10000</code> など)を指定できます。
 </p>
 <p>
-	条件文の左側が名前変数のとき、条件文の右側には文字列のみ指定できます。
-	文字列中の変数名は展開されません。
+  条件文の左側が名前変数のとき、条件文の右側には文字列のみ指定できます。
+  文字列中の変数名は展開されません。
 </p>
 
 <h3>使い方1</h3>
 <p>
-	ローカル変数の値でシナリオを分岐します。
-	ローカル変数 <code>$1</code> の値が <code>1</code> であれば、ラベル <code>abc</code> にジャンプします。
-	つまり、フラグが立っていればシナリオを分岐します。
+  ローカル変数の値でシナリオを分岐します。
+  ローカル変数 <code>$1</code> の値が <code>1</code> であれば、ラベル <code>abc</code> にジャンプします。
+  つまり、フラグが立っていればシナリオを分岐します。
 </p>
 <pre><code>@if $1 == 1 abc
 変数の値が1以外です。つまり、フラグが立っていないということです。
@@ -1328,7 +1325,7 @@ case "こんばんは":
 
 <h3>使い方2</h3>
 <p>
-	ラベルやジャンプがわかりにくいときは、拡張 if 文を使うことができます。
+  ラベルやジャンプがわかりにくいときは、拡張 if 文を使うことができます。
 </p>
 <pre><code>&lt;&lt;&lt;
 if $1 == 0 {
@@ -1344,9 +1341,9 @@ else {
 
 <h3>使い方3</h3>
 <p>
-	名前変数の値でシナリオを分岐します。
-	名前変数 <code>%a</code> の値が <code>みどり</code> であれば、ラベル <code>MIDORI</code> にジャンプします。
-	デフォルトの名前のときだけイベントを発生させるときに使えます。
+  名前変数の値でシナリオを分岐します。
+  名前変数 <code>%a</code> の値が <code>みどり</code> であれば、ラベル <code>MIDORI</code> にジャンプします。
+  デフォルトの名前のときだけイベントを発生させるときに使えます。
 </p>
 <pre><code>@if %a == みどり MIDORI
 名前がみどり以外です。
@@ -1365,17 +1362,17 @@ else {
 <pre><code>:ラベル名</code></pre>
 
 <p>
-	ジャンプ先となるラベルを作成します。
-	ラベルはゲームの見た目には影響しません。
-	ラベルの名前には日本語を使うことも可能です。
+  ジャンプ先となるラベルを作成します。
+  ラベルはゲームの見た目には影響しません。
+  ラベルの名前には日本語を使うことも可能です。
 </p>
 <p>
-	なお、拡張if文や拡張switch文を使うことで、ラベルを使わずにゲームを記述できます。
+  なお、拡張if文や拡張switch文を使うことで、ラベルを使わずにゲームを記述できます。
 </p>
 
 <h3>使い方</h3>
 <p>
-	ループします。
+  ループします。
 </p>
 <pre><code>:ジャンプ先
 何かメッセージを表示する
@@ -1390,19 +1387,19 @@ else {
 @story [file=ファイル名] [label=ラベル名]</code></pre>
 
 <p>
-	別なストーリーファイルにジャンプします。
-	ストーリーファイルはフォルダ <code>story</code> の中に存在する必要があります。
+  別なストーリーファイルにジャンプします。
+  ストーリーファイルはフォルダ <code>story</code> の中に存在する必要があります。
 </p>
 
 <h3>使い方1</h3>
 <p>
-	ストーリーファイル <code>001.txt</code> にジャンプします。
+  ストーリーファイル <code>001.txt</code> にジャンプします。
 </p>
 <pre><code>@story 001.txt</code></pre>
 
 <h3>使い方2</h3>
 <p>
-	ストーリーファイル <code>001.txt</code> のラベル <code>AAA</code> にジャンプします。
+  ストーリーファイル <code>001.txt</code> のラベル <code>AAA</code> にジャンプします。
 </p>
 <pre><code>@story 001.txt AAA</code></pre>
 
@@ -1412,84 +1409,84 @@ else {
 <h2>メッセージ</h2>
 
 <p>
-	メッセージボックスにテキストを出力します。
+  メッセージボックスにテキストを出力します。
 </p>
 
 <ul>
-	<li><code>$0</code> のように <code>$数字</code> でローカル変数やグローバル変数の値の数値を出力できます</li>
-	<li><code>%a</code> のように <code>%アルファベット</code> 小文字で名前変数の値の文字列を出力できます</li>
-	<li>利用できる装飾は下記の表の通りです</li>
+  <li><code>$0</code> のように <code>$数字</code> でローカル変数やグローバル変数の値の数値を出力できます</li>
+  <li><code>%a</code> のように <code>%アルファベット</code> 小文字で名前変数の値の文字列を出力できます</li>
+  <li>利用できる装飾は下記の表の通りです</li>
 </ul>
 
 <table>
-	<thead>
-		<tr>
-			<th>記述</th>
-			<th>装飾の内容</th>
-		</tr>
-	</thead>
-	<tbody>
-		<tr>
-			<td>\n</td>
-			<td>改行する</td>
-		</tr>
-		<tr>
-			<td>\#{RRGGBB}</td>
-			<td>フォントの色を変更する</td>
-		</tr>
-		<tr>
-			<td>\#{DEF}</td>
-			<td>フォントの色をデフォルトに戻す</td>
-		</tr>
-		<tr>
-			<td>\@{サイズ}</td>
-			<td>フォントのサイズを変更する。\{!サイズ}と書くとベースの高さ(下端)も変更できる</td>
-		</tr>
-		<tr>
-			<td>\^{ルビ}</td>
-			<td>ルビを振る</td>
-		</tr>
-		<tr>
-			<td>\f{1}</td>
-			<td>フォント1を使用する</td>
-		</tr>
-		<tr>
-			<td>\f{2}</td>
-			<td>フォント2を使用する</td>
-		</tr>
-		<tr>
-			<td>\f{3}</td>
-			<td>フォント3を使用する</td>
-		</tr>
-		<tr>
-			<td>\f{4}</td>
-			<td>フォント4を使用する</td>
-		</tr>
-		<tr>
-			<td>\o{+}</td>
-			<td>フォントのふちどりをONにする</td>
-		</tr>
-		<tr>
-			<td>\o{-}</td>
-			<td>フォントのふちどりをOFFにする</td>
-		</tr>
-		<tr>
-			<td>\p{x座標,y座標}</td>
-			<td>描画位置を変更する</td>
-		</tr>
-		<tr>
-			<td>\w{秒数}</td>
-			<td>ウェイトを挿入する</td>
-		</tr>
-		<tr>
-			<td>\M{左,上}</td>
-			<td>@textでのマージン指定</td>
-		</tr>
-		<tr>
-			<td>\L{高さ}</td>
-			<td>@textでの行間指定</td>
-		</tr>
-	</tbody>
+  <thead>
+    <tr>
+      <th>記述</th>
+      <th>装飾の内容</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>\n</td>
+      <td>改行する</td>
+    </tr>
+    <tr>
+      <td>\#{RRGGBB}</td>
+      <td>フォントの色を変更する</td>
+    </tr>
+    <tr>
+      <td>\#{DEF}</td>
+      <td>フォントの色をデフォルトに戻す</td>
+    </tr>
+    <tr>
+      <td>\@{サイズ}</td>
+      <td>フォントのサイズを変更する。\{!サイズ}と書くとベースの高さ(下端)も変更できる</td>
+    </tr>
+    <tr>
+      <td>\^{ルビ}</td>
+      <td>ルビを振る</td>
+    </tr>
+    <tr>
+      <td>\f{1}</td>
+      <td>フォント1を使用する</td>
+    </tr>
+    <tr>
+      <td>\f{2}</td>
+      <td>フォント2を使用する</td>
+    </tr>
+    <tr>
+      <td>\f{3}</td>
+      <td>フォント3を使用する</td>
+    </tr>
+    <tr>
+      <td>\f{4}</td>
+      <td>フォント4を使用する</td>
+    </tr>
+    <tr>
+      <td>\o{+}</td>
+      <td>フォントのふちどりをONにする</td>
+    </tr>
+    <tr>
+      <td>\o{-}</td>
+      <td>フォントのふちどりをOFFにする</td>
+    </tr>
+    <tr>
+      <td>\p{x座標,y座標}</td>
+      <td>描画位置を変更する</td>
+    </tr>
+    <tr>
+      <td>\w{秒数}</td>
+      <td>ウェイトを挿入する</td>
+    </tr>
+    <tr>
+      <td>\M{左,上}</td>
+      <td>@textでのマージン指定</td>
+    </tr>
+    <tr>
+      <td>\L{高さ}</td>
+      <td>@textでの行間指定</td>
+    </tr>
+  </tbody>
 </table>
 
 <h3>使い方</h3>
@@ -1497,8 +1494,8 @@ else {
 
 <h3>メッセージを一瞬で表示するには</h3>
 <p>
-	メッセージを一瞬で表示するための特別なコマンドはありません。
-	一時的にコンフィグを書き換えて制御します。
+  メッセージを一瞬で表示するための特別なコマンドはありません。
+  一時的にコンフィグを書き換えて制御します。
 </p>
 <pre><code>@config msgbox.nowait 1
 一瞬で表示するメッセージ
@@ -1512,12 +1509,12 @@ else {
 <pre><code>@return</code></pre>
 
 <p>
-	サブルーチンから戻ります。
+  サブルーチンから戻ります。
 </p>
 
 <h3>使い方1</h3>
 <p>
-	サブルーチン <code>SUB</code> を呼び出したと、元の位置に戻ります。
+  サブルーチン <code>SUB</code> を呼び出したと、元の位置に戻ります。
 </p>
 <pre><code>@gosub SUB
 
@@ -1535,27 +1532,27 @@ else {
 *キャラ名*音声ファイル*セリフ</code></pre>
 
 <p>
-	メッセージボックスにセリフのテキストを出力します。
-	また、名前ボックスにキャラクタの名前を出力します。
+  メッセージボックスにセリフのテキストを出力します。
+  また、名前ボックスにキャラクタの名前を出力します。
 </p>
 <p>
-	ボイスを再生することができます。
-	ボイスファイルは、フォルダ <code>sound/voice</code> の中に存在する必要があります。
-	ボイスファイルの形式は、44.1kHzのOgg Vorbisである必要があります。
+  ボイスを再生することができます。
+  ボイスファイルは、フォルダ <code>sound/voice</code> の中に存在する必要があります。
+  ボイスファイルの形式は、44.1kHzのOgg Vorbisである必要があります。
 </p>
 <p>
-	メッセージと同様の装飾が使えます。
+  メッセージと同様の装飾が使えます。
 </p>
 
 <h3>使い方1</h3>
 <p>
-	セリフを出力します。
+  セリフを出力します。
 </p>
 <pre><code>キャラ名「こんにちは。」</code></pre>
 
 <h3>使い方2</h3>
 <p>
-	ボイスを再生して、セリフを出力します。
+  ボイスを再生して、セリフを出力します。
 </p>
 <pre><code>*キャラ名*001.ogg*こんにちは。</code></pre>
 
@@ -1567,107 +1564,107 @@ else {
 <pre><code>@set [variable] [operator] [value]</code></pre>
 
 <p>
-	ローカル変数、グローバル変数、名前変数に値をセットします。
+  ローカル変数、グローバル変数、名前変数に値をセットします。
 </p>
 
 <table>
-	<thead>
-		<tr>
-			<th>変数の種類</th>
-			<th>説明</th>
-		</tr>
-	</thead>
-	<tbody>
-		<tr>
-			<td>ローカル変数</td>
-			<td>セーブデータごとに値が異なり、<code>$0</code> から <code>$9999</code> までの <code>10000</code> 個を利用できます。初期値は <code>0</code> です。</td>
-		</tr>
-		<tr>
-			<td>グローバル変数</td>
-			<td>全てのセーブデータで共通の値となり、<code>$10000</code> から <code>$10999</code> までの <code>1000</code> 個を利用できます。初期値は <code>0</code> です。</td>
-		</tr>
-		<tr>
-			<td>名前変数</td>
-			<td>セーブデータごとに値が異なり、<code>%a</code> から <code>%z</code> までの <code>26</code> 個を利用できます。初期値は空の文字列です。</td>
-		</tr>
-	</tbody>
+  <thead>
+    <tr>
+      <th>変数の種類</th>
+      <th>説明</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>ローカル変数</td>
+      <td>セーブデータごとに値が異なり、<code>$0</code> から <code>$9999</code> までの <code>10000</code> 個を利用できます。初期値は <code>0</code> です。</td>
+    </tr>
+    <tr>
+      <td>グローバル変数</td>
+      <td>全てのセーブデータで共通の値となり、<code>$10000</code> から <code>$10999</code> までの <code>1000</code> 個を利用できます。初期値は <code>0</code> です。</td>
+    </tr>
+    <tr>
+      <td>名前変数</td>
+      <td>セーブデータごとに値が異なり、<code>%a</code> から <code>%z</code> までの <code>26</code> 個を利用できます。初期値は空の文字列です。</td>
+    </tr>
+  </tbody>
 </table>
 
 <p>
-	<code>@set</code> で利用できる計算には下記のものがあります。
-	名前変数には代入以外使えません。
+  <code>@set</code> で利用できる計算には下記のものがあります。
+  名前変数には代入以外使えません。
 </p>
 
 <table>
-	<thead>
-		<tr>
-			<th>計算の種類</th>
-			<th>意味</th>
-		</tr>
-	</thead>
-	<tbody>
-		<tr>
-			<td>=</td>
-			<td>単純に a に b を入れます(代入)</td>
-		</tr>
-		<tr>
-			<td>+=</td>
-			<td>a に b を足し算します(加算)</td>
-		</tr>
-		<tr>
-			<td>-=</td>
-			<td>a から b を引き算します(減算)</td>
-		</tr>
-		<tr>
-			<td>*=</td>
-			<td>a に b をかけ算します(乗算)</td>
-		</tr>
-		<tr>
-			<td>/=</td>
-			<td>a を b で割り算します(除算)</td>
-		</tr>
-		<tr>
-			<td>%=</td>
-			<td>a を b で割った余りを求めます(剰余)</td>
-		</tr>
-	</tbody>
+  <thead>
+    <tr>
+      <th>計算の種類</th>
+      <th>意味</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>=</td>
+      <td>単純に a に b を入れます(代入)</td>
+    </tr>
+    <tr>
+      <td>+=</td>
+      <td>a に b を足し算します(加算)</td>
+    </tr>
+    <tr>
+      <td>-=</td>
+      <td>a から b を引き算します(減算)</td>
+    </tr>
+    <tr>
+      <td>*=</td>
+      <td>a に b をかけ算します(乗算)</td>
+    </tr>
+    <tr>
+      <td>/=</td>
+      <td>a を b で割り算します(除算)</td>
+    </tr>
+    <tr>
+      <td>%=</td>
+      <td>a を b で割った余りを求めます(剰余)</td>
+    </tr>
+  </tbody>
 </table>
 
 <h3>使い方1</h3>
 <p>
-	ローカル変数 <code>$0</code> に値 <code>1</code> を代入します。
-	フラグのセットに利用します。
-	ローカル変数の初期値は <code>0</code> なので、フラグが立ったことになります。
+  ローカル変数 <code>$0</code> に値 <code>1</code> を代入します。
+  フラグのセットに利用します。
+  ローカル変数の初期値は <code>0</code> なので、フラグが立ったことになります。
 </p>
 <pre><code>@set $0 = 1</code></pre>
 
 <h3>使い方2</h3>
 <p>
-	ローカル変数 <code>$10</code> に値 <code>23</code> を加算します。
-	好感度の加算などに応用できます。
+  ローカル変数 <code>$10</code> に値 <code>23</code> を加算します。
+  好感度の加算などに応用できます。
 </p>
 <pre><code>@set $10 += 23</code></pre>
 
 <h3>使い方3</h3>
 <p>
-	ローカル変数 <code>$0</code> に <code>0</code> から <code>9</code> までのランダムな値を代入します。
-	最初にランダムな数を <code>$RAND</code> で求めてから、 <code>10</code> で割った余りを計算しています。
-	ランダムなイベント発生に応用できます。
+  ローカル変数 <code>$0</code> に <code>0</code> から <code>9</code> までのランダムな値を代入します。
+  最初にランダムな数を <code>$RAND</code> で求めてから、 <code>10</code> で割った余りを計算しています。
+  ランダムなイベント発生に応用できます。
 </p>
 <pre><code>@set $0 = $RAND
 @set $0 %= 10</code></pre>
 
 <h3>使い方4</h3>
 <p>
-	ローカル変数 <code>$1</code> にローカル変数 <code>$2</code> を加算します。
-	好感度の計算などに利用できます。
+  ローカル変数 <code>$1</code> にローカル変数 <code>$2</code> を加算します。
+  好感度の計算などに利用できます。
 </p>
 <pre><code>@set $1 += $2</code></pre>
 
 <h3>使い方5</h3>
 <p>
-	名前変数 <code>%a</code> に文字列 <code>みどり</code> を代入します。
-	デフォルトの名前を設定するのに利用できます。
+  名前変数 <code>%a</code> に文字列 <code>みどり</code> を代入します。
+  デフォルトの名前を設定するのに利用できます。
 </p>
 <pre><code>@set %a = なまえ</code></pre>
 
@@ -1679,13 +1676,13 @@ else {
 <pre><code>@setconfig [コンフィグ名] (値)</code></pre>
 
 <p>
-	コンフィグをゲーム実行中に書き換えられる便利コマンドです。
+  コンフィグをゲーム実行中に書き換えられる便利コマンドです。
 </p>
 
 <h3>使い方</h3>
 <p>
-	メッセージボックスを変更します。
-	例えば、テキストを画面いっぱいに表示するノベルスタイルと、画面の下の方に表示するアドベンチャー形式を切り替えるのに使います。
+  メッセージボックスを変更します。
+  例えば、テキストを画面いっぱいに表示するノベルスタイルと、画面の下の方に表示するアドベンチャー形式を切り替えるのに使います。
 </p>
 <pre><code>@config msgbox.image msgbox2.png</code></pre>
 
@@ -1698,20 +1695,20 @@ else {
 @shake [dir=方向] [t=秒数] [count=振動回数] [amp=大きさ]</code></pre>
 
 <p>
-	画面を揺らします。
+  画面を揺らします。
 </p>
 
 <h3>使い方1</h3>
 <p>
-	<code>1.0</code> 秒かけて、<code>3</code> 回、横方向に <code>100</code> px、画面を揺らします。
-	なお、<code>horizontal</code> は <code>h</code> と省略できます。
+  <code>1.0</code> 秒かけて、<code>3</code> 回、横方向に <code>100</code> px、画面を揺らします。
+  なお、<code>horizontal</code> は <code>h</code> と省略できます。
 </p>
 <pre><code>@shake horizontal 1.0 3 100</code></pre>
 
 <h3>使い方2</h3>
 <p>
-	<code>1.0</code> 秒かけて、<code>3</code> 回、縦方向に <code>100</code> px、画面を揺らします。
-	なお、<code>vertical</code> は <code>v</code> と省略できます。
+  <code>1.0</code> 秒かけて、<code>3</code> 回、縦方向に <code>100</code> px、画面を揺らします。
+  なお、<code>vertical</code> は <code>v</code> と省略できます。
 </p>
 <pre><code>@shake vertical 1.0 3 100</code></pre>
 
@@ -1723,21 +1720,21 @@ else {
 <pre><code>@skip [enable/disable]</code></pre>
 
 <p>
-	待ち時間のあるコマンドのスキップを禁止・解禁します。
+  待ち時間のあるコマンドのスキップを禁止・解禁します。
 </p>
 <p>
-	主に、ゲーム起動時にブランドロゴを表示するのに使用できます。
+  主に、ゲーム起動時にブランドロゴを表示するのに使用できます。
 </p>
 
 <h3>使い方1</h3>
 <p>
-	スキップを有効にします。 [デフォルト設定]
+  スキップを有効にします。 [デフォルト設定]
 </p>
 <pre><code>@skip enable</code></pre>
 
 <h3>使い方2</h3>
 <p>
-	スキップを無効にします。
+  スキップを無効にします。
 </p>
 <pre><code>@skip disable</code></pre>
 
@@ -1749,28 +1746,28 @@ else {
 @video [file=ファイル名]</code></pre>
 
 <p>
-	動画を再生します。
+  動画を再生します。
 </p>
 <p>
-	Windowsで再生できる動画は <code>.wmv</code> ファイルです。
-	その他の環境で再生できる動画は <code>.mp4</code> ファイルです。
-	ファイル名の指定では拡張子(<code>.wmv</code> や <code>.mp4</code>)を省略すれば、
-	その環境用にファイルが自動選択されます。
+  Windowsで再生できる動画は <code>.wmv</code> ファイルです。
+  その他の環境で再生できる動画は <code>.mp4</code> ファイルです。
+  ファイル名の指定では拡張子(<code>.wmv</code> や <code>.mp4</code>)を省略すれば、
+  その環境用にファイルが自動選択されます。
 </p>
 <p>
-	動画ファイルは <code>video</code> ディレクトリに格納します。
-	<code>video</code> ディレクトリは <code>package.pak</code> ファイルにパッケージングされません。
+  動画ファイルは <code>video</code> ディレクトリに格納します。
+  <code>video</code> ディレクトリは <code>package.pak</code> ファイルにパッケージングされません。
 </p>
 <p>
-	Webブラウザでは、プレイヤが最初にクリックを行う前に動画を再生しようとすると、ブラウザでの違反となりゲームが止まります。
-	Web版でゲームの先頭で動画を再生するときは、事前に <code>@click</code> コマンドを入れるなどの対策を行ってください。
+  Webブラウザでは、プレイヤが最初にクリックを行う前に動画を再生しようとすると、ブラウザでの違反となりゲームが止まります。
+  Web版でゲームの先頭で動画を再生するときは、事前に <code>@click</code> コマンドを入れるなどの対策を行ってください。
 </p>
 
 <h3>使い方</h3>
 <p>
-	動画を再生します。
-	Windowsでは <code>sample.wmv</code> が再生されます。
-	その他の環境では <code>sample.mp4</code> が再生されます。
+  動画を再生します。
+  Windowsでは <code>sample.wmv</code> が再生されます。
+  その他の環境では <code>sample.mp4</code> が再生されます。
 </p>
 <pre><code>@video sample</code></pre>
 
@@ -1783,15 +1780,15 @@ else {
 @plugin [file=ファイル名.txt]</code></pre>
 
 <p>
-	プラグインスクリプトを実行します。
-	プラグインスクリプトはプログラミング言語です。
-	ストーリースクリプトでは複雑なプログラミングが大変なので、
-	ロジックを記述したい場合はストーリースクリプトからプラグインスクリプトを呼び出します。
+  プラグインスクリプトを実行します。
+  プラグインスクリプトはプログラミング言語です。
+  ストーリースクリプトでは複雑なプログラミングが大変なので、
+  ロジックを記述したい場合はストーリースクリプトからプラグインスクリプトを呼び出します。
 </p>
 
 <h3>使い方</h3>
 <p>
-	<code>script/plugin/hello.txt</code> を実行します。
+  <code>script/plugin/hello.txt</code> を実行します。
 </p>
 <pre><code>@plugin hello.txt</code></pre>
 
@@ -1804,14 +1801,14 @@ else {
 @text [layer=レイヤー] [text=テキスト]</code></pre>
 
 <p>
-	テキストレイヤにテキストを描画します。
-	あらかじめ利用するテキストレイヤ(<code>text1</code> から <code>text8</code> のいずれか)に、
-	@layerコマンドで画像を読み込んでおく必要があります。
+  テキストレイヤにテキストを描画します。
+  あらかじめ利用するテキストレイヤ(<code>text1</code> から <code>text8</code> のいずれか)に、
+  @layerコマンドで画像を読み込んでおく必要があります。
 </p>
 
 <h3>使い方</h3>
 <p>
-	テキストレイヤ1 (<code>text1</code>) にテキストを描画します。
+  テキストレイヤ1 (<code>text1</code>) にテキストを描画します。
 </p>
 <pre><code>@layer name=text1 file=text-layer-image.png x=0 y=0 a=255
 @text text1 "このテキストが描画されます。"</code></pre>
@@ -1824,18 +1821,18 @@ else {
 <pre><code>using [マクロファイル]</code></pre>
 
 <p>
-	ファイルにまとめたマクロを取り込みます。
+  ファイルにまとめたマクロを取り込みます。
 </p>
 <p>
-	マクロ内で定義したサブルーチンを <code>@gosub</code> で呼び出してください。
-	詳細は <a href="call.html">共通処理の呼び出し</a> に記載しています。
+  マクロ内で定義したサブルーチンを <code>@gosub</code> で呼び出してください。
+  詳細は <a href="call.html">共通処理の呼び出し</a> に記載しています。
 </p>
 
 <h3>使い方</h3>
 <p>
-	<code>story/macro.txt</code> を取り込みます。
-	マクロがそのまま実行されないように、<a href="#goto"><code>@goto</code></a> でガードします。
-	各ストーリーファイルの末尾の方に書くことが望ましいです。
+  <code>story/macro.txt</code> を取り込みます。
+  マクロがそのまま実行されないように、<a href="#goto"><code>@goto</code></a> でガードします。
+  各ストーリーファイルの末尾の方に書くことが望ましいです。
 </p>
 <pre><code>@goto MACRO_END
 using macro.txt

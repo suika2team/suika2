@@ -1,13 +1,19 @@
 <html><head></head><body><ul><!-- -*- mode: html-mode; -*- -->
 
 <!-- BEGIN-LATEST -->
+<li>Suika2 22.0.9 2024/10/13
+  <ul>
+    <li>Removed unused files</li>
+    <li>Added the lip-sync and eye-blink documents</li>
+</ul>
+</li>
+<!-- END-LATEST -->
+
 <li>Suika2 22.0.8 2024/10/13
   <ul>
     <li>Changed to msgbox.show.on.bg=no</li>
 </ul>
 </li>
-<!-- END-LATEST -->
-
 <li>Suika2 22.0.7 2024/10/13
   <ul>
     <li>Fixed story.txt</li>

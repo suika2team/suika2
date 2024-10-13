@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>Suika2 By OpenNovel.org Manual</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<h1>Lip Synchronization</h1>
+
+<p>
+  An lip synchronization image must be stored in the "lip" folder that is located in the same folder as the main character image exists.
+</p>
+<ul>
+  <li>happy.png (main character file)</li>
+  <li>lip
+    <ul>
+      <li>happy.png (lip synchronization file)</li>
+    </ul>
+  </li>
+</ul>
+
+<p>
+  An lip synchronization image consists of image(s) of lip synchronization difference(s).
+  A frame must be as the same size as the main character image is.
+  Frames must be stored horizontally in the left to right order.
+</p>
+<p>
+  Alpha values on borders must be smoothed.
+  Please use "Blur Selected" and "Delete" in an image editing software.
+</p>
+<p>
+  The lip synchronization interval may be specified in the <code>project.txt</code> file.
+</p>
+<pre><code>#
+# Lip synchronization frame length (seconds per frame)
+#
+character.lipsync.frame=0.3
+
+#
+# Lip synchronization times per characters
+#
+character.lipsync.chars=3</code></pre>
+
+</body>
+</html>

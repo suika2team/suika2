@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ja-JP">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>Suika2 By OpenNovel.org マニュアル</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<h1>目パチ</h1>
+
+<p>
+  目パチ画像ファイルは、キャラクタ本体画像と同じフォルダの中に、<code>eye</code> というフォルダを作って格納します。
+</p>
+<ul>
+  <li>happy.png (本体ファイル)</li>
+  <li>eye
+    <ul>
+      <li>happy.png (目パチファイル)</li>
+    </ul>
+  </li>
+</ul>
+
+<p>
+  目パチファイルは、まばたきのフレーム数の分だけ、キャラの目の差分を横につなげたものです。
+  １フレームの幅と高さは、本体ファイルの幅と同じにします。
+</p>
+<p>
+  差分の境界の透明度は、なめらかにする必要があります。
+  画像編集ツールで、選択範囲のぼかしと削除を利用してください。
+</p>
+  
+<p>
+  目パチの間隔は、<code>project.txt</code> の下記の箇所で変更できます。
+  指定した間隔が正確に反映されるわけではなく、ランダム要素があります。
+  また、ランダムに２回まばたきします。
+</p>
+<pre><code>#
+# 目パチの間隔(秒)
+#
+character.eyeblink.interval=4.0
+
+#
+# 目パチアニメの1フレームの秒数
+#
+character.eyeblink.frame=0.15</code></pre>
+
+
+</body>
+</html>

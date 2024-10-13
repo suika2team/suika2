@@ -1,13 +1,10 @@
 <!DOCTYPE html>
-<html lang="ja-JP">
+<html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width">
   <title>Suika2 By OpenNovel.org Manual</title>
-  <link rel="stylesheet" href="../css/style.css">
-  <style>
-    code { background-color: #CF9; }
-  </style>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
@@ -54,18 +51,18 @@
   </li>
   <li>Branch Commands
     <ul>
-      <li><a href="#ラベル">ラベル</a></li>
-      <li><a href="#goto">@goto ラベルにジャンプ</a></li>
-      <li><a href="#set">@set 変数に値を設定</a></li>
-      <li><a href="#if">@if 変数の値でジャンプ</a></li>
-      <li><a href="#story">@story ストーリーファイルにジャンプ</a></li>
-      <li><a href="#chapter">@chapter 章のタイトルを設定</a></li>
+      <li><a href="#label">Label (Jump Target)</a></li>
+      <li><a href="#goto">@goto Jumping To A Label</a></li>
+      <li><a href="#set">@set Setting A Value To A Variable</a></li>
+      <li><a href="#if">@if Branching By A Variable Value</a></li>
+      <li><a href="#story">@story Jumping To A Story File</a></li>
+      <li><a href="#chapter">@chapter Setting A Chapter Title</a></li>
     </ul>
   </li>
   <li>System Commands
     <ul>
-      <li><a href="#config">@config コンフィグの書き換え</a></li>
-      <li><a href="#using">using マクロの取り込み</a></li>
+      <li><a href="#config">@config Changin A Config At Runtimeえ</a></li>
+      <li><a href="#using">using Capture A Macro File</a></li>
     </ul>
   </li>
 </ul>
@@ -73,7 +70,7 @@
 <hr>
 
 <a name="about">
-<h2>命令とは</h2>
+<h2>About Commands</h2>
 <p>
   命令とは、<code>OpenNovel</code> を使ってゲームを作る上で必要なもので、
   <code>OpenNovel</code> に対する指示のことです。
