@@ -1,6 +1,5 @@
 move {
     layer: msg;
-    clear: all;
     start: 0.0;
     end: 0.1;
     from-x: +0;

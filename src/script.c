@@ -434,7 +434,7 @@ struct param_item {
 	{COMMAND_MOVE, MOVE_PARAM_ACCEL, "accel="},
 	{COMMAND_MOVE, MOVE_PARAM_OFFSET_X, "x="},
 	{COMMAND_MOVE, MOVE_PARAM_OFFSET_Y, "y="},
-	{COMMAND_MOVE, MOVE_PARAM_ALPHA, "alpha"},
+	{COMMAND_MOVE, MOVE_PARAM_ALPHA, "alpha="},
 
 	/* @music */
 	{COMMAND_MUSIC, MUSIC_PARAM_FILE, "file="},

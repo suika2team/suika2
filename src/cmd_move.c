@@ -73,6 +73,7 @@ static bool init(void)
 
 	/* アルファ値を求める */
 	alpha = get_alpha(alpha_s);
+	log_info("alpha=%s", alpha_s);
 
 	/* キャラのfrom位置を取得する */
 	from_x = get_layer_x(layer);
