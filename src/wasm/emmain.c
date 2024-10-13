@@ -739,7 +739,7 @@ char *make_valid_path(const char *dir, const char *fname)
 
 	/* If it is a save directory. */
 	if (dir != NULL && strcmp(dir, SAVE_DIR) == 0) {
-		snprintf(buf, sizeof(buf), "opennovel/%s-%s", conf_game_title, fname);
+		snprintf(buf, sizeof(buf), "suika2/%s-%s", conf_game_title, fname);
 		ret = strdup(buf);
 		if (ret == NULL) {
 			log_memory();
