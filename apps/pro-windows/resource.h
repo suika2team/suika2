@@ -37,38 +37,42 @@
 
 /* File Menu / Open Button */
 #define ID_NEW_PROJECT_JAPANESE_ADV	    160
-#define ID_OPEN_PROJECT			    161
-#define ID_OPEN_GAME_FOLDER		    162
-#define ID_OPEN                             163
-#define ID_RELOAD                           164
-#define ID_SAVE                             165
-#define ID_DEBUG_LAYERS                     166
-#define ID_QUIT                             167
+#define ID_NEW_PROJECT_ENGLISH_ADV	    161
+#define ID_NEW_PROJECT_JAPANESE_NVL	    162
+#define ID_NEW_PROJECT_ENGLISH_NVL	    163
+#define ID_NEW_PROJECT_JAPANESE_NVLV	    164
+#define ID_OPEN_PROJECT			    165
+#define ID_OPEN_GAME_FOLDER		    166
+#define ID_OPEN                             167
+#define ID_RELOAD                           168
+#define ID_SAVE                             169
+#define ID_DEBUG_LAYERS                     170
+#define ID_QUIT                             171
 
 /* Run Menu / Buttons */
-#define ID_CONTINUE                         170
-#define ID_NEXT                             171
-#define ID_STOP                             172
-#define ID_ERROR                            173
-#define ID_VARS                             174
+#define ID_CONTINUE                         180
+#define ID_NEXT                             181
+#define ID_STOP                             182
+#define ID_ERROR                            183
+#define ID_VARS                             184
 
 /* Direction Menu / Popup Menu */
-#define ID_CMD_MESSAGE			    180
-#define ID_CMD_SERIF			    181
-#define ID_CMD_BG			    182
-#define ID_CMD_BG_ONLY			    183
-#define ID_CMD_CH			    184
-#define ID_CMD_CHCH			    185
-#define ID_CMD_MUSIC			    186
-#define ID_CMD_SOUND			    187
-#define ID_CMD_VOLUME			    188
-#define ID_CMD_VIDEO			    189
-#define ID_CMD_SHAKE			    190
-#define ID_CMD_CHOOSE			    191
-#define ID_CMD_MENU			    192
-#define ID_CMD_CLICK			    193
-#define ID_CMD_TIME			    194
-#define ID_CMD_STORY			    195
+#define ID_CMD_MESSAGE			    190
+#define ID_CMD_SERIF			    191
+#define ID_CMD_BG			    192
+#define ID_CMD_BG_ONLY			    193
+#define ID_CMD_CH			    194
+#define ID_CMD_CHCH			    195
+#define ID_CMD_MUSIC			    196
+#define ID_CMD_SOUND			    197
+#define ID_CMD_VOLUME			    198
+#define ID_CMD_VIDEO			    199
+#define ID_CMD_SHAKE			    200
+#define ID_CMD_CHOOSE			    201
+#define ID_CMD_MENU			    202
+#define ID_CMD_CLICK			    203
+#define ID_CMD_TIME			    204
+#define ID_CMD_STORY			    205
 
 /* View Menu */
 #define ID_FONT		                    210

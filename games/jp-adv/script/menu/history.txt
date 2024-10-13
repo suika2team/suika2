@@ -1,0 +1,156 @@
+#
+# メッセージ履歴画面のメニュースクリプト
+#
+
+# このファイルの基本設定
+global {
+    # 下記の画像を使用する
+    base:   system/history/base.png;
+    idle:   system/history/idle.png;
+    hover:  system/history/hover.png;
+    active: system/history/active.png;
+
+    # 1画面あたりの履歴表示数を指定
+    historyslots: 3;
+
+    # 右クリックによるキャンセル時のSE
+    cancelse: click.ogg;
+
+    # フェードイン時間(秒)
+    #fadein: 0.5;
+
+    # フェードアウト時間(秒)
+    #fadeout: 0.5;
+}
+
+# 元の画面に戻るボタン
+BACK {
+    # 種類:キャンセル
+    type: cancel;
+
+    # 座標とサイズ
+    x: 33;
+    y: 605;
+    width: 245;
+    height: 78;
+
+    # ポイントされたときの効果音
+    pointse: button.ogg;
+
+    # クリックされたときの効果音
+    clickse: click.ogg;
+}
+
+# 履歴スロット1
+HISTORYSLOT1 {
+    # 種類:履歴
+    type: history;
+
+    # 履歴スロット0番目
+    index: 0;
+
+    # 座標とサイズ
+    x: 290;
+    y: 38;
+    width: 770;
+    height: 100;
+
+    # テキストのマージン
+    margin: 0;
+
+    # ポイントされたときの効果音
+    pointse: button.ogg;
+
+    # クリア用の色(背景色を設定しないと擬似的なフォントのふちどりが生じる)
+    clear-r: 255;
+    clear-g: 255;
+    clear-b: 255;
+}
+
+# 履歴スロット2
+HISTORYSLOT2 {
+    # 種類:履歴
+    type: history;
+
+    # 履歴スロット1番目
+    index: 1;
+
+    # 座標とサイズ
+    x: 290;
+    y: 238;
+    width: 770;
+    height: 100;
+
+    # テキストのマージン
+    margin: 0;
+
+    # ポイントされたときの効果音
+    pointse: button.ogg;
+
+    # クリア用の色(背景色を設定しないと擬似的なフォントのふちどりが生じる)
+    clear-r: 255;
+    clear-g: 255;
+    clear-b: 255;
+}
+
+# 履歴スロット3
+HISTORYSLOT3 {
+    # 種類:履歴
+    type: history;
+
+    # 履歴スロット2番目
+    index: 2;
+
+    # 座標とサイズ
+    x: 290;
+    y: 438;
+    width: 770;
+    height: 100;
+
+    # テキストのマージン
+    margin: 0;
+
+    # ポイントされたときの効果音
+    pointse: button.ogg;
+
+    # クリア用の色(背景色を設定しないと擬似的なフォントのふちどりが生じる)
+    clear-r: 255;
+    clear-g: 255;
+    clear-b: 255;
+}
+
+# スクロールバー
+SCROLL {
+    # 種類:スクロールバー
+    type: historyscroll;
+
+    # 座標とサイズ
+    x: 1148;
+    y: 77;
+    width: 66;
+    height: 566;
+
+    # ポイントされたときの効果音
+    pointse: button.ogg;
+}
+
+# タイトルへ戻るボタン
+TITLE {
+    # 種類:タイトルへ戻る
+    type: title;
+
+    # 移動先のシナリオファイル
+    file: story.txt;
+
+    # 座標とサイズ
+    x: 33;
+    y: 512;
+    width: 245;
+    height: 78;
+
+    # ポイントされたときの効果音
+    pointse: button.ogg;
+
+    # クリックされたときの効果音
+    clickse: click.ogg;
+}

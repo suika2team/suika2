@@ -1,0 +1,351 @@
+# This is the first story file.
+
+#
+# Logo
+#
+
+# Stop the music.
+@music stop
+
+# Disable skip operations.
+@skip disable
+
+# Load a white background to the stage.
+@bg file=white.png t=0
+
+# Show the logo.
+@bg file=logo.png t=0.5
+
+# Play the sound logo.
+@sound file=suika.ogg
+
+# Wait for 2 seconds.
+@time t=2.0
+
+# Hide the logo.
+@bg file=white.png t=0.5
+
+# Enable skip operations.
+@skip enable
+
+#
+# Menu
+#
+
+# Set the music volume.
+@volume track=bgm vol=1.0 t=0
+
+# Play a music.
+@music file=adventure.ogg
+
+# Show the menu background.
+@bg file=title.png t=1.0
+
+# This is a label to be jumped to when showing the menu again.
+:MENU
+
+# Show the title menu.
+@menu file=title.txt
+
+#
+# Will be jumped here when "START" is selected in the menu.
+#
+
+:START
+
+# Jump to the SCENE1
+@goto label="SCENE1"
+
+#
+# Will be jumped here when "LOAD" is selected in the menu.
+#
+:LOAD
+
+# Show the load menu.
+@menu file=load.txt
+
+# If not loaded, the control comes here.
+@goto label="MENU"
+
+#
+# Will be jumped here when "CONFIG" is selected in the menu.
+#
+
+:CONFIG
+
+# Show the config menu.
+@menu file=config.txt
+
+# The control comes here after the config menu.
+@goto label="MENU"
+
+#
+# Scene 1
+#
+
+:SCENE1
+
+# Prepare.
+@chapter title="Scene1"
+@volume track=bgm vol=0.0 t=1.0
+@bg file=white.png t=1.0
+@bg file=roof.png t=1.0 effect=rule:star.png
+
+# Start raining. (calling a macro)
+&start-rain
+It is sunny, but there is a shower...
+
+# Stop raining. (calling a macro)
+&stop-rain
+...It looks like the rain is over.
+
+# Let Midori enter.
+@ch pos=center file=midori/fun.png t=0 effect=normal right=600 down=0 alpha=0
+@move pos=center t=2.0 accel=move x=-600 y=0 alpha=255
+
+*Midori*e001.ogg*Isn't the breeze great from up here? It's so cool...
+*Midori*e002.ogg*(I'm on my school's rooftop, having skipped my remedial class.)
+
+@ch pos=center file=midori/happy.png t=1.0
+
+*Midori*e003.ogg*Hm? Oh, you're here. Hey, it's fine, they don't call the roll for remedial classes anymore.
+*Midori*e004.ogg*(Since this is a country town in Hokkaido, and on the coast, I can see the sea peaking up over the horizon. During the cultural festival, the sun turns the whole ocean amber.)
+
+@ch pos=center file=midori/fun.png t=1.0
+
+*Midori*e005.ogg*Now, you're probably wondering why I skipped the remedial class, right?
+*Midori*e006.ogg*Oh actually, I should probably introduce myself first, shouldn't I?
+
+@ch pos=center file=midori/happy.png t=1.0
+
+*Midori*e007.ogg*My name's \#{00ff00}Midori\#{DEF}, nice to meet you!
+*Midori*e008.ogg*I'm a senior student here. If you couldn't already tell, I love watermelon, my parents even own a watermelon farm!
+
+@ch pos=center file=midori/normal.png t=1.0
+
+*Midori*e009.ogg*Now for the reason I dragged you up here all of a sudden...
+*Midori*e010.ogg*It's because...
+
+@ch pos=center file=midori/sad.png t=1.0
+
+*Midori*e011.ogg*(This is really important... I can't mess this up!)
+*Midori*e012.ogg*I want to... to...
+
+@ch pos=center file=midori/happy.png t=1.0
+
+*Midori*e013.ogg*I want to tell you about Suika2!
+
+#
+# Scene 2
+#
+
+@chapter title="Scene2"
+
+*Midori*e014.ogg*Ahem, okay, now that that's out in the open...
+
+@music file=adventure.ogg
+@volume track=bgm vol=1.0 t=1.0
+
+*Midori*e015.ogg*Heya!
+*Midori*e016.ogg*Thank you for using Suika2!
+*Midori*e017.ogg*As you may already know, Suika2 is a visual novel authoring tool, commonly known as an "engine".
+*Midori*e018.ogg*It's free, open-source, runs on Windows, Mac, and loads of other systems - awesome, right?
+
+@ch pos=center file=midori/fun.png t=1.0
+
+*Midori*e019.ogg*The Team asked me to see if you had any questions. Anything you'd like to ask them?
+
+@ch pos=center none t=1.0
+
+#
+# Scene 3
+#
+
+@chapter title="Scene3"
+
+:LOOP1
+@choose L1_ADVANTAGE "Why choose Suika2?" L1_ENV "Any system requirements?" L1_NEXT Next
+
+# In case "Why choose Suika2?" is selected.
+
+:L1_ADVANTAGE
+Suika2 has three main advantages.
+
+Firstly, it's diverse.
+Games made with Suika2 run on Windows, iPhone, iPad, Android, Mac, and gaming consoles.
+All of them work in pretty much the same way.
+
+Secondly, it's simple.
+Anyone can start writing scripts with nothing more than a text editor.
+In addition, scripts are pretty much just plain English!
+What's even better: you can use a mouse to edit your script.
+
+Last but not least, freedom. You can use Suika2 in your commercial projects for free!
+
+# Mark as read.
+@set $1 = 1
+
+@ch pos=center file=midori/fun.png t=1.0
+
+*Midori*e020.ogg*Great! I'm glad my stories will keep working, even on my new computer! Being able to focus on the story, rather than syntax is nice too!
+*Midori*e021.ogg*Do you have any other questions?
+
+@ch pos=center none t=1.0
+
+@goto label="LOOP1"
+
+# In case "Any system requirements?" is selected.
+
+:L1_ENV
+You can create games that run on PC, iPhone, iPad, Android, Mac, and gaming consoles!
+Market trends for devices that run games differ from country to country.
+You can create games for all markets.
+
+# Mark as read.
+@set $2 = 1
+
+@ch pos=center file=midori/fun.png t=1.0
+
+*Midori*e022.ogg*Oh yeah, that's right!
+*Midori*e021.ogg*Do you have any other questions?
+
+@ch pos=center none t=1.0
+
+@goto label="LOOP1"
+
+# In case "Next" is selected.
+
+:L1_NEXT
+
+#
+# Scene 4
+#
+
+@chapter title="Scene4"
+
+@ch pos=center file=midori/fun.png 1.0
+
+*Midori*e023.ogg*How about we step out and take a walk? ...Hm, how about we go to the beach?
+
+@volume track=bgm vol=0.0 t=1.0
+
+@bg coast.png t=1.0 effect=curtain-right
+
+@ch pos=center file=midori/happy.png t=1.0
+
+*Midori*e024.ogg*Is there anything else you were wondering?
+
+@ch pos=center none t=1.0
+
+:LOOP2
+@choose L2_WHEN "Is there a Suika1?" L2_DIVERSE "Why so diverse?" L2_NEXT Next
+
+:L2_WHEN
+Releases before version 2.0.0 were named 'Suika Studio' and the author developed it when he was just a high school student.
+
+# Mark as read.
+@set $3 = 1
+
+@ch pos=center file=midori/fun.png t=1.0
+
+*Midori*e025.ogg*Oh, cool! Even I didn't know that!
+*Midori*e021.ogg*Do you have any other questions?
+
+@ch pos=center none t=1.0
+
+@goto label="LOOP2"
+
+:L2_DIVERSE
+Because the author is a porting freek.
+
+# Mark as read.
+@set $4 = 1
+
+@ch pos=center file=midori/fun.png t=1.0
+
+*Midori*e026.ogg*Oh, yes!
+*Midori*e021.ogg*Do you have any other questions?
+
+@ch pos=center none t=1.0
+
+@goto label="LOOP2"
+
+:L2_NEXT
+
+#
+# Scene 5
+#
+
+@chapter title="Scene5"
+
+@ch pos=center file=midori/fun.png t=1.0
+
+*Midori*e027.ogg*Thanks for asking so many questions today!
+
+@ch pos=center file=midori/sad.png t=1.0
+
+*Midori*e028.ogg*(I just wanted to tell you about Suika2... That's pretty much a confession, right? ...Right?)
+
+@ch pos=center file=midori/fun.png t=1.0
+
+*Midori*e029.ogg*If you have any questions, send me an e-mail at \#{ff0000}midori@suika2.com\#{DEF} anytime!
+
+@ch pos=center file=midori/sad.png t=1.0
+
+*Midori*e031.ogg*I hope you'll send me an e-mail with your questions, feedback, issues, or even just to say hi! - See you next time!
+
+@ch pos=center file=midori/happy.png t=1.0
+
+# Shake the message box.
+@anime msgbox-shake.txt sync,showmsgbox
+
+# Let Midori leave.
+@move pos=center t=1.0 accel=move x=600 y=0 alpha=0
+@ch pos=center none t=0.0
+
+#
+# Scene 6
+#
+
+# Jump to "END" if there is an "unseen" option.
+@if $1 != 1 END
+@if $2 != 1 END
+@if $3 != 1 END
+@if $4 != 1 END
+
+# All options are seen.
+@chapter title="Scene6"
+
+Thank you for selecting all the options!
+
+*Midori*e030.ogg*Don't forget to check out the web site!
+
+@goto END
+
+#
+# Epilogue
+#
+
+:END
+
+@bg file=white.png t=1.0
+
+# Load the story.txt file again.
+@story story.txt
+
+#
+# Macros
+#
+
+# Start raining.
+:start-rain
+@layer effect1 effect/rain/1.png
+@layer effect2 effect/rain/1.png
+@anime rain.txt async,reg00
+@return
+
+# Stop raining.
+:stop-rain
+@anime clear layer-effect1,layer-effect2
+@anime unregister reg00
+@return

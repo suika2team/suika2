@@ -100,5 +100,8 @@ libroot:
 # Phony
 #
 
+setup:
+	sudo apt-get install mingw-w64
+
 clean:
 	@rm -rf *.o *~ game.exe errors.txt save tmp libroot*

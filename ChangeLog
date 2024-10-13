@@ -1,34 +1,33 @@
 <html><head></head><body><ul><!-- -*- mode: html-mode; -*- -->
 
 <!-- BEGIN-LATEST -->
-<li>Suika2 22.0.9 2024/10/13
+<li>Suika2 22.0.10 2024/10/14
   <ul>
-    <li>Removed unused files</li>
-    <li>Added the lip-sync and eye-blink documents</li>
-</ul>
+    <li>Added the English sample project</li>
+  </ul>
 </li>
 <!-- END-LATEST -->
 
 <li>Suika2 22.0.8 2024/10/13
   <ul>
     <li>Changed to msgbox.show.on.bg=no</li>
-</ul>
+  </ul>
 </li>
 <li>Suika2 22.0.7 2024/10/13
   <ul>
     <li>Fixed story.txt</li>
-</ul>
+  </ul>
 </li>
 <li>Suika2 22.0.6 2024/10/13
   <ul>
     <li>Removed a debug message</li>
-</ul>
+  </ul>
 </li>
 <li>Suika2 22.0.5 2024/10/13
   <ul>
     <li>Fixed a bug where alpha= option is not recognized by the move command</li>
     <li>Changed the sample game</li>
-</ul>
+  </ul>
 </li>
 <li>Suika2 22.0.4 2024/10/12
   <ul>

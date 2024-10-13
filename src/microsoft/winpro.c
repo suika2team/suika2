@@ -61,7 +61,7 @@
 
 /* The version string. */
 #define VERSION_STRING 		\
-	"Suika2 22.0 - An OpenNovel.org Engine\n" \
+	"Suika2 22.0\n" \
 	"Copyright (c) 2001-2024, OpenNovel.org. All rights reserved.\n"
 
 /* The minimum window size. */
@@ -1105,16 +1105,22 @@ static VOID InitMenu(HWND hWnd)
 	 * New Game
 	 */
 
-	/* Create a second layer for Create a new project. */
+	/* Create a second layer for "Create a new project" */
 	mi.hSubMenu = hMenuProject;
 	mi.dwTypeData = bEnglish ? L"Create a new project" : L"新規プロジェクトを作成";
 	InsertMenuItem(hMenuFile, 0, TRUE, &mi);
 
-	/* Create a menu item for Japanese Adventure. */
+	/* Create a menu item for "Japanese Adventure" */
 	nOrder = 0;
 	mi.fMask = MIIM_TYPE | MIIM_ID;
 	mi.wID = ID_NEW_PROJECT_JAPANESE_ADV;
 	mi.dwTypeData = bEnglish ? L"Japanese Adventure" : L"日本語アドベンチャー形式";
+	InsertMenuItem(hMenuProject, nOrder++, TRUE, &mi);
+
+	/* Create a menu item for "English Adventure" */
+	mi.fMask = MIIM_TYPE | MIIM_ID;
+	mi.wID = ID_NEW_PROJECT_ENGLISH_ADV;
+	mi.dwTypeData = bEnglish ? L"English Adventure" : L"英語アドベンチャー形式";
 	InsertMenuItem(hMenuProject, nOrder++, TRUE, &mi);
 
 	/*
@@ -1123,14 +1129,14 @@ static VOID InitMenu(HWND hWnd)
 
 	mi.fMask = MIIM_TYPE | MIIM_ID;
 
-	/* Create a menu item for Open game. */
+	/* Create a menu item for "Open project" */
 	mi.wID = ID_OPEN_PROJECT;
 	mi.dwTypeData = bEnglish ?
 		L"Open project\tCtrl+G" :
 		L"プロジェクトを開く\tCtrl+G";
 	InsertMenuItem(hMenuFile, nOrder++, TRUE, &mi);
 
-	/* Create a menu item for Open game folder. */
+	/* Create a menu item for "Open project folder" */
 	mi.wID = ID_OPEN_GAME_FOLDER;
 	mi.dwTypeData = bEnglish ?
 		L"Open project folder" :
@@ -1138,7 +1144,7 @@ static VOID InitMenu(HWND hWnd)
 	InsertMenuItem(hMenuFile, nOrder++, TRUE, &mi);
 	EnableMenuItem(hMenu, ID_OPEN_GAME_FOLDER, MF_GRAYED);
 
-	/* Create a menu item for Open script. */
+	/* Create a menu item for "Open script" */
 	mi.wID = ID_OPEN;
 	mi.dwTypeData = bEnglish ?
 		L"Open script\tCtrl+O" :
@@ -1146,7 +1152,7 @@ static VOID InitMenu(HWND hWnd)
 	InsertMenuItem(hMenuFile, nOrder++, TRUE, &mi);
 	EnableMenuItem(hMenu, ID_OPEN, MF_GRAYED);
 
-	/* Create a menu item for Reload script. */
+	/* Create a menu item for "Reload script" */
 	mi.wID = ID_RELOAD;
 	mi.dwTypeData = bEnglish ?
 		L"Reload script\tCtrl+L" :
@@ -1154,7 +1160,7 @@ static VOID InitMenu(HWND hWnd)
 	InsertMenuItem(hMenuFile, nOrder++, TRUE, &mi);
 	EnableMenuItem(hMenu, ID_RELOAD, MF_GRAYED);
 
-	/* Create a menu item for Pverwrite script. */
+	/* Create a menu item for "Overwrite script" */
 	mi.wID = ID_SAVE;
 	mi.dwTypeData = bEnglish ?
 		L"Overwrite script\tCtrl+S" :
@@ -1162,14 +1168,14 @@ static VOID InitMenu(HWND hWnd)
 	InsertMenuItem(hMenuFile, nOrder++, TRUE, &mi);
 	EnableMenuItem(hMenu, ID_SAVE, MF_GRAYED);
 
-	/* Create a menu item for Write layer images for debugging. */
+	/* Create a menu item for "Write layer images for debugging" */
 	mi.wID = ID_DEBUG_LAYERS;
 	mi.dwTypeData = bEnglish ?
 		L"Write layer images for debugging" :
 		L"レイヤー画像のデバッグ出力";
 	InsertMenuItem(hMenuFile, nOrder++, TRUE, &mi);
 
-	/* Create a menu item for Quit. */
+	/* Create a menu item for "Quit" */
 	mi.wID = ID_QUIT;
 	mi.dwTypeData = bEnglish ?
 		L"Quit\tCtrl+Q" :
@@ -1180,7 +1186,7 @@ static VOID InitMenu(HWND hWnd)
 	 * Run
 	 */
 
-	/* Create a menu item for Continue. */
+	/* Create a menu item for "Continue" */
 	nOrder = 0;
 	mi.wID = ID_CONTINUE;
 	mi.dwTypeData = bEnglish ?
@@ -1189,7 +1195,7 @@ static VOID InitMenu(HWND hWnd)
 	InsertMenuItem(hMenuRun, nOrder++, TRUE, &mi);
 	EnableMenuItem(hMenu, ID_CONTINUE, MF_GRAYED);
 
-	/* Create a menu item for Next. */
+	/* Create a menu item for "Next" */
 	mi.wID = ID_NEXT;
 	mi.dwTypeData = bEnglish ?
 		L"Next\tCtrl+N" :
@@ -1197,7 +1203,7 @@ static VOID InitMenu(HWND hWnd)
 	InsertMenuItem(hMenuRun, nOrder++, TRUE, &mi);
 	EnableMenuItem(hMenu, ID_NEXT, MF_GRAYED);
 
-	/* Create a menu item for Stop. */
+	/* Create a menu item for "Stop" */
 	mi.wID = ID_STOP;
 	mi.dwTypeData = bEnglish ?
 		L"Stop\tCtrl+P" :
@@ -1205,7 +1211,7 @@ static VOID InitMenu(HWND hWnd)
 	InsertMenuItem(hMenuRun, nOrder++, TRUE, &mi);
 	EnableMenuItem(hMenu, ID_STOP, MF_GRAYED);
 
-	/* Create a menu item for Go to next error. */
+	/* Create a menu item for "Go to next error" */
 	mi.wID = ID_ERROR;
 	mi.dwTypeData = bEnglish ?
 		L"Go to next error\tCtrl+E" :
@@ -1217,7 +1223,7 @@ static VOID InitMenu(HWND hWnd)
 	 * Export
 	 */
 
-	/* Create a menu item for Export iOS project. */
+	/* Create a menu item for "Export iOS project" */
 	nOrder = 0;
 	mi.wID = ID_EXPORT_IOS;
 	mi.dwTypeData = bEnglish ?
@@ -1226,7 +1232,7 @@ static VOID InitMenu(HWND hWnd)
 	InsertMenuItem(hMenuExport, nOrder++, TRUE, &mi);
 	EnableMenuItem(hMenu, ID_EXPORT_IOS, MF_GRAYED);
 
-	/* Create a menu item for Export Android project. */
+	/* Create a menu item for "Export Android project" */
 	mi.wID = ID_EXPORT_ANDROID;
 	mi.dwTypeData = bEnglish ?
 		L"Export Android project" :
@@ -1234,7 +1240,7 @@ static VOID InitMenu(HWND hWnd)
 	InsertMenuItem(hMenuExport, nOrder++, TRUE, &mi);
 	EnableMenuItem(hMenu, ID_EXPORT_ANDROID, MF_GRAYED);
 
-	/* Create a menu item for Export macOS project. */
+	/* Create a menu item for "Export macOS project" */
 	mi.wID = ID_EXPORT_MAC;
 	mi.dwTypeData = bEnglish ?
 		L"Export macOS project" :
@@ -1242,7 +1248,7 @@ static VOID InitMenu(HWND hWnd)
 	InsertMenuItem(hMenuExport, nOrder++, TRUE, &mi);
 	EnableMenuItem(hMenu, ID_EXPORT_MAC, MF_GRAYED);
 
-	/* Create a menu item for Export for Web. */
+	/* Create a menu item for "Export for Web" */
 	mi.wID = ID_EXPORT_WEB;
 	mi.dwTypeData = bEnglish ?
 		L"Export for Web" :
@@ -1250,7 +1256,7 @@ static VOID InitMenu(HWND hWnd)
 	InsertMenuItem(hMenuExport, nOrder++, TRUE, &mi);
 	EnableMenuItem(hMenu, ID_EXPORT_WEB, MF_GRAYED);
 
-	/* Create a menu item for Export a Windows game. */
+	/* Create a menu item for "Export a Windows game" */
 	mi.wID = ID_EXPORT_WIN;
 	mi.dwTypeData = bEnglish ?
 		L"Export a Windows game" :
@@ -1258,7 +1264,7 @@ static VOID InitMenu(HWND hWnd)
 	InsertMenuItem(hMenuExport, nOrder++, TRUE, &mi);
 	EnableMenuItem(hMenu, ID_EXPORT_WIN, MF_GRAYED);
 
-	/* Create a menu item for Export Unity project. */
+	/* Create a menu item for "Export Unity project" */
 	mi.wID = ID_EXPORT_UNITY;
 	mi.dwTypeData = bEnglish ?
 		L"Export Unity project" :
@@ -1266,7 +1272,7 @@ static VOID InitMenu(HWND hWnd)
 	InsertMenuItem(hMenuExport, nOrder++, TRUE, &mi);
 	EnableMenuItem(hMenu, ID_EXPORT_UNITY, MF_GRAYED);
 
-	/* Create a menu item for export package only. */
+	/* Create a menu item for "Export package only" */
 	mi.wID = ID_EXPORT_PACKAGE;
 	mi.dwTypeData = bEnglish ?
 		L"Export package only" :
@@ -1278,7 +1284,7 @@ static VOID InitMenu(HWND hWnd)
 	 * Direction
 	 */
 
-	/* Create a menu item for Message. */
+	/* Create a menu item for "Message" */
 	nOrder = 0;
 	mi.wID = ID_CMD_MESSAGE;
 	mi.dwTypeData = bEnglish ?
@@ -1287,13 +1293,13 @@ static VOID InitMenu(HWND hWnd)
 	InsertMenuItem(hMenuDirection, nOrder++, TRUE, &mi);
 	EnableMenuItem(hMenu, ID_CMD_MESSAGE, MF_GRAYED);
 
-	/* Create a menu item for Line. */
+	/* Create a menu item for "Line" */
 	mi.wID = ID_CMD_SERIF;
 	mi.dwTypeData = bEnglish ? L"Line" : L"セリフを入力";
 	InsertMenuItem(hMenuDirection, nOrder++, TRUE, &mi);
 	EnableMenuItem(hMenu, ID_CMD_SERIF, MF_GRAYED);
 
-	/* Create a menu item for Background. */
+	/* Create a menu item for "Background" */
 	mi.wID = ID_CMD_BG;
 	mi.dwTypeData = bEnglish ?
 		L"Background" :
@@ -1301,7 +1307,7 @@ static VOID InitMenu(HWND hWnd)
 	InsertMenuItem(hMenuDirection, nOrder++, TRUE, &mi);
 	EnableMenuItem(hMenu, ID_CMD_BG, MF_GRAYED);
 
-	/* Create a menu item for Background only. */
+	/* Create a menu item for "Background only" */
 	mi.wID = ID_CMD_BG_ONLY;
 	mi.dwTypeData = bEnglish ?
 		L"Change Background Only" :
@@ -1309,7 +1315,7 @@ static VOID InitMenu(HWND hWnd)
 	InsertMenuItem(hMenuDirection, nOrder++, TRUE, &mi);
 	EnableMenuItem(hMenu, ID_CMD_BG_ONLY, MF_GRAYED);
 
-	/* Create a menu item for Character. */
+	/* Create a menu item for "Character" */
 	mi.wID = ID_CMD_CH;
 	mi.dwTypeData = bEnglish ?
 		L"Character" :
@@ -1317,7 +1323,7 @@ static VOID InitMenu(HWND hWnd)
 	InsertMenuItem(hMenuDirection, nOrder++, TRUE, &mi);
 	EnableMenuItem(hMenu, ID_CMD_CH, MF_GRAYED);
 
-	/* Create a menu item for Change Multiple Characters. */
+	/* Create a menu item for "Change Multiple Characters" */
 	mi.wID = ID_CMD_CHCH;
 	mi.dwTypeData = bEnglish ?
 		L"Change Multiple Characters" :
@@ -1325,7 +1331,7 @@ static VOID InitMenu(HWND hWnd)
 	InsertMenuItem(hMenuDirection, nOrder++, TRUE, &mi);
 	EnableMenuItem(hMenu, ID_CMD_CHCH, MF_GRAYED);
 
-	/* Create a menu item for Play Music. */
+	/* Create a menu item for "Play Music" */
 	mi.wID = ID_CMD_MUSIC;
 	mi.dwTypeData = bEnglish ?
 		L"Play Background Music" :
@@ -1333,7 +1339,7 @@ static VOID InitMenu(HWND hWnd)
 	InsertMenuItem(hMenuDirection, nOrder++, TRUE, &mi);
 	EnableMenuItem(hMenu, ID_CMD_MUSIC, MF_GRAYED);
 
-	/* Create a menu item for Play Sound Effect. */
+	/* Create a menu item for "Play Sound Effect" */
 	mi.wID = ID_CMD_SOUND;
 	mi.dwTypeData = bEnglish ?
 		L"Play Sound Effect" :
@@ -1341,7 +1347,7 @@ static VOID InitMenu(HWND hWnd)
 	InsertMenuItem(hMenuDirection, nOrder++, TRUE, &mi);
 	EnableMenuItem(hMenu, ID_CMD_SOUND, MF_GRAYED);
 
-	/* Create a menu item for Sound Effect Volume. */
+	/* Create a menu item for "Sound Effect Volume" */
 	mi.wID = ID_CMD_VOLUME;
 	mi.dwTypeData = bEnglish ?
 		L"Sound Volume" :
@@ -1349,7 +1355,7 @@ static VOID InitMenu(HWND hWnd)
 	InsertMenuItem(hMenuDirection, nOrder++, TRUE, &mi);
 	EnableMenuItem(hMenu, ID_CMD_VOLUME, MF_GRAYED);
 
-	/* Create a menu item for Play Video. */
+	/* Create a menu item for "Play Video" */
 	mi.wID = ID_CMD_VIDEO;
 	mi.dwTypeData = bEnglish ?
 		L"Play Video" :
@@ -1357,7 +1363,7 @@ static VOID InitMenu(HWND hWnd)
 	InsertMenuItem(hMenuDirection, nOrder++, TRUE, &mi);
 	EnableMenuItem(hMenu, ID_CMD_VIDEO, MF_GRAYED);
 
-	/* Create a menu item for Shake Screen Horizontally. */
+	/* Create a menu item for "Shake Screen Horizontally" */
 	mi.wID = ID_CMD_SHAKE;
 	mi.dwTypeData = bEnglish ?
 		L"Shake Screen" :
@@ -1365,7 +1371,7 @@ static VOID InitMenu(HWND hWnd)
 	InsertMenuItem(hMenuDirection, nOrder++, TRUE, &mi);
 	EnableMenuItem(hMenu, ID_CMD_SHAKE, MF_GRAYED);
 
-	/* Create a menu item for Options (3). */
+	/* Create a menu item for "Show Options" */
 	mi.wID = ID_CMD_CHOOSE;
 	mi.dwTypeData = bEnglish ?
 		L"Show Options" :
@@ -1373,7 +1379,7 @@ static VOID InitMenu(HWND hWnd)
 	InsertMenuItem(hMenuDirection, nOrder++, TRUE, &mi);
 	EnableMenuItem(hMenu, ID_CMD_CHOOSE, MF_GRAYED);
 
-	/* Create a menu item for Menu Screen. */
+	/* Create a menu item for "Menu Screen" */
 	mi.wID = ID_CMD_MENU;
 	mi.dwTypeData = bEnglish ?
 		L"Menu Screen" :
@@ -1381,7 +1387,7 @@ static VOID InitMenu(HWND hWnd)
 	InsertMenuItem(hMenuDirection, nOrder++, TRUE, &mi);
 	EnableMenuItem(hMenu, ID_CMD_MENU, MF_GRAYED);
 
-	/* Create a menu item for Click Wait. */
+	/* Create a menu item for "Click Wait" */
 	mi.wID = ID_CMD_CLICK;
 	mi.dwTypeData = bEnglish ?
 		L"Click Wait" :
@@ -1389,7 +1395,7 @@ static VOID InitMenu(HWND hWnd)
 	InsertMenuItem(hMenuDirection, nOrder++, TRUE, &mi);
 	EnableMenuItem(hMenu, ID_CMD_CLICK, MF_GRAYED);
 
-	/* Create a menu item for Timed Wait. */
+	/* Create a menu item for "Timed Wait" */
 	mi.wID = ID_CMD_TIME;
 	mi.dwTypeData = bEnglish ?
 		L"Timed Wait" :
@@ -1397,11 +1403,11 @@ static VOID InitMenu(HWND hWnd)
 	InsertMenuItem(hMenuDirection, nOrder++, TRUE, &mi);
 	EnableMenuItem(hMenu, ID_CMD_TIME, MF_GRAYED);
 
-	/* Create a menu item for Load Other Story. */
+	/* Create a menu item for "Load Other Story" */
 	mi.wID = ID_CMD_STORY;
 	mi.dwTypeData = bEnglish ?
 		L"Load Other Story" :
-		L"他のスクリプトへ移動する";
+		L"他のストーリーへ移動する";
 	InsertMenuItem(hMenuDirection, nOrder++, TRUE, &mi);
 	EnableMenuItem(hMenu, ID_CMD_STORY, MF_GRAYED);
 
@@ -1409,7 +1415,7 @@ static VOID InitMenu(HWND hWnd)
 	 * Preference
 	 */
 
-	/* Create a menu item for Font settings. */
+	/* Create a menu item for "Font settings" */
 	nOrder = 0;
 	mi.wID = ID_FONT;
 	mi.dwTypeData = bEnglish ?
@@ -1417,14 +1423,14 @@ static VOID InitMenu(HWND hWnd)
 		L"フォント設定";
 	InsertMenuItem(hMenuPref, nOrder++, TRUE, &mi);
 
-	/* Create a menu item for Highlight mode. */
+	/* Create a menu item for "Highlight mode" */
 	mi.wID = ID_HIGHLIGHTMODE;
 	mi.dwTypeData = bEnglish ?
 		L"Highlight mode" :
 		L"ハイライトモード";
 	InsertMenuItem(hMenuPref, nOrder++, TRUE, &mi);
 
-	/* Create a menu item for Dark mode. */
+	/* Create a menu item for "Dark mode" */
 	mi.wID = ID_DARKMODE;
 	mi.dwTypeData = bEnglish ?
 		L"Dark mode" :
@@ -1435,7 +1441,7 @@ static VOID InitMenu(HWND hWnd)
 	 * Help
 	 */
 
-	/* Create a menu item for Version. */
+	/* Create a menu item for "Version" */
 	nOrder = 0;
 	mi.wID = ID_VERSION;
 	mi.dwTypeData = bEnglish ?
@@ -1443,7 +1449,7 @@ static VOID InitMenu(HWND hWnd)
 		L"バージョン";
 	InsertMenuItem(hMenuHelp, nOrder++, TRUE, &mi);
 
-	/* Create a menu item for Document. */
+	/* Create a menu item for "Document" */
 	mi.wID = ID_DOCUMENT;
 	mi.dwTypeData = bEnglish ?
 		L"Document" :
@@ -2147,7 +2153,10 @@ static void OnCommand(WPARAM wParam, LPARAM lParam)
 	{
 	/* File */
 	case ID_NEW_PROJECT_JAPANESE_ADV:
-		OnNewProject(L"sample\\*");
+		OnNewProject(L"games\\jp-adv\\*");
+		break;
+	case ID_NEW_PROJECT_ENGLISH_ADV:
+		OnNewProject(L"games\\en-adv\\*");
 		break;
 	case ID_OPEN_PROJECT:
 		OnOpenProject();

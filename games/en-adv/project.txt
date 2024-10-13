@@ -1,0 +1,957 @@
+###
+### Config File
+###
+
+########################################################################
+
+##
+## General Settings
+##
+
+#
+# Title
+#  - Do not include characters that cannot be used for folder names.
+#
+game.title=Sample
+
+#
+# Screen Size
+#  - 1280x720 or 720x1280 is recommended
+#
+game.width=1280
+game.height=720
+
+#
+# Novel Annotation
+#  - no:  Normal
+#  - yes: Use \=== for page feed, and \--- for click wait
+#
+game.novel=no
+
+#
+# Language Settings
+#  - default: System Locale
+#  - ja:      Set to Japanese
+#  - en:      Set to English
+#
+#game.locale=ja
+
+########################################################################
+
+##
+## Font File Settings
+##
+
+#
+# Font1
+#  - The default font
+#  - Write \f{1} to choose in a message
+#
+font.ttf1=rounded-l-mplus-1c-bold.ttf
+
+#
+# Font2
+#  - Write \f{2} to choose in a message
+#
+#font.ttf2=
+
+#
+# Font3
+#  - Write \f{3} to choose in a message
+#
+#font.ttf3=
+
+#
+# Font4
+#  - Write \f{4} to choose in a message
+#
+#font.ttf4=
+
+########################################################################
+
+##
+## Message Box Settings
+##
+
+#
+# Message box image
+#
+msgbox.image=system/message/msgbox.png
+
+#
+# Message box position (pixels)
+#
+msgbox.x=0
+msgbox.y=520
+
+#
+# Message box boundary margins (pixels)
+#
+msgbox.margin.left=200
+msgbox.margin.top=20
+msgbox.margin.right=200
+msgbox.margin.bottom=30
+
+#
+# Line margin (pixels)
+#
+msgbox.margin.line=40
+
+#
+# Margin between characters (pixels)
+#
+msgbox.margin.char=0
+
+#
+# Font selection (1,2,3,4)
+#
+msgbox.font=1
+
+#
+# Font size
+#
+msgbox.font.size=36
+
+#
+# Font color
+#
+msgbox.font.r=255
+msgbox.font.g=255
+msgbox.font.b=255
+
+#
+# Font outline size (point)
+#
+msgbox.font.outline=0
+
+#
+# Font outline color
+#
+msgbox.font.outline.r=255
+msgbox.font.outline.g=255
+msgbox.font.outline.b=255
+
+#
+# Ruby size
+#
+msgbox.font.ruby=10
+
+#
+# Use the Vertical Writing System
+#  - no:  Horizontal
+#  - yes: Vertical
+#
+msgbox.font.tategaki=no
+
+#
+# Use dimming for already seen messages
+#  - no:  No dimming
+#  - yes: Dimming
+#
+msgbox.dim=no
+
+#
+# Dimming color
+#
+msgbox.dim.r=0
+msgbox.dim.g=0
+msgbox.dim.b=0
+msgbox.dim.outline.r=0
+msgbox.dim.outline.g=0
+msgbox.dim.outline.b=0
+
+#
+# Use coloring for seen messages
+#  - no:  変えない
+#  - yes: 変える
+#
+msgbox.seen=no
+
+#
+# Color for seen messages
+#
+msgbox.seen.r=0
+msgbox.seen.g=0
+msgbox.seen.b=0
+msgbox.seen.outline.r=0
+msgbox.seen.outline.g=0
+msgbox.seen.outline.b=0
+
+#
+# Show message box while a character is changing
+#  - no:  Do not show
+#  - yes: Show
+#
+msgbox.show.on.ch=yes
+
+#
+# Show message box while a background is changing
+#  - no:  Do not show
+#  - yes: Show
+#
+msgbox.show.on.bg=no
+
+#
+# Show message box while options are showing
+#  - no:  Do not show
+#  - yes: Show
+#
+msgbox.show.on.choose=yes
+
+#
+# Make unseen messages skippable
+#  - no:  Do not skip
+#  - yes: Make them skippable
+#
+msgbox.skip.unseen=no
+
+########################################################################
+
+##
+## Name Box Settings
+##
+
+#
+# Name box image
+#
+namebox.image=system/message/namebox.png
+
+#
+# Name box position (pixels)
+#
+namebox.x=80
+namebox.y=450
+
+#
+# Name box top margin (pixels)
+#
+namebox.margin.top=5
+
+#
+# Use "Leftification" for names
+#  - no:  Centered
+#  - yes: Leftified
+#
+namebox.leftify=no
+
+#
+# Left margin of names when leftified (pixels)
+#
+namebox.margin.left=0
+
+#
+# Font selection (1,2,3,4)
+#
+namebox.font=1
+
+#
+# Font size
+#
+namebox.font.size=36
+
+#
+# Font color
+#
+namebox.font.r=255
+namebox.font.g=255
+namebox.font.b=255
+
+#
+# Font outline size (point)
+#
+namebox.font.outline=0
+
+#
+# Font outline color
+#
+namebox.font.outline.r=255
+namebox.font.outline.g=255
+namebox.font.outline.b=255
+
+#
+# Ruby size
+#
+namebox.font.ruby=10
+
+#
+# Use the Vertical Writing System
+#  - no:  Horizontal
+#  - yes: Vertical
+#
+namebox.font.tategaki=no
+
+#
+# Hide the name box
+#  - no:  Show
+#  - yes: Hide
+#
+namebox.hide=no
+
+########################################################################
+
+##
+## Click Animation Settings
+##
+
+#
+# Click animation position (pixels)
+#
+click.x=1060
+click.y=660
+
+#
+# Click animation interval (seconds)
+#
+click.interval=1.0
+
+#
+# Click animation image(s)
+#
+click.image1=system/message/click1.png
+click.image2=system/message/click2.png
+
+#click.image3=
+#click.image4=
+#click.image5=
+#click.image6=
+#click.image7=
+#click.image8=
+#click.image9=
+#click.image10=
+#click.image11=
+#click.image12=
+#click.image13=
+#click.image14=
+#click.image15=
+#click.image16=
+
+#
+# Move the click animation to the end of text
+#  - no:  Do not move
+#  - yes: Move
+#
+click.move=no
+
+########################################################################
+
+##
+## Option Settings
+##
+
+#
+# Option background image
+#
+choose.bg.image1=system/choose/idle.png
+
+# Note that 2-10 are omissible
+#choose.bg.image2=
+#choose.bg.image3=
+#choose.bg.image4=
+#choose.bg.image5=
+#choose.bg.image6=
+#choose.bg.image7=
+#choose.bg.image8=
+#choose.bg.image9=
+#choose.bg.image10=
+
+#
+# Option foreground image
+#
+choose.fg.image1=system/choose/hover.png
+
+# Note that 2-10 are omissible
+#choose.fg.image2=
+#choose.fg.image3=
+#choose.fg.image4=
+#choose.fg.image5=
+#choose.fg.image6=
+#choose.fg.image7=
+#choose.fg.image8=
+#choose.fg.image9=
+#choose.fg.image10=
+
+#
+# Option position (pixels)
+#
+choose.x1=200
+choose.y1=129
+
+# Note that 2-10 are omissible
+#choose.x2=
+#choose.y2=
+#choose.x3=
+#choose.y3=
+#choose.x4=
+#choose.y4=
+#choose.x5=
+#choose.y5=
+#choose.x6=
+#choose.y6=
+#choose.x7=
+#choose.y7=
+#choose.x8=
+#choose.y8=
+#choose.x9=
+#choose.y9=
+#choose.x10=
+#choose.y10=
+
+#
+# Option vertical margin (pixels)
+#  - Used for ommited 2-10 positions
+#
+choose.margin.y=15
+
+#
+# Option top text margin (pixels)
+#
+choose.text.margin.y=15
+
+#
+# Font selection (1,2,3,4)
+#
+choose.font=1
+
+#
+# Font size
+#
+choose.font.size=36
+
+#
+# Font color
+#
+choose.font.r=255
+choose.font.g=255
+choose.font.b=255
+
+#
+# Font outline size (point)
+#
+choose.font.outline=0
+
+#
+# Font outline color
+#
+choose.font.outline.r=255
+choose.font.outline.g=255
+choose.font.outline.b=255
+
+#
+# Ruby size
+#
+choose.font.ruby=10
+
+#
+# Use the Vertical Writing System
+#  - no:  Horizontal
+#  - yes: Vertical
+#
+choose.font.tategaki=no
+
+#
+# Change color for the actively pointed option
+#  - no:  Do not change
+#  - yes: Change
+#
+choose.active=no
+
+#
+# Color for the actively pointed option
+#
+choose.active.r=0
+choose.active.g=0
+choose.active.b=0
+choose.active.outline.r=0
+choose.active.outline.g=0
+choose.active.outline.b=0
+
+#
+# Change color for inactive options
+#  - no:  Do not change
+#  - yes: Change
+#
+choose.inactive=no
+
+#
+# Color for inactive options
+#
+choose.inactive.r=0
+choose.inactive.g=0
+choose.inactive.b=0
+choose.inactive.outline.r=0
+choose.inactive.outline.g=0
+choose.inactive.outline.b=0
+
+#
+# Sound effect to be played when the actively pointed option is changed
+#
+choose.change.se=button.ogg
+
+#
+# Sound effect to be played when an option is clicked
+#
+choose.click.se=click.ogg
+
+#
+# Option bomb timer (seconds)
+#  - Usually used with @config command
+#
+#choose.timed=0.0
+
+#
+# Anime scripts to be played when an option is pointed
+#
+#choose.anime.focus1=
+#choose.anime.focus2=
+#choose.anime.focus3=
+#choose.anime.focus4=
+#choose.anime.focus5=
+#choose.anime.focus6=
+#choose.anime.focus7=
+#choose.anime.focus8=
+#choose.anime.focus9=
+#choose.anime.focus10=
+
+#
+# Anime scripts to be played when an option is unpointed
+#
+#choose.anime.unfocus1=
+#choose.anime.unfocus2=
+#choose.anime.unfocus3=
+#choose.anime.unfocus4=
+#choose.anime.unfocus5=
+#choose.anime.unfocus6=
+#choose.anime.unfocus7=
+#choose.anime.unfocus8=
+#choose.anime.unfocus9=
+#choose.anime.unfocus10=
+
+########################################################################
+
+##
+## Save Data Settings
+##
+
+#
+# Thumbnail size
+#
+save.data.thumb.width=213
+save.data.thumb.height=120
+
+#
+# "NEW" image
+#
+#save.data.new=system/save/new.png
+
+########################################################################
+
+##
+## System Button Settings
+##
+
+#
+# Non-pointed system button image
+#
+sysbtn.idle.image=system/menu/small-idle.png
+
+#
+# Pointed system button image
+#
+sysbtn.hover.image=system/menu/small-hover.png
+
+#
+# System button position (pixels)
+#
+sysbtn.x=1183
+sysbtn.y=48
+
+# Sound effect to be played when the system button is clicked
+sysbtn.se=click.ogg
+
+#
+# Show or hide the system button
+#  - no:  Show
+#  - yes: Hide
+#
+sysbtn.hide=no
+
+#
+# Show the system button when transition is going on
+#  - no:  Hide
+#  - yes: Show
+#
+sysbtn.transition=yes
+
+########################################################################
+
+##
+## Auto Mode Settings
+##
+
+#
+# Auto mode banner image
+#
+automode.banner.image=system/message/auto.png
+
+#
+# Auto mode banner position
+#
+automode.banner.x=0
+automode.banner.y=126
+
+#
+# Sound effect to be played when we enter the auto mode
+#
+#automode.enter.se=
+
+#
+# Sound effect to be played when we leave the auto mode
+#
+#automode.leave.se=
+
+########################################################################
+
+##
+## Skip Mode Settings
+##
+
+#
+# Skip mode banner image
+#
+skipmode.banner.image=system/message/skip.png
+
+#
+# Skip mode banner position
+#
+skipmode.banner.x=0
+skipmode.banner.y=126
+
+#
+# Sound effect to be played when we enter the skip mode
+#
+#skipmode.enter.se=
+
+#
+# Sound effect to be played when we leave the skip mode
+#
+#skipmode.leave.se=
+
+########################################################################
+
+##
+## Menu Screen Settings
+##
+
+#
+# Save screen font selection (1,2,3,4)
+#
+menu.save.font=1
+
+#
+# Save screen font size
+#
+menu.save.font.size=36
+
+#
+# Save screen font color
+#
+menu.save.font.r=255
+menu.save.font.g=255
+menu.save.font.b=255
+
+#
+# Save screen font outline size (point)
+#
+menu.save.font.outline=0
+
+#
+# Save screen font outline color
+#
+menu.save.font.outline.r=255
+menu.save.font.outline.g=255
+menu.save.font.outline.b=255
+
+#
+# Save screen ruby size
+#
+menu.save.font.ruby=10
+
+#
+# Use the Vertical Writing System in the save screen
+#  - no:  Horizontal
+#  - yes: Vertical
+#
+menu.save.font.tategaki=no
+
+#
+# History screen line margin (pixels)
+#
+menu.history.margin.line=40
+
+#
+# History screen font selection (1,2,3,4)
+#
+menu.history.font=1
+
+#
+# History screen font size
+#
+menu.history.font.size=36
+
+#
+# History screen font color
+#
+menu.history.font.r=255
+menu.history.font.g=255
+menu.history.font.b=255
+
+#
+# History screen font outline size (point)
+#
+menu.history.font.outline=0
+
+#
+# History screen font outline color
+#
+menu.history.font.outline.r=255
+menu.history.font.outline.g=255
+menu.history.font.outline.b=255
+
+#
+# History screen ruby size
+#
+menu.history.font.ruby=10
+
+#
+# Use the Vertical Writing System in the history screen
+#  - no:  Horizontal
+#  - yes: Vertical
+#
+menu.history.font.tategaki=no
+
+#
+# A setting to insert a text after character names
+#
+menu.history.quote.prefix=: 
+
+#
+# Quotation in the history screen
+#
+menu.history.quote.start="
+menu.history.quote.end="
+
+#
+# Do not show the last item in the history
+#  - no:  Show
+#  - yes: Do not show (for seemless history)
+#
+menu.history.nolast=no
+
+#
+# Use the Vertical Writing System in the text preview
+#  - no:  Horizontal
+#  - yes: Vertical
+#
+menu.preview.tategaki=no
+
+########################################################################
+
+##
+## Volume Initial Values
+##
+
+#
+# BGM volume initial value
+#
+sound.vol.bgm=1.0
+
+#
+# Voice volume initial value
+#
+sound.vol.voice=1.0
+
+#
+# Sound effect volume initial value
+#
+sound.vol.se=1.0
+
+#
+# [Per-character voice volume initial value]
+#
+sound.vol.character=1.0
+
+########################################################################
+
+##
+## Per-character Volume Settings
+##  - If a name in a message matches a pre-defined character name, a per-character volume is applied
+##  - Index 1-15 are available
+##
+
+sound.character.name1=Haruka
+sound.character.name2=Kana
+sound.character.name3=Chiaki
+
+########################################################################
+
+##
+## Character Settings
+##
+
+#
+# Use auto focus for speaking characters
+#  - no:  Do not focus
+#  - yes: Focus
+#
+character.focus=no
+
+#
+# Eye-blinking interval (seconds)
+#
+character.eyeblink.interval=4.0
+
+#
+# Eye-blinking frame time (seconds)
+#
+character.eyeblink.frame=0.15
+
+#
+# Lip-sync frame time (seconds)
+#
+character.lipsync.frame=0.3
+
+#
+# Lip-sync per letters
+#
+character.lipsync.chars=3
+
+#
+# Character to file name prefix mapping (1-32, for auto focus)
+#
+
+character.name1=Midori
+character.image1=midori/
+
+character.name2=YYY
+character.image2=yyy/
+
+########################################################################
+
+##
+## Stage Settings
+##
+
+#
+# Character bottom margin (pixels)
+#
+stage.ch.margin.bottom=0
+
+#
+# Character left margin (pixels)
+#
+stage.ch.margin.left=0
+
+#
+# Character right margin (pixels)
+#
+stage.ch.margin.right=0
+
+########################################################################
+
+##
+## Variable Aliases Settings
+##
+
+#
+# Local variable aliases
+#  - $0 to $31 are available for naming
+#  - You may use a branch by an alias:
+#    - @set ${seen_option1} = true
+#    - @if ${seen_option1} == true エンディングA
+#
+var.local.name0=seen_option1
+var.local.name1=seen_option2
+var.local.name2=seen_option3
+
+#
+# Global variable aliases
+#  - $10000 to $10031 are available for naming
+#
+var.global.name0=name_this_A
+var.global.name1=name_this_B
+var.global.name2=name_this_C
+
+########################################################################
+
+##
+## Sparkling Effect Settings
+##
+
+#
+# Use the Sparkling Effect on a tap
+#  - no:  Do not use
+#  - yes: Use
+#
+kirakira=no
+
+#
+# Use "add" composition for the Sparkling Effect
+#  - no:  Normal composition
+#  - yes: Add composition
+#
+kirakira.add=no
+
+#
+# Frame time for the Sparkling Effect (seconds)
+#
+kirakira.frame=0.333
+
+#
+# Images for the Sparkling Effect (1-16, Max.16)
+#
+
+#kirakira.file1=kira1.png
+#kirakira.file2=kira2.png
+#kirakira.file3=kira3.png
+#kirakira.file4=kira4.png
+
+########################################################################
+
+##
+## Emoticon Settings (Max.16)
+##
+
+#
+# - Write \e{name} in messages
+#
+
+emoticon.name1=heart
+emoticon.image1=emoji/heart.png
+
+emoticon.name2=sweat
+emoticon.image2=emoji/sweat.png
+
+########################################################################
+
+##
+## Text-To-Speech Settings
+##
+
+#
+# Use TTS
+#  no:  No
+#  yes: Yes
+#
+tts=no
+
+########################################################################
+
+##
+## Release Mode Setting
+##
+
+#
+# Please change this to "yes" only when you make an app with installer on Windows.
+# If this value is "yes", save data will be stored under the "AppData" folder.
+#
+release=no

@@ -1,0 +1,334 @@
+# これは最初に読み込まれるストーリーファイルです
+
+#
+# ロゴ表示
+#
+
+# BGMを停止します (タイトルに戻った場合のため)
+@music stop
+
+# スキップを禁止して、ロゴ表示をスキップできなくします
+@skip disable
+
+# ステージに白い背景をセットします
+@bg file=white.png t=0
+
+# ロゴを表示します
+@bg file=logo.png t=0.5
+
+# ロゴ音声を流します
+@sound file=suika.ogg
+
+# 2秒待ちます
+@time t=2.0
+
+# ロゴを消します
+@bg file=white.png t=0.5
+
+# スキップを許可します
+@skip enable
+
+#
+# メニュー表示
+#
+
+# BGMのボリュームをセットします
+@volume track=bgm vol=1.0 t=0
+
+# BGMを再生します
+@music file=adventure.ogg
+
+# メニューの背景を表示します
+@bg file=title.png t=1.0
+
+# メニューを再表示するとき、ここに飛んできます
+:MENU
+
+# メニューを表示します
+@menu file=title.txt
+
+#
+# メニューで"スタート"が選択されたとき、ここにジャンプしてきます
+#
+
+:START
+
+# シーン1にジャンプします
+@goto label="シーン1"
+
+#
+# メニューで"ロード"が選択されたとき、ここにジャンプしてきます
+#
+:LOAD
+
+# ロード画面を表示します
+@menu file=load.txt
+
+# ロードされなかった場合はここに来ます
+@goto label="MENU"
+
+#
+# メニューで"設定"が選択されたとき、ここにジャンプしてきます
+#
+
+:CONFIG
+
+# 設定画面を表示します
+@menu file=config.txt
+
+# 設定画面のあとここに戻ってきます
+@goto label="MENU"
+
+#
+# シーン1 (セリフとモノローグの交錯)
+#
+
+:シーン1
+
+# 準備を行います
+@chapter title="シーン1"
+@volume track=bgm vol=0.0 t=1.0
+@bg file=white.png t=1.0
+@bg file=roof.png t=1.0 effect=rule:star.png
+
+# 雨を降らせます (マクロ呼び出し)
+&start-rain
+お天気雨が降っている。
+
+# 雨を上がらせます (マクロ呼び出し)
+&stop-rain
+どうやら雨は降りやんだようだ。
+
+# みどり登場 (右端に読み込んで中央に移動する)
+@ch pos=center file=midori/fun.png t=0 effect=normal right=600 down=0 alpha=0
+@move pos=center t=2.0 accel=move x=-600 y=0 alpha=255
+
+*みどり*001.ogg*あー、気持ちいい風……。
+*みどり*002.ogg*（私は今、夏休みの補習を抜け出して、学校の屋上に出ている。）
+
+@ch pos=center file=midori/happy.png t=1.0
+
+*みどり*003.ogg*補習は出欠取らないから、別にいいんだ～。
+*みどり*004.ogg*（辺りにビルは見あたらず、少し離れたところには海岸線が見える。ここは北海道の田舎町だ。）
+
+@ch pos=center file=midori/fun.png t=1.0
+
+*みどり*005.ogg*どうして補習を抜け出したのかって？
+*みどり*006.ogg*（あ、言い忘れてた。私の名前は\#{00ff00}みどり\#{DEF}。この田舎町で女子高生をやってる。家は農家だよ。）
+
+@ch pos=center file=midori/angry.png t=1.0
+
+*みどり*007.ogg*それはね……
+*みどり*008.ogg*（そうだった。とても大切なことがあったんだ。今日私がここにいる理由は……。）
+
+@ch pos=center file=midori/normal.png t=1.0
+
+*みどり*009.ogg*君に……
+
+@ch pos=center file=midori/happy.png t=1.0
+
+*みどり*010.ogg*君に……Suika2のことを知ってもらうためだよ！
+
+#
+# シーン2 (屋上であいさつする)
+#
+
+@chapter title="シーン2"
+
+@music file=adventure.ogg
+@volume track=bgm vol=1.0 t=1.0
+
+*みどり*011.ogg*こんにちは！Suika2を使ってくれてありがと！
+*みどり*012.ogg*知ってると思うけど、Suika2は、アドベンチャーゲーム制作ツールだよ。
+*みどり*013.ogg*自由に使えて、PCでもMacでも動くなんて、すごくない？
+
+@ch pos=center file=midori/fun.png t=1.0
+
+*みどり*014.ogg*作者が質問してほしいんだって。何か聞きたいことあるかな？
+
+@ch pos=center none t=1.0
+
+#
+# シーン3 (屋上で質問を受け付ける)
+#
+
+@chapter title="シーン3"
+
+:LOOP1
+@choose L1_ADVANTAGE "何が強みなの？" L1_ENV "動作環境は？" L1_NEXT "次へ"
+
+# 「何が強みなの？」が選択された場合、ここに飛びます
+
+:L1_ADVANTAGE
+Suika2の強みは、三つあります。
+第一は、使いやすさ。直感的な操作で誰でもかんたんにゲームを開発できます。
+第二は、移植性。作ったゲームはPC、スマホ、ゲーム機と、どんな環境でも動きます。
+第三は、自由さ。商用クオリティなのに、無償で自由に利用可能です。
+
+# 1番のフラグに1をセットします (既読をマーク)
+@set $1 = 1
+
+@ch pos=center file=midori/fun.png t=1.0
+
+*みどり*015.ogg*へー、そうだったんだ。私も知らなかったよ。
+*みどり*016.ogg*ほかにも聞きたいことある？
+
+@ch pos=center none t=1.0
+
+@goto label="LOOP1"
+
+# 「動作環境は？」が選択された場合、ここに飛びます
+
+:L1_ENV
+作ったゲームはPC, iPhone, iPad, Android, ゲーム機で快適に動作します。
+ここまで移植性の高いゲームエンジンは、あまりないと思います。
+
+# 2番のフラグに1をセットします (既読をマーク)
+@set $2 = 1
+
+@ch pos=center file=midori/fun.png t=1.0
+
+*みどり*017.ogg*うんうん、そうなんだよね。
+*みどり*018.ogg*まだまだ質問してほしいってさ。
+
+@ch pos=center none t=1.0
+
+@goto label="LOOP1"
+
+# 「次へ」が選択された場合、ここに飛びます
+
+:L1_NEXT
+
+#
+# シーン4 (浜辺で質問を受け付ける)
+#
+
+@chapter title="シーン4"
+
+@ch pos=center file=midori/fun.png 1.0
+
+*みどり*019.ogg*学校出て、ちょっと歩こうか。どこに行く？浜の方に出てみようか。
+
+@volume track=bgm vol=0.0 t=1.0
+
+@bg coast.png t=1.0 effect=curtain-right
+
+@ch pos=center file=midori/happy.png t=1.0
+
+*みどり*020.ogg*ほかにも知りたいこととかある？
+
+@ch pos=center none t=1.0
+
+:LOOP2
+@choose L2_ITSU "いつから作ってるの？" L2_ISHOKU "移植性が高いのはなぜ？" L2_NEXT "次へ"
+
+:L2_ITSU
+なんと、2001年11月からです。
+現在でも積極的に開発されているビジュアルノベルエンジンの中では、最古参の一つです。
+
+# 3番のフラグに1をセットします (既読をマーク)
+@set $3 = 1
+
+@ch pos=center file=midori/fun.png t=1.0
+
+*みどり*015.ogg*へー、そうだったんだ。私も知らなかったよ。
+*みどり*018.ogg*まだまだ質問してほしいってさ。
+
+@ch pos=center none t=1.0
+
+@goto label="LOOP2"
+
+:L2_ISHOKU
+作者が移植マニアで、すべてのプラットフォーム向けに移植を行ったからです。
+
+# 4番のフラグに1をセットします (既読をマーク)
+@set $4 = 1
+
+@ch pos=center file=midori/fun.png t=1.0
+
+*みどり*017.ogg*うんうん、そうなんだよね。
+*みどり*016.ogg*ほかにも聞きたいことある？
+
+@ch pos=center none t=1.0
+
+@goto label="LOOP2"
+
+:L2_NEXT
+
+#
+# シーン5 (浜でラスト・セリフとモノローグの交錯)
+#
+
+@chapter title="シーン5"
+
+@ch pos=center file=midori/fun.png t=1.0
+
+*みどり*021.ogg*今日はいろいろ聞いてくれてありがとうね。
+
+@ch pos=center file=midori/sad.png t=1.0
+
+*みどり*022.ogg*（君に、Suika2のことを知ってもらいたくて……）
+
+@ch pos=center file=midori/fun.png t=1.0
+
+*みどり*023.ogg*何かわからないことがあったら、いつでも\#{ff0000}midori@luxion.jp\#{DEF} までメールしてよ。
+
+@ch pos=center file=midori/sad.png t=1.0
+
+*みどり*024.ogg*（……本当にメールしていいんだからね？　メールしてくれるかな？）
+
+@ch pos=center file=midori/happy.png t=1.0
+
+*みどり*025.ogg*それじゃ、また会おうね！
+
+# メッセージボックスを揺らします
+@anime msgbox-shake.txt sync,showmsgbox
+
+# みどりを右に退場させます
+@move pos=center t=1.0 accel=move x=600 y=0 alpha=0
+@ch pos=center none t=0.0
+
+#
+# シーン6 (おまけ)
+#
+
+# セットされていないフラグがあればENDにジャンプします
+@if $1 != 1 END
+@if $2 != 1 END
+@if $3 != 1 END
+@if $4 != 1 END
+
+# 全部のフラグがセットされているときはここに来ます
+@chapter title="おまけ"
+
+全部読んでいただいてありがとうございました。
+
+@goto END
+
+#
+# 終了
+#
+
+:END
+
+@bg file=white.png t=1.0
+
+# story.txtを読み込み直して、先頭から実行します
+@story story.txt
+
+#
+# マクロ
+#
+
+# 雨エフェクトを開始するマクロです
+:start-rain
+@layer effect1 effect/rain/1.png
+@layer effect2 effect/rain/1.png
+@anime rain.txt async,reg00
+@return
+
+# 雨エフェクトを終了するマクロです
+:stop-rain
+@anime clear layer-effect1,layer-effect2
+@anime unregister reg00
+@return

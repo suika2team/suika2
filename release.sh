@@ -27,8 +27,8 @@ read str
 
 echo 'Making a target directories...'
 
-TARGET_DIR="`pwd`/Suika2-$VERSION"
-TARGET_EXE="`pwd`/Suika2-$VERSION.exe"
+TARGET_DIR="`pwd`/suika2-$VERSION"
+TARGET_EXE="`pwd`/suika2-installer-$VERSION.exe"
 rm -rf "$TARGET_DIR"
 mkdir "$TARGET_DIR"
 mkdir "$TARGET_DIR/tools"
@@ -144,8 +144,8 @@ echo ''
 
 echo 'Copying documents and sample...'
 
-cp -R doc "$TARGET_DIR/manual"
-cp -R game "$TARGET_DIR/sample"
+cp -R docs "$TARGET_DIR/manual"
+cp -R games "$TARGET_DIR/games"
 
 echo '...Done copying documents and sample.'
 echo ''
@@ -159,7 +159,7 @@ echo 'Making an installer...'
 cp "$TARGET_DIR"/engine.exe apps/installer-windows/
 cp "$TARGET_DIR"/editor.exe apps/installer-windows/
 cp -R "$TARGET_DIR"/manual apps/installer-windows/
-cp -R "$TARGET_DIR"/sample apps/installer-windows/
+cp -R "$TARGET_DIR"/games apps/installer-windows/
 cp -R "$TARGET_DIR"/tools apps/installer-windows/
 
 cd apps/installer-windows
@@ -170,7 +170,7 @@ cd ../..
 rm -rf apps/installer-windows/engine.exe
 rm -rf apps/installer-windows/editor.exe
 rm -rf apps/installer-windows/manual
-rm -rf apps/installer-windows/sample
+rm -rf apps/installer-windows/games
 rm -rf apps/installer-windows/tools
 
 echo '...Done making an installer.'
@@ -179,6 +179,8 @@ echo ''
 #
 # GitHub Release
 #
+
+read str
 
 echo 'Making a release on GitHub...'
 

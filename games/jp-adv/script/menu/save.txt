@@ -1,0 +1,255 @@
+#
+# セーブ画面のメニュースクリプト
+#
+
+# このファイルの基本設定
+global {
+    # 下記の画像を使用する
+    base:   system/save/base.png;
+    idle:   system/save/idle.png;
+    hover:  system/save/hover.png;
+    active: system/save/active.png;
+
+    # 1画面あたりのセーブデータ表示数を指定
+    saveslots: 3;
+
+    # 右クリックによるキャンセル時のSE
+    cancelse: click.ogg;
+
+    # フェードイン時間(秒)
+    fadein: 0.5;
+
+    # フェードアウト時間(秒)
+    fadeout: 0.5;
+}
+
+# 元の画面に戻るボタン
+BACK {
+    # 種類:キャンセル
+    type: cancel;
+
+    # 座標とサイズ
+    x: 888;
+    y: 27;
+    width: 361;
+    height: 96;
+
+    # ポイントされたときの効果音
+    pointse: button.ogg;
+
+    # クリックされたときの効果音
+    clickse: click.ogg;
+}
+
+# セーブデータ1番目
+SAVESLOT1 {
+    # 種類:セーブ
+    type: save;
+
+    # セーブデータ番号0
+    index: 0;
+
+    # 座標とサイズ
+    x: 32;
+    y: 136;
+    width: 1001;
+    height: 171;
+
+    # 画像とテキストのマージン
+    margin: 20;
+
+    # 背景色(スロットが白や黒のときに目立たないようにする)
+    clear-r: 255;
+    clear-g: 255;
+    clear-b: 255;
+
+    # ポイントされたときの効果音
+    pointse: button.ogg;
+
+    # クリックされたときの効果音
+    clickse: click.ogg;
+}
+
+# セーブデータ2番目
+SAVESLOT2 {
+    # 種類:セーブ
+    type: save;
+
+    # セーブデータ番号1
+    index: 1;
+
+    # 座標とサイズ
+    x: 32;
+    y: 324;
+    width: 1001;
+    height: 171;
+
+    # 画像とテキストのマージン
+    margin: 20;
+
+    # 背景色(スロットが白や黒のときに目立たないようにする)
+    clear-r: 255;
+    clear-g: 255;
+    clear-b: 255;
+
+    # ポイントされたときの効果音
+    pointse: button.ogg;
+
+    # クリックされたときの効果音
+    clickse: click.ogg;
+}
+
+# セーブデータ3番目
+SAVESLOT3 {
+    # 種類:セーブ
+    type: save;
+
+    # セーブデータ番号2
+    index: 2;
+
+    # 座標とサイズ
+    x: 32;
+    y: 510;
+    width: 1001;
+    height: 171;
+
+    # 画像とテキストのマージン
+    margin: 20;
+
+    # 背景色(スロットが白や黒のときに目立たないようにする)
+    clear-r: 255;
+    clear-g: 255;
+    clear-b: 255;
+
+    # ポイントされたときの効果音
+    pointse: button.ogg;
+
+    # クリックされたときの効果音
+    clickse: click.ogg;
+}
+
+# セーブデータページ1のボタン
+PAGE1 {
+    # 種類:セーブデータページ
+    type: savepage;
+
+    # 1ページ目(index=0)
+    index: 0;
+
+    # 座標とサイズ
+    x: 1065;
+    y: 135;
+    width: 184;
+    height: 96;
+
+    # ポイントされたときの効果音
+    pointse: button.ogg;
+
+    # クリックされたときの効果音
+    clickse: click.ogg;
+}
+
+# セーブデータページ2のボタン
+PAGE2 {
+    # 種類:セーブデータページ
+    type: savepage;
+
+    # 2ページ目(index=1)
+    index: 1;
+
+    # 座標とサイズ
+    x: 1065;
+    y: 247;
+    width: 184;
+    height: 96;
+
+    # ポイントされたときの効果音
+    pointse: button.ogg;
+
+    # クリックされたときの効果音
+    clickse: click.ogg;
+}
+
+# セーブデータページ3のボタン
+PAGE3 {
+    # 種類:セーブデータページ
+    type: savepage;
+
+    # 3ページ目(index=2)
+    index: 2;
+
+    # 座標とサイズ
+    x: 1065;
+    y: 359;
+    width: 184;
+    height: 96;
+
+    # ポイントされたときの効果音
+    pointse: button.ogg;
+
+    # クリックされたときの効果音
+    clickse: click.ogg;
+}
+
+# セーブデータページ2のボタン
+PAGE4 {
+    # 種類:セーブデータページ
+    type: savepage;
+
+    # 4ページ目(index=3)
+    index: 3;
+
+    # 座標とサイズ
+    x: 1065;
+    y: 471;
+    width: 184;
+    height: 96;
+
+    # ポイントされたときの効果音
+    pointse: button.ogg;
+
+    # クリックされたときの効果音
+    clickse: click.ogg;
+}
+
+# セーブデータページ2のボタン
+PAGE5 {
+    # 種類:セーブデータページ
+    type: savepage;
+
+    # 5ページ目(index=4)
+    index: 4;
+
+    # 座標とサイズ
+    x: 1065;
+    y: 583;
+    width: 184;
+    height: 96;
+
+    # ポイントされたときの効果音
+    pointse: button.ogg;
+
+    # クリックされたときの効果音
+    clickse: click.ogg;
+}
+
+# タイトルへ戻るボタン
+TITLE {
+    # 種類:タイトルへ戻る
+    type: title;
+
+    # 移動先のシナリオファイル
+    file: story.txt;
+
+    # 座標とサイズ
+    x: 514;
+    y: 27;
+    width: 361;
+    height: 96;
+
+    # ポイントされたときの効果音
+    pointse: button.ogg;
+
+    # クリックされたときの効果音
+    clickse: click.ogg;
+}

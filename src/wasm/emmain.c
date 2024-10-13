@@ -739,12 +739,15 @@ char *make_valid_path(const char *dir, const char *fname)
 
 	/* If it is a save directory. */
 	if (dir != NULL && strcmp(dir, SAVE_DIR) == 0) {
+		char *space;
 		snprintf(buf, sizeof(buf), "suika2/%s-%s", conf_game_title, fname);
 		ret = strdup(buf);
 		if (ret == NULL) {
 			log_memory();
 			return NULL;
 		}
+		while ((space = strchr(buf, ' ')) != NULL)
+			*space = '_';
 		return ret;
 	}
 
