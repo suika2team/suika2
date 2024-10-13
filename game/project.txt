@@ -189,7 +189,7 @@ msgbox.show.on.ch=yes
 #  - no:  表示しない
 #  - yes: 表示する
 #
-msgbox.show.on.bg=yes
+msgbox.show.on.bg=no
 
 #
 # 選択肢表示中にメッセージボックスを表示するか

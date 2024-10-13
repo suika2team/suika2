@@ -1,13 +1,18 @@
 <html><head></head><body><ul><!-- -*- mode: html-mode; -*- -->
 
 <!-- BEGIN-LATEST -->
+<li>Suika2 22.0.8 2024/10/13
+  <ul>
+    <li>Changed to msgbox.show.on.bg=no</li>
+</ul>
+</li>
+<!-- END-LATEST -->
+
 <li>Suika2 22.0.7 2024/10/13
   <ul>
     <li>Fixed story.txt</li>
 </ul>
 </li>
-<!-- END-LATEST -->
-
 <li>Suika2 22.0.6 2024/10/13
   <ul>
     <li>Removed a debug message</li>
