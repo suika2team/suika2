@@ -73,15 +73,10 @@ LDFLAGS = \
 # Target
 #
 
-all: game-freebsd
+all: engine-freebsd
 
-game-freebsd: $(SRCS) libroot
-	$(CC) \
-		-o game-freebsd \
-		$(CPPFLAGS) \
-		$(CFLAGS) \
-		$(SRCS) \
-		$(LDFLAGS) \
+engine-freebsd: $(SRCS) libroot
+	$(CC) -o engine-freebsd $(CPPFLAGS) $(CFLAGS) $(SRCS) $(LDFLAGS)
 
 libroot:
 	../../external/build-libs.sh "" $(CC) "-O2 -g0" $(AR)
@@ -90,4 +85,4 @@ setup:
 	sudo pkg install git libX11 libXpm mesa-devel alsa-lib alsa-plugins webp libvorbis libogg freetype2 brotli gstreamer1 gstreamer1-plugins
 
 clean:
-	@rm -rf *~ *.o game-freebsd errors.txt save tmp libroot
+	@rm -rf *~ *.o engine-freebsd errors.txt save tmp libroot

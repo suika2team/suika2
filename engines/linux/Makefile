@@ -60,20 +60,31 @@ LDFLAGS = \
 	-lm
 
 #
+# .c.o compilation rules
+#
+
+OBJS = \
+	$(SRCS_MAIN:../../src/%.c=%.o) \
+	$(SRCS_LINUX:../../src/linux/%.c=%.o) \
+	$(SRCS_OPENGL:../../src/khronos/%.c=%.o)
+
+%.o: ../../src/%.c
+	$(CC) -c $(CPPFLAGS) $(CFLAGS) $<
+
+%.o: ../../src/linux/%.c
+	$(CC) -c $(CPPFLAGS) $(CFLAGS) `pkg-config --cflags gstreamer-1.0 gstreamer-video-1.0` $<
+
+%.o: ../../src/khronos/%.c
+	$(CC) -c $(CPPFLAGS) $(CFLAGS) $<
+
+#
 # Targets
 #
 
 all: engine-linux
 
-engine-linux: $(SRCS) libroot
-	@$(CC) \
-		-o engine-linux \
-		$(CPPFLAGS) \
-		$(CFLAGS) \
-		`pkg-config --cflags gstreamer-1.0 gstreamer-video-1.0` \
-		$(SRCS) \
-		 $(LDFLAGS) \
-		`pkg-config --libs gstreamer-1.0 gstreamer-video-1.0`
+engine-linux: libroot $(OBJS)
+	@$(CC) -o engine-linux $(CPPFLAGS) $(CFLAGS) $(OBJS) $(LDFLAGS) `pkg-config --libs gstreamer-1.0 gstreamer-video-1.0`
 	@$(STRIP) engine-linux
 
 libroot:
