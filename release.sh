@@ -25,15 +25,16 @@ read str
 # Make Directories
 #
 
-echo 'Making a target directories...'
+echo 'Preparing target directories...'
 
 TARGET_DIR="`pwd`/suika2-$VERSION"
 TARGET_EXE="`pwd`/suika2-installer-$VERSION.exe"
-rm -rf "$TARGET_DIR"
+ENGINE_ZIP="`pwd`/suika2-engine-only-$VERSION.zip"
+rm -rf "$TARGET_DIR" "$TARGET_EXE" "$ENGINE_ZIP"
 mkdir "$TARGET_DIR"
 mkdir "$TARGET_DIR/tools"
 
-echo '...Done making a target directory.'
+echo '...Done preparing target directories.'
 echo ''
 
 #
@@ -177,13 +178,22 @@ echo '...Done making an installer.'
 echo ''
 
 #
+# Engine Only ZIP
+#
+
+POPD=`pwd`
+cd "$TARGET_DIR"
+zip "$ENGINE_ZIP" "engine.exe"
+cd "$POPD"
+
+#
 # GitHub Release
 #
 
 echo 'Making a release on GitHub...'
 
-yes '' | gh release create "$VERSION" --title "$VERSION" --notes "$NOTE" "$TARGET_EXE"
-rm -rf "$TARGET_DIR" "$TARGET_EXE"
+yes '' | gh release create "$VERSION" --title "$VERSION" --notes "$NOTE" "$TARGET_EXE" "$ENGINE_ZIP"
+rm -rf "$TARGET_DIR" "$TARGET_EXE" "$ENGINE_ZIP"
 
 echo '...Done releasing on GitHub.'
 echo ''

@@ -1,13 +1,18 @@
 <html><head></head><body><ul><!-- -*- mode: html-mode; -*- -->
 
 <!-- BEGIN-LATEST -->
+<li>Suika2 22.0.11 2024/10/14
+  <ul>
+    <li>Added an engine only zip for releases</li>
+  </ul>
+</li>
+<!-- END-LATEST -->
+
 <li>Suika2 22.0.10 2024/10/14
   <ul>
     <li>Added the English sample project</li>
   </ul>
 </li>
-<!-- END-LATEST -->
-
 <li>Suika2 22.0.8 2024/10/13
   <ul>
     <li>Changed to msgbox.show.on.bg=no</li>
