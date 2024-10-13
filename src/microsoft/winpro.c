@@ -4232,6 +4232,10 @@ const wchar_t *SelectFile(const char *pszDir)
 		return NULL;
 	}
 
+	pSlash = wszPath;
+	while ((pSlash = wcsstr(pSlash, L"\\")))
+		*pSlash++ = L'/';
+
 	/* 素材ディレクトリ内の相対パスを返す */
 	return wszPath + wcslen(wszBase) + 1 ;
 }

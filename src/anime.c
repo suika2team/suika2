@@ -734,63 +734,85 @@ const char *get_reg_anime_file_name(int reg_index)
  */
 bool load_eye_image_if_exists(int chpos, const char *fname)
 {
-	char eye_fname[1024], ext[128], *dot;
+	char eye_fname[1024], *slash, *dot;
 	struct image *eye_img;
 	int eye_layer;
 
-	/* まず目のレイヤを無効にする */
+	/* Firstly, disable the eye layer. */
 	eye_layer = chpos_to_eye_layer(chpos);
 	set_layer_file_name(eye_layer, NULL);
 	set_layer_image(eye_layer, NULL);
 
-	/* キャラがない場合 */
+	/* In case that we erase the character. */
 	if (fname == NULL || strcmp(fname, "none") == 0 || strcmp(fname, U8("消去")) == 0) {
-		/* 既存の目パチアニメを終了する */
+		/* Finish the existing eye anime. */
 		clear_layer_anime_sequence(eye_layer);
 		return true;
 	}
 
-	/* 目パチファイル名の文字列"filename_eye.ext"を作る */
-	strcpy(eye_fname, fname);
+	/* Make an eye file name. (base + "/eye/" + file) */
+	slash = strrchr(fname, '/');
+	if (slash != NULL) {
+		char base[1024], file[1024];
+
+		strcpy(base, fname);
+		slash = strrchr(base, '/');
+		*slash = '\0';
+		strcpy(file, slash + 1);
+
+		strcpy(eye_fname, base);
+		strcat(eye_fname, "/eye/");
+		strcat(eye_fname, file);
+	} else {
+		strcpy(eye_fname, "eye/");
+		strcat(eye_fname, fname);
+	}
+
+	/* Check if the file name includes extension. */
 	dot = strstr(eye_fname, ".");
 	if (dot != NULL) {
-		/* 拡張子ありの場合 */
-		strcpy(ext, dot);
-		strcpy(dot, "_eye");
-		strcat(dot, ext);
-
-		/* ファイルがない場合 */
-		if (!check_file_exist(CH_DIR, eye_fname))
+		/* There is an extension. */
+		if (!check_file_exist(CH_DIR, eye_fname)) {
+			/* No such file. */
 			return true;
+		}
 	} else {
-		/* 拡張子なしの場合 */
+		/* There is no extension. */
 		do {
-			strcat(eye_fname, "_eye.png");
-			if (check_file_exist(CH_DIR, eye_fname))
-				break;
-			strcat(eye_fname, "_eye.webp");
-			if (check_file_exist(CH_DIR, eye_fname))
-				break;
+			char tmp[1024];
 
-			/* 目パチファイルがない */
+			strcpy(tmp, eye_fname);
+			strcat(tmp, ".png");
+			if (check_file_exist(CH_DIR, tmp)) {
+				strcpy(eye_fname, tmp);
+				break;
+			}
+			strcpy(tmp, eye_fname);
+			strcat(tmp, ".webp");
+			if (check_file_exist(CH_DIR, tmp)) {
+				strcpy(eye_fname, tmp);
+				break;
+			}
+
+			/* No such file. */
 			return true;
 		} while (0);
 	}
 
-	/* イメージを読み込む */
+	/* Load an image. */
 	eye_img = create_image_from_file(CH_DIR, eye_fname);
 	if (eye_img == NULL) {
 		log_script_exec_footer();
 		return false;
 	}
 
-	/* レイヤを設定する */
+	/* Initialize the layer. */
 	set_layer_file_name(eye_layer, eye_fname);
 	set_layer_image(eye_layer, eye_img);
 	set_layer_alpha(eye_layer, 0);
 	set_layer_scale(eye_layer, 1.0f, 1.0f);
 
-	/* 目パチのアニメを合成する */
+	/* Make an eye anime. */
 	synthesis_eye_anime(chpos);
 
 	return true;
@@ -896,50 +918,72 @@ static void synthesis_eye_anime(int chpos)
  */
 bool load_lip_image_if_exists(int chpos, const char *fname)
 {
-	char lip_fname[1024], ext[128], *dot;
+	char lip_fname[1024], *slash, *dot;
 	struct image *lip_img;
 	int lip_layer;
 
-	/* まず口のレイヤを無効にする */
+	/* Firstly, disable the lip layer. */
 	lip_layer = chpos_to_lip_layer(chpos);
 	set_layer_file_name(lip_layer, NULL);
 	set_layer_image(lip_layer, NULL);
 
-	/* キャラがない場合 */
+	/* In case that we erase the character. */
 	if (fname == NULL || strcmp(fname, "none") == 0 || strcmp(fname, U8("消去")) == 0) {
-		/* 既存の口パクアニメを終了する */
+		/* Finish the existing lip anime. */
 		clear_layer_anime_sequence(lip_layer);
 		return true;
 	}
 
-	/* 口パクファイル名の文字列"filename_eye.ext"を作る */
-	strcpy(lip_fname, fname);
+	/* Make a lip file name. (base + "/lip/" + file) */
+	slash = strrchr(fname, '/');
+	if (slash != NULL) {
+		char base[1024], file[1024];
+
+		strcpy(base, fname);
+		slash = strrchr(base, '/');
+		*slash = '\0';
+		strcpy(file, slash + 1);
+
+		strcpy(lip_fname, base);
+		strcat(lip_fname, "/lip/");
+		strcat(lip_fname, file);
+	} else {
+		strcpy(lip_fname, "lip/");
+		strcat(lip_fname, fname);
+	}
+
+	/* Check if the file name includes extension. */
 	dot = strstr(lip_fname, ".");
 	if (dot != NULL) {
-		/* 拡張子ありの場合 */
-		strcpy(ext, dot);
-		strcpy(dot, "_lip");
-		strcat(dot, ext);
-
-		/* ファイルがない場合 */
-		if (!check_file_exist(CH_DIR, lip_fname))
+		/* There is an extension. */
+		if (!check_file_exist(CH_DIR, lip_fname)) {
+			/* No such file. */
 			return true;
+		}
 	} else {
-		/* 拡張子なしの場合 */
+		/* There is no extension. */
 		do {
-			strcat(lip_fname, "_lip.png");
-			if (check_file_exist(CH_DIR, lip_fname))
-				break;
-			strcat(lip_fname, "_lip.webp");
-			if (check_file_exist(CH_DIR, lip_fname))
-				break;
+			char tmp[1024];
 
-			/* 口パクファイルがない */
+			strcpy(tmp, lip_fname);
+			strcat(tmp, ".png");
+			if (check_file_exist(CH_DIR, tmp)) {
+				strcpy(lip_fname, tmp);
+				break;
+			}
+			strcpy(tmp, lip_fname);
+			strcat(tmp, ".webp");
+			if (check_file_exist(CH_DIR, tmp)) {
+				strcpy(lip_fname, tmp);
+				break;
+			}
+
+			/* No such file. */
 			return true;
 		} while (0);
 	}
 
-	/* イメージを読み込む */
+	/* Load an image. */
 	lip_img = create_image_from_file(CH_DIR, lip_fname);
 	if (lip_img == NULL) {
 		log_script_exec_footer();
