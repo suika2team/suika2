@@ -74,7 +74,7 @@
 :CONFIG
 
 # 設定画面を表示します
-@menu file=system.txt
+@menu file=config.txt
 
 # 設定画面のあとここに戻ってきます
 @goto label="MENU"
