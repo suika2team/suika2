@@ -6,40 +6,21 @@
  */
 
 /*
- * Dialog procedure for the @ch command.
+ * Dialog procedure for the @bg command.
  */
 
 #include "dialog.h"
 #include "resource.h"
 
-#include "../opennovel.h"
+#include "opennovel.h"
 
 static VOID OnInit(HWND hWnd)
 {
-	HWND hWndPos, hWndFade;
+	HWND hWndFade;
 	const wchar_t *pwszText;
 	const char *pszText;
 	float fTime;
 	int i;
-
-	struct chpos {
-		const char *name;
-		int index;
-	} chpos[] = {
-		{"", 0},
-		{"center", 0},
-		{"c", 0},
-		{"left", 1},
-		{"l", 1},
-		{"right", 2},
-		{"r", 2},
-		{"left-center", 3},
-		{"lc", 3},
-		{"right-center", 4},
-		{"rc", 4},
-		{"back", 5},
-		{"b", 5},
-	};
 
 	struct fade {
 		const char *name;
@@ -86,38 +67,11 @@ static VOID OnInit(HWND hWnd)
 
 	UNUSED_PARAMETER(hWnd);
 
-	/* Position */
-	hWndPos = GetDlgItem(hWnd, IDC_COMBO_CHPOS);
-	SendMessage(hWndPos, (UINT)CB_ADDSTRING, (WPARAM)0, (LPARAM)(bEnglish ? L"Center" : L"中央"));
-	SendMessage(hWndPos, (UINT)CB_ADDSTRING, (WPARAM)1, (LPARAM)(bEnglish ? L"Left" : L"左"));
-	SendMessage(hWndPos, (UINT)CB_ADDSTRING, (WPARAM)2, (LPARAM)(bEnglish ? L"Right" : L"右"));
-	SendMessage(hWndPos, (UINT)CB_ADDSTRING, (WPARAM)3, (LPARAM)(bEnglish ? L"Left Center" : L"左中央"));
-	SendMessage(hWndPos, (UINT)CB_ADDSTRING, (WPARAM)4, (LPARAM)(bEnglish ? L"Right Center" : L"右中央"));
-	SendMessage(hWndPos, (UINT)CB_ADDSTRING, (WPARAM)5, (LPARAM)(bEnglish ? L"Bak" : L"背面中央"));
-	pszText = get_string_param(CH_PARAM_POS);
-	for (i = 0; i < (int)(sizeof(chpos) / sizeof(struct chpos)); i++)
-	{
-		if (strcmp(pszText, chpos[i].name) == 0)
-		{
-			SendMessage(hWndPos, CB_SETCURSEL, (WPARAM)chpos[i].index, (LPARAM)0);
-			break;
-		}
-	}
-
 	/* File */
-	pwszText = conv_utf8_to_utf16(get_string_param(CH_PARAM_FILE));
-	if (wcscmp(pwszText, L"none") == 0)
-	{
-		SendMessage(GetDlgItem(hWnd, IDC_CHECK_NONE), (UINT)BM_SETCHECK, (WPARAM)BST_CHECKED, (LPARAM)0);
-		EnableWindow(GetDlgItem(hWnd, IDC_TEXT_FILE1), FALSE);
-	}
-	else
-	{
-		SetWindowText(GetDlgItem(hWnd, IDC_TEXT_FILE1), pwszText);
-	}
+	SetWindowText(GetDlgItem(hWnd, IDC_TEXT_FILE1), conv_utf8_to_utf16(get_string_param(BG_PARAM_FILE)));
 
 	/* Time */
-	pwszText = conv_utf8_to_utf16(get_string_param(CH_PARAM_SPAN));
+	pwszText = conv_utf8_to_utf16(get_string_param(BG_PARAM_SPAN));
 	if (wcscmp(pwszText, L"") == 0)
 		pwszText = L"0";
 	SetWindowText(GetDlgItem(hWnd, IDC_TEXT_TIME), pwszText);
@@ -149,13 +103,13 @@ static VOID OnInit(HWND hWnd)
 	SendMessage(hWndFade, (UINT)CB_ADDSTRING, (WPARAM)20, (LPARAM)(bEnglish ? L"Slit Close Vertical" : L"スリットを閉じる(縦)"));
 	SendMessage(hWndFade, (UINT)CB_ADDSTRING, (WPARAM)21, (LPARAM)(bEnglish ? L"Rule Image 1-bit" : L"ルール画像(1bit)"));
 	SendMessage(hWndFade, (UINT)CB_ADDSTRING, (WPARAM)22, (LPARAM)(bEnglish ? L"Rule Image 8-bit" : L"ルール画像(8bit)"));
-	pszText = get_string_param(CH_PARAM_METHOD);
+	pszText = get_string_param(BG_PARAM_METHOD);
 	for (i = 0; i < (int)(sizeof(fade) / sizeof(struct fade)); i++)
 	{
 		if (strcmp(pszText, fade[i].name) == 0)
 		{
-			SendMessage(hWndFade, CB_SETCURSEL, (WPARAM)fade[i].index, (LPARAM)0);
-				break;
+			SendMessage(hWndFade, (UINT)CB_SETCURSEL, (WPARAM)fade[i].index, (LPARAM)0);
+			break;
 		}
 	}
 	if (strncmp(pszText, "rule:", 5) == 0)
@@ -175,18 +129,6 @@ static VOID OnInit(HWND hWnd)
 		EnableWindow(GetDlgItem(hWnd, IDC_TEXT_RULE), FALSE);
 		EnableWindow(GetDlgItem(hWnd, IDC_BUTTON_RULE), FALSE);
 	}
-
-	/* X-Offset */
-	pwszText = conv_utf8_to_utf16(get_string_param(CH_PARAM_OFFSET_X));
-	if (wcscmp(pwszText, L"") == 0)
-		pwszText = L"0";
-	SetWindowText(GetDlgItem(hWnd, IDC_TEXT_OFSX), pwszText);
-
-	/* Y-Offset */
-	pwszText = conv_utf8_to_utf16(get_string_param(CH_PARAM_OFFSET_Y));
-	if (wcscmp(pwszText, L"") == 0)
-		pwszText = L"0";
-	SetWindowText(GetDlgItem(hWnd, IDC_TEXT_OFSY), pwszText);
 }
 
 static VOID OnCommand(HWND hWnd, UINT nID)
@@ -194,25 +136,10 @@ static VOID OnCommand(HWND hWnd, UINT nID)
 	if (nID == IDC_BUTTON_FILE1)
 	{
 		const wchar_t *pwszFile;
-		pwszFile = SelectFile(CH_DIR);
+		pwszFile = SelectFile(BG_DIR);
 		if (pwszFile != NULL)
 		{
 			SetWindowText(GetDlgItem(hWnd, IDC_TEXT_FILE1), pwszFile);
-		}
-		return;
-	}
-
-	if (nID == IDC_CHECK_NONE)
-	{
-		if (!SendMessage(GetDlgItem(hWnd, IDC_CHECK_NONE), (UINT)BM_GETCHECK, (WPARAM)0, (LPARAM)0))
-		{
-			SendMessage(GetDlgItem(hWnd, IDC_CHECK_NONE), (UINT)BM_SETCHECK, (WPARAM)BST_CHECKED, (LPARAM)0);
-			EnableWindow(GetDlgItem(hWnd, IDC_TEXT_FILE1), FALSE);
-		}
-		else
-		{
-			SendMessage(GetDlgItem(hWnd, IDC_CHECK_NONE), (UINT)BM_SETCHECK, (WPARAM)BST_UNCHECKED, (LPARAM)0);
-			EnableWindow(GetDlgItem(hWnd, IDC_TEXT_FILE1), TRUE);
 		}
 		return;
 	}
@@ -258,16 +185,7 @@ static BOOL OnFinish(HWND hWnd)
 {
 	wchar_t wszText[1024];
 	char szCmd[4096];
-	BOOL bXOfs, bYOfs;
-	const char *chpos[] = {
-		"center",
-		"left",
-		"right",
-		"left-center",
-		"right-center",
-		"back",
-	};
-	const char *fade[] = {
+	const char *tbl[] = {
 		"normal",
 		"curtain-right",
 		"curtain-left",
@@ -296,34 +214,22 @@ static BOOL OnFinish(HWND hWnd)
 	const int RULE = 21;
 	const int MELT = 22;
 
-	strncpy(szCmd, "@ch", sizeof(szCmd) - 1);
-
-	/* Position */
-	nIndex = SendMessage(GetDlgItem(hWnd, IDC_COMBO_CHPOS), CB_GETCURSEL, (WPARAM)0, (LPARAM)0);
-	strncat(szCmd, " pos=", sizeof(szCmd) - 1);
-	strncat(szCmd, chpos[nIndex], sizeof(szCmd) - 1);
+	strncpy(szCmd, "@bg", sizeof(szCmd) - 1);
 
 	/* File */
-	if (!SendMessage(GetDlgItem(hWnd, IDC_CHECK_NONE), BM_GETCHECK, (WPARAM)0, (LPARAM)0))
+	GetWindowText(GetDlgItem(hWnd, IDC_TEXT_FILE1), wszText, sizeof(wszText) / sizeof(wchar_t));
+	if (wcscmp(wszText, L"") == 0)
 	{
-		GetWindowText(GetDlgItem(hWnd, IDC_TEXT_FILE1), wszText, sizeof(wszText) / sizeof(wchar_t));
-		if (wcscmp(wszText, L"") == 0)
-		{
-			MessageBox(hWnd,
-					   bEnglish ?
-					   L"Fill the background file name." :
-					   L"背景ファイル名を指定してください。",
-					   DIALOG_TITLE,
-					   MB_OK | MB_ICONEXCLAMATION);
-			return FALSE;
-		}
-		strncat(szCmd, " file=", sizeof(szCmd) - 1);
-		strncat(szCmd, conv_utf16_to_utf8(wszText), sizeof(szCmd) - 1);
+		MessageBox(hWnd,
+				   bEnglish ?
+				   L"Fill the background file name." :
+				   L"背景ファイル名を指定してください。",
+				   DIALOG_TITLE,
+				   MB_OK | MB_ICONEXCLAMATION);
+		return FALSE;
 	}
-	else
-	{
-		strncat(szCmd, " file=none", sizeof(szCmd) - 1);
-	}
+	strncat(szCmd, " file=", sizeof(szCmd) - 1);
+	strncat(szCmd, conv_utf16_to_utf8(wszText), sizeof(szCmd) - 1);
 
 	/* Time */
 	GetWindowText(GetDlgItem(hWnd, IDC_TEXT_TIME), wszText, sizeof(wszText) / sizeof(wchar_t));
@@ -335,7 +241,7 @@ static BOOL OnFinish(HWND hWnd)
 	/* Fade */
 	nIndex = SendMessage(GetDlgItem(hWnd, IDC_COMBO_FADE), CB_GETCURSEL, (WPARAM)0, (LPARAM)0);
 	strncat(szCmd, " effect=", sizeof(szCmd) - 1);
-	strncat(szCmd, fade[nIndex], sizeof(szCmd) - 1);
+	strncat(szCmd, tbl[nIndex], sizeof(szCmd) - 1);
 
 	/* Rule file */
 	if (nIndex == RULE || nIndex == MELT)
@@ -354,38 +260,13 @@ static BOOL OnFinish(HWND hWnd)
 		strncat(szCmd, conv_utf16_to_utf8(wszText), sizeof(szCmd) - 1);
 	}
 
-	/* X-Y Offsets */
-	GetWindowText(GetDlgItem(hWnd, IDC_TEXT_OFSX), wszText, sizeof(wszText) / sizeof(wchar_t));
-	bXOfs = wcscmp(wszText, L"") != 0 && wcscmp(wszText, L"0") != 0 ;
-	GetWindowText(GetDlgItem(hWnd, IDC_TEXT_OFSY), wszText, sizeof(wszText) / sizeof(wchar_t));
-	bYOfs = wcscmp(wszText, L"") != 0 && wcscmp(wszText, L"0") != 0 ;
-	if (bXOfs || bYOfs)
-	{
-		/* X Offset */
-		if (!bXOfs)
-			wcscpy(wszText, L"0");
-		else
-			GetWindowText(GetDlgItem(hWnd, IDC_TEXT_OFSX), wszText, sizeof(wszText) / sizeof(wchar_t));
-		strncat(szCmd, " right=", sizeof(szCmd) - 1);
-		strncat(szCmd, conv_utf16_to_utf8(wszText), sizeof(szCmd) - 1);
-
-		/* Y Offset */
-		if (!bYOfs)
-			wcscpy(wszText, L"0");
-		else
-			GetWindowText(GetDlgItem(hWnd, IDC_TEXT_OFSX), wszText, sizeof(wszText) / sizeof(wchar_t));
-		GetWindowText(GetDlgItem(hWnd, IDC_TEXT_OFSY), wszText, sizeof(wszText) / sizeof(wchar_t));
-		strncat(szCmd, " down=", sizeof(szCmd) - 1);
-		strncat(szCmd, conv_utf16_to_utf8(wszText), sizeof(szCmd) - 1);
-	}
-
 	/* Update the script model. */
 	update_script_line(get_expanded_line_num(), szCmd);
 
 	return TRUE;
 }
 
-BOOL CALLBACK DlgChWndProc(HWND hWnd, UINT nMsg, WPARAM wParam, LPARAM lParam)
+BOOL CALLBACK DlgBgWndProc(HWND hWnd, UINT nMsg, WPARAM wParam, LPARAM lParam)
 {
 	UINT nID;
 

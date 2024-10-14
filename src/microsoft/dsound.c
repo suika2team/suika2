@@ -9,15 +9,16 @@
  * DirectSound Output (DirectSound 5.0)
  */
 
-#include <windows.h>
-//#include <process.h>
-
-#include <math.h>
-
+/* Base */
 #include "../opennovel.h"
 
+/* Windows */
+#include <windows.h>
 #define DIRECTSOUND_VERSION 0x0500 /* Windows 98 default */
 #include <dsound.h>
+
+/* C */
+#include <math.h>
 
 /*
  * バッファのフォーマット

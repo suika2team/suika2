@@ -6,13 +6,13 @@
  */
 
 /*
- * Dialog procedure for the @ch command.
+ * Dialog procedure for the @sound command.
  */
 
 #include "dialog.h"
 #include "resource.h"
 
-#include "../opennovel.h"
+#include "opennovel.h"
 
 static VOID OnInit(HWND hWnd)
 {
@@ -21,22 +21,22 @@ static VOID OnInit(HWND hWnd)
 	UNUSED_PARAMETER(hWnd);
 
 	/* File */
-	pszText = get_string_param(MUSIC_PARAM_FILE);
+	pszText = get_string_param(SOUND_PARAM_FILE);
 	if (strcmp(pszText, "stop") == 0)
 	{
 		SendMessage(GetDlgItem(hWnd, IDC_CHECK_STOP), (UINT)BM_SETCHECK, (WPARAM)BST_CHECKED, (LPARAM)0);
 		EnableWindow(GetDlgItem(hWnd, IDC_TEXT_FILE1), FALSE);
-		EnableWindow(GetDlgItem(hWnd, IDC_CHECK_ONCE), FALSE);
+		EnableWindow(GetDlgItem(hWnd, IDC_CHECK_LOOP), FALSE);
 	}
 	else
 	{
 		SetWindowText(GetDlgItem(hWnd, IDC_TEXT_FILE1), conv_utf8_to_utf16(pszText));
 	}
 
-	/* Once */
-	pszText = get_string_param(MUSIC_PARAM_ONCE);
-	if (strcmp(pszText, "once") == 0)
-		SendMessage(GetDlgItem(hWnd, IDC_CHECK_ONCE), (UINT)BM_SETCHECK, (WPARAM)BST_CHECKED, (LPARAM)0);
+	/* Loop */
+	pszText = get_string_param(SOUND_PARAM_OPTION);
+	if (strcmp(pszText, "loop") == 0)
+		SendMessage(GetDlgItem(hWnd, IDC_CHECK_LOOP), (UINT)BM_SETCHECK, (WPARAM)BST_CHECKED, (LPARAM)0);
 }
 
 static VOID OnCommand(HWND hWnd, UINT nID)
@@ -44,7 +44,7 @@ static VOID OnCommand(HWND hWnd, UINT nID)
 	if (nID == IDC_BUTTON_FILE1)
 	{
 		const wchar_t *pwszFile;
-		pwszFile = SelectFile(BGM_DIR);
+		pwszFile = SelectFile(SE_DIR);
 		if (pwszFile != NULL)
 		{
 			SetWindowText(GetDlgItem(hWnd, IDC_TEXT_FILE1), pwszFile);
@@ -58,23 +58,23 @@ static VOID OnCommand(HWND hWnd, UINT nID)
 		{
 			SendMessage(GetDlgItem(hWnd, IDC_CHECK_STOP), (UINT)BM_SETCHECK, (WPARAM)BST_CHECKED, (LPARAM)0);
 			EnableWindow(GetDlgItem(hWnd, IDC_TEXT_FILE1), FALSE);
-			EnableWindow(GetDlgItem(hWnd, IDC_CHECK_ONCE), FALSE);
+			EnableWindow(GetDlgItem(hWnd, IDC_CHECK_LOOP), FALSE);
 		}
 		else
 		{
 			SendMessage(GetDlgItem(hWnd, IDC_CHECK_STOP), (UINT)BM_SETCHECK, (WPARAM)BST_UNCHECKED, (LPARAM)0);
 			EnableWindow(GetDlgItem(hWnd, IDC_TEXT_FILE1), TRUE);
-			EnableWindow(GetDlgItem(hWnd, IDC_CHECK_ONCE), TRUE);
+			EnableWindow(GetDlgItem(hWnd, IDC_CHECK_LOOP), TRUE);
 		}
 		return;
 	}
 
-	if (nID == IDC_CHECK_ONCE)
+	if (nID == IDC_CHECK_LOOP)
 	{
-		if (!SendMessage(GetDlgItem(hWnd, IDC_CHECK_ONCE), (UINT)BM_GETCHECK, (WPARAM)0, (LPARAM)0))
-			SendMessage(GetDlgItem(hWnd, IDC_CHECK_ONCE), (UINT)BM_SETCHECK, (WPARAM)BST_CHECKED, (LPARAM)0);
+		if (!SendMessage(GetDlgItem(hWnd, IDC_CHECK_LOOP), (UINT)BM_GETCHECK, (WPARAM)0, (LPARAM)0))
+			SendMessage(GetDlgItem(hWnd, IDC_CHECK_LOOP), (UINT)BM_SETCHECK, (WPARAM)BST_CHECKED, (LPARAM)0);
 		else
-			SendMessage(GetDlgItem(hWnd, IDC_CHECK_ONCE), (UINT)BM_SETCHECK, (WPARAM)BST_UNCHECKED, (LPARAM)0);
+			SendMessage(GetDlgItem(hWnd, IDC_CHECK_LOOP), (UINT)BM_SETCHECK, (WPARAM)BST_UNCHECKED, (LPARAM)0);
 		return;
 	}
 }
@@ -84,7 +84,7 @@ static BOOL OnFinish(HWND hWnd)
 	wchar_t wszText[1024];
 	char szCmd[4096];
 
-	strncpy(szCmd, "@music", sizeof(szCmd) - 1);
+	strncpy(szCmd, "@sound", sizeof(szCmd) - 1);
 
 	/* File */
 	if (!SendMessage(GetDlgItem(hWnd, IDC_CHECK_STOP), BM_GETCHECK, (WPARAM)0, (LPARAM)0))
@@ -94,8 +94,8 @@ static BOOL OnFinish(HWND hWnd)
 		{
 			MessageBox(hWnd,
 					   bEnglish ?
-					   L"Fill the music file name." :
-					   L"音楽ファイル名を指定してください。",
+					   L"Fill the sound file name." :
+					   L"音声ファイル名を指定してください。",
 					   DIALOG_TITLE,
 					   MB_OK | MB_ICONEXCLAMATION);
 			return FALSE;
@@ -112,16 +112,16 @@ static BOOL OnFinish(HWND hWnd)
 		return TRUE;
 	}
 
-	/* Once */
-	if (SendMessage(GetDlgItem(hWnd, IDC_CHECK_ONCE), BM_GETCHECK, (WPARAM)0, (LPARAM)0))
-		strncat(szCmd, " once", sizeof(szCmd) - 1);
+	/* Loop */
+	if (SendMessage(GetDlgItem(hWnd, IDC_CHECK_LOOP), BM_GETCHECK, (WPARAM)0, (LPARAM)0))
+		strncat(szCmd, " loop", sizeof(szCmd) - 1);
 
 	/* Update the script model. */
 	update_script_line(get_expanded_line_num(), szCmd);
 	return TRUE;
 }
 
-BOOL CALLBACK DlgMusicWndProc(HWND hWnd, UINT nMsg, WPARAM wParam, LPARAM lParam)
+BOOL CALLBACK DlgSoundWndProc(HWND hWnd, UINT nMsg, WPARAM wParam, LPARAM lParam)
 {
 	UINT nID;
 

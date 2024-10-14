@@ -10,17 +10,18 @@
  */
 
 /* Base */
-#include "../opennovel.h"
+#include "opennovel.h"
 
 /* Editor */
-#include "../pro.h"
-#include "../package.h"
-#include "dialog.h"
+#include "pro.h"
+#include "package.h"
+#include "scriptview.h"
+#include "dialog/dialog.h"
 
 /* HAL Implementaions */
-#include "dx9render.h"		/* Graphics HAL */
-#include "dsound.h"			/* Sound HAL */
-#include "dsvideo.h"		/* Video HAL */
+#include "microsoft/dx9render.h"	/* Graphics HAL */
+#include "microsoft/dsound.h"		/* Sound HAL */
+#include "microsoft/dsvideo.h"		/* Video HAL */
 
 /* Windows */
 #include <windows.h>
@@ -55,10 +56,6 @@
 /* The font name for the controls. */
 #define CONTROL_FONT		L"Yu Gothic UI"
 
-/* The font name for the script view. */
-#define SCRIPT_FONT_JP		L"BIZ UDゴシック"
-#define SCRIPT_FONT_EN		L"Courier New"
-
 /* The version string. */
 #define VERSION_STRING 		\
 	"Suika2 22.0\n" \
@@ -82,34 +79,6 @@
 
 /* Size of the UTF-8/UTF-16 conversion buffer */
 #define CONV_MESSAGE_SIZE	(65536)
-
-/* Timer */
-#define ID_TIMER_FORMAT		(1)
-#define ID_TIMER_UPDATE		(2)
-
-/* Colors */
-#define LIGHT_BG_DEFAULT	0x00ffffff
-#define LIGHT_FG_DEFAULT	0x00000000
-#define LIGHT_COMMENT		0x00808080
-#define LIGHT_LABEL			0x00ff0000
-#define LIGHT_ERROR			0x000000ff
-#define LIGHT_COMMAND_NAME	0x00ff0000
-#define LIGHT_CIEL_COMMAND	0x00cba55d
-#define LIGHT_PARAM_NAME	0x00c0f0c0
-#define LIGHT_NEXT_EXEC		0x00ffc0c0
-#define LIGHT_CURRENT_EXEC	0x00c0c0ff
-#define LIGHT_SELECTED		0x0033ccff
-#define DARK_BG_DEFAULT		0x00282828
-#define DARK_FG_DEFAULT		0x00ffffff
-#define DARK_COMMENT		0x00808080
-#define DARK_LABEL			0x006200ee
-#define DARK_ERROR			0x000000ff
-#define DARK_COMMAND_NAME	0x0060a0a0
-#define DARK_CIEL_COMMAND	0x00ecd790
-#define DARK_PARAM_NAME		0x00e0acac
-#define DARK_NEXT_EXEC		0x002d623a
-#define DARK_CURRENT_EXEC	0x00353562
-#define DARK_SELECTED		0x00282828
 
 /* Max. text size of the var box (Line: "$00001=12345678901\r\n") */
 #define VAR_TEXTBOX_MAX		(11000 * (1 + 5 + 1 + 11 + 2))
@@ -215,12 +184,6 @@ BOOL bEnglish;
 /* A flag to show whether the game is running or not. */
 static BOOL bRunning;
 
-/* A flag to show whether we are using the highlight mode or not. */
-static BOOL bHighlightMode;
-
-/* A flag to show whether we are using the dark mode or not. */
-static BOOL bDarkMode;
-
 /* Event status. */
 static BOOL bContinuePressed;		/* "Continue" is pressed. */
 static BOOL bNextPressed;			/* "Next" is pressed. */
@@ -228,32 +191,10 @@ static BOOL bStopPressed;			/* "Stop" is pressed. */
 static BOOL bScriptOpened;			/* The script file is opened. */
 static BOOL bExecLineChanged;		/* The running line is changed. */
 static int nLineChanged;			/* The running line. */
-static BOOL bIgnoreChange;			/* Ignore changes to the RichEdit control. */
 static BOOL bNeedUpdateVars;		/* "Update Vars" is pressed. */
 
 /* Property */
 static int nLineProperty;			/* Line in edit by property dialog. */
-
-/* Colors */
-static DWORD dwColorBgDefault = LIGHT_BG_DEFAULT;
-static DWORD dwColorFgDefault = LIGHT_FG_DEFAULT;
-static DWORD dwColorComment = LIGHT_COMMENT;
-static DWORD dwColorLabel = LIGHT_LABEL;
-static DWORD dwColorError = LIGHT_ERROR;
-static DWORD dwColorCommandName = LIGHT_COMMAND_NAME;
-static DWORD dwColorCielCommand = LIGHT_CIEL_COMMAND;
-static DWORD dwColorParamName = LIGHT_PARAM_NAME;
-static DWORD dwColorNextExec = LIGHT_NEXT_EXEC;
-static DWORD dwColorCurrentExec = LIGHT_CURRENT_EXEC;
-
-/* The font name for the script view. */
-static wchar_t wszFontName[128];
-
-/* The font size for the script view. */
-static int nFontSize = 10;
-
-/* A timestamp of the current editing file. */
-static FILETIME ftTimeStamp;
 
 /*
  * Completion
@@ -306,40 +247,9 @@ static void OnSizing(int edge, LPRECT lpRect);
 static void OnSize(void);
 static void OnDpiChanged(HWND hWnd, UINT nDpi, LPRECT lpRect);
 static void Layout(int nClientWidth, int nClientHeight);
-const wchar_t *conv_utf8_to_utf16(const char *utf8_message);
-const char *conv_utf16_to_utf8(const wchar_t *utf16_message);
 
 /* TextEdit (for Variables) */
 static VOID Variable_UpdateText(void);
-
-/* RichEdit */
-static VOID RichEdit_OnChange(void);
-static VOID RichEdit_SetFont(void);
-static int RichEdit_GetCursorPosition(void);
-static int RichEdit_GetSelectedLen(void);
-static VOID RichEdit_SetCursorPosition(int nCursor);
-static VOID RichEdit_SetSelectedRange(int nLineStart, int nLineLen);
-static int RichEdit_GetCursorLine(void);
-static wchar_t *RichEdit_GetText(void);
-static VOID RichEdit_SetTextColorForAllLines(void);
-static VOID RichEdit_SetTextColorForLine(const wchar_t *pText, int nLineStartCR, int nLineStartCRLF, int nLineLen);
-static VOID RichEdit_ClearFormatAll(void);
-static VOID RichEdit_ClearBackgroundColorAll(void);
-static VOID RichEdit_SetBackgroundColorForNextExecuteLine(void);
-static VOID RichEdit_SetBackgroundColorForCurrentExecuteLine(void);
-static VOID RichEdit_GetLineStartAndLength(int nLine, int *nLineStart, int *nLineLen);
-static VOID RichEdit_SetTextColorForSelectedRange(COLORREF cl);
-static VOID RichEdit_SetBackgroundColorForSelectedRange(COLORREF cl);
-static VOID RichEdit_AutoScroll(void);
-static VOID RichEdit_GetLineStartAndLength(int nLine, int *nLineStart, int *nLineLen);
-static BOOL RichEdit_SearchNextError(int nStart, int nEnd);
-static VOID RichEdit_SetTextByScriptModel(void);
-static VOID RichEdit_UpdateScriptModelFromText(void);
-static VOID RichEdit_InsertText(const wchar_t *pLine, ...);
-static VOID RichEdit_InsertTextAtEnd(const wchar_t *pszText);
-static VOID RichEdit_UpdateTheme(void);
-static VOID RichEdit_DelayedHighligth(void);
-static VOID __stdcall OnTimerFormat(HWND hWnd, UINT nID, UINT_PTR uTime, DWORD dwParam);
 
 /* Project */
 static BOOL CreateProjectFromTemplate(const wchar_t *pszTemplate);
@@ -511,8 +421,6 @@ static BOOL InitApp(HINSTANCE hInstance, int nCmdShow)
 		}
 	}
 
-	SetTimer(hWndMain, ID_TIMER_FORMAT, 100, OnTimerFormat);
-
 	return TRUE;
 }
 
@@ -536,7 +444,7 @@ static void CleanupApp(void)
 /*
  * A wrapper for GetDpiForWindow().
  */
-int Win11_GetDpiForWindow(HWND hWnd)
+int App_GetDpiForWindow(HWND hWnd)
 {
 	static UINT (__stdcall *pGetDpiForWindow)(HWND) = NULL;
 	UINT nDpi;
@@ -557,6 +465,12 @@ int Win11_GetDpiForWindow(HWND hWnd)
 		return 96;
 
 	return (int)nDpi;
+}
+
+/* Returns whether we are in the English mode or not. */
+BOOL App_IsEnglishMode(void)
+{
+	return bEnglish;
 }
 
 /* Initialize the window. */
@@ -701,7 +615,7 @@ static BOOL InitMainWindow(HINSTANCE hInstance, int *pnRenderWidth, int *pnRende
 	}
 
 	/* Handle HiDPI. */
-	nDpi = Win11_GetDpiForWindow(hWndMain);
+	nDpi = App_GetDpiForWindow(hWndMain);
 	nRenderWidth = MulDiv(conf_game_width, nDpi, 96);
 	nRenderHeight = MulDiv(conf_game_height, nDpi, 96);
 	nWinWidth = nRenderWidth + nFrameAddWidth + EDITOR_WIDTH;
@@ -774,14 +688,13 @@ static BOOL InitRenderingPanel(HINSTANCE hInstance, int nWidth, int nHeight)
 /* Initialize the editor panel. */
 static BOOL InitEditorPanel(HINSTANCE hInstance)
 {
-	wchar_t wszCls[128];
 	WNDCLASSEX wcex;
 	RECT rcClient;
-	HFONT hFont, hFontFixed;
+	HFONT hFont;
 	int nDpi;
 
 	/* Get the DPI. */
-	nDpi = Win11_GetDpiForWindow(hWndMain);
+	nDpi = App_GetDpiForWindow(hWndMain);
 
 	/* Get the client rect. */
 	GetClientRect(hWndMain, &rcClient);
@@ -812,7 +725,6 @@ static BOOL InitEditorPanel(HINSTANCE hInstance)
 		return FALSE;
 
 	/* Create fonts. */
-	wcscpy(wszFontName, bEnglish ? SCRIPT_FONT_EN : SCRIPT_FONT_JP);
 	hFont = CreateFont(MulDiv(18, nDpi, 96),
 					   0,
 					   0,
@@ -827,20 +739,6 @@ static BOOL InitEditorPanel(HINSTANCE hInstance)
 					   DEFAULT_QUALITY,
 					   DEFAULT_PITCH | FF_DONTCARE,
 					   CONTROL_FONT);
-	hFontFixed = CreateFont(MulDiv(nFontSize, nDpi, 96),
-							0,
-							0,
-							0,
-							FW_DONTCARE,
-							FALSE,
-							FALSE,
-							FALSE,
-							DEFAULT_CHARSET,
-							OUT_TT_PRECIS,
-							CLIP_DEFAULT_PRECIS,
-							DEFAULT_QUALITY,
-							FIXED_PITCH | FF_DONTCARE,
-							wszFontName);
 
 	/* Create the continue button. */
 	hWndBtnContinue = CreateWindow(
@@ -957,50 +855,7 @@ static BOOL InitEditorPanel(HINSTANCE hInstance)
 	EnableWindow(hWndBtnSelectScript, FALSE);
 
 	/* Create a RichEdit for the script. */
-	LoadLibrary(L"Msftedit.dll");
-	hWndRichEdit = CreateWindowEx(
-		0,
-		MSFTEDIT_CLASS, /* RichEdit50W */
-		L"Script",
-		ES_MULTILINE | WS_VISIBLE | WS_CHILD | WS_BORDER | WS_TABSTOP | ES_AUTOVSCROLL,
-		MulDiv(10, nDpi, 96),
-		MulDiv(100, nDpi, 96),
-		MulDiv(420, nDpi, 96),
-		MulDiv(400, nDpi, 96),
-		hWndEditor,
-		(HMENU)ID_RICHEDIT,
-		hInstance,
-		NULL);
-	if (hWndRichEdit == NULL)
-	{
-		hWndRichEdit = CreateWindowEx(
-			0,
-			RICHEDIT_CLASS, /* RichEdit30W */
-			L"Script",
-			ES_MULTILINE | WS_VISIBLE | WS_CHILD | WS_BORDER | WS_TABSTOP | ES_AUTOVSCROLL,
-			MulDiv(10, nDpi, 96),
-			MulDiv(100, nDpi, 96),
-			MulDiv(420, nDpi, 96),
-			MulDiv(400, nDpi, 96),
-			hWndEditor,
-			(HMENU)ID_RICHEDIT,
-			hInstance,
-			NULL);
-	}
-	GetClassName(hWndRichEdit, wszCls, sizeof(wszCls) / sizeof(wchar_t));
-	if (wcscmp(wszCls, L"RICHEDIT50W") == 0)
-	{
-		/* Microsoft Office付属のリッチエディットでない場合(Windows付属の場合)、オートスクロールを使用しない */
-		LONG style = GetWindowLong(hWndRichEdit, GWL_STYLE);
-		style &= ~ES_AUTOVSCROLL;
-		SetWindowLong(hWndRichEdit, GWL_STYLE, style);
-	}
-	SendMessage(hWndRichEdit, EM_SHOWSCROLLBAR, (WPARAM)SB_VERT, (LPARAM)TRUE);
-	SendMessage(hWndRichEdit, EM_SETEVENTMASK, 0, (LPARAM)ENM_CHANGE);
-	SendMessage(hWndRichEdit, EM_SETBKGNDCOLOR, (WPARAM)0, (LPARAM)dwColorBgDefault);
-	SendMessage(hWndRichEdit, WM_SETFONT, (WPARAM)hFontFixed, (LPARAM)TRUE);
-	RichEdit_SetFont();
-	EnableWindow(hWndRichEdit, FALSE);
+	hWndRichEdit = ScriptView_Create(hWndEditor);
 
 	/* Create a textbox for variables. */
 	hWndTextboxVar = CreateWindow(
@@ -1485,6 +1340,32 @@ static HWND CreateTooltip(HWND hWndBtn, const wchar_t *pszTextEnglish,
 	return hWndTip;
 }
 
+/*
+ * Execution Control
+ */
+
+BOOL App_IsRunning(void)
+{
+	return bRunning;
+}
+
+void App_SetExecLineChanged(BOOL bVal)
+{
+	bExecLineChanged = bVal;
+}
+
+void App_SetChangedLine(int nLine)
+{
+	nLineChanged = nLine;
+}
+
+void App_SetScriptOpened(BOOL bVal)
+{
+	bScriptOpened = bVal;
+}
+
+/*******************************************/
+
 static VOID StartGame(void)
 {
 	RECT rcClient;
@@ -1572,6 +1453,7 @@ static void GameLoop(void)
 		dwStartTime = GetTickCount();
 
 		/* フレームを実行する */
+		/* TODO: bRunning */
 		if (!RunFrame())
 			bBreak = TRUE;
 	}
@@ -2144,7 +2026,7 @@ static void OnCommand(WPARAM wParam, LPARAM lParam)
 	/* リッチエディットのEN_CHANGEを確認する */
 	if (nID == ID_RICHEDIT && nNotify == EN_CHANGE)
 	{
-		RichEdit_OnChange();
+		ScriptView_OnChange();
 		return;
 	}
 
@@ -2371,7 +2253,8 @@ static void OnSize(void)
 		Layout(rc.right - rc.left, rc.bottom - rc.top);
 	}
 
-	RichEdit_SetFont();
+	/* FIXME */
+	ScriptView_ApplyFont();
 }
 
 /* スクリーンのオフセットとスケールを計算する */
@@ -2380,7 +2263,7 @@ static void Layout(int nClientWidth, int nClientHeight)
 	float fAspect, fRenderWidth, fRenderHeight;
 	int nDpi, nRenderWidth, nEditorWidth, y;
 
-	nDpi = Win11_GetDpiForWindow(hWndMain);
+	nDpi = App_GetDpiForWindow(hWndMain);
 
 	/* If size and dpi are not changed, just return. */
 	if (nClientWidth == nLastClientWidth && nClientHeight == nLastClientHeight && nLastDpi != nDpi)
@@ -2869,7 +2752,7 @@ void on_change_running_state(bool running, bool request_stop)
 
 		/* 実行中の背景色を設定する */
 		SetFocus(NULL);
-		RichEdit_SetBackgroundColorForCurrentExecuteLine();
+		ScriptView_SetBackgroundColorForCurrentExecuteLine();
 		SetFocus(hWndRichEdit);
 	}
 	else if(running)
@@ -2905,7 +2788,7 @@ void on_change_running_state(bool running, bool request_stop)
 
 		/* 実行中の背景色を設定する */
 		SetFocus(NULL);
-		RichEdit_SetBackgroundColorForCurrentExecuteLine();
+		ScriptView_SetBackgroundColorForCurrentExecuteLine();
 		SetFocus(hWndRichEdit);
 	}
 	else
@@ -2941,7 +2824,7 @@ void on_change_running_state(bool running, bool request_stop)
 
 		/* 次の実行される行の背景色を設定する */
 		SetFocus(NULL);
-		RichEdit_SetBackgroundColorForNextExecuteLine();
+		ScriptView_SetBackgroundColorForNextExecuteLine();
 		SetFocus(hWndRichEdit);
 	}
 }
@@ -2952,28 +2835,21 @@ void on_change_running_state(bool running, bool request_stop)
 void on_load_script(void)
 {
 	const char *script_file;
-	HANDLE hFile;
 
 	/* スクリプトファイル名を設定する */
 	script_file = get_script_file_name();
 	SetWindowText(hWndTextboxScript, conv_utf8_to_utf16(script_file));
 
-	/* タイムスタンプ(スクリプトの最終更新時刻)を取得する */
-	hFile = CreateFile(conv_utf8_to_utf16(get_script_file_name()),
-					   GENERIC_READ, FILE_SHARE_READ, NULL,
-					   OPEN_EXISTING, 0, NULL);
-	if (hFile != INVALID_HANDLE_VALUE)
-		GetFileTime(hFile, NULL, NULL, &ftTimeStamp);
-	else
-		ZeroMemory(&ftTimeStamp, sizeof(ftTimeStamp));
+	/* スクリプトの最終更新時刻を取得する */
+	ScriptView_UpdateTimeStamp();
 
 	/* 実行中のスクリプトファイルが変更されたとき、リッチエディットにテキストを設定する */
 	SetFocus(NULL);
-	RichEdit_SetTextByScriptModel();
+	ScriptView_SetTextByScriptModel();
 	SetFocus(hWndRichEdit);
 
 	/* 全体のテキスト色を変更する(遅延) */
-	RichEdit_DelayedHighligth();
+	ScriptView_DelayedHighligth();
 }
 
 /*
@@ -2985,9 +2861,9 @@ void on_change_position(void)
 
 	/* 実行行のハイライトを行う */
 	if (!bRunning)
-		RichEdit_SetBackgroundColorForNextExecuteLine();
+		ScriptView_SetBackgroundColorForNextExecuteLine();
 	else
-		RichEdit_SetBackgroundColorForCurrentExecuteLine();
+		ScriptView_SetBackgroundColorForCurrentExecuteLine();
 
 	/* 変数の情報を更新する */
 	if (bNeedUpdateVars)
@@ -2997,7 +2873,7 @@ void on_change_position(void)
 	}
 
 	/* スクロールする */
-	RichEdit_AutoScroll();
+	ScriptView_AutoScroll();
 
 	SetFocus(hWndRichEdit);
 }
@@ -3043,759 +2919,6 @@ static VOID Variable_UpdateText(void)
 
 	/* テキストボックスにセットする */
 	SetWindowText(hWndTextboxVar, szTextboxVar);
-}
-
-/*
- * リッチエディット
- */
-
-/* リッチエディットの内容の更新通知を処理する */
-static VOID RichEdit_OnChange(void)
-{
-	int nCursor;
-
-	if (bIgnoreChange)
-	{
-		bIgnoreChange = FALSE;
-		return;
-	}
-
-	/* カーソル位置を取得する */
-	nCursor = RichEdit_GetCursorPosition();
-
-	SetFocus(NULL);
-
-	/* フォントを設定する */
-	RichEdit_SetFont();
-
-	/* 実行行の背景色を設定する */
-	if (bRunning)
-		RichEdit_SetBackgroundColorForCurrentExecuteLine();
-	else
-		RichEdit_SetBackgroundColorForNextExecuteLine();
-
-	/*
-	 * カーソル位置を設定する
-	 *  - 色付けで選択が変更されたのを修正する
-	 */
-	RichEdit_SetCursorPosition(nCursor);
-
-	SetFocus(hWndRichEdit);
-
-	/* 全体のテキスト色を変更する(遅延) */
-	RichEdit_DelayedHighligth();
-}
-
-/* リッチエディットのフォントを設定する */
-static VOID RichEdit_SetFont(void)
-{
-	CHARFORMAT2W cf;
-
-	bIgnoreChange = TRUE;
-	memset(&cf, 0, sizeof(cf));
-	cf.cbSize = sizeof(cf);
-	cf.dwMask = CFM_FACE | CFM_SIZE;
-	cf.yHeight = nFontSize * 20;
-	wcscpy(&cf.szFaceName[0], wszFontName);
-	SendMessage(hWndRichEdit, EM_SETCHARFORMAT, (WPARAM)SCF_ALL, (LPARAM)&cf);
-}
-
-/* リッチエディットのカーソル位置を取得する */
-static int RichEdit_GetCursorPosition(void)
-{
-	CHARRANGE cr;
-
-	/* カーソル位置を取得する */
-	SendMessage(hWndRichEdit, EM_EXGETSEL, 0, (LPARAM)&cr);
-
-	return cr.cpMin;
-}
-
-/* リッチエディットの選択範囲の長さを取得する */
-static int RichEdit_GetSelectedLen(void)
-{
-	CHARRANGE cr;
-
-	/* カーソル位置を取得する */
-	SendMessage(hWndRichEdit, EM_EXGETSEL, 0, (LPARAM)&cr);
-
-	return cr.cpMax - cr.cpMin;
-}
-
-/* リッチエディットのカーソル位置を設定する */
-static VOID RichEdit_SetCursorPosition(int nCursor)
-{
-	CHARRANGE cr;
-
-	bIgnoreChange = TRUE;
-	cr.cpMin = nCursor;
-	cr.cpMax = nCursor;
-	SendMessage(hWndRichEdit, EM_EXSETSEL, 0, (LPARAM)&cr);
-}
-
-/* リッチエディットの範囲を選択する */
-static VOID RichEdit_SetSelectedRange(int nLineStart, int nLineLen)
-{
-	CHARRANGE cr;
-
-	bIgnoreChange = TRUE;
-	memset(&cr, 0, sizeof(cr));
-	cr.cpMin = nLineStart;
-	cr.cpMax = nLineStart + nLineLen;
-	SendMessage(hWndRichEdit, EM_EXSETSEL, 0, (LPARAM)&cr);
-}
-
-/* リッチエディットのカーソル行の行番号を取得する */
-static int RichEdit_GetCursorLine(void)
-{
-	wchar_t *pWcs, *pCRLF;
-	int nTotal, nCursor, nLineStartCharCR, nLineStartCharCRLF, nLine;
-
-	pWcs = RichEdit_GetText();
-	nTotal = (int)wcslen(pWcs);
-	nCursor = RichEdit_GetCursorPosition();
-	nLineStartCharCR = 0;
-	nLineStartCharCRLF = 0;
-	nLine = 0;
-	while (nLineStartCharCRLF < nTotal)
-	{
-		pCRLF = wcswcs(pWcs + nLineStartCharCRLF, L"\r\n");
-		int nLen = (pCRLF != NULL) ?
-			(int)(pCRLF - (pWcs + nLineStartCharCRLF)) :
-			(int)wcslen(pWcs + nLineStartCharCRLF);
-		if (nCursor >= nLineStartCharCR && nCursor <= nLineStartCharCR + nLen)
-			break;
-		nLineStartCharCRLF += nLen + 2; /* +2 for CRLF */
-		nLineStartCharCR += nLen + 1; /* +1 for CR */
-		nLine++;
-	}
-	free(pWcs);
-
-	return nLine;
-}
-
-/* リッチエディットのテキストを取得する */
-static wchar_t *RichEdit_GetText(void)
-{
-	wchar_t *pText;
-	int nTextLen;
-
-	/* リッチエディットのテキストの長さを取得する */
-	nTextLen = (int)SendMessage(hWndRichEdit, WM_GETTEXTLENGTH, 0, 0);
-	if (nTextLen == 0)
-	{
-		pText = wcsdup(L"");
-		if (pText == NULL)
-		{
-			log_memory();
-			abort();
-		}
-	}
-
-	/* テキスト全体を取得する */
-	pText = malloc((size_t)(nTextLen + 1) * sizeof(wchar_t));
-	if (pText == NULL)
-	{
-		log_memory();
-		abort();
-	}
-	SendMessage(hWndRichEdit, WM_GETTEXT, (WPARAM)(nTextLen + 1), (LPARAM)pText);
-	pText[nTextLen] = L'\0';
-
-	return pText;
-}
-
-/* リッチエディットのテキストすべてについて、行の内容により色付けを行う */
-static VOID RichEdit_SetTextColorForAllLines(void)
-{
-	wchar_t *pText, *pLineStop;
-	int i, nLineStartCRLF, nLineStartCR, nLineLen;
-
-	pText = RichEdit_GetText();
-	nLineStartCRLF = 0;		/* WM_GETTEXTは改行をCRLFで返す */
-	nLineStartCR = 0;		/* EM_EXSETSELでは改行はCRの1文字 */
-	for (i = 0; i < get_line_count(); i++)
-	{
-		/* 行の終了位置を求める */
-		pLineStop = wcswcs(pText + nLineStartCRLF, L"\r\n");
-		nLineLen = pLineStop != NULL ?
-			(int)(pLineStop - (pText + nLineStartCRLF)) :
-			(int)wcslen(pText + nLineStartCRLF);
-
-		/* 行の色付けを行う */
-		RichEdit_SetTextColorForLine(pText, nLineStartCR, nLineStartCRLF, nLineLen);
-
-		/* 次の行へ移動する */
-		nLineStartCRLF += nLineLen + 2;	/* +2 for CRLF */
-		nLineStartCR += nLineLen + 1;	/* +1 for CR */
-	}
-	free(pText);
-}
-
-/* 特定の行のテキスト色を設定する */
-static VOID RichEdit_SetTextColorForLine(const wchar_t *pText, int nLineStartCR, int nLineStartCRLF, int nLineLen)
-{
-	wchar_t wszCommandName[1024];
-	const wchar_t *pCommandSpaceStop, *pCommandCRStop, *pParamStart, *pParamStop, *pParamSpace;
-	int nParamLen, nCommandType;
-
-	/* 行を選択して選択範囲のテキスト色をデフォルトに変更する */
-	RichEdit_SetSelectedRange(nLineStartCR, nLineLen);
-	RichEdit_SetTextColorForSelectedRange(dwColorFgDefault);
-
-	/* コメントを処理する */
-	if (pText[nLineStartCRLF] == L'#')
-	{
-		/* 行全体を選択して、選択範囲のテキスト色を変更する */
-		RichEdit_SetSelectedRange(nLineStartCR, nLineLen);
-		RichEdit_SetTextColorForSelectedRange(dwColorComment);
-	}
-	/* ラベルを処理する */
-	else if (pText[nLineStartCRLF] == L':')
-	{
-		/* 行全体を選択して、選択範囲のテキスト色を変更する */
-		RichEdit_SetSelectedRange(nLineStartCR, nLineLen);
-		RichEdit_SetTextColorForSelectedRange(dwColorLabel);
-	}
-	/* エラー行を処理する */
-	if (pText[nLineStartCRLF] == L'!')
-	{
-		/* 行全体を選択して、選択範囲のテキスト色を変更する */
-		RichEdit_SetSelectedRange(nLineStartCR, nLineLen);
-		RichEdit_SetTextColorForSelectedRange(dwColorError);
-	}
-	/* コマンド行を処理する */
-	else if (pText[nLineStartCRLF] == L'@')
-	{
-		/* コマンド名部分を抽出する */
-		pCommandSpaceStop = wcswcs(pText + nLineStartCRLF, L" ");
-		pCommandCRStop = wcswcs(pText + nLineStartCRLF, L"\r\n");
-		if (pCommandSpaceStop == NULL || pCommandCRStop == NULL)
-			nParamLen = nLineLen; /* EOF */
-		else if (pCommandSpaceStop < pCommandCRStop)
-			nParamLen = (int)(pCommandSpaceStop - (pText + nLineStartCRLF));
-		else
-			nParamLen = (int)(pCommandCRStop - (pText + nLineStartCRLF));
-		wcsncpy(wszCommandName, &pText[nLineStartCRLF],
-				(size_t)nParamLen < sizeof(wszCommandName) / sizeof(wchar_t) ?
-				(size_t)nParamLen :
-				sizeof(wszCommandName) / sizeof(wchar_t));
-		wszCommandName[nParamLen] = L'\0';
-
-		nCommandType = get_command_type_from_name(conv_utf16_to_utf8(wszCommandName));
-		if (nCommandType != -1)
-		{
-			/* コマンド名のテキストに色を付ける */
-			RichEdit_SetSelectedRange(nLineStartCR, nParamLen);
-			if (nCommandType != COMMAND_CIEL)
-				RichEdit_SetTextColorForSelectedRange(dwColorCommandName);
-			else
-				RichEdit_SetTextColorForSelectedRange(dwColorCielCommand);
-
-			if (nCommandType != COMMAND_SET &&
-				nCommandType != COMMAND_IF &&
-				nCommandType != COMMAND_UNLESS &&
-				nCommandType != COMMAND_TEXT)
-			{
-				/* 引数名を灰色にする */
-				pParamStart = pText + nLineStartCRLF + nParamLen;
-				while ((pParamStart = wcswcs(pParamStart, L" ")) != NULL)
-				{
-					int nNameStart;
-					int nNameLen;
-
-					/* 次の行以降の' 'にヒットしている場合はループから抜ける */
-					if (pParamStart >= pText + nLineStartCRLF + nLineLen)
-						break;
-
-					/* ' 'の次の文字を開始位置にする */
-					pParamStart++;
-
-					/* '='を探す。次の行以降にヒットした場合はループから抜ける */
-					pParamStop = wcswcs(pParamStart, L"=");
-					if (pParamStop == NULL || pParamStop >= pText + nLineStartCRLF + nLineLen)
-						break;
-
-					/* '='の手前に' 'があればスキップする */
-					pParamSpace = wcswcs(pParamStart, L" ");
-					if (pParamSpace != NULL && pParamSpace < pParamStop)
-						continue;
-
-					/* 引数名部分を選択してテキスト色を変更する */
-					nNameStart = nLineStartCR + (int)(pParamStart - (pText + nLineStartCRLF));
-					nNameLen = (int)(pParamStop - pParamStart) + 1;
-					RichEdit_SetSelectedRange(nNameStart, nNameLen);
-					RichEdit_SetTextColorForSelectedRange(dwColorParamName);
-				}
-			}
-		}
-	}
-}
-
-/* 次の実行行の背景色を設定する */
-static VOID RichEdit_SetBackgroundColorForNextExecuteLine(void)
-{
-	int nLine, nLineStart, nLineLen;
-
-	/* すべてのテキストの背景色を白にする */
-	RichEdit_ClearBackgroundColorAll();
-
-	/* 実行行を取得する */
-	nLine = get_expanded_line_num();
-
-	/* 実行行の開始文字と終了文字を求める */
-	RichEdit_GetLineStartAndLength(nLine, &nLineStart, &nLineLen);
-
-	/* 実行行を選択する */
-	RichEdit_SetSelectedRange(nLineStart, nLineLen);
-
-	/* 選択範囲の背景色を変更する */
-	RichEdit_SetBackgroundColorForSelectedRange(dwColorNextExec);
-
-	/* カーソル位置を実行行の先頭に設定する */
-	RichEdit_SetCursorPosition(nLineStart);
-}
-
-/* 現在実行中の行の背景色を設定する */
-static VOID RichEdit_SetBackgroundColorForCurrentExecuteLine(void)
-{
-	int nLine, nLineStart, nLineLen;
-
-	/* すべてのテキストの背景色を白にする */
-	RichEdit_ClearBackgroundColorAll();
-
-	/* 実行行を取得する */
-	nLine = get_expanded_line_num();
-
-	/* 実行行の開始文字と終了文字を求める */
-	RichEdit_GetLineStartAndLength(nLine, &nLineStart, &nLineLen);
-
-	/* 実行行を選択する */
-	RichEdit_SetSelectedRange(nLineStart, nLineLen);
-
-	/* 選択範囲の背景色を変更する */
-	RichEdit_SetBackgroundColorForSelectedRange(dwColorCurrentExec);
-
-	/* カーソル位置を実行行の先頭に設定する */
-	RichEdit_SetCursorPosition(nLineStart);
-}
-
-/* リッチエディットの書式をクリアする */
-static VOID RichEdit_ClearFormatAll(void)
-{
-	CHARFORMAT2W cf;
-
-	bIgnoreChange = TRUE;
-	memset(&cf, 0, sizeof(cf));
-	cf.cbSize = sizeof(cf);
-	cf.dwMask = CFM_BACKCOLOR | CFM_COLOR;
-	cf.crBackColor = dwColorBgDefault;
-	cf.crTextColor = dwColorFgDefault;
-	SendMessage(hWndRichEdit, EM_SETCHARFORMAT, (WPARAM)SCF_ALL, (LPARAM)&cf);
-}
-
-/* リッチエディットのテキスト全体の背景色をクリアする */
-static VOID RichEdit_ClearBackgroundColorAll(void)
-{
-	CHARFORMAT2W cf;
-
-	bIgnoreChange = TRUE;
-	memset(&cf, 0, sizeof(cf));
-	cf.cbSize = sizeof(cf);
-	cf.dwMask = CFM_BACKCOLOR;
-	cf.crBackColor = dwColorBgDefault;
-	SendMessage(hWndRichEdit, EM_SETCHARFORMAT, (WPARAM)SCF_ALL, (LPARAM)&cf);
-}
-
-/* リッチエディットの選択範囲のテキスト色を変更する */
-static VOID RichEdit_SetTextColorForSelectedRange(COLORREF cl)
-{
-	CHARFORMAT2W cf;
-
-	bIgnoreChange = TRUE;
-	memset(&cf, 0, sizeof(cf));
-	cf.cbSize = sizeof(cf);
-	cf.dwMask = CFM_COLOR;
-	cf.crTextColor = cl;
-	bIgnoreChange = TRUE;
-	SendMessage(hWndRichEdit, EM_SETCHARFORMAT, (WPARAM)SCF_SELECTION, (LPARAM)&cf);
-}
-
-/* リッチエディットの選択範囲の背景色を変更する */
-static VOID RichEdit_SetBackgroundColorForSelectedRange(COLORREF cl)
-{
-	CHARFORMAT2W cf;
-
-	bIgnoreChange = TRUE;
-	memset(&cf, 0, sizeof(cf));
-	cf.cbSize = sizeof(cf);
-	cf.dwMask = CFM_BACKCOLOR;
-	cf.crBackColor = cl;
-	SendMessage(hWndRichEdit, EM_SETCHARFORMAT, (WPARAM)SCF_SELECTION, (LPARAM)&cf);
-}
-
-/* リッチエディットを自動スクロールする */
-static VOID RichEdit_AutoScroll(void)
-{
-	/* リッチエディットをフォーカスする */
-	SetFocus(hWndRichEdit);
-
-	/* リッチエディットをスクロールする */
-	SendMessage(hWndRichEdit, EM_SETREADONLY, TRUE, 0);
-	SendMessage(hWndRichEdit, EM_SCROLLCARET, 0, 0);
-	SendMessage(hWndRichEdit, EM_SETREADONLY, FALSE, 0);
-
-	/* リッチエディットを再描画する */
-	InvalidateRect(hWndRichEdit, NULL, TRUE);
-}
-
-/* 実行行の開始文字と終了文字を求める */
-static VOID RichEdit_GetLineStartAndLength(int nLine, int *nLineStart, int *nLineLen)
-{
-	wchar_t *pText, *pCRLF;
-	int i, nLineStartCharCRLF, nLineStartCharCR;
-
-	pText = RichEdit_GetText();
-	nLineStartCharCRLF = 0;		/* WM_GETTEXTは改行をCRLFで返す */
-	nLineStartCharCR = 0;		/* EM_EXSETSELでは改行はCRの1文字 */
-	for (i = 0; i < nLine; i++)
-	{
-		int nLen;
-		pCRLF = wcswcs(pText + nLineStartCharCRLF, L"\r\n");
-		nLen = pCRLF != NULL ?
-			(int)(pCRLF - (pText + nLineStartCharCRLF)) :
-			(int)wcslen(pText + nLineStartCharCRLF);
-		nLineStartCharCRLF += nLen + 2;		/* +2 for CRLF */
-		nLineStartCharCR += nLen + 1;		/* +1 for CR */
-	}
-	pCRLF = wcswcs(pText + nLineStartCharCRLF, L"\r\n");
-	*nLineStart = nLineStartCharCR;
-	*nLineLen = pCRLF != NULL ?
-		(int)(pCRLF - (pText + nLineStartCharCRLF)) :
-		(int)wcslen(pText + nLineStartCharCRLF);
-	free(pText);
-}
-
-/* リッチエディットで次のエラーを探す */
-static BOOL RichEdit_SearchNextError(int nStart, int nEnd)
-{
-	wchar_t *pWcs, *pCRLF, *pLine;
-	int nTotal, nLineStartCharCR, nLineStartCharCRLF, nLen;
-	BOOL bFound;
-
-	/* リッチエディットのテキストの内容でスクリプトの各行をアップデートする */
-	pWcs = RichEdit_GetText();
-	nTotal = (int)wcslen(pWcs);
-	nLineStartCharCR = nStart;
-	nLineStartCharCRLF = 0;
-	bFound = FALSE;
-	while (nLineStartCharCRLF < nTotal)
-	{
-		if (nEnd != -1 && nLineStartCharCRLF >= nEnd)
-			break;
-
-		/* 行を切り出す */
-		pLine = pWcs + nLineStartCharCRLF;
-		pCRLF = wcswcs(pLine, L"\r\n");
-		nLen = (pCRLF != NULL) ?
-			(int)(pCRLF - (pWcs + nLineStartCharCRLF)) :
-			(int)wcslen(pWcs + nLineStartCharCRLF);
-		if (pCRLF != NULL)
-			*pCRLF = L'\0';
-
-		/* エラーを発見したらカーソルを移動する */
-		if (pLine[0] == L'!')
-		{
-			bFound = TRUE;
-			RichEdit_SetCursorPosition(nLineStartCharCR);
-			break;
-		}
-
-		nLineStartCharCRLF += nLen + 2; /* +2 for CRLF */
-		nLineStartCharCR += nLen + 1; /* +1 for CR */
-	}
-	free(pWcs);
-
-	return bFound;
-}
-
-/* リッチエディットのテキストをスクリプトモデルを元に設定する */
-static VOID RichEdit_SetTextByScriptModel(void)
-{
-	wchar_t *pWcs;
-	int nScriptSize;
-	int i;
-
-	/* スクリプトのサイズを計算する */
-	nScriptSize = 0;
-	for (i = 0; i < get_line_count(); i++)
-	{
-		const char *pUtf8Line = get_line_string_at_line_num(i);
-//		nScriptSize += (int)strlen(pUtf8Line) + 1; /* +1 for CR */
-		nScriptSize += (int)strlen(pUtf8Line) + 2; /* +2 for CRLF */
-	}
-
-	/* スクリプトを格納するメモリを確保する */
-	pWcs = malloc((size_t)(nScriptSize + 1) * sizeof(wchar_t));
-	if (pWcs == NULL)
-	{
-		log_memory();
-		abort();
-	}
-
-	/* 行を連列してスクリプト文字列を作成する */
-	pWcs[0] = L'\0';
-	for (i = 0; i < get_line_count(); i++)
-	{
-		const char *pUtf8Line = get_line_string_at_line_num(i);
-		wcscat(pWcs, conv_utf8_to_utf16(pUtf8Line));
-//		wcscat(pWcs, L"\r");
-		wcscat(pWcs, L"\r\n");
-	}
-
-	/* リッチエディットにテキストを設定する */
-	bIgnoreChange = TRUE;
-	SetWindowText(hWndRichEdit, pWcs);
-
-	/* メモリを解放する */
-	free(pWcs);
-}
-
-/* リッチエディットの内容を元にスクリプトモデルを更新する */
-static VOID RichEdit_UpdateScriptModelFromText(void)
-{
-	char szLine[2048];
-	wchar_t *pWcs, *pCRLF;
-	int i, nTotal, nLine, nLineStartCharCRLF;
-
-	/* パースエラーをリセットして、最初のパースエラーで通知を行う */
-	dbg_reset_parse_error_count();
-
-	/* リッチエディットのテキストの内容でスクリプトの各行をアップデートする */
-	pWcs = RichEdit_GetText();
-	nTotal = (int)wcslen(pWcs);
-	nLine = 0;
-	nLineStartCharCRLF = 0;
-	while (nLineStartCharCRLF < nTotal)
-	{
-		wchar_t *pLine;
-		int nLen;
-
-		/* 行を切り出す */
-		pLine = pWcs + nLineStartCharCRLF;
-		pCRLF = wcswcs(pWcs + nLineStartCharCRLF, L"\r\n");
-		nLen = (pCRLF != NULL) ?
-			(int)(pCRLF - (pWcs + nLineStartCharCRLF)) :
-			(int)wcslen(pWcs + nLineStartCharCRLF);
-		if (pCRLF != NULL)
-			*pCRLF = L'\0';
-
-		/* 行を更新する */
-		strncpy(szLine, conv_utf16_to_utf8(pLine), sizeof(szLine) - 1);
-		szLine[sizeof(szLine) - 1] = '\0';
-		if (nLine < get_line_count())
-			update_script_line(nLine, szLine);
-		else
-			insert_script_line(nLine, szLine);
-
-		nLine++;
-		nLineStartCharCRLF += nLen + 2; /* +2 for CRLF */
-	}
-	free(pWcs);
-
-	/* 削除された末尾の行を処理する */
-	bExecLineChanged = FALSE;
-	for (i = get_line_count() - 1; i >= nLine; i--)
-		if (delete_script_line(nLine))
-			bExecLineChanged = TRUE;
-
-	/* 拡張構文がある場合に対応する */
-	reparse_script_for_structured_syntax();
-
-	/* コマンドのパースに失敗した場合 */
-	if (dbg_get_parse_error_count() > 0)
-	{
-		/* 行頭の'!'を反映するためにテキストを再設定する */
-		RichEdit_SetTextByScriptModel();
-	}
-}
-
-/* テキストを挿入する */
-static VOID RichEdit_InsertText(const wchar_t *pFormat, ...)
-{
-	va_list ap;
-	wchar_t buf[1024];
-		
-	int nLine, nLineStart, nLineLen;
-
-	va_start(ap, pFormat);
-	vswprintf(buf, sizeof(buf) / sizeof(wchar_t), pFormat, ap);
-	va_end(ap);
-
-	/* カーソル行を取得する */
-	nLine = RichEdit_GetCursorLine();
-
-	/* 行の先頭にカーソルを移す */
-	RichEdit_GetLineStartAndLength(nLine, &nLineStart, &nLineLen);
-	RichEdit_SetCursorPosition(nLineStart);
-
-	/* スクリプトモデルに行を追加する */
-	insert_script_line(nLine, conv_utf16_to_utf8(buf));
-
-	/* リッチエディットに行を追加する */
-	wcscat(buf, L"\r");
-	RichEdit_SetTextColorForSelectedRange(dwColorFgDefault);
-	SendMessage(hWndRichEdit, EM_REPLACESEL, (WPARAM)TRUE, (LPARAM)buf);
-
-	/* 行を選択する */
-	RichEdit_SetCursorPosition(nLineStart);
-
-	/* 次のフレームで実行位置を変更する */
-	nLineChanged = nLine;
-	bExecLineChanged = TRUE;
-}
-
-/* テキストを行末に挿入する */
-static VOID RichEdit_InsertTextAtEnd(const wchar_t *pszText)
-{
-	int nLine, nLineStart, nLineLen;
-
-	/* カーソル行を取得する */
-	nLine = RichEdit_GetCursorLine();
-
-	/* 行の末尾にカーソルを移す */
-	RichEdit_GetLineStartAndLength(nLine, &nLineStart, &nLineLen);
-	RichEdit_SetCursorPosition(nLineStart + nLineLen);
-
-	/* リッチエディットにテキストを追加する */
-	SendMessage(hWndRichEdit, EM_REPLACESEL, (WPARAM)TRUE, (LPARAM)pszText);
-}
-
-static VOID RichEdit_UpdateTheme(void)
-{
-	int nCursor;
-
-	if (hWndRichEdit == NULL)
-		return;
-
-	SetFocus(NULL);
-
-	nCursor = RichEdit_GetCursorPosition();
-	SendMessage(hWndRichEdit, EM_SETBKGNDCOLOR, (WPARAM)0, (LPARAM)dwColorBgDefault);
-	RichEdit_ClearFormatAll();
-	RichEdit_ClearBackgroundColorAll();
-	if (bHighlightMode)
-		RichEdit_SetTextColorForAllLines();
-	if (!bRunning)
-		RichEdit_SetBackgroundColorForNextExecuteLine();
-	else
-		RichEdit_SetBackgroundColorForCurrentExecuteLine();
-	RichEdit_SetCursorPosition(nCursor);
-	RichEdit_AutoScroll();
-
-	SetFocus(hWndRichEdit);
-}
-
-static VOID RichEdit_DelayedHighligth(void)
-{
-	SetTimer(hWndMain, ID_TIMER_FORMAT, 100, OnTimerFormat);
-}
-
-static VOID __stdcall OnTimerFormat(HWND hWnd, UINT nID, UINT_PTR uTime, DWORD dwParam)
-{
-	FILETIME ftCurrent;
-	HIMC hImc;
-	DWORD dwConversion, dwSentence;
-	int nCursor;
-	BOOL bRet;
-	HANDLE hFile;
-	uint64_t prev, cur;
-
-	UNUSED_PARAMETER(hWnd);
-	UNUSED_PARAMETER(nID);
-	UNUSED_PARAMETER(uTime);
-	UNUSED_PARAMETER(dwParam);
-
-	/* ファイルが外部エディタで更新されたかチェックする */
-	hFile = CreateFile(conv_utf8_to_utf16(get_script_file_name()),
-					   GENERIC_READ, FILE_SHARE_READ, NULL,
-					   OPEN_EXISTING, 0, NULL);
-	if (hFile != INVALID_HANDLE_VALUE)
-	{
-		GetFileTime(hFile, NULL, NULL, &ftCurrent);
-		CloseHandle(hFile);
-		prev = ((uint64_t)ftTimeStamp.dwLowDateTime) | (((uint64_t)ftTimeStamp.dwHighDateTime) << 32);
-		cur = ((uint64_t)ftCurrent.dwLowDateTime) | (((uint64_t)ftCurrent.dwHighDateTime) << 32);
-		if (cur > prev)
-		{
-			/* 外部のエディタで更新されているのでリロードする */
-			bScriptOpened = TRUE;
-			bExecLineChanged = TRUE;
-			nLineChanged = get_expanded_line_num();
-			return;
-		}
-	}
-
-	/* ハイライトモードでない場合 */
-	if (!bHighlightMode)
-		return;
-
-	/* 選択範囲がある場合は更新せず、1秒後に再び確認する */
-	if (RichEdit_GetSelectedLen() > 0)
-		return;
-
-	/* IMEを使用中は更新せず、1秒後に再び確認する */
-	hImc = ImmGetContext(hWndRichEdit);
-	if (hImc != NULL)
-	{
-		if (ImmGetOpenStatus(hImc))
-		{
-			bRet = ImmGetConversionStatus(hImc, &dwConversion, &dwSentence);
-			ImmReleaseContext(hWndRichEdit, hImc);
-			if (bRet)
-			{
-				if ((dwConversion & IME_CMODE_CHARCODE) != 0 ||
-					(dwConversion & IME_CMODE_EUDC) != 0 ||
-					(dwConversion & IME_CMODE_FIXED) != 0 ||
-					(dwConversion & IME_CMODE_HANJACONVERT) != 0 ||
-					(dwConversion & IME_CMODE_KATAKANA) != 0 ||
-					(dwConversion & IME_CMODE_NOCONVERSION) != 0 ||
-					(dwConversion & IME_CMODE_ROMAN) != 0 ||
-					(dwConversion & IME_CMODE_SOFTKBD) != 0 ||
-					(dwConversion & IME_CMODE_SYMBOL) != 0)
-				{
-					/* 入力中 */
-					return;
-				}
-			}
-		}
-	}
-
-	/* タイマを止める */
-	KillTimer(hWndMain, ID_TIMER_FORMAT);
-
-	/* 現在のカーソル位置を取得する */
-	nCursor = RichEdit_GetCursorPosition();
-
-	/* スクロールを避けるためにフォーカスを外す */
-	SetFocus(NULL);
-
-	/* フォントを適用する */
-	bIgnoreChange = TRUE;
-	RichEdit_SetFont();
-
-	/* ハイライトを適用する */
-	if (bHighlightMode)
-	{
-		bIgnoreChange = TRUE;
-		RichEdit_SetTextColorForAllLines();
-	}
-
-	/* カーソル位置を戻す */
-	RichEdit_SetCursorPosition(nCursor);
-
-	/* フォーカスを戻す */
-	SetFocus(hWndRichEdit);
 }
 
 /*
@@ -3970,20 +3093,6 @@ static void ReadProjectFile(void)
 	FILE *fp;
 
 	/* Defaults */
-	bDarkMode = FALSE;
-	bHighlightMode = FALSE;
-	wcscpy(wszFontName, bEnglish ? SCRIPT_FONT_EN : SCRIPT_FONT_JP);
-	nFontSize = 10;
-	dwColorBgDefault = LIGHT_BG_DEFAULT;
-	dwColorFgDefault = LIGHT_FG_DEFAULT;
-	dwColorComment = LIGHT_COMMENT;
-	dwColorLabel = LIGHT_LABEL;
-	dwColorError = LIGHT_ERROR;
-	dwColorCommandName = LIGHT_COMMAND_NAME;
-	dwColorCielCommand = LIGHT_CIEL_COMMAND;
-	dwColorParamName = LIGHT_PARAM_NAME;
-	dwColorNextExec = LIGHT_NEXT_EXEC;
-	dwColorCurrentExec = LIGHT_CURRENT_EXEC;
 	CheckMenuItem(hMenu, ID_HIGHLIGHTMODE, MF_UNCHECKED);
 	CheckMenuItem(hMenu, ID_DARKMODE, MF_UNCHECKED);
 
@@ -4002,27 +3111,21 @@ static void ReadProjectFile(void)
 			*stop = '\0';
 
 		if (strncmp(buf, "font-name:", 10) == 0)
-			wcscpy(wszFontName, conv_utf8_to_utf16(buf + 10));
+		{
+			ScriptView_SetFontName(conv_utf8_to_utf16(buf + 10));
+		}
 		else if (strncmp(buf, "font-size:", 10) == 0)
-			nFontSize = abs(atoi(buf + 10));
+		{
+			ScriptView_SetFontSize(abs(atoi(buf + 10)));
+		}
 		else if (strcmp(buf, "highlightmode") == 0)
 		{
-			bHighlightMode = TRUE;
+			ScriptView_SetHighlightMode(TRUE);
 			CheckMenuItem(hMenu, ID_HIGHLIGHTMODE, MF_CHECKED);
 		}
 		else if (strcmp(buf, "darkmode") == 0)
 		{
-			bDarkMode = TRUE;
-			dwColorBgDefault = DARK_BG_DEFAULT;
-			dwColorFgDefault = DARK_FG_DEFAULT;
-			dwColorComment = DARK_COMMENT;
-			dwColorLabel = DARK_LABEL;
-			dwColorError = DARK_ERROR;
-			dwColorCommandName = DARK_COMMAND_NAME;
-			dwColorCielCommand = DARK_CIEL_COMMAND;
-			dwColorParamName = DARK_PARAM_NAME;
-			dwColorNextExec = DARK_NEXT_EXEC;
-			dwColorCurrentExec = DARK_CURRENT_EXEC;
+			ScriptView_SetDarkMode(TRUE);
 			CheckMenuItem(hMenu, ID_DARKMODE, MF_CHECKED);
 		}
 		else
@@ -4031,8 +3134,6 @@ static void ReadProjectFile(void)
 		}
 	}
 	fclose(fp);
-
-	RichEdit_UpdateTheme();
 }
 
 static void WriteProjectFile(void)
@@ -4043,11 +3144,11 @@ static void WriteProjectFile(void)
 	if (fp == NULL)
 		return;
 
-	fprintf(fp, "font-name:%s\n", conv_utf16_to_utf8(wszFontName));
-	fprintf(fp, "font-size:%d\n", nFontSize);
-	if (bHighlightMode)
+	fprintf(fp, "font-name:%s\n", conv_utf16_to_utf8(ScriptView_GetFontName()));
+	fprintf(fp, "font-size:%d\n", ScriptView_GetFontSize());
+	if (ScriptView_IsHighlightMode())
 		fprintf(fp, "highlightmode\n");
-	if (bDarkMode)
+	if (ScriptView_IsDarkMode())
 		fprintf(fp, "darkmode\n");
 
 	fclose(fp);
@@ -4252,16 +3353,7 @@ const wchar_t *SelectFile(const char *pszDir)
 /* 上書き保存 */
 static VOID OnSave(void)
 {
-	HANDLE hFile;
-
-	if (MessageBox(hWndMain, bEnglish ?
-				   L"Are you sure you want to save the script?" :
-				   L"スクリプトを保存してもよろしいですか？",
-				   TITLE,
-				   MB_YESNO | MB_ICONQUESTION) == IDNO)
-		return;
-
-	RichEdit_UpdateScriptModelFromText();
+	ScriptView_UpdateScriptModelFromText();
 	if (!save_script())
 	{
 		MessageBox(hWndMain, bEnglish ?
@@ -4271,21 +3363,15 @@ static VOID OnSave(void)
 				   MB_OK | MB_ICONERROR);
 	}
 
-	/* タイムスタンプ(スクリプトの最終更新時刻)を取得する */
-	hFile = CreateFile(conv_utf8_to_utf16(get_script_file_name()),
-					   GENERIC_READ, FILE_SHARE_READ, NULL,
-					   OPEN_EXISTING, 0, NULL);
-	if (hFile != INVALID_HANDLE_VALUE)
-		GetFileTime(hFile, NULL, NULL, &ftTimeStamp);
-	else
-		ZeroMemory(&ftTimeStamp, sizeof(ftTimeStamp));
+	/* スクリプトの最終更新時刻を取得する */
+	ScriptView_UpdateTimeStamp();
 }
 
 /* 続ける */
 static VOID OnContinue(void)
 {
-	RichEdit_UpdateScriptModelFromText();
-	nLineChanged = RichEdit_GetCursorLine();
+	ScriptView_UpdateScriptModelFromText();
+	nLineChanged = ScriptView_GetCursorLine();
 	bExecLineChanged = TRUE;
 	bContinuePressed = TRUE;
 }
@@ -4293,8 +3379,8 @@ static VOID OnContinue(void)
 /* 次へ */
 static VOID OnNext(void)
 {
-	RichEdit_UpdateScriptModelFromText();
-	nLineChanged = RichEdit_GetCursorLine();
+	ScriptView_UpdateScriptModelFromText();
+	nLineChanged = ScriptView_GetCursorLine();
 	bExecLineChanged = TRUE;
 	bNextPressed = TRUE;
 }
@@ -4310,11 +3396,11 @@ static VOID OnNextError(void)
 {
 	int nStart;
 
-	nStart = RichEdit_GetCursorPosition();
-	if (RichEdit_SearchNextError(nStart, -1))
+	nStart = ScriptView_GetCursorPosition();
+	if (ScriptView_SearchNextError(nStart, -1))
 		return;
 
-	if (RichEdit_SearchNextError(0, nStart - 1))
+	if (ScriptView_SearchNextError(0, nStart - 1))
 		return;
 
 	MessageBox(hWndMain, bEnglish ?
@@ -4330,13 +3416,13 @@ static VOID OnShiftEnter(void)
 	int nCursorLine;
 
 	/* スクリプトモデルを更新する */
-	RichEdit_UpdateScriptModelFromText();
+	ScriptView_UpdateScriptModelFromText();
 
 	/* パースエラーがないとき */
 	if (dbg_get_parse_error_count() == 0)
 	{
 		/* 次フレームでの一行実行する */
-		nCursorLine = RichEdit_GetCursorLine();
+		nCursorLine = ScriptView_GetCursorLine();
 		if (nCursorLine != -1)
 		{
 			bNextPressed = TRUE;
@@ -4346,7 +3432,7 @@ static VOID OnShiftEnter(void)
 	}
 
 	/* 全体のテキスト色を変更する(遅延) */
-	RichEdit_DelayedHighligth();
+	ScriptView_DelayedHighligth();
 }
 
 /* リッチエディットでのTabを処理する */
@@ -4358,8 +3444,8 @@ static VOID OnTab(void)
 
 	memset(szCmd, 0, sizeof(szCmd));
 
-	nLine = RichEdit_GetCursorLine();
-	pWcs = RichEdit_GetText();
+	nLine = ScriptView_GetCursorLine();
+	pWcs = ScriptView_GetText();
 	nTotal = (int)wcslen(pWcs);
 	nLineStartCharCR = 0;
 	nLineStartCharCRLF = 0;
@@ -4398,12 +3484,12 @@ static VOID OnTab(void)
 	{
 		if (wcscmp(completion_item[i].prefix, szCmd) == 0)
 		{
-			RichEdit_InsertTextAtEnd(completion_item[i].insert);
+			ScriptView_InsertTextAtEnd(completion_item[i].insert);
 			return;
 		}
 	}
 
-	RichEdit_InsertTextAtEnd(L"    ");
+	ScriptView_InsertTextAtEnd(L"    ");
 }
 
 /* ポップアップを表示する */
@@ -5177,74 +4263,50 @@ static VOID OnFont(void)
 		return;
 
 	hDC = GetDC(NULL);
-	nFontSize = -MulDiv (lf.lfHeight, 72, GetDeviceCaps(hDC, LOGPIXELSY));
+	ScriptView_SetFontSize(-MulDiv(lf.lfHeight, 72, GetDeviceCaps(hDC, LOGPIXELSY)));
 	ReleaseDC(NULL, hDC);
 
-	wcscpy(wszFontName, lf.lfFaceName);
+	ScriptView_SetFontName(lf.lfFaceName);
 
 	if (bProjectOpened)
 		WriteProjectFile();
 
-	RichEdit_UpdateScriptModelFromText();
-	RichEdit_SetFont();
+	ScriptView_UpdateScriptModelFromText();
+	ScriptView_ApplyFont();
 }
 
 static VOID OnHighlightMode(void)
 {
-	if (!bHighlightMode)
+	if (!ScriptView_IsHighlightMode())
 	{
 		CheckMenuItem(hMenu, ID_HIGHLIGHTMODE, MF_CHECKED);
-		bHighlightMode = TRUE;
+		ScriptView_SetHighlightMode(TRUE);
 	}
 	else
 	{
 		CheckMenuItem(hMenu, ID_HIGHLIGHTMODE, MF_UNCHECKED);
-		bHighlightMode = FALSE;
+		ScriptView_SetHighlightMode(FALSE);
 	}
 
 	if (bProjectOpened)
 		WriteProjectFile();
-
-	RichEdit_UpdateScriptModelFromText();
-	RichEdit_UpdateTheme();
 }
 
 static VOID OnDarkMode(void)
 {
-	if (!bDarkMode)
+	if (!ScriptView_IsDarkMode())
 	{
 		CheckMenuItem(hMenu, ID_DARKMODE, MF_CHECKED);
-		bDarkMode = TRUE;
-		dwColorBgDefault = DARK_BG_DEFAULT;
-		dwColorFgDefault = DARK_FG_DEFAULT;
-		dwColorComment = DARK_COMMENT;
-		dwColorLabel = DARK_LABEL;
-		dwColorError = DARK_ERROR;
-		dwColorCommandName = DARK_COMMAND_NAME;
-		dwColorParamName = DARK_PARAM_NAME;
-		dwColorNextExec = DARK_NEXT_EXEC;
-		dwColorCurrentExec = DARK_CURRENT_EXEC;
+		ScriptView_SetDarkMode(TRUE);
 	}
 	else
 	{
 		CheckMenuItem(hMenu, ID_DARKMODE, MF_UNCHECKED);
-		bDarkMode = FALSE;
-		dwColorBgDefault = LIGHT_BG_DEFAULT;
-		dwColorFgDefault = LIGHT_FG_DEFAULT;
-		dwColorComment = LIGHT_COMMENT;
-		dwColorLabel = LIGHT_LABEL;
-		dwColorError = LIGHT_ERROR;
-		dwColorCommandName = LIGHT_COMMAND_NAME;
-		dwColorParamName = LIGHT_PARAM_NAME;
-		dwColorNextExec = LIGHT_NEXT_EXEC;
-		dwColorCurrentExec = LIGHT_CURRENT_EXEC;
+		ScriptView_SetDarkMode(FALSE);
 	}
 
 	if (bProjectOpened)
 		WriteProjectFile();
-
-	RichEdit_UpdateScriptModelFromText();
-	RichEdit_UpdateTheme();
 }
 
 static VOID OnVersion(void)
@@ -5282,22 +4344,22 @@ static VOID OnDocument(void)
 static VOID OnInsertMessage(void)
 {
 	if (bEnglish)
-		RichEdit_InsertText(L"Edit this message.");
+		ScriptView_InsertText(L"Edit this message.");
 	else
-		RichEdit_InsertText(L"この行のメッセージを編集してください。");
+		ScriptView_InsertText(L"この行のメッセージを編集してください。");
 
-	RichEdit_UpdateScriptModelFromText();
+	ScriptView_UpdateScriptModelFromText();
 	OnProperty();
 }
 
 static VOID OnInsertSerif(void)
 {
 	if (bEnglish)
-		RichEdit_InsertText(L"*Name*Edit this line and press return.");
+		ScriptView_InsertText(L"*Name*Edit this line and press return.");
 	else
-		RichEdit_InsertText(L"名前「このセリフを編集してください。」");
+		ScriptView_InsertText(L"名前「このセリフを編集してください。」");
 
-	RichEdit_UpdateScriptModelFromText();
+	ScriptView_UpdateScriptModelFromText();
 	OnProperty();
 }
 
@@ -5309,8 +4371,8 @@ static VOID OnInsertBg(void)
 	if (pFile == NULL)
 		return;
 
-	RichEdit_InsertText(L"@bg file=%ls t=1.0", pFile);
-	RichEdit_UpdateScriptModelFromText();
+	ScriptView_InsertText(L"@bg file=%ls t=1.0", pFile);
+	ScriptView_UpdateScriptModelFromText();
 	OnProperty();
 }
 
@@ -5322,8 +4384,8 @@ static VOID OnInsertBgOnly(void)
 	if (pFile == NULL)
 		return;
 
-	RichEdit_InsertText(L"@chch bg=%ls t=1.0", pFile);
-	RichEdit_UpdateScriptModelFromText();
+	ScriptView_InsertText(L"@chch bg=%ls t=1.0", pFile);
+	ScriptView_UpdateScriptModelFromText();
 	OnProperty();
 }
 
@@ -5335,15 +4397,15 @@ static VOID OnInsertCh(void)
 	if (pFile == NULL)
 		return;
 
-	RichEdit_InsertText(L"@ch pos=center file=%ls t=1.0", pFile);
-	RichEdit_UpdateScriptModelFromText();
+	ScriptView_InsertText(L"@ch pos=center file=%ls t=1.0", pFile);
+	ScriptView_UpdateScriptModelFromText();
 	OnProperty();
 }
 
 static VOID OnInsertChch(void)
 {
-	RichEdit_InsertText(L"@chch t=1.0");
-	RichEdit_UpdateScriptModelFromText();
+	ScriptView_InsertText(L"@chch t=1.0");
+	ScriptView_UpdateScriptModelFromText();
 	OnProperty();
 }
 
@@ -5355,8 +4417,8 @@ static VOID OnInsertMusic(void)
 	if (pFile == NULL)
 		return;
 
-	RichEdit_InsertText(L"@music file=%ls", pFile);
-	RichEdit_UpdateScriptModelFromText();
+	ScriptView_InsertText(L"@music file=%ls", pFile);
+	ScriptView_UpdateScriptModelFromText();
 	OnProperty();
 }
 
@@ -5368,15 +4430,15 @@ static VOID OnInsertSound(void)
 	if (pFile == NULL)
 		return;
 
-	RichEdit_InsertText(L"@sound file=%ls", pFile);
-	RichEdit_UpdateScriptModelFromText();
+	ScriptView_InsertText(L"@sound file=%ls", pFile);
+	ScriptView_UpdateScriptModelFromText();
 	OnProperty();
 }
 
 static VOID OnInsertVolume(void)
 {
-	RichEdit_InsertText(L"@volume track=bgm vol=1.0 t=1.0");
-	RichEdit_UpdateScriptModelFromText();
+	ScriptView_InsertText(L"@volume track=bgm vol=1.0 t=1.0");
+	ScriptView_UpdateScriptModelFromText();
 	OnProperty();
 }
 
@@ -5397,26 +4459,26 @@ static VOID OnInsertVideo(void)
 	if (pExt != NULL)
 		*pExt = L'\0';
 
-	RichEdit_InsertText(L"@video file=%ls", buf);
-	RichEdit_UpdateScriptModelFromText();
+	ScriptView_InsertText(L"@video file=%ls", buf);
+	ScriptView_UpdateScriptModelFromText();
 	OnProperty();
 }
 
 static VOID OnInsertShake(void)
 {
-	RichEdit_InsertText(L"@shake dir=horizontal t=1.0 count=3 amp=100");
-	RichEdit_UpdateScriptModelFromText();
+	ScriptView_InsertText(L"@shake dir=horizontal t=1.0 count=3 amp=100");
+	ScriptView_UpdateScriptModelFromText();
 	OnProperty();
 }
 
 static VOID OnInsertChoose(void)
 {
 	if (bEnglish)
-		RichEdit_InsertText(L"@choose L1 \"Option1\" L2 \"Option2\" L3 \"Option3\"");
+		ScriptView_InsertText(L"@choose L1 \"Option1\" L2 \"Option2\" L3 \"Option3\"");
 	else
-		RichEdit_InsertText(L"@choose L1 \"選択肢1\" L2 \"選択肢2\" L3 \"選択肢3\"");
+		ScriptView_InsertText(L"@choose L1 \"選択肢1\" L2 \"選択肢2\" L3 \"選択肢3\"");
 
-	RichEdit_UpdateScriptModelFromText();
+	ScriptView_UpdateScriptModelFromText();
 	OnProperty();
 }
 
@@ -5428,21 +4490,21 @@ static VOID OnInsertMenu(void)
 	if (pFile == NULL)
 		return;
 
-	RichEdit_InsertText(L"@menu file=%ls", pFile);
-	RichEdit_UpdateScriptModelFromText();
+	ScriptView_InsertText(L"@menu file=%ls", pFile);
+	ScriptView_UpdateScriptModelFromText();
 	OnProperty();
 }
 
 static VOID OnInsertClick(void)
 {
-	RichEdit_InsertText(L"@click");
-	RichEdit_UpdateScriptModelFromText();
+	ScriptView_InsertText(L"@click");
+	ScriptView_UpdateScriptModelFromText();
 }
 
 static VOID OnInsertTime(void)
 {
-	RichEdit_InsertText(L"@time t=1.0");
-	RichEdit_UpdateScriptModelFromText();
+	ScriptView_InsertText(L"@time t=1.0");
+	ScriptView_UpdateScriptModelFromText();
 	OnProperty();
 }
 
@@ -5454,8 +4516,8 @@ static VOID OnInsertStory(void)
 	if (pFile == NULL)
 		return;
 
-	RichEdit_InsertText(L"@story file=%ls", pFile);
-	RichEdit_UpdateScriptModelFromText();
+	ScriptView_InsertText(L"@story file=%ls", pFile);
+	ScriptView_UpdateScriptModelFromText();
 	OnProperty();
 }
 
@@ -5477,10 +4539,10 @@ VOID OnProperty(void)
 		return;
 
 	/* Apply the current RichEdit content to the script model. */
-	RichEdit_UpdateScriptModelFromText();
+	ScriptView_UpdateScriptModelFromText();
 
 	/* Get the current cursor line number. */
-	nLine = RichEdit_GetCursorLine();
+	nLine = ScriptView_GetCursorLine();
 
 	/* Get the command. */
 	nCmdIndex = get_command_index_from_line_num(nLine);
@@ -5626,8 +4688,8 @@ void OnPropertyUpdate(void)
 	ShowWindow(hWndBtnVar, SW_SHOW);
 
 	/* Update RichEdit by the script model. */
-	RichEdit_SetTextByScriptModel();
-	RichEdit_DelayedHighligth();
+	ScriptView_SetTextByScriptModel();
+	ScriptView_DelayedHighligth();
 
 	/* Change the execution line. */
 	bExecLineChanged = TRUE;

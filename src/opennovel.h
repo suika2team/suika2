@@ -52,6 +52,7 @@
 #include "wms.h"	/* The WMS subsystem */
 #if defined(USE_EDITOR)
 #include "pro.h"	/* The editor extension */
+#include "package.h"	/* The packager subsystem */
 #endif
 
 /*

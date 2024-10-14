@@ -12,7 +12,7 @@
 #include "dialog.h"
 #include "resource.h"
 
-#include "../opennovel.h"
+#include "opennovel.h"
 
 static VOID OnInit(HWND hWnd)
 {
