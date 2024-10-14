@@ -62,9 +62,6 @@ LDFLAGS = \
 
 all: libroot editor.exe
 
-libroot:
-	@../../external/build-libs.sh "" $(CC) "-O3 -g0 -s -fno-stack-protector -fomit-frame-pointer -msse3 -ffast-math -ftree-vectorize -ffunction-sections -fdata-sections" $(AR)
-
 #
 # Sources
 #
@@ -238,6 +235,9 @@ editor.exe: libroot $(OBJS) $(HDRS_MAIN) $(HDRS)
 	@$(CC) -o editor.exe $(OBJS) $(CFLAGS) $(LDFLAGS)
 	@$(STRIP) --strip-all editor.exe
 
+libroot:
+	@../../external/build-libs.sh "" $(CC) "-O3 -g0 -s -fno-stack-protector -fomit-frame-pointer -msse3 -ffast-math -ftree-vectorize -ffunction-sections -fdata-sections" $(AR)
+
 objs/anime.o: ../../src/anime.c
 	mkdir -p objs
 	$(CC) -o $@ -c $(CPPFLAGS) $(CFLAGS) $<
@@ -318,7 +318,7 @@ objs/seen.o: ../../src/seen.c
 	mkdir -p objs
 	$(CC) -o $@ -c $(CPPFLAGS) $(CFLAGS) $<
 
-objs/stage.o: ../../src/stage.c
+objs/stage.o: ../../src/stage.c libroot
 	mkdir -p objs
 	$(CC) -o $@ -c $(CPPFLAGS) $(CFLAGS) $<
 
@@ -539,4 +539,4 @@ objs/resource.o: res/resource.rc
 #
 
 clean:
-	@rm -rf *.o *~ editor.exe errors.txt save tmp libroot*
+	@rm -rf editor.exe objs libroot errors.txt save tmp *~
