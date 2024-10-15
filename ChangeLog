@@ -1,13 +1,18 @@
 <html><head></head><body><ul><!-- -*- mode: html-mode; -*- -->
 
 <!-- BEGIN-LATEST -->
+<li>Suika2 22.0.14 2024/10/16
+  <ul>
+    <li>Removed unused files</li>
+  </ul>
+</li>
+<!-- END-LATEST -->
+
 <li>Suika2 22.0.13 2024/10/16
   <ul>
     <li>Fixed a bug where the lip synchronization stops when a message showing is finished</li>
   </ul>
 </li>
-<!-- END-LATEST -->
-
 <li>Suika2 22.0.12 2024/10/15
   <ul>
     <li>Changed to a ZIP distribution</li>
