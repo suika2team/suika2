@@ -28,9 +28,8 @@ read str
 echo 'Preparing target directories...'
 
 TARGET_DIR="`pwd`/suika2-$VERSION"
-TARGET_EXE="`pwd`/suika2-installer-$VERSION.exe"
-ENGINE_ZIP="`pwd`/suika2-engine-only-$VERSION.zip"
-rm -rf "$TARGET_DIR" "$TARGET_EXE" "$ENGINE_ZIP"
+TARGET_ZIP="`pwd`/suika2-$VERSION.zip"
+rm -rf "$TARGET_DIR" "$TARGET_ZIP"
 mkdir "$TARGET_DIR"
 mkdir "$TARGET_DIR/tools"
 
@@ -43,7 +42,6 @@ echo ''
 
 echo 'Building the Windows engine...'
 cd engines/windows
-make libroot
 make -j$(nproc)
 cd ../..
 cp engines/windows/engine.exe "$TARGET_DIR/engine.exe"
@@ -51,7 +49,6 @@ echo '...Done building the Windows engine.'
 
 echo 'Building the Windows editor...'
 cd apps/pro-windows
-make libroot
 make -j$(nproc)
 cd ../../
 cp apps/pro-windows/editor.exe "$TARGET_DIR/editor.exe"
@@ -152,39 +149,10 @@ echo '...Done copying documents and sample.'
 echo ''
 
 #
-# Installer
+# ZIP
 #
 
-echo 'Making an installer...'
-
-cp "$TARGET_DIR"/engine.exe apps/installer-windows/
-cp "$TARGET_DIR"/editor.exe apps/installer-windows/
-cp -R "$TARGET_DIR"/manual apps/installer-windows/
-cp -R "$TARGET_DIR"/games apps/installer-windows/
-cp -R "$TARGET_DIR"/tools apps/installer-windows/
-
-cd apps/installer-windows
-make
-cp suika2-installer.exe "$TARGET_EXE"
-cd ../..
-
-rm -rf apps/installer-windows/engine.exe
-rm -rf apps/installer-windows/editor.exe
-rm -rf apps/installer-windows/manual
-rm -rf apps/installer-windows/games
-rm -rf apps/installer-windows/tools
-
-echo '...Done making an installer.'
-echo ''
-
-#
-# Engine Only ZIP
-#
-
-POPD=`pwd`
-cd "$TARGET_DIR"
-zip "$ENGINE_ZIP" "engine.exe"
-cd "$POPD"
+zip -9 -r "$TARGET_ZIP" "suika2-$VERSION"
 
 #
 # GitHub Release
@@ -192,8 +160,8 @@ cd "$POPD"
 
 echo 'Making a release on GitHub...'
 
-yes '' | gh release create "$VERSION" --title "$VERSION" --notes "$NOTE" "$TARGET_EXE" "$ENGINE_ZIP"
-rm -rf "$TARGET_DIR" "$TARGET_EXE" "$ENGINE_ZIP"
+yes '' | gh release create "$VERSION" --title "$VERSION" --notes "$NOTE" "$TARGET_ZIP"
+rm -rf "$TARGET_DIR" "$TARGET_ZIP"
 
 echo '...Done releasing on GitHub.'
 echo ''
