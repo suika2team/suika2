@@ -809,12 +809,12 @@ character.eyeblink.interval=4.0
 #
 # 目パチアニメの1フレームの秒数
 #
-character.eyeblink.frame=0.15
+character.eyeblink.frame=0.05
 
 #
 # 口パクの1フレームの秒数
 #
-character.lipsync.frame=0.3
+character.lipsync.frame=0.06
 
 #
 # 口パクを何文字ごとに行うか

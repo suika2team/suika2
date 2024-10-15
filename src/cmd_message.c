@@ -1105,11 +1105,8 @@ static bool init_serif(void)
 	/* 名前ボックスを表示する */
 	show_namebox(true);
 
-	/* キャラクタのフォーカスが有効なとき */
-	if (conf_character_focus) {
-		/* フォーカスを設定する */
-		focus_character();
-	}
+	/* フォーカスを設定する */
+	focus_character();
 
 	return true;
 }
@@ -1265,8 +1262,6 @@ static void focus_character(void)
 {
 	int i;
 
-	assert(conf_character_focus != 0);
-
 	/* 名前が登録されているキャラクタであるかチェックする */
 	for (i = 0; i < CHARACTER_MAP_COUNT; i++) {
 		if (conf_character_name[i] == NULL)
@@ -1280,8 +1275,11 @@ static void focus_character(void)
 	/* 発話キャラを設定する */
 	set_ch_talking(i < CHARACTER_MAP_COUNT ? i : -1);
 
-	/* 発話キャラを元に明暗を更新する */
-	update_ch_dim_by_talking_ch();
+	/* キャラクタのオートフォーカスが有効なとき */
+	if (conf_character_focus) {
+		/* 発話キャラを元に明暗を更新する */
+		update_ch_dim_by_talking_ch();
+	}
 }
 
 /* クリックアニメーションを初期化する */
@@ -1569,7 +1567,7 @@ static void blit_frame(void)
 		}
 		if (is_end_of_msg()) {
 			/* 口パクを止める */
-			cleanup_lip_sync();
+			/*cleanup_lip_sync();*/
 		}
 	} else {
 		/*
@@ -2182,7 +2180,7 @@ static void init_lip_sync(void)
 {
 	int chpos;
 
-	if (get_command_type() == COMMAND_SERIF)
+	if (get_command_type() != COMMAND_SERIF)
 		return;
 	if (gui_sys_flag || gui_gosub_flag)
 		return;

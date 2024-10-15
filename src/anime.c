@@ -408,10 +408,6 @@ void update_anime_frame(void)
 		if (i == LAYER_CLICK || i == LAYER_AUTO || i == LAYER_SKIP)
 			continue;
 
-		/* 更新の必要がない場合 */
-		if (!context[i].is_finished && !context[i].is_running)
-			continue;
-
 		/* レイヤの情報を更新する */
 		update_layer_params(i);
 	}

@@ -16,8 +16,8 @@ CPPFLAGS = \
 #
 
 CFLAGS = \
-	-O2 \
-	-g0 \
+	-O0 \
+	-g3 \
 	-ffast-math \
 	-ftree-vectorize \
 	-std=gnu11 \
@@ -130,7 +130,7 @@ all: engine-linux
 
 engine-linux: libroot $(OBJS) $(SRCS)
 	@$(CC) -o engine-linux $(CPPFLAGS) $(CFLAGS) $(OBJS) $(LDFLAGS) `pkg-config --libs gstreamer-1.0 gstreamer-video-1.0`
-	@$(STRIP) engine-linux
+	#@$(STRIP) engine-linux
 
 libroot:
 	@../../external/build-libs.sh "" $(CC) "-O2 -g0" $(AR)

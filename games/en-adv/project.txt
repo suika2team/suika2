@@ -813,12 +813,12 @@ character.eyeblink.interval=4.0
 #
 # Eye-blinking frame time (seconds)
 #
-character.eyeblink.frame=0.15
+character.eyeblink.frame=0.05
 
 #
 # Lip-sync frame time (seconds)
 #
-character.lipsync.frame=0.3
+character.lipsync.frame=0.06
 
 #
 # Lip-sync per letters

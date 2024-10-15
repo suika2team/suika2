@@ -172,10 +172,8 @@ static bool init(void)
 		}
 
 		/* キャラを暗くしない */
-		if (i != BG_INDEX) {
-			if (conf_character_focus == 1)
-				focus_character(i, fname[i]);
-		}
+		if (i != BG_INDEX)
+			focus_character(i, fname[i]);
 	}
 
 	/* 発話中のキャラをなしにする */
