@@ -210,8 +210,7 @@ OBJS = \
 	objs/dx9render.o \
 	objs/dsvideo.o \
 	objs/tts_sapi.o \
-	objs/app.o \
-	objs/scriptview.o \
+	objs/winpro.o \
 	objs/dialog_message.o \
 	objs/dialog_bg.o \
 	objs/dialog_ch.o \
@@ -470,7 +469,7 @@ objs/tts_sapi.o: ../../src/microsoft/tts_sapi.cc
 	mkdir -p objs
 	$(CXX) -o $@ -c $(CPPFLAGS) $(CFLAGS) $(CXXFLAGS) $<
 
-objs/app.o: src/app.c
+objs/winpro.o: src/winpro.c
 	mkdir -p objs
 	$(CC) -o $@ -c $(CPPFLAGS) $(CFLAGS) $<
 
